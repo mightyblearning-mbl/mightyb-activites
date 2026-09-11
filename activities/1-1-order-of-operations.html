@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.1 Order of Operations Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540;
+    --card: #16345c;
+    --card-alt: #1c3f6e;
+    --text: #eef4fb;
+    --text-soft: #b9cde3;
+    --accent: #5fb3a3;
+    --accent-strong: #3f9686;
+    --wrong: #e0a45c;
+    --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f;
+    --focus: #ffd166;
+    --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000;
+    --card: #101010;
+    --card-alt: #1a1a1a;
+    --text: #ffffff;
+    --text-soft: #e6e6e6;
+    --accent: #ffd166;
+    --accent-strong: #ffca3a;
+    --wrong: #ff8c42;
+    --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f;
+    --focus: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 24px 16px 60px;
+  }
+  .wrap { width: 100%; max-width: 640px; }
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button {
+    background: var(--card-alt);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible, .choice:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track {
+    flex: 1;
+    height: 10px;
+    background: var(--card-alt);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+  h1.title { font-size: 1.4rem; margin: 0 0 6px; }
+  p.subtitle { color: var(--text-soft); margin: 0 0 22px; line-height: 1.5; }
+  .question-text {
+    font-size: 1.7rem;
+    font-weight: bold;
+    background: var(--card-alt);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+    margin-bottom: 22px;
+    letter-spacing: 0.02em;
+  }
+  .choices { display: grid; gap: 12px; }
+  .choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--card-alt);
+    color: var(--text);
+    border: 2px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 1.15rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .feedback {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    line-height: 1.55;
+    font-size: 1rem;
+  }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary {
+    background: var(--accent);
+    color: #06231d;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 22px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note {
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 0.8rem;
+    margin-top: 22px;
+    opacity: 0.8;
+  }
+  @media (max-width: 480px) {
+    .question-text { font-size: 1.35rem; padding: 18px 14px; }
+    .card { padding: 24px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 1.1 Order of Operations</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel">Question 1 of 8</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <main class="card" id="card">
+    <!-- content injected by JS -->
+  </main>
+
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+
+<script>
+const problems = [
+  { q: "3 + 4 × 2", answer: 11, choices: [11, 14, 9],
+    explain: "Multiply first: 4 × 2 = 8. Then add: 3 + 8 = 11." },
+  { q: "(5 + 3) × 2", answer: 16, choices: [16, 11, 13],
+    explain: "Parentheses first: 5 + 3 = 8. Then multiply: 8 × 2 = 16." },
+  { q: "10 − 2 × 3", answer: 4, choices: [4, 24, 5],
+    explain: "Multiply first: 2 × 3 = 6. Then subtract: 10 − 6 = 4." },
+  { q: "2 × (3 + 4) − 5", answer: 9, choices: [9, 4, 13],
+    explain: "Parentheses first: 3 + 4 = 7. Multiply: 2 × 7 = 14. Then subtract: 14 − 5 = 9." },
+  { q: "12 ÷ 4 + 3 × 2", answer: 9, choices: [9, 12, 15],
+    explain: "Divide and multiply first (left to right): 12 ÷ 4 = 3 and 3 × 2 = 6. Then add: 3 + 6 = 9." },
+  { q: "(8 − 2) ÷ 3 + 4", answer: 6, choices: [6, 8, 10],
+    explain: "Parentheses first: 8 − 2 = 6. Divide: 6 ÷ 3 = 2. Then add: 2 + 4 = 6." },
+  { q: "5 + 2² × 3", answer: 17, choices: [17, 11, 41],
+    explain: "Exponent first: 2² = 4. Multiply: 4 × 3 = 12. Then add: 5 + 12 = 17." },
+  { q: "3² − 4 + 6 ÷ 2", answer: 8, choices: [8, 2, 5.5],
+    explain: "Exponent first: 3² = 9. Divide: 6 ÷ 2 = 3. Then work left to right: 9 − 4 + 3 = 8." },
+];
+
+let current = 0;
+let firstTryCorrectCount = 0;
+let answeredThisQuestion = false;
+let gotItRightFirstTry = false;
+
+const card = document.getElementById('card');
+const progressLabel = document.getElementById('progressLabel');
+const progressFill = document.getElementById('progressFill');
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderQuestion() {
+  answeredThisQuestion = false;
+  gotItRightFirstTry = true;
+  const p = problems[current];
+  progressLabel.textContent = `Question ${current + 1} of ${problems.length}`;
+  progressFill.style.width = `${(current / problems.length) * 100}%`;
+
+  const options = shuffle(p.choices);
+
+  card.innerHTML = `
+    <h1 class="title">Solve using order of operations</h1>
+    <p class="subtitle">Pick the answer that follows PEMDAS (Parentheses, Exponents, Multiply/Divide, Add/Subtract).</p>
+    <div class="question-text">${p.q} = ?</div>
+    <div class="choices" role="group" aria-label="Answer choices"></div>
+    <div id="feedbackArea"></div>
+    <div class="actions" id="actionsArea"></div>
+  `;
+
+  const choicesEl = card.querySelector('.choices');
+  options.forEach((val) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.type = 'button';
+    btn.textContent = val;
+    btn.addEventListener('click', () => handleAnswer(val, btn, p));
+    choicesEl.appendChild(btn);
+  });
+}
+
+function handleAnswer(selected, btnEl, p) {
+  if (answeredThisQuestion && btnEl.classList.contains('locked')) return;
+
+  const isCorrect = selected === p.answer;
+  const allButtons = card.querySelectorAll('.choice');
+
+  if (isCorrect) {
+    allButtons.forEach(b => { b.disabled = true; b.classList.add('locked'); });
+    btnEl.classList.add('correct');
+
+    const feedbackArea = document.getElementById('feedbackArea');
+    feedbackArea.innerHTML = `
+      <div class="feedback correct">
+        <strong>${gotItRightFirstTry ? 'Nice work!' : 'You got it!'}</strong>
+        ${p.explain}
+      </div>`;
+
+    if (gotItRightFirstTry) firstTryCorrectCount++;
+    answeredThisQuestion = true;
+
+    const actionsArea = document.getElementById('actionsArea');
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'btn-primary';
+    nextBtn.type = 'button';
+    nextBtn.textContent = current === problems.length - 1 ? 'See summary' : 'Next question';
+    nextBtn.addEventListener('click', goNext);
+    actionsArea.appendChild(nextBtn);
+    nextBtn.focus();
+  } else {
+    gotItRightFirstTry = false;
+    btnEl.classList.add('incorrect');
+    btnEl.disabled = true;
+    btnEl.classList.add('locked');
+
+    const feedbackArea = document.getElementById('feedbackArea');
+    feedbackArea.innerHTML = `
+      <div class="feedback incorrect">
+        <strong>Not quite yet - give it another try.</strong>
+        That's a common one to mix up. Look again at what needs to happen first.
+      </div>`;
+  }
+}
+
+function goNext() {
+  if (current < problems.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    renderDone();
+  }
+}
+
+function renderDone() {
+  progressLabel.textContent = `Question ${problems.length} of ${problems.length}`;
+  progressFill.style.width = `100%`;
+  card.innerHTML = `
+    <div class="done-card">
+      <h2>All done! 🎉</h2>
+      <p>You worked through all ${problems.length} order-of-operations problems.<br>
+      You got ${firstTryCorrectCount} of ${problems.length} correct on your first try.</p>
+      <p>Every problem here uses PEMDAS: Parentheses, Exponents, Multiply/Divide, then Add/Subtract.</p>
+      <div class="actions" style="justify-content:center; margin-top:20px;">
+        <button class="btn-primary" type="button" id="restartBtn">Practice again</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    current = 0;
+    firstTryCorrectCount = 0;
+    renderQuestion();
+  });
+}
+
+document.getElementById('contrastToggle').addEventListener('click', function () {
+  const root = document.documentElement;
+  const isHigh = root.getAttribute('data-contrast') === 'high';
+  root.setAttribute('data-contrast', isHigh ? 'normal' : 'high');
+  this.setAttribute('aria-pressed', String(!isHigh));
+  this.textContent = isHigh ? 'High contrast' : 'Normal contrast';
+});
+
+document.getElementById('fontToggle').addEventListener('click', function () {
+  const wrap = document.getElementById('wrap');
+  const isLarge = wrap.classList.toggle('font-lg');
+  this.setAttribute('aria-pressed', String(isLarge));
+  this.textContent = isLarge ? 'Smaller text' : 'Larger text';
+});
+
+renderQuestion();
+</script>
+</body>
+</html>
