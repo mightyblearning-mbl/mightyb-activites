@@ -1,0 +1,1 @@
+# mightyb-activites
