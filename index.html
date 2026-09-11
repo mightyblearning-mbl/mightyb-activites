@@ -2,19 +2,66 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mighty B Learning - Activities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mighty B Learning - Practice Activities</title>
 <style>
-  body { font-family: Arial, sans-serif; background:#0f2540; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; text-align:center; }
-  .card { background:#16345c; padding:2.5rem 3rem; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.3); }
-  h1 { margin:0 0 0.5rem; font-size:1.6rem; }
-  p { color:#cfe0f5; margin:0.25rem 0; }
+  :root {
+    --bg: #0f2540;
+    --card: #16345c;
+    --card-alt: #1c3f6e;
+    --text: #eef4fb;
+    --text-soft: #b9cde3;
+    --accent: #5fb3a3;
+    --accent-strong: #3f9686;
+    --focus: #ffd166;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 40px 16px 60px; }
+  .wrap { width: 100%; max-width: 720px; }
+  header.top { margin-bottom: 28px; text-align: center; }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; }
+  p.subtitle { color: var(--text-soft); margin: 0; line-height: 1.5; }
+  .list { display: grid; gap: 16px; margin-top: 32px; }
+  .item {
+    display: block;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    transition: transform 0.15s ease, background 0.15s ease;
+    border: 2px solid transparent;
+  }
+  .item:hover, .item:focus-visible { background: var(--card-alt); transform: translateY(-2px); border-color: var(--accent); outline: none; }
+  .item .name { font-size: 1.15rem; font-weight: bold; margin-bottom: 4px; }
+  .item .desc { color: var(--text-soft); font-size: 0.95rem; }
+  .section-label { color: var(--text-soft); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; margin: 32px 0 4px; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 40px; opacity: 0.8; }
 </style>
 </head>
 <body>
-  <div class="card">
+<div class="wrap">
+  <header class="top">
     <h1>Mighty B Learning</h1>
-    <p>Interactive practice activities hosting is live.</p>
-    <p style="font-size:0.85rem;color:#93b3d9;">Setup test page - real activities coming soon.</p>
+    <p class="subtitle">Interactive practice activities</p>
+  </header>
+
+  <div class="section-label">Available activities</div>
+  <div class="list">
+    <a class="item" href="activities/1-1-order-of-operations.html">
+      <div class="name">1.1 Order of Operations Practice</div>
+      <div class="desc">Practice applying PEMDAS with 8 guided problems.</div>
+    </a>
+    <a class="item" href="activities/6-1-growth-and-decay.html">
+      <div class="name">6.1 Growth and Decay Recognition</div>
+      <div class="desc">Identify growth vs. decay from exponential equations.</div>
+    </a>
   </div>
+
+  <footer class="note">More activities are added regularly.</footer>
+</div>
 </body>
 </html>
