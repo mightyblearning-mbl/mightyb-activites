@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.5 Unit 3 Review - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.5 Unit 3 Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars" aria-live="polite"></span>
+  </div>
+  <main class="card" id="card" aria-live="polite"></main>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script>
+const DECK = {
+ "brand": "3.5 Unit 3 Review",
+ "wrapUp": "Remember: momentum is conserved in every collision, but kinetic energy is only conserved when objects bounce perfectly.",
+ "problems": [
+  {
+   "tag": "3.5 Elastic vs. Inelastic",
+   "q": "During an elastic collision, objects...",
+   "choices": [
+    "bounce off each other",
+    "stick together",
+    "disappear",
+    "stop moving forever"
+   ],
+   "answer": "bounce off each other",
+   "hint": "Think about the basketball: the more elastic the collision, the higher the bounce.",
+   "explain": "In elastic collisions, objects bounce off each other."
+  },
+  {
+   "tag": "3.5 Elastic vs. Inelastic",
+   "q": "Two equal masses crash into each other and stick together. What kind of collision is this?",
+   "choices": [
+    "Perfectly inelastic",
+    "Perfectly elastic",
+    "Partially inelastic",
+    "No collision"
+   ],
+   "answer": "Perfectly inelastic",
+   "hint": "Perfectly elastic is 100% bouncy. What do we call 0% bouncy?",
+   "explain": "When the objects stick together completely, it's a perfectly inelastic collision."
+  },
+  {
+   "tag": "3.5 Elastic vs. Inelastic",
+   "q": "A basketball is dropped on concrete, grass, sand, and a pillow. Which surface makes the most elastic collision?",
+   "choices": [
+    "Concrete",
+    "Grass",
+    "Sand",
+    "Pillow"
+   ],
+   "answer": "Concrete",
+   "hint": "The most elastic collision gives the highest bounce. Where would a basketball bounce highest?",
+   "explain": "The ball bounces highest on the concrete floor, so that's the most elastic collision."
+  },
+  {
+   "tag": "3.5 Kinetic Energy",
+   "q": "Ball A has a mass of 2 kg and moves at 1 m/s. Using KE = ½mv², how much kinetic energy does it have?",
+   "choices": [
+    "1 joule",
+    "2 joules",
+    "4 joules",
+    "0.5 joules"
+   ],
+   "answer": "1 joule",
+   "hint": "½ × 2 × 1² = ? Remember that 1 squared is 1.",
+   "explain": "½ × 2 kg × (1 m/s)² = 1 joule."
+  },
+  {
+   "tag": "3.5 Kinetic Energy",
+   "q": "Ball B also has a mass of 2 kg but moves at −1 m/s (to the left). How much kinetic energy does it have?",
+   "choices": [
+    "1 joule",
+    "−1 joule",
+    "0 joules",
+    "−2 joules"
+   ],
+   "answer": "1 joule",
+   "hint": "Velocity is squared in the kinetic energy equation, and −1 × −1 = +1.",
+   "explain": "Because velocity is squared, Ball B also has 1 joule. Kinetic energy is never negative."
+  },
+  {
+   "tag": "3.5 Momentum",
+   "q": "Ball B (2 kg) moves at −1 m/s. What is its momentum?",
+   "choices": [
+    "−2 kg·m/s",
+    "2 kg·m/s",
+    "0 kg·m/s",
+    "1 kg·m/s"
+   ],
+   "answer": "−2 kg·m/s",
+   "hint": "In p = m × v, velocity is NOT squared, so the negative sign stays.",
+   "explain": "2 × (−1) = −2 kg·m/s. Momentum is a vector, so direction matters."
+  },
+  {
+   "tag": "3.5 Momentum",
+   "q": "Two equal balls move toward each other with equal and opposite velocities. What is their total momentum before they collide?",
+   "choices": [
+    "Zero",
+    "Double one ball's momentum",
+    "It can't be found",
+    "Negative"
+   ],
+   "answer": "Zero",
+   "hint": "Equal and opposite momenta cancel out when you add them.",
+   "explain": "Their momenta are equal and opposite, so they add up to zero."
+  },
+  {
+   "tag": "3.5 Energy",
+   "q": "After a perfectly inelastic collision, both balls stop. How much total kinetic energy is left?",
+   "choices": [
+    "None",
+    "The same as before",
+    "More than before",
+    "An unknown amount"
+   ],
+   "answer": "None",
+   "hint": "Kinetic energy is the energy of motion. Are the balls still moving?",
+   "explain": "Both balls have zero velocity, so there's no kinetic energy left in the system."
+  },
+  {
+   "tag": "3.5 Energy",
+   "q": "When a car's bumper crunches in a crash, some kinetic energy is lost. Where does it go?",
+   "choices": [
+    "Into crunching metal, noise, and heat",
+    "It is destroyed",
+    "Into more speed",
+    "It turns into momentum"
+   ],
+   "answer": "Into crunching metal, noise, and heat",
+   "hint": "Think about what you see, hear, and feel in a crash.",
+   "explain": "The kinetic energy transforms into the energy of crunching metal, noise, and even heat."
+  },
+  {
+   "tag": "3.5 Big Idea",
+   "q": "Which statement is true for ALL collisions?",
+   "choices": [
+    "Momentum is conserved.",
+    "Kinetic energy is conserved.",
+    "Objects always bounce.",
+    "Objects always stick together."
+   ],
+   "answer": "Momentum is conserved.",
+   "hint": "Kinetic energy is only conserved in perfectly elastic collisions. What is conserved every time?",
+   "explain": "Momentum is conserved in all collisions. Kinetic energy is only conserved in perfectly elastic ones."
+  },
+  {
+   "tag": "3.5 Big Idea",
+   "q": "In real life, collisions are always...",
+   "choices": [
+    "partially inelastic",
+    "perfectly elastic",
+    "perfectly inelastic",
+    "impossible to measure"
+   ],
+   "answer": "partially inelastic",
+   "hint": "Some kinetic energy is always lost in a real collision, but objects usually bounce a little.",
+   "explain": "All real collisions are partially inelastic: somewhere between 100% bouncy and 0% bouncy."
+  },
+  {
+   "tag": "Unit 3 Mix",
+   "q": "Why does a helmet or airbag lower the force on your head?",
+   "choices": [
+    "It makes the collision last longer.",
+    "It makes the collision shorter.",
+    "It removes your momentum instantly.",
+    "It makes your head lighter."
+   ],
+   "answer": "It makes the collision last longer.",
+   "hint": "Impulse = F × Δt. For the same impulse, what happens to force when Δt goes up?",
+   "explain": "A longer collision time means a smaller force for the same impulse."
+  },
+  {
+   "tag": "Vocabulary",
+   "type": "match",
+   "q": "Match each collision to what happens.",
+   "hint": "Think about how bouncy each one is.",
+   "pairs": [
+    [
+     "Perfectly elastic",
+     "Bounces apart just as fast; kinetic energy conserved",
+     "Perfectly elastic is 100% bouncy."
+    ],
+    [
+     "Perfectly inelastic",
+     "Objects stick together and stop",
+     "Perfectly inelastic is 0% bouncy."
+    ],
+    [
+     "Partially inelastic",
+     "Bounces a little and moves apart more slowly",
+     "Partially inelastic is in between."
+    ],
+    [
+     "Kinetic energy",
+     "The energy of mass in motion (KE = ½mv²)",
+     "Kinetic energy depends on mass and velocity squared."
+    ]
+   ],
+   "explain": "Every real collision is somewhere between perfectly elastic and perfectly inelastic."
+  }
+ ]
+};
+const problems = DECK.problems;
+let current = 0, firstTry = 0, streak = 0, bestStreak = 0, triedWrong = false;
+const card = document.getElementById('card');
+const progressLabel = document.getElementById('progressLabel');
+const progressFill = document.getElementById('progressFill');
+const starsEl = document.getElementById('stars');
+
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function tableHTML(t) {
+  if (!t) return '';
+  return '<table class="data"><tr>' + t[0].map(h => `<th>${h}</th>`).join('') + '</tr>' +
+    t.slice(1).map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</table>';
+}
+function updateTop() {
+  progressLabel.textContent = `Question ${Math.min(current + 1, problems.length)} of ${problems.length}`;
+  progressFill.style.width = `${(current / problems.length) * 100}%`;
+  starsEl.textContent = streak >= 2 ? `⭐ ${streak} in a row` : '';
+}
+function showNext() {
+  const actions = document.getElementById('actionsArea');
+  const btn = document.createElement('button');
+  btn.className = 'btn-primary'; btn.type = 'button';
+  btn.textContent = current === problems.length - 1 ? 'See summary' : 'Next question';
+  btn.addEventListener('click', () => { if (current < problems.length - 1) { current++; render(); } else { renderDone(); } });
+  actions.appendChild(btn); btn.focus();
+}
+function correctFeedback(p) {
+  if (!triedWrong) { firstTry++; streak++; bestStreak = Math.max(bestStreak, streak); }
+  updateTop();
+  document.getElementById('feedbackArea').innerHTML =
+    `<div class="feedback correct"><strong>${triedWrong ? 'You got it!' : 'Nice work!'}</strong>${p.explain}</div>`;
+  showNext();
+}
+function wrongFeedback(hint) {
+  if (!triedWrong) { streak = 0; updateTop(); }
+  triedWrong = true;
+  document.getElementById('feedbackArea').innerHTML =
+    `<div class="feedback incorrect"><strong>Not quite yet. Here's a hint:</strong>${hint}</div>`;
+}
+function render() {
+  triedWrong = false;
+  const p = problems[current];
+  updateTop();
+  card.innerHTML = `<span class="tag">${p.tag || DECK.brand}</span>
+    <div class="question-text">${p.q}</div>${tableHTML(p.table)}
+    <div id="body"></div><div id="feedbackArea"></div><div class="actions" id="actionsArea"></div>`;
+  if (p.type === 'match') renderMatch(p); else renderMC(p);
+}
+function renderMC(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = '<div class="choices" role="group" aria-label="Answer choices"></div>';
+  const wrap = body.firstChild;
+  shuffle(p.choices).forEach(val => {
+    const b = document.createElement('button');
+    b.className = 'choice'; b.type = 'button'; b.innerHTML = val;
+    b.addEventListener('click', () => {
+      if (val === p.answer) {
+        wrap.querySelectorAll('.choice').forEach(x => x.disabled = true);
+        b.classList.add('correct'); correctFeedback(p);
+      } else {
+        b.classList.add('incorrect'); b.disabled = true;
+        wrongFeedback((p.hints && p.hints[val]) || p.hint);
+      }
+    });
+    wrap.appendChild(b);
+  });
+}
+function renderMatch(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = `<p class="match-help">Click a word on the left, then click what it matches on the right.</p>
+    <div class="match-grid"><div class="match-col" id="left"></div><div class="match-col" id="right"></div></div>`;
+  let picked = null, done = 0;
+  const left = document.getElementById('left'), right = document.getElementById('right');
+  const L = {}, R = {};
+  shuffle(p.pairs).forEach(([a]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = a;
+    b.addEventListener('click', () => { if (b.disabled) return; Object.values(L).forEach(x => x.classList.remove('picked')); b.classList.add('picked'); picked = a; });
+    L[a] = b; left.appendChild(b);
+  });
+  shuffle(p.pairs).forEach(([a, bText]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = bText;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (!picked) { wrongFeedback('First click a word on the left, then click its match here.'); return; }
+      const pair = p.pairs.find(x => x[0] === picked);
+      if (pair[1] === bText) {
+        L[picked].classList.remove('picked'); L[picked].classList.add('correct'); L[picked].disabled = true;
+        b.classList.add('correct'); b.disabled = true; picked = null; done++;
+        document.getElementById('feedbackArea').innerHTML = '';
+        if (done === p.pairs.length) correctFeedback(p);
+      } else {
+        b.classList.add('incorrect'); setTimeout(() => b.classList.remove('incorrect'), 900);
+        wrongFeedback(pair[2] || p.hint);
+      }
+    });
+    right.appendChild(b);
+  });
+}
+function renderDone() {
+  current = problems.length; updateTop();
+  progressLabel.textContent = `Question ${problems.length} of ${problems.length}`;
+  progressFill.style.width = '100%';
+  card.innerHTML = `<div class="done-card"><h2>All done! 🎉</h2>
+    <p>You worked through all ${problems.length} questions.<br>
+    You got ${firstTry} of ${problems.length} on your first try, and your best streak was ${bestStreak} in a row.</p>
+    <p>${DECK.wrapUp}</p>
+    <div class="actions" style="justify-content:center; margin-top:20px;">
+    <button class="btn-primary" type="button" id="restartBtn">Practice again</button></div></div>`;
+  document.getElementById('restartBtn').addEventListener('click', () => { current = 0; firstTry = 0; streak = 0; bestStreak = 0; render(); });
+}
+document.getElementById('contrastToggle').addEventListener('click', function () {
+  const root = document.documentElement; const isHigh = root.getAttribute('data-contrast') === 'high';
+  root.setAttribute('data-contrast', isHigh ? 'normal' : 'high');
+  this.setAttribute('aria-pressed', String(!isHigh)); this.textContent = isHigh ? 'High contrast' : 'Normal contrast';
+});
+document.getElementById('fontToggle').addEventListener('click', function () {
+  const isLarge = document.getElementById('wrap').classList.toggle('font-lg');
+  this.setAttribute('aria-pressed', String(isLarge)); this.textContent = isLarge ? 'Smaller text' : 'Larger text';
+});
+render();
+</script>
+</body>
+</html>
