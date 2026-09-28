@@ -1099,5 +1099,95 @@
   "course": "11th Grade English",
   "unit": "7",
   "unitTitle": "British & European Voices"
+ },
+ "ela12-4-1-your-digital-reputation": {
+  "file": "english-12/ela12-4-1-your-digital-reputation.html",
+  "title": "4.1 Your Digital Reputation",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-2-brainstorming-your-college-essay": {
+  "file": "english-12/ela12-4-2-brainstorming-your-college-essay.html",
+  "title": "4.2 Brainstorming Your College Essay",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-3-writing-a-strong-admissions-essay": {
+  "file": "english-12/ela12-4-3-writing-a-strong-admissions-essay.html",
+  "title": "4.3 Writing a Strong Admissions Essay",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-4-avoiding-common-essay-mistakes": {
+  "file": "english-12/ela12-4-4-avoiding-common-essay-mistakes.html",
+  "title": "4.4 Avoiding Common Essay Mistakes",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-5-cover-letters-and-personal-statements": {
+  "file": "english-12/ela12-4-5-cover-letters-and-personal-statements.html",
+  "title": "4.5 Cover Letters and Personal Statements",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-6-your-first-resume": {
+  "file": "english-12/ela12-4-6-your-first-resume.html",
+  "title": "4.6 Your First Resume",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-7-gross-vs-net-pay": {
+  "file": "english-12/ela12-4-7-gross-vs-net-pay.html",
+  "title": "4.7 Gross vs. Net Pay",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-8-acing-an-entry-level-interview": {
+  "file": "english-12/ela12-4-8-acing-an-entry-level-interview.html",
+  "title": "4.8 Acing an Entry-Level Interview",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-9-tell-me-about-yourself": {
+  "file": "english-12/ela12-4-9-tell-me-about-yourself.html",
+  "title": "4.9 Tell Me About Yourself",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
+ },
+ "ela12-4-10-college-and-career-writing-review": {
+  "file": "english-12/ela12-4-10-college-and-career-writing-review.html",
+  "title": "4.10 College and Career Writing Review",
+  "kind": "unit-review",
+  "questions": 16,
+  "course": "12th Grade English",
+  "unit": "4",
+  "unitTitle": "College and Career Writing"
  }
 }

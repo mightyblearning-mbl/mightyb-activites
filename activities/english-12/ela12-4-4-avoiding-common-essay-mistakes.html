@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.4 Avoiding Common Essay Mistakes Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.4 Avoiding Common Essay Mistakes</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela12-4-4-avoiding-common-essay-mistakes",
+ "title": "4.4 Avoiding Common Essay Mistakes",
+ "course": "12th Grade English",
+ "unit": "4",
+ "lesson": "4.4",
+ "kind": "lesson",
+ "theme": "launch",
+ "sourceVideo": "Avoiding Common Admissions Essay Mistakes",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Keep the focus on you, explain why things matter, and choose one experience. A simple, heartfelt essay beats one that tries too hard to stand out.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "If you write about something personal, what do the notes say you should trust the reader to do?",
+   "choices": [
+    "see you in a vulnerable light",
+    "skip the most personal parts",
+    "guess the details you left out",
+    "judge you only by your grades"
+   ],
+   "answer": "see you in a vulnerable light",
+   "hint": "Check the \"Heavy Topics\" section.",
+   "explain": "If you write about something personal, trust the reader to see you in a vulnerable light."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "Why should students be careful with heavy topics?",
+   "choices": [
+    "They are hard to handle well in about 750 words or less.",
+    "Colleges do not allow any personal topics.",
+    "Readers will stop reading after the first sentence.",
+    "Heavy topics always make an essay too short."
+   ],
+   "answer": "They are hard to handle well in about 750 words or less.",
+   "hint": "Think about the length of the essay.",
+   "explain": "Common heavy topics are hard to handle in about 750 words or less, so be careful."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "A senior's essay repeats every club and award from her activities list. Which mistake is this?",
+   "choices": [
+    "an embellished resume",
+    "relying on a gimmick",
+    "writing all about someone else",
+    "describing an event without its significance"
+   ],
+   "answer": "an embellished resume",
+   "hint": "Readers already have your list of activities.",
+   "explain": "This is an embellished resume. Instead, explain why you do things and how they shaped you."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "A student writes a beautiful essay about his grandfather, but says little about himself. What is the problem?",
+   "choices": [
+    "The reader may want to admit the grandfather, not the student.",
+    "The essay is too simple and heartfelt.",
+    "The essay focuses on only one experience.",
+    "The essay uses too much of the student's own voice."
+   ],
+   "answer": "The reader may want to admit the grandfather, not the student.",
+   "hint": "Whose application is it?",
+   "explain": "Writing all about someone else is a mistake. The notes' example made the reader want to admit the grandfather instead."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "A student writes a detailed story about a snowstorm but never says what it shows about her. Which mistake is this?",
+   "choices": [
+    "describing an event without its significance",
+    "listing too many things",
+    "an embellished resume",
+    "relying on a gimmick"
+   ],
+   "answer": "describing an event without its significance",
+   "hint": "The story must tell the reader something about you.",
+   "explain": "A snowstorm story must tell the reader something about the writer, or it is an event without significance."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "What is the risk of relying on a gimmick, like an essay written as an acceptance speech?",
+   "choices": [
+    "It can hide the student.",
+    "It is always too short.",
+    "It is against the rules.",
+    "It makes the essay too simple."
+   ],
+   "answer": "It can hide the student.",
+   "hint": "Check the \"Why it hurts\" column.",
+   "explain": "A gimmick, like an essay shaped like a chalice or written as an acceptance speech, can hide the student."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "What is the fix for listing too many things?",
+   "choices": [
+    "Focus on one experience and use it as a lens to show how you think.",
+    "Add even more activities so the list looks complete.",
+    "Write each item on the list as its own paragraph.",
+    "Remove every personal detail from the essay."
+   ],
+   "answer": "Focus on one experience and use it as a lens to show how you think.",
+   "hint": "Think about the word \"lens.\"",
+   "explain": "Focus on one experience and use it as a lens to show how you think."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "What is the main takeaway of the lesson?",
+   "choices": [
+    "A simple, heartfelt essay is better than trying too hard to stand out.",
+    "The most unusual essay format always wins.",
+    "An essay should list as many achievements as possible.",
+    "An essay should focus on the people you admire most."
+   ],
+   "answer": "A simple, heartfelt essay is better than trying too hard to stand out.",
+   "hint": "Check \"The Takeaway\" section.",
+   "explain": "It is better to write a simple, heartfelt essay than to try too hard to stand out."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "tag": "4.4 Avoiding Common Essay Mistakes",
+   "q": "Match each essay mistake to its fix.",
+   "pairs": [
+    [
+     "An embellished resume",
+     "Explain why you do things and how they shaped you."
+    ],
+    [
+     "Describing an event without its significance",
+     "Tell the reader what the event shows about you."
+    ],
+    [
+     "Listing too many things",
+     "Focus on one experience as a lens."
+    ],
+    [
+     "Writing all about someone else",
+     "Keep the focus on yourself."
+    ]
+   ],
+   "hint": "Use the Five Mistakes table.",
+   "explain": "Each fix keeps the essay focused on you and what your experiences mean."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

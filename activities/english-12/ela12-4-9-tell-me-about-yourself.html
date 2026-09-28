@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.9 Tell Me About Yourself Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.9 Tell Me About Yourself</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela12-4-9-tell-me-about-yourself",
+ "title": "4.9 Tell Me About Yourself",
+ "course": "12th Grade English",
+ "unit": "4",
+ "lesson": "4.9",
+ "kind": "lesson",
+ "theme": "launch",
+ "sourceVideo": "How to Answer \"Tell Me About Yourself\": College Student Edition",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Answer \"Tell me about yourself\" with present, past, and future in about two to three minutes. Be confident, concise, and end with a strong closing line.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "What should you NOT do when answering \"Tell me about yourself\"?",
+   "choices": [
+    "restate your resume",
+    "share how your skills fit the job",
+    "explain how the role fits your future ambitions",
+    "tell a compelling story"
+   ],
+   "answer": "restate your resume",
+   "hint": "The interviewer already has your resume.",
+   "explain": "Don't restate your resume. Share how your skills fit the job and how the role fits your future ambitions."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "About how long should your answer be?",
+   "choices": [
+    "two to three minutes",
+    "ten seconds",
+    "fifteen minutes",
+    "half an hour"
+   ],
+   "answer": "two to three minutes",
+   "hint": "Check \"What the Interviewer Wants.\"",
+   "explain": "Aim for a compelling story of about two to three minutes."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "What three parts do the notes use to organize the answer?",
+   "choices": [
+    "present, past, future",
+    "beginning, middle, end",
+    "name, age, hometown",
+    "strengths, weaknesses, goals"
+   ],
+   "answer": "present, past, future",
+   "hint": "The three parts move through time.",
+   "explain": "The answer is organized as present, past, and future."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "A senior explains why she wants this role and how her goals align with the company's. Which part of the answer is this?",
+   "choices": [
+    "future",
+    "present",
+    "past",
+    "introduction"
+   ],
+   "answer": "future",
+   "hint": "Which part looks ahead?",
+   "explain": "The future part explains why you want this role and how your goals align with the company's."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "A student describes how his interest in the field began and how he got where he is. Which part of the answer is this?",
+   "choices": [
+    "past",
+    "present",
+    "future",
+    "closing"
+   ],
+   "answer": "past",
+   "hint": "Which part tells your history?",
+   "explain": "The past part covers the history of your interest in the field and how you got where you are."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "Which is the best way to end a \"Tell me about yourself\" answer?",
+   "choices": [
+    "\"And that's what brings me here today for this exciting opportunity.\"",
+    "\"Yep, that's me.\"",
+    "\"So, yeah, that's about it.\"",
+    "\"Anyway, I guess that's all.\""
+   ],
+   "answer": "\"And that's what brings me here today for this exciting opportunity.\"",
+   "hint": "End with a strong closing line.",
+   "explain": "A strong closing line, like \"And that's what brings me here today for this exciting opportunity,\" ends the answer well."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "Which kind of information should you leave out of your answer?",
+   "choices": [
+    "highly personal information like political or religious affiliations",
+    "the school you attend and the classes you take",
+    "a key accomplishment you are proud of",
+    "why you want this role"
+   ],
+   "answer": "highly personal information like political or religious affiliations",
+   "hint": "Check the Four Delivery Tips.",
+   "explain": "Leave out highly personal information like relationship status or political or religious affiliations."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "A senior has never had a paid job. According to the bonus tip, what can still count as relevant experience?",
+   "choices": [
+    "clubs, volunteer work, and babysitting siblings",
+    "nothing, since only paid work counts",
+    "only jobs that lasted more than a year",
+    "only experience at the same company"
+   ],
+   "answer": "clubs, volunteer work, and babysitting siblings",
+   "hint": "Relevant experience is not limited to paid work.",
+   "explain": "Clubs, volunteer work, and even babysitting siblings can show responsibility and leadership."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "tag": "4.9 Tell Me About Yourself",
+   "q": "Match each delivery tip to how to do it.",
+   "pairs": [
+    [
+     "Project confidence",
+     "eye contact and good posture"
+    ],
+    [
+     "Be concise",
+     "practice with a timer or a friend"
+    ],
+    [
+     "Leave out personal information",
+     "skip relationship status and political views"
+    ]
+   ],
+   "hint": "Use the Four Delivery Tips list.",
+   "explain": "Confidence, conciseness, and leaving out highly personal details help your answer land well."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

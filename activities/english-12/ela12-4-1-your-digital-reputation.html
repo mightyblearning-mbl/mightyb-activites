@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.1 Your Digital Reputation Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.1 Your Digital Reputation</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela12-4-1-your-digital-reputation",
+ "title": "4.1 Your Digital Reputation",
+ "course": "12th Grade English",
+ "unit": "4",
+ "lesson": "4.1",
+ "kind": "lesson",
+ "theme": "launch",
+ "sourceVideo": "Social Media and Digital Reputation",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Your digital reputation is built from everything you post, share, comment on, and react to. Treat every post as permanent and potentially public.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "What is a digital reputation?",
+   "choices": [
+    "what other people think and believe about you based on your online persona",
+    "the number of followers you have on social media",
+    "a list of every account you have ever created",
+    "the privacy settings you choose for your accounts"
+   ],
+   "answer": "what other people think and believe about you based on your online persona",
+   "hint": "Think about the word \"reputation.\"",
+   "explain": "Your digital reputation is what other people think and believe about you based on your online persona.",
+   "hints": {
+    "the privacy settings you choose for your accounts": "Privacy settings help, but they are not your reputation."
+   }
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "What is an online persona?",
+   "choices": [
+    "how you present yourself on social media and other online platforms",
+    "what other people think about you after reading your posts",
+    "a fake account that someone else creates in your name",
+    "the password you use to log in to your accounts"
+   ],
+   "answer": "how you present yourself on social media and other online platforms",
+   "hint": "A persona is the way you present yourself.",
+   "explain": "Your online persona is how you present yourself online. Your digital reputation is what others think because of it.",
+   "hints": {
+    "what other people think about you after reading your posts": "That is your digital reputation, not your persona."
+   }
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "According to the notes, what is one thing you CAN control?",
+   "choices": [
+    "what you say and do online",
+    "what other people think of you",
+    "whether someone takes a screenshot of your post",
+    "who shares your post after you delete it"
+   ],
+   "answer": "what you say and do online",
+   "hint": "Nobody can control other people, but you can control yourself.",
+   "explain": "Nobody can control what other people think, but we can control what we say and do online."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "A senior deletes a post an hour after sharing it. Why might it still be seen?",
+   "choices": [
+    "Someone may have shared, saved, or taken a screenshot of it.",
+    "Deleted posts are always moved to a public folder.",
+    "Privacy settings make deleted posts reappear.",
+    "Posts cannot be deleted for the first 24 hours."
+   ],
+   "answer": "Someone may have shared, saved, or taken a screenshot of it.",
+   "hint": "Think about what other people can do with a post before it is deleted.",
+   "explain": "Deleting a post does not always mean it goes away, because someone may have shared, saved, or screenshotted it."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "A student sets all of his accounts to private. What does the notes' advice say he should still remember?",
+   "choices": [
+    "Privacy settings do not guarantee others won't see a post.",
+    "Private accounts cannot be seen by anyone at all.",
+    "He no longer needs to think before he posts.",
+    "Employers are not allowed to look at private accounts."
+   ],
+   "answer": "Privacy settings do not guarantee others won't see a post.",
+   "hint": "Privacy settings help, but are they a guarantee?",
+   "explain": "Pay attention to privacy settings, but remember they do not guarantee others won't see a post."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "Besides your own posts, what else is part of your digital reputation?",
+   "choices": [
+    "your comments, shares, and reactions on other people's content",
+    "only the photos other people post of you",
+    "only the accounts you have deleted",
+    "the websites your family members visit"
+   ],
+   "answer": "your comments, shares, and reactions on other people's content",
+   "hint": "Check the section \"More Than Your Own Posts.\"",
+   "explain": "Your digital reputation also includes your comments, shares, and reactions on other people's content."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "An employer sees a joke post from a student applicant. According to the notes, what might happen?",
+   "choices": [
+    "The employer may think the student is not responsible and decide not to hire them.",
+    "The employer will ignore it because it was only a joke.",
+    "The employer must ask the student to explain the post first.",
+    "The employer is not allowed to consider anything posted online."
+   ],
+   "answer": "The employer may think the student is not responsible and decide not to hire them.",
+   "hint": "Things we do online can have real-life consequences.",
+   "explain": "An employer might see a post, think a student is not responsible or trustworthy, and decide not to hire them, even if it was just a joke."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "4.1 Your Digital Reputation",
+   "q": "Which groups do the notes say may search your name online?",
+   "choices": [
+    "colleges, scholarship committees, and employers",
+    "only your friends and classmates",
+    "only people who follow your accounts",
+    "only government agencies"
+   ],
+   "answer": "colleges, scholarship committees, and employers",
+   "hint": "Check the \"Connect to Your Future\" section.",
+   "explain": "Colleges, scholarship committees, and employers may search your name online, so it is worth checking your accounts."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

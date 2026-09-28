@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.8 Acing an Entry-Level Interview Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.8 Acing an Entry-Level Interview</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela12-4-8-acing-an-entry-level-interview",
+ "title": "4.8 Acing an Entry-Level Interview",
+ "course": "12th Grade English",
+ "unit": "4",
+ "lesson": "4.8",
+ "kind": "lesson",
+ "theme": "launch",
+ "sourceVideo": "How to Ace an Entry Level Interview",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "You already have qualities from school, teams, and activities. Be specific, do your homework on the company, and come ready with good questions.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "What do interviewers expect from entry-level candidates?",
+   "choices": [
+    "the right qualities, not a lot of professional experience",
+    "many years of professional experience",
+    "a college degree in the same field",
+    "a perfect answer to every question"
+   ],
+   "answer": "the right qualities, not a lot of professional experience",
+   "hint": "Check \"The Big Idea.\"",
+   "explain": "Interviewers don't expect a lot of professional experience for an entry-level job. They look for the right qualities."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "Where do the notes say you learned many of the qualities interviewers look for?",
+   "choices": [
+    "in school, on sports teams, and in extracurricular activities",
+    "only in paid jobs",
+    "only in college classes",
+    "only from watching interview videos"
+   ],
+   "answer": "in school, on sports teams, and in extracurricular activities",
+   "hint": "You already have these qualities.",
+   "explain": "You learned those qualities in school, on sports teams, and in extracurricular activities."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "A senior with no job history is asked about her experience. What does the notes' advice suggest?",
+   "choices": [
+    "Refer to her academics and transferable skills.",
+    "Say she has nothing to share.",
+    "Talk about her personal challenges at home.",
+    "Change the subject to the company's pay."
+   ],
+   "answer": "Refer to her academics and transferable skills.",
+   "hint": "Check the \"What Works\" list.",
+   "explain": "Refer to your academics if you lack professional experience, and talk about transferable skills."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "What does it mean to \"do your homework\" before an interview?",
+   "choices": [
+    "Research the company before the interview.",
+    "Finish your school assignments first.",
+    "Bring your homework to show the interviewer.",
+    "Write your answers on a sheet of paper to read aloud."
+   ],
+   "answer": "Research the company before the interview.",
+   "hint": "The homework is about the company.",
+   "explain": "Do your homework on the company before the interview, so you can show that your values align with theirs."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "A strong answer to a \"biggest obstacle\" question is...",
+   "choices": [
+    "confident, concise, and professional",
+    "long, detailed, and personal",
+    "short, vague, and casual",
+    "funny, loud, and dramatic"
+   ],
+   "answer": "confident, concise, and professional",
+   "hint": "Avoid personal challenges.",
+   "explain": "A strong answer is confident, concise, and professional."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "What should a \"biggest obstacle\" answer show?",
+   "choices": [
+    "that you can identify problems and create solutions",
+    "that you have never faced a problem",
+    "that other people caused your problems",
+    "that you prefer to avoid challenges"
+   ],
+   "answer": "that you can identify problems and create solutions",
+   "hint": "Think about problem solving.",
+   "explain": "Show that you can identify problems and create solutions."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "Why does the hiring manager ask, \"Do you have any questions for me?\"",
+   "choices": [
+    "to see if you are a critical thinker and curious about the organization",
+    "to let you know the interview is already over",
+    "to check whether you remember the job title",
+    "to find out when you can start working"
+   ],
+   "answer": "to see if you are a critical thinker and curious about the organization",
+   "hint": "The interview isn't over yet.",
+   "explain": "The hiring manager wants to see if you are a critical thinker and curious about the organization."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "4.8 Acing an Entry-Level Interview",
+   "q": "Which is one of the questions the notes suggest asking an interviewer?",
+   "choices": [
+    "What qualities would make an entry-level candidate most successful in this role?",
+    "How soon can I get a raise?",
+    "How many days can I take off?",
+    "Can I leave early on Fridays?"
+   ],
+   "answer": "What qualities would make an entry-level candidate most successful in this role?",
+   "hint": "Check the list under \"Do You Have Any Questions for Me?\"",
+   "explain": "Asking what qualities make a candidate successful shows curiosity and critical thinking."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

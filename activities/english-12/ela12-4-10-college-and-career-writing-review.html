@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.10 College and Career Writing Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.10 College and Career Writing Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela12-4-10-college-and-career-writing-review",
+ "title": "4.10 College and Career Writing Review",
+ "course": "12th Grade English",
+ "unit": "4",
+ "lesson": "4.10",
+ "kind": "unit-review",
+ "theme": "launch",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "From your digital reputation to college essays, resumes, paychecks, and interviews, the same idea keeps coming back: be specific, be professional, and show who you really are.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior deletes a post an hour after sharing it. Why might it still be seen?",
+   "choices": [
+    "Someone may have shared, saved, or taken a screenshot of it.",
+    "Deleted posts are always moved to a public folder.",
+    "Privacy settings make deleted posts reappear.",
+    "Posts cannot be deleted for the first 24 hours."
+   ],
+   "answer": "Someone may have shared, saved, or taken a screenshot of it.",
+   "hint": "Think about what other people can do with a post before it is deleted.",
+   "explain": "Deleting a post does not always mean it goes away, because someone may have shared, saved, or screenshotted it."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "What is the difference between a talent and a strength?",
+   "choices": [
+    "A talent is something you do well. A strength is an underlying quality.",
+    "A talent is an underlying quality. A strength is something you do well.",
+    "A talent is learned in school. A strength is learned at home.",
+    "There is no difference. The words mean the same thing."
+   ],
+   "answer": "A talent is something you do well. A strength is an underlying quality.",
+   "hint": "Use the Talents vs. Strengths table.",
+   "explain": "A talent is something you do well, like math or drama. A strength is an underlying quality, like being observant."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A student ends his essay with \"That's when I realized I was a leader.\" What does the notes' advice suggest instead?",
+   "choices": [
+    "Let the story show his strengths and let readers draw their own conclusions.",
+    "Add a second sentence that repeats the lesson in different words.",
+    "Move the sentence to the very first line of the essay.",
+    "Replace it with a list of every club he has joined."
+   ],
+   "answer": "Let the story show his strengths and let readers draw their own conclusions.",
+   "hint": "The notes warn against summarizing with \"That's when I realized...\"",
+   "explain": "Instead of summarizing, let the story show your strengths and let readers draw their own conclusions."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior is choosing an essay topic. Which choice best follows the admissions officers' advice?",
+   "choices": [
+    "her daily bus ride to school and what she notices on it",
+    "a list of every award she has ever won",
+    "a summary of a famous historical event",
+    "a topic she read about online but never experienced"
+   ],
+   "answer": "her daily bus ride to school and what she notices on it",
+   "hint": "The notes suggest simple, everyday topics you know.",
+   "explain": "Stick to simple, everyday topics you know, like walking the dog or the bus ride to school."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "What is the \"dropped essay\" test?",
+   "choices": [
+    "If your essay were dropped with no name on it, someone who knows you should recognize it.",
+    "If your essay is dropped from the pile, you should rewrite it from scratch.",
+    "You should drop any sentence that is longer than twenty words.",
+    "You should drop your essay off in person at the admissions office."
+   ],
+   "answer": "If your essay were dropped with no name on it, someone who knows you should recognize it.",
+   "hint": "Think about voice, experiences, and perspective.",
+   "explain": "Someone who knows you should recognize your essay because it shows your voice, experiences, and perspective."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior's essay repeats every club and award from her activities list. Which mistake is this?",
+   "choices": [
+    "an embellished resume",
+    "relying on a gimmick",
+    "writing all about someone else",
+    "describing an event without its significance"
+   ],
+   "answer": "an embellished resume",
+   "hint": "Readers already have your list of activities.",
+   "explain": "This is an embellished resume. Instead, explain why you do things and how they shaped you."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "What is the main takeaway of the lesson?",
+   "choices": [
+    "A simple, heartfelt essay is better than trying too hard to stand out.",
+    "The most unusual essay format always wins.",
+    "An essay should list as many achievements as possible.",
+    "An essay should focus on the people you admire most."
+   ],
+   "answer": "A simple, heartfelt essay is better than trying too hard to stand out.",
+   "hint": "Check \"The Takeaway\" section.",
+   "explain": "It is better to write a simple, heartfelt essay than to try too hard to stand out."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior is applying for a college scholarship. Which document is she most likely asked to write?",
+   "choices": [
+    "a personal statement",
+    "a cover letter",
+    "a pay stub",
+    "an applicant tracking system"
+   ],
+   "answer": "a personal statement",
+   "hint": "Which document is used for college, grad school, or scholarship applications?",
+   "explain": "Personal statements are used for college, grad school, or scholarship applications."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "Why should a cover letter use the exact key terms from the job description?",
+   "choices": [
+    "Applicant tracking systems may rank letters without the right keywords lower.",
+    "Employers require every sentence to be copied from the job posting.",
+    "Key terms make the letter longer and more impressive.",
+    "Key terms replace the need for a salutation."
+   ],
+   "answer": "Applicant tracking systems may rank letters without the right keywords lower.",
+   "hint": "Think about what ATSs do.",
+   "explain": "ATSs are databases that sort applications and may rank letters without the right keywords lower."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior's resume lists her full street address. What should she change?",
+   "choices": [
+    "List only her city, for privacy reasons.",
+    "Add her home phone and her parents' names.",
+    "Move the address to the bottom of the page.",
+    "Write the address in a larger, colorful font."
+   ],
+   "answer": "List only her city, for privacy reasons.",
+   "hint": "Check \"The Top of the Page.\"",
+   "explain": "List your city, not your full street address, for privacy reasons."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A student has never had a paid job. What can he list as experience?",
+   "choices": [
+    "volunteer work, personal projects, and even babysitting",
+    "nothing, so he should leave out the experience section",
+    "jobs his older siblings have held",
+    "a list of his favorite movies and games"
+   ],
+   "answer": "volunteer work, personal projects, and even babysitting",
+   "hint": "Check \"Experience Without a Job.\"",
+   "explain": "You can list part-time, freelance, volunteer, and personal project experience, even babysitting."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior earns $18 per hour and works 10 hours. What is her gross pay?",
+   "choices": [
+    "$180",
+    "$28",
+    "$108",
+    "$1,800"
+   ],
+   "answer": "$180",
+   "hint": "Multiply the hourly wage by the number of hours.",
+   "explain": "$18 x 10 hours = $180 gross pay."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior is planning a monthly budget with her first paycheck. Which amount should she use?",
+   "choices": [
+    "her net pay",
+    "her gross pay",
+    "her hourly wage only",
+    "her total deductions"
+   ],
+   "answer": "her net pay",
+   "hint": "Use the money you actually take home.",
+   "explain": "Base your budget on your net pay, not your gross pay."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior with no job history is asked about her experience. What does the notes' advice suggest?",
+   "choices": [
+    "Refer to her academics and transferable skills.",
+    "Say she has nothing to share.",
+    "Talk about her personal challenges at home.",
+    "Change the subject to the company's pay."
+   ],
+   "answer": "Refer to her academics and transferable skills.",
+   "hint": "Check the \"What Works\" list.",
+   "explain": "Refer to your academics if you lack professional experience, and talk about transferable skills."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "A senior explains why she wants this role and how her goals align with the company's. Which part of the answer is this?",
+   "choices": [
+    "future",
+    "present",
+    "past",
+    "introduction"
+   ],
+   "answer": "future",
+   "hint": "Which part looks ahead?",
+   "explain": "The future part explains why you want this role and how your goals align with the company's."
+  },
+  {
+   "id": "q16",
+   "type": "match",
+   "tag": "4.10 College and Career Writing Review",
+   "q": "Match each term to its meaning.",
+   "pairs": [
+    [
+     "Online persona",
+     "how you present yourself online"
+    ],
+    [
+     "Gross pay",
+     "total amount earned by working"
+    ],
+    [
+     "Net pay",
+     "take-home pay after deductions"
+    ],
+    [
+     "Cover letter",
+     "a letter for a job application"
+    ],
+    [
+     "Genre",
+     "a kind of writing with shared rules"
+    ]
+   ],
+   "hint": "Think back to the key terms across the unit.",
+   "explain": "These key terms come from the digital reputation, cover letter, and pay lessons."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

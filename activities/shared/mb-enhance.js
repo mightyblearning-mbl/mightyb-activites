@@ -10,6 +10,7 @@
     frontier:  { label: 'Frontier',  bg: 'linear-gradient(160deg,#1f2a22 0%,#2e3f30 60%,#445a3f 100%)', card: '#28372b', alt: '#35493a', accent: '#f0b35b', strong: '#d3953d', text: '#f4f1e8', soft: '#cfd8c6', motif: 'stars' },
     poetry:    { label: 'Poetry',    bg: 'linear-gradient(160deg,#1d1633 0%,#2e2150 60%,#442e6e 100%)', card: '#271d43', alt: '#35285a', accent: '#f2a7c3', strong: '#d985a6', text: '#f7f2fb', soft: '#d6cbe8', motif: 'stars' },
     liberty:   { label: 'Liberty',   bg: 'linear-gradient(160deg,#10223d 0%,#1a3561 60%,#274a80 100%)', card: '#172c4f', alt: '#213b66', accent: '#e4574c', strong: '#c43f35', text: '#f5f7fb', soft: '#c7d3e8', motif: 'stars' },
+    launch:    { label: 'Launch Pad', bg: 'linear-gradient(160deg,#0e1f33 0%,#143a52 60%,#1b5a6b 100%)', card: '#12304a', alt: '#1a4260', accent: '#ffd166', strong: '#e6b440', text: '#f1f7fb', soft: '#c3d9e6', motif: 'stars' },
     grammar:   { label: 'Grammar Lab', bg: 'linear-gradient(160deg,#0f2b2b 0%,#154040 60%,#1d5756 100%)', card: '#133737', alt: '#1b4a4a', accent: '#8fe3c8', strong: '#5fc4a6', text: '#effaf6', soft: '#bfe2d8', motif: 'dots' },
   };
   const root = document.documentElement;
