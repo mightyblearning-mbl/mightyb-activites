@@ -73,7 +73,7 @@
   "file": "10-1-nuclear-fission.html",
   "title": "10.1 Nuclear Fission",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-10-2-nuclear-fusion": {
@@ -87,14 +87,14 @@
   "file": "3-1-momentum.html",
   "title": "3.1 Momentum",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-3-2-impulse": {
   "file": "3-2-impulse.html",
   "title": "3.2 Impulse",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-3-3-how-helmets-affect-impulse": {
@@ -136,28 +136,28 @@
   "file": "4-3-kinetic-vs-potential-energy.html",
   "title": "4.3 Kinetic vs. Potential Energy",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-4-4-kinetic-energy-bowling": {
   "file": "4-4-kinetic-energy-bowling.html",
   "title": "4.4 Kinetic Energy & Bowling",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-4-5-gravitational-pe-dams": {
   "file": "4-5-gravitational-pe-dams.html",
   "title": "4.5 Gravitational PE & Dams",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-4-6-work-and-power": {
   "file": "4-6-work-and-power.html",
   "title": "4.6 Work and Power",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-4-7-calculating-ke-and-pe": {
@@ -185,21 +185,21 @@
   "file": "5-3-centripetal-force-lab.html",
   "title": "5.3 Centripetal Force Lab",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-5-4-the-law-of-gravitation": {
   "file": "5-4-the-law-of-gravitation.html",
   "title": "5.4 The Law of Gravitation",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-5-5-mass-vs-weight": {
   "file": "5-5-mass-vs-weight.html",
   "title": "5.5 Mass vs. Weight",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-6-1-waves": {
@@ -213,7 +213,7 @@
   "file": "6-2-sound-waves.html",
   "title": "6.2 Sound Waves",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-6-3-simple-harmonic-motion": {
@@ -227,7 +227,7 @@
   "file": "6-4-simple-harmonic-motion-lab.html",
   "title": "6.4 Simple Harmonic Motion Lab",
   "kind": "lesson",
-  "questions": 5,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-6-5-wave-speed": {
@@ -255,7 +255,7 @@
   "file": "7-3-digital-and-analog-information.html",
   "title": "7.3 Digital and Analog Information",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "phys-8-1-electricity": {
@@ -304,7 +304,7 @@
   "file": "9-3-specific-heat-capacity.html",
   "title": "9.3 Specific Heat Capacity",
   "kind": "lesson",
-  "questions": 6,
+  "questions": 8,
   "course": "Physics"
  },
  "ela10-g1-commas-in-compound-sentences": {
