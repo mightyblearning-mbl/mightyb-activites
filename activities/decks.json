@@ -397,5 +397,707 @@
   "kind": "lesson",
   "questions": 9,
   "course": "11th Grade English"
+ },
+ "ela10-2-2-tkam-chapter-4": {
+  "file": "english-10/ela10-2-2-tkam-chapter-4.html",
+  "title": "2.2 TKAM Chapter 4",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "2",
+  "unitTitle": "To Kill a Mockingbird"
+ },
+ "ela10-2-3-tkam-chapter-5": {
+  "file": "english-10/ela10-2-3-tkam-chapter-5.html",
+  "title": "2.3 TKAM Chapter 5",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "2",
+  "unitTitle": "To Kill a Mockingbird"
+ },
+ "ela10-2-4-tkam-chapter-12": {
+  "file": "english-10/ela10-2-4-tkam-chapter-12.html",
+  "title": "2.4 TKAM Chapter 12",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "2",
+  "unitTitle": "To Kill a Mockingbird"
+ },
+ "ela10-2-5-tkam-chapter-15": {
+  "file": "english-10/ela10-2-5-tkam-chapter-15.html",
+  "title": "2.5 TKAM Chapter 15",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "2",
+  "unitTitle": "To Kill a Mockingbird"
+ },
+ "ela10-2-6-tkam-chapter-20": {
+  "file": "english-10/ela10-2-6-tkam-chapter-20.html",
+  "title": "2.6 TKAM Chapter 20",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "2",
+  "unitTitle": "To Kill a Mockingbird"
+ },
+ "ela10-2-7-tkam-chapter-31": {
+  "file": "english-10/ela10-2-7-tkam-chapter-31.html",
+  "title": "2.7 TKAM Chapter 31",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "2",
+  "unitTitle": "To Kill a Mockingbird"
+ },
+ "ela10-2-8-tkam-review": {
+  "file": "english-10/ela10-2-8-tkam-review.html",
+  "title": "2.8 To Kill a Mockingbird Review",
+  "kind": "unit-review",
+  "questions": 14,
+  "course": "10th Grade English",
+  "unit": "2",
+  "unitTitle": "To Kill a Mockingbird"
+ },
+ "ela10-3-1-julius-caesar-introduction": {
+  "file": "english-10/ela10-3-1-julius-caesar-introduction.html",
+  "title": "3.1 Julius Caesar Introduction",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-3-2-julius-caesar-act-1": {
+  "file": "english-10/ela10-3-2-julius-caesar-act-1.html",
+  "title": "3.2 Julius Caesar Act 1",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-3-3-julius-caesar-act-2": {
+  "file": "english-10/ela10-3-3-julius-caesar-act-2.html",
+  "title": "3.3 Julius Caesar Act 2",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-3-4-julius-caesar-act-3-scene-1": {
+  "file": "english-10/ela10-3-4-julius-caesar-act-3-scene-1.html",
+  "title": "3.4 Julius Caesar Act 3 Scene 1",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-3-5-julius-caesar-act-3-scenes-2-3": {
+  "file": "english-10/ela10-3-5-julius-caesar-act-3-scenes-2-3.html",
+  "title": "3.5 Julius Caesar Act 3 Scenes 2-3",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-3-6-julius-caesar-act-4": {
+  "file": "english-10/ela10-3-6-julius-caesar-act-4.html",
+  "title": "3.6 Julius Caesar Act 4",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-3-7-julius-caesar-act-5": {
+  "file": "english-10/ela10-3-7-julius-caesar-act-5.html",
+  "title": "3.7 Julius Caesar Act 5",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-3-8-julius-caesar-review": {
+  "file": "english-10/ela10-3-8-julius-caesar-review.html",
+  "title": "3.8 Julius Caesar Review",
+  "kind": "unit-review",
+  "questions": 14,
+  "course": "10th Grade English",
+  "unit": "3",
+  "unitTitle": "Julius Caesar"
+ },
+ "ela10-4-1-mla-in-text-citations": {
+  "file": "english-10/ela10-4-1-mla-in-text-citations.html",
+  "title": "4.1 MLA In-Text Citations",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "4",
+  "unitTitle": "Research-Based Argument"
+ },
+ "ela10-4-2-mla-works-cited-entries": {
+  "file": "english-10/ela10-4-2-mla-works-cited-entries.html",
+  "title": "4.2 MLA Works Cited Entries",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "4",
+  "unitTitle": "Research-Based Argument"
+ },
+ "ela10-4-3-mla-works-cited-page": {
+  "file": "english-10/ela10-4-3-mla-works-cited-page.html",
+  "title": "4.3 MLA Works Cited Page",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "4",
+  "unitTitle": "Research-Based Argument"
+ },
+ "ela10-4-4-formal-tone": {
+  "file": "english-10/ela10-4-4-formal-tone.html",
+  "title": "4.4 Formal Tone",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "4",
+  "unitTitle": "Research-Based Argument"
+ },
+ "ela10-4-5-research-skills-review": {
+  "file": "english-10/ela10-4-5-research-skills-review.html",
+  "title": "4.5 Research Skills Review",
+  "kind": "unit-review",
+  "questions": 9,
+  "course": "10th Grade English",
+  "unit": "4",
+  "unitTitle": "Research-Based Argument"
+ },
+ "ela10-1-1-what-is-an-argument": {
+  "file": "english-10/ela10-1-1-what-is-an-argument.html",
+  "title": "1.1 What Is an Argument?",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-2-parts-of-an-argument": {
+  "file": "english-10/ela10-1-2-parts-of-an-argument.html",
+  "title": "1.2 Parts of an Argument",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-3-choosing-the-best-evidence": {
+  "file": "english-10/ela10-1-3-choosing-the-best-evidence.html",
+  "title": "1.3 Choosing the Best Evidence",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-4-citing-evidence-in-literary-analysis": {
+  "file": "english-10/ela10-1-4-citing-evidence-in-literary-analysis.html",
+  "title": "1.4 Citing Evidence in Literary Analysis",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-5-evaluating-reasoning-and-evidence": {
+  "file": "english-10/ela10-1-5-evaluating-reasoning-and-evidence.html",
+  "title": "1.5 Evaluating Reasoning and Evidence",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-6-rhetorical-appeals": {
+  "file": "english-10/ela10-1-6-rhetorical-appeals.html",
+  "title": "1.6 Rhetorical Appeals",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-7-identifying-parts-of-an-argument": {
+  "file": "english-10/ela10-1-7-identifying-parts-of-an-argument.html",
+  "title": "1.7 Identifying Parts of an Argument",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-8-slippery-slope-fallacy": {
+  "file": "english-10/ela10-1-8-slippery-slope-fallacy.html",
+  "title": "1.8 Slippery Slope Fallacy",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela10-1-9-bootcamp-review": {
+  "file": "english-10/ela10-1-9-bootcamp-review.html",
+  "title": "1.9 Bootcamp Review",
+  "kind": "unit-review",
+  "questions": 16,
+  "course": "10th Grade English",
+  "unit": "1",
+  "unitTitle": "Argument & Analysis Bootcamp"
+ },
+ "ela11-4-1-what-is-poetry": {
+  "file": "english-11/ela11-4-1-what-is-poetry.html",
+  "title": "4.1 What Is Poetry",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-2-song-of-myself": {
+  "file": "english-11/ela11-4-2-song-of-myself.html",
+  "title": "4.2 Song of Myself",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-3-o-captain-my-captain": {
+  "file": "english-11/ela11-4-3-o-captain-my-captain.html",
+  "title": "4.3 O Captain My Captain",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-4-hope-is-the-thing-with-feathers": {
+  "file": "english-11/ela11-4-4-hope-is-the-thing-with-feathers.html",
+  "title": "4.4 Hope Is the Thing with Feathers",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-5-because-i-could-not-stop-for-death": {
+  "file": "english-11/ela11-4-5-because-i-could-not-stop-for-death.html",
+  "title": "4.5 Because I Could Not Stop for Death",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-6-the-new-colossus": {
+  "file": "english-11/ela11-4-6-the-new-colossus.html",
+  "title": "4.6 The New Colossus",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-7-the-road-not-taken": {
+  "file": "english-11/ela11-4-7-the-road-not-taken.html",
+  "title": "4.7 The Road Not Taken",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-8-nothing-gold-can-stay": {
+  "file": "english-11/ela11-4-8-nothing-gold-can-stay.html",
+  "title": "4.8 Nothing Gold Can Stay",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-9-mother-to-son": {
+  "file": "english-11/ela11-4-9-mother-to-son.html",
+  "title": "4.9 Mother to Son",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-10-i-too": {
+  "file": "english-11/ela11-4-10-i-too.html",
+  "title": "4.10 I Too",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-11-after-the-winter": {
+  "file": "english-11/ela11-4-11-after-the-winter.html",
+  "title": "4.11 After the Winter",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-4-12-american-voices-review": {
+  "file": "english-11/ela11-4-12-american-voices-review.html",
+  "title": "4.12 American Voices Review",
+  "kind": "unit-review",
+  "questions": 23,
+  "course": "11th Grade English",
+  "unit": "4",
+  "unitTitle": "American Voices: Poetry"
+ },
+ "ela11-6-1-the-celebrated-jumping-frog": {
+  "file": "english-11/ela11-6-1-the-celebrated-jumping-frog.html",
+  "title": "6.1 The Celebrated Jumping Frog",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "6",
+  "unitTitle": "American Short Stories"
+ },
+ "ela11-6-2-the-lady-or-the-tiger": {
+  "file": "english-11/ela11-6-2-the-lady-or-the-tiger.html",
+  "title": "6.2 The Lady or the Tiger",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "6",
+  "unitTitle": "American Short Stories"
+ },
+ "ela11-6-3-a-retrieved-reformation": {
+  "file": "english-11/ela11-6-3-a-retrieved-reformation.html",
+  "title": "6.3 A Retrieved Reformation",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "6",
+  "unitTitle": "American Short Stories"
+ },
+ "ela11-6-4-the-gift-of-the-magi": {
+  "file": "english-11/ela11-6-4-the-gift-of-the-magi.html",
+  "title": "6.4 The Gift of the Magi",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "6",
+  "unitTitle": "American Short Stories"
+ },
+ "ela11-6-5-to-build-a-fire": {
+  "file": "english-11/ela11-6-5-to-build-a-fire.html",
+  "title": "6.5 To Build a Fire",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "6",
+  "unitTitle": "American Short Stories"
+ },
+ "ela11-6-6-american-short-stories-review": {
+  "file": "english-11/ela11-6-6-american-short-stories-review.html",
+  "title": "6.6 American Short Stories Review",
+  "kind": "unit-review",
+  "questions": 13,
+  "course": "11th Grade English",
+  "unit": "6",
+  "unitTitle": "American Short Stories"
+ },
+ "ela11-8-1-12-angry-men-introduction": {
+  "file": "english-11/ela11-8-1-12-angry-men-introduction.html",
+  "title": "8.1 12 Angry Men: Introduction",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-2-12-angry-men-part-1": {
+  "file": "english-11/ela11-8-2-12-angry-men-part-1.html",
+  "title": "8.2 12 Angry Men: Part 1",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-3-12-angry-men-part-2": {
+  "file": "english-11/ela11-8-3-12-angry-men-part-2.html",
+  "title": "8.3 12 Angry Men: Part 2",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-4-12-angry-men-part-3": {
+  "file": "english-11/ela11-8-4-12-angry-men-part-3.html",
+  "title": "8.4 12 Angry Men: Part 3",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-5-12-angry-men-part-4": {
+  "file": "english-11/ela11-8-5-12-angry-men-part-4.html",
+  "title": "8.5 12 Angry Men: Part 4",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-6-12-angry-men-part-5": {
+  "file": "english-11/ela11-8-6-12-angry-men-part-5.html",
+  "title": "8.6 12 Angry Men: Part 5",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-7-12-angry-men-part-6": {
+  "file": "english-11/ela11-8-7-12-angry-men-part-6.html",
+  "title": "8.7 12 Angry Men: Part 6",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-8-12-angry-men-part-7": {
+  "file": "english-11/ela11-8-8-12-angry-men-part-7.html",
+  "title": "8.8 12 Angry Men: Part 7",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-8-9-12-angry-men-review": {
+  "file": "english-11/ela11-8-9-12-angry-men-review.html",
+  "title": "8.9 12 Angry Men Review",
+  "kind": "unit-review",
+  "questions": 16,
+  "course": "11th Grade English",
+  "unit": "8",
+  "unitTitle": "12 Angry Men"
+ },
+ "ela11-9-1-motif": {
+  "file": "english-11/ela11-9-1-motif.html",
+  "title": "9.1 Motif in The Old Man and the Sea",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "9",
+  "unitTitle": "The Old Man and the Sea"
+ },
+ "ela11-9-2-imagery": {
+  "file": "english-11/ela11-9-2-imagery.html",
+  "title": "9.2 Imagery in The Old Man and the Sea",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "9",
+  "unitTitle": "The Old Man and the Sea"
+ },
+ "ela11-9-3-personification": {
+  "file": "english-11/ela11-9-3-personification.html",
+  "title": "9.3 Personification in The Old Man and the Sea",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "9",
+  "unitTitle": "The Old Man and the Sea"
+ },
+ "ela11-9-4-allegory": {
+  "file": "english-11/ela11-9-4-allegory.html",
+  "title": "9.4 Allegory in The Old Man and the Sea",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "9",
+  "unitTitle": "The Old Man and the Sea"
+ },
+ "ela11-9-5-paradox": {
+  "file": "english-11/ela11-9-5-paradox.html",
+  "title": "9.5 Paradox in The Old Man and the Sea",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "9",
+  "unitTitle": "The Old Man and the Sea"
+ },
+ "ela11-9-6-theme": {
+  "file": "english-11/ela11-9-6-theme.html",
+  "title": "9.6 Theme in The Old Man and the Sea",
+  "kind": "lesson",
+  "questions": 9,
+  "course": "11th Grade English",
+  "unit": "9",
+  "unitTitle": "The Old Man and the Sea"
+ },
+ "ela11-9-7-old-man-and-the-sea-review": {
+  "file": "english-11/ela11-9-7-old-man-and-the-sea-review.html",
+  "title": "9.7 The Old Man and the Sea Review",
+  "kind": "unit-review",
+  "questions": 14,
+  "course": "11th Grade English",
+  "unit": "9",
+  "unitTitle": "The Old Man and the Sea"
+ },
+ "ela11-5-1-preamble-to-the-constitution": {
+  "file": "english-11/ela11-5-1-preamble-to-the-constitution.html",
+  "title": "5.1 Preamble to the Constitution",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "5",
+  "unitTitle": "Founding Voices"
+ },
+ "ela11-5-2-the-bill-of-rights": {
+  "file": "english-11/ela11-5-2-the-bill-of-rights.html",
+  "title": "5.2 The Bill of Rights",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "5",
+  "unitTitle": "Founding Voices"
+ },
+ "ela11-5-3-washington-s-farewell-address": {
+  "file": "english-11/ela11-5-3-washington-s-farewell-address.html",
+  "title": "5.3 Washington's Farewell Address",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "5",
+  "unitTitle": "Founding Voices"
+ },
+ "ela11-5-4-the-gettysburg-address": {
+  "file": "english-11/ela11-5-4-the-gettysburg-address.html",
+  "title": "5.4 The Gettysburg Address",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "5",
+  "unitTitle": "Founding Voices"
+ },
+ "ela11-5-5-roosevelt-s-four-freedoms": {
+  "file": "english-11/ela11-5-5-roosevelt-s-four-freedoms.html",
+  "title": "5.5 Roosevelt's Four Freedoms",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "5",
+  "unitTitle": "Founding Voices"
+ },
+ "ela11-5-6-founding-voices-review": {
+  "file": "english-11/ela11-5-6-founding-voices-review.html",
+  "title": "5.6 Founding Voices Review",
+  "kind": "unit-review",
+  "questions": 11,
+  "course": "11th Grade English",
+  "unit": "5",
+  "unitTitle": "Founding Voices"
+ },
+ "ela11-7-1-daedalus-and-icarus": {
+  "file": "english-11/ela11-7-1-daedalus-and-icarus.html",
+  "title": "7.1 Daedalus and Icarus",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-2-sonnet-18": {
+  "file": "english-11/ela11-7-2-sonnet-18.html",
+  "title": "7.2 Sonnet 18",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-3-no-man-is-an-island": {
+  "file": "english-11/ela11-7-3-no-man-is-an-island.html",
+  "title": "7.3 No Man Is an Island",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-4-a-poison-tree": {
+  "file": "english-11/ela11-7-4-a-poison-tree.html",
+  "title": "7.4 A Poison Tree",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-5-i-wandered-lonely-as-a-cloud": {
+  "file": "english-11/ela11-7-5-i-wandered-lonely-as-a-cloud.html",
+  "title": "7.5 I Wandered Lonely as a Cloud",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-6-ozymandias": {
+  "file": "english-11/ela11-7-6-ozymandias.html",
+  "title": "7.6 Ozymandias",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-7-jabberwocky": {
+  "file": "english-11/ela11-7-7-jabberwocky.html",
+  "title": "7.7 Jabberwocky",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-8-invictus": {
+  "file": "english-11/ela11-7-8-invictus.html",
+  "title": "7.8 Invictus",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
+ },
+ "ela11-7-9-british-european-review": {
+  "file": "english-11/ela11-7-9-british-european-review.html",
+  "title": "7.9 British & European Voices Review",
+  "kind": "unit-review",
+  "questions": 17,
+  "course": "11th Grade English",
+  "unit": "7",
+  "unitTitle": "British & European Voices"
  }
 }
