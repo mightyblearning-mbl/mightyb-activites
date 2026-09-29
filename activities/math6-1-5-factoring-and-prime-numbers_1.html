@@ -228,11 +228,25 @@ function applyPrefs(){const r=document.documentElement;r.dataset.bg=P.bg;r.datas
 function savePrefs(){try{localStorage.setItem("mb-prefs",JSON.stringify(P));}catch(e){}}
 
 /* ---------- state ---------- */
-const KEY="mb-"+DECK.deckId;
-let S=load()||fresh();
+/* In Canvas the game runs inside the Mighty B Practice page, which keeps each student's stars on the
+   server so they belong to that student and follow them to any device. Opened on its own (GitHub Pages),
+   the game keeps stars in this browser only. */
+const EMBED=window.parent!==window;
+let KEY="mb-"+DECK.deckId, READY=!EMBED, HOSTED=false;
+let S=EMBED?fresh():(load()||fresh());
+function mergeState(a,b){
+  const ok=s=>s&&Array.isArray(s.stars)&&s.stars.length===LEVELS.length;
+  if(!ok(a)) return ok(b)?b:null; if(!ok(b)) return a;
+  const n=(+a.at||0)>=(+b.at||0)?a:b, o=n===a?b:a, out=Object.assign({},n);
+  out.stars=n.stars.map((v,i)=>Math.max(+v||0,+o.stars[i]||0));
+  out.starred=out.stars.map((_,i)=>[...new Set([...((n.starred||[])[i]||[]),...((o.starred||[])[i]||[])])]);
+  if(o.startedAt&&(!n.startedAt||o.startedAt<n.startedAt)) out.startedAt=o.startedAt;
+  return out;
+}
 function fresh(){return {level:0,stars:LEVELS.map(()=>0),used:LEVELS.map(()=>[]),starred:LEVELS.map(()=>[]),stats:LEVELS.map(()=>({tried:0,own:0,hints:0,together:0})),streak:0,startedAt:new Date().toISOString(),best:0};}
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));return s&&s.stars&&s.stars.length===LEVELS.length?s:null;}catch(e){return null;}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function save(){ if(!READY) return; S.at=Date.now(); try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+  if(HOSTED){try{window.parent.postMessage({type:"mb-save-state",deckId:DECK.deckId,state:S},MB_HOST_ORIGIN);}catch(e){}} }
 const totalStars=()=>LEVELS.reduce((t,L,i)=>t+Math.min(S.stars[i],L.need),0);
 const maxStars=()=>LEVELS.reduce((t,L)=>t+L.need,0);
 /* Grade passback: same result object and message as every Mighty B deck. Sent each time the student earns a
@@ -667,7 +681,25 @@ function syncSound(){const sb=document.getElementById("soundBtn");if(!sb)return;
 document.getElementById("soundBtn").onclick=()=>{P.sound=P.sound&&!P.calm?0:1;if(P.sound)P.calm=0;applyPrefs();savePrefs();};
 
 applyPrefs();
-newQuestion();
+function start(){ READY=true; newQuestion(); }
+if(!EMBED) start();
+else{
+  document.getElementById("stage").innerHTML=`<p class="prompt" role="status">Loading your stars...</p>`;
+  let done=false;
+  window.addEventListener("message",e=>{
+    if(done||e.origin!==MB_HOST_ORIGIN||e.source!==window.parent) return;
+    const m=e.data; if(!m||m.type!=="mb-state"||m.deckId!==DECK.deckId||!/^[A-Za-z0-9_-]{8,64}$/.test(m.uh||"")) return;
+    done=true; HOSTED=true; KEY="mb-"+DECK.deckId+"-"+m.uh;   // this student's own copy on this device
+    S=mergeState(m.state,load())||fresh();
+    if(!S.used||S.used.length!==LEVELS.length) S.used=LEVELS.map(()=>[]);
+    if(!S.stats||S.stats.length!==LEVELS.length) S.stats=LEVELS.map(()=>({tried:0,own:0,hints:0,together:0}));
+    S.cur=null; start(); save();
+    if(totalStars()>0) sendResult();   // makes sure Canvas has this student's best score
+  });
+  try{window.parent.postMessage({type:"mb-deck-ready",deckId:DECK.deckId},MB_HOST_ORIGIN);}catch(e){}
+  // Older Mighty B Practice page that doesn't answer: keep the old behavior (stars saved in this browser).
+  setTimeout(()=>{ if(done) return; done=true; S=load()||fresh(); start(); },5000);
+}
 })();
 </script>
 
