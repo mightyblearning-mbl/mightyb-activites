@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prime Constellations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --sky:#14213D; --sky-deep:#0E1830; --panel:#1E2F55; --panel-2:#26396A; --line:#34497D;
+  --moon:#F3EFE0; --muted:#A3AECB; --star:#FFD166; --star-dim:#4A5A86;
+  --mint:#7BDCB5; --mint-ink:#0F3B2E; --lilac:#B8A6FF;
+  --star-text:#FFD166; --sky-top:#22346A; --panel-b:#1A2A4E; --well:rgba(0,0,0,.25); --hover:#4B63A3; --btn-ink:#2B2208;
+  --boss:#FF9E7A;
+  --display:"Baloo 2","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Verdana","Segoe UI",system-ui,sans-serif;
+  --r:14px;
+}
+:root[data-bg="light"]{color-scheme:light;--sky:#F4F6FB;--sky-deep:#E6EAF3;--sky-top:#FFFFFF;--panel:#FFFFFF;--panel-2:#EEF1F8;--panel-b:#F8F9FD;--line:#C5CEE0;
+  --moon:#1B2440;--muted:#4F5A73;--star:#F5B83D;--star-text:#8A5A00;--star-dim:#B7C0D6;--mint:#1F8A63;--mint-ink:#FFFFFF;--lilac:#5B45C9;--well:rgba(27,36,64,.06);--hover:#8FA2CC;--boss:#C2410C}
+:root[data-bg="cream"]{color-scheme:light;--sky:#FBF6E9;--sky-deep:#F2EAD3;--sky-top:#FFFDF6;--panel:#FFFCF3;--panel-2:#F4EDDA;--panel-b:#FBF6E8;--line:#D9CBA6;
+  --moon:#2A2418;--muted:#62573F;--star:#F0B43A;--star-text:#855600;--star-dim:#CDBF9A;--mint:#23805E;--mint-ink:#FFFFFF;--lilac:#5E4AB8;--well:rgba(60,45,10,.06);--hover:#C7B480;--boss:#B4410F}
+:root[data-size="1"] .wrap{zoom:1.15}
+:root[data-size="2"] .wrap{zoom:1.32}
+:root[data-spacing="1"] body{letter-spacing:.05em;word-spacing:.16em;line-height:1.85}
+:root[data-calm="1"] *{animation:none!important;transition:none!important}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,var(--sky-top) 0%,var(--sky) 55%,var(--sky-deep) 100%) fixed,var(--sky);color:var(--moon);font-family:var(--body);font-size:17px;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:18px 40px;display:flex;flex-direction:column;gap:16px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,.chip:focus-visible,.zone:focus-visible{outline:3px solid var(--star);outline-offset:3px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column}
+.brand h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,5vw,34px);line-height:1;margin:0}
+.brand h1 span{color:var(--star-text)}
+.brand small{color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;display:inline-flex;align-items:center;gap:7px}
+.pill svg{width:16px;height:16px}
+.proto{font-size:13px;color:var(--muted);background:rgba(184,166,255,.08);border:1px dashed rgba(184,166,255,.35);border-radius:10px;padding:8px 12px}
+.proto b{color:var(--lilac)}
+.map{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.con{background:transparent;border:1px solid transparent;border-radius:12px;padding:6px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted)}
+.con:hover{border-color:var(--line)}
+.con[aria-current="step"]{background:rgba(255,209,102,.07);border-color:rgba(255,209,102,.35);color:var(--moon)}
+.con svg{width:100%;max-width:120px;height:auto;aspect-ratio:12/9}
+.con .nm{font-family:var(--display);font-weight:600;font-size:14px;line-height:1.1;text-align:center}
+.con .sk{font-size:11.5px;text-align:center;line-height:1.2}
+.con.done .nm{color:var(--star-text)}
+.con.boss .nm{color:var(--boss)}
+.con.locked{opacity:.55}
+@media (max-width:560px){.map{gap:2px}.con .sk{display:none}.con .nm{font-size:12px}}
+.card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel-b) 100%);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);display:flex;flex-direction:column;gap:18px;box-shadow:0 20px 50px -30px rgba(0,0,0,.7)}
+.card.bosscard{border-color:var(--boss);box-shadow:0 0 0 2px rgba(255,158,122,.25),0 20px 50px -30px rgba(0,0,0,.7)}
+.eyebrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.eyebrow .lv{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.eyebrow .lv b{color:var(--star-text);font-weight:700}
+.bosscard .eyebrow .lv b{color:var(--boss)}
+.starrow{display:flex;gap:4px}
+.starrow svg{width:22px;height:22px}
+.prompt{font-family:var(--display);font-weight:600;font-size:clamp(22px,4.2vw,30px);line-height:1.2;margin:0;text-wrap:balance}
+.prompt .num{color:var(--star-text)}
+.sub{color:var(--muted);margin:-8px 0 0;max-width:62ch}
+.readbtn{align-self:flex-start}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px}
+.tile{background:var(--panel-2);border:2px solid var(--line);border-radius:var(--r);min-height:60px;font-family:var(--display);font-weight:700;font-size:24px;font-variant-numeric:tabular-nums;transition:transform .12s ease,background .15s,border-color .15s}
+.tile:hover{transform:translateY(-2px);border-color:var(--hover)}
+.tile[aria-pressed="true"]{background:var(--star);color:var(--btn-ink);border-color:var(--star)}
+.tile.locked{background:var(--mint);color:var(--mint-ink);border-color:var(--mint);cursor:default;transform:none}
+.tile.nope{border-color:var(--lilac);border-style:dashed;color:var(--muted);background:transparent}
+.tile.small{min-height:50px;font-size:20px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:none;border-radius:999px;padding:12px 22px;font-family:var(--display);font-weight:700;font-size:18px;background:var(--star);color:var(--btn-ink);transition:transform .1s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;filter:grayscale(1)}
+.btn.ghost{background:transparent;color:var(--lilac);border:2px solid rgba(184,166,255,.5)}
+.btn.soft{background:var(--panel-2);color:var(--moon);border:1px solid var(--line)}
+.fb{border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;font-size:16.5px}
+.fb svg{flex:none;width:26px;height:26px;margin-top:1px}
+.fb.good{background:rgba(123,220,181,.12);border:1px solid rgba(123,220,181,.45)}
+.fb.good strong{color:var(--mint)}
+.fb.look{background:rgba(184,166,255,.10);border:1px solid rgba(184,166,255,.45)}
+.fb.look strong{color:var(--lilac)}
+.fb.hint{background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.35)}
+.fb.hint strong{color:var(--star-text)}
+.fb p{margin:0}
+.fb p+p{margin-top:6px}
+.tray{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border-radius:14px;background:var(--well);border:1px dashed var(--line)}
+.chip{background:var(--panel-2);border:2px solid var(--line);border-radius:12px;min-width:52px;height:46px;padding:0 10px;font-family:var(--display);font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;touch-action:none;user-select:none}
+.chip[aria-pressed="true"]{border-color:var(--star);box-shadow:0 0 0 3px rgba(255,209,102,.25)}
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.zones{grid-template-columns:1fr}}
+.zone{border:2px solid var(--line);border-radius:18px;padding:10px;min-height:120px;display:flex;flex-direction:column;gap:8px;background:rgba(255,255,255,.02);text-align:left}
+.zone.over{border-color:var(--star);background:rgba(255,209,102,.12)}
+.zone .zl{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.zone .zl b{color:var(--moon);font-family:var(--display);font-size:18px;letter-spacing:0;text-transform:none}
+.zone .zc{display:flex;flex-wrap:wrap;gap:6px}
+.zone .chip{height:40px;min-width:46px;font-size:19px}
+.tray.zone{flex-direction:row;align-items:center;min-height:62px;border-style:dashed}
+/* factor builder */
+.builder{display:flex;flex-direction:column;gap:12px}
+.eq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--display);font-weight:700;font-size:32px;font-variant-numeric:tabular-nums}
+.slot{min-width:84px;height:62px;border-radius:14px;background:var(--well);border:2px solid var(--line);display:inline-flex;align-items:center;justify-content:center;padding:0 12px;font:inherit;color:var(--moon)}
+.slot[aria-pressed="true"]{border-color:var(--star);box-shadow:0 0 0 3px rgba(255,209,102,.25)}
+.slot.empty{color:var(--muted);font-family:var(--body);font-weight:400;font-size:15px}
+.found{display:flex;flex-wrap:wrap;gap:8px}
+.found .fp{border:2px solid var(--mint);color:var(--mint);border-radius:999px;padding:4px 14px;font-family:var(--display);font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+.found .ghostp{border:2px dashed var(--line);color:var(--muted);border-radius:999px;padding:4px 14px;font-size:15px}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:320px}
+.pad button{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;height:54px;font-family:var(--display);font-weight:700;font-size:22px}
+.pad button:hover{border-color:var(--hover)}
+/* boss sky */
+.skyfield{position:relative;border-radius:16px;background:var(--well);border:1px solid var(--line);overflow:hidden}
+.skyfield svg{display:block;width:100%;height:auto}
+.hgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px 8px;padding:20px 12px 24px;justify-items:center}
+.hstar{width:clamp(48px,13vw,62px);aspect-ratio:1;border-radius:50%;border:2px solid var(--line);background:radial-gradient(circle at 35% 30%,var(--panel-2),var(--sky-deep));font-family:var(--display);font-weight:700;font-size:clamp(18px,4.6vw,22px);color:var(--moon);font-variant-numeric:tabular-nums;transition:transform .15s,box-shadow .2s}
+.hstar:hover:not(:disabled){border-color:var(--hover)}
+.hstar.on{background:var(--boss);border-color:var(--boss);color:var(--btn-ink);box-shadow:0 0 0 6px rgba(255,158,122,.18),0 0 22px rgba(255,158,122,.55)}
+.hstar.no{opacity:.35;border-style:dashed;border-color:var(--lilac)}
+.hstar:disabled{cursor:default}
+.cele{text-align:center;align-items:center}
+.cele svg.big{width:min(320px,90%);height:auto}
+.cele .prompt{max-width:22ch}
+.summary{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
+.summary th,.summary td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+.summary th{color:var(--muted);font-weight:400;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+.tablewrap{overflow-x:auto;width:100%}
+footer.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:13.5px}
+.linkish{background:none;border:none;color:var(--lilac);text-decoration:underline;text-underline-offset:3px;padding:0}
+.report{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.report label{display:flex;gap:8px;align-items:center}
+.report textarea{font:inherit;background:var(--well);color:var(--moon);border:1px solid var(--line);border-radius:10px;padding:10px;min-height:70px;resize:vertical}
+.pop{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(.6);opacity:.3}60%{transform:scale(1.25)}100%{transform:scale(1);opacity:1}}
+.twinkle{animation:tw 3.5s ease-in-out infinite}
+@keyframes tw{50%{opacity:.55}}
+.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:var(--star);color:var(--btn-ink);font-family:var(--display);font-weight:700;padding:8px 18px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:10;animation:toast 1.8s ease forwards;pointer-events:none}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}15%{opacity:1;transform:translate(-50%,0)}80%{opacity:1}100%{opacity:0}}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:20}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+[hidden]{display:none!important}
+.settings{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.settings h2{margin:0;font-family:var(--display);font-size:22px}
+.settings .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.settings .lbl{min-width:150px;font-weight:700}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+.seg button{background:var(--panel-2);border:2px solid var(--line);border-radius:999px;padding:7px 14px;font-size:15px}
+.seg button[aria-pressed="true"]{border-color:var(--star);background:var(--star);color:var(--btn-ink);font-weight:700}
+.settings .note{color:var(--muted);font-size:14px;margin:0}
+.reading{outline:3px solid var(--lilac);outline-offset:4px;border-radius:10px;background-color:rgba(184,166,255,.10)}
+.fbread{background:none;border:1px solid currentColor;border-radius:999px;color:inherit;padding:3px 10px;font-size:13px;margin-top:8px;display:inline-flex;gap:6px;align-items:center}
+.fbread svg{width:14px;height:14px;margin:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar .tl{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.toolbar .pill[aria-pressed="true"]{border-color:var(--lilac);color:var(--moon);background:rgba(184,166,255,.18)}
+.tool{border:1px dashed var(--lilac);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px;background:var(--well)}
+.tool .ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tool .ctl .seg button{padding:5px 12px;font-size:15px;font-variant-numeric:tabular-nums}
+.tool .cap{margin:0;font-size:16.5px;max-width:62ch}
+.tool .scroll{overflow-x:auto}
+.notebox{border-left:4px solid var(--star);background:var(--well);border-radius:0 12px 12px 0;padding:10px 14px;font-size:15.5px}
+.notebox b{color:var(--star-text)}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>Prime <span>Constellations</span></h1>
+      <small>6th Grade Math · Lesson 1.5 · Factoring and Prime Numbers</small>
+    </div>
+    <div class="tools">
+      <button class="pill" id="setBtn" aria-expanded="false" aria-controls="settingsBox" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>My settings</span></button>
+      <button class="pill" id="soundBtn" aria-pressed="true" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg><span>Sound on</span></button>
+      
+    </div>
+  </header>
+  <section class="settings" id="settingsBox" hidden aria-label="My settings"></section>
+  <div class="proto" id="proto">Every star you earn on your own counts toward your grade. Light up four constellations to unlock the Prime Hunter.</div>
+  <nav class="map" id="map" aria-label="Constellations"></nav>
+  <main id="stage" aria-live="polite"></main>
+  <div id="reportBox"></div>
+  <footer class="foot">
+    <span>No timer. Take your time. Every question comes from your 1.5 notes.</span>
+    <button class="linkish" id="reportBtn" type="button">Report a problem with this question</button>
+  </footer>
+</div>
+
+<script type="application/json" id="mb-deck">
+{"formatVersion": 1, "engine": "quest", "deckId": "math6-1-5-factoring-and-prime-numbers", "title": "1.5 Factoring and Prime Numbers", "course": "Math 601 (6th Grade Math)", "unit": "1", "lesson": "1.5", "kind": "lesson", "theme": "constellations", "sourceNotes": "1.5 Factoring and Prime Numbers - Notes (N-Gen Math 6, Unit 1, Lesson 5)", "sourceVideo": "Edpuzzle: N-Gen Math 6, Unit 1, Lesson 5, Factoring and Prime Numbers", "replacesBoom": ["i3Sqv6z7QzB2qTiKT", "gxb9GNotTBkkd432H", "7Ak68Xc3QSjPfasQb"], "accuracyReview": {"status": "approved", "by": "Bethany", "date": "2026-09-29"}, "levels": [{"key": "split", "name": "The Scales", "skill": "Factor it every way", "need": 3, "pool": [20, 16, 30, 28, 36, 40]}, {"key": "factors", "name": "The Net", "skill": "Catch every factor", "need": 3, "pool": [32, 27, 45, 50, 42, 44]}, {"key": "sort", "name": "The Twins", "skill": "Prime or composite?", "need": 3, "pool": [[2, 9, 13, 21, 23, 27], [5, 15, 19, 25, 29, 39], [7, 11, 35, 37, 49, 51], [3, 17, 33, 41, 45, 57], [31, 43, 55, 47, 63, 91]]}, {"key": "share", "name": "The Party", "skill": "Share it equally", "need": 2, "pool": [{"n": 17, "thing": "cupcakes"}, {"n": 18, "thing": "stickers"}, {"n": 23, "thing": "marbles"}, {"n": 20, "thing": "pencils"}, {"n": 29, "thing": "grapes"}, {"n": 24, "thing": "crayons"}]}, {"key": "hunt", "name": "Prime Hunter", "skill": "Boss: find every prime", "need": 1, "boss": true, "pool": [[20, 39], [40, 59], [60, 79]]}], "problems": [{"id": "split-1", "type": "quest-star", "skill": "Factor it every way", "tag": "The Scales", "q": "The Scales: star 1 of 3 (Factor it every way)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "split-2", "type": "quest-star", "skill": "Factor it every way", "tag": "The Scales", "q": "The Scales: star 2 of 3 (Factor it every way)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "split-3", "type": "quest-star", "skill": "Factor it every way", "tag": "The Scales", "q": "The Scales: star 3 of 3 (Factor it every way)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "factors-1", "type": "quest-star", "skill": "Catch every factor", "tag": "The Net", "q": "The Net: star 1 of 3 (Catch every factor)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "factors-2", "type": "quest-star", "skill": "Catch every factor", "tag": "The Net", "q": "The Net: star 2 of 3 (Catch every factor)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "factors-3", "type": "quest-star", "skill": "Catch every factor", "tag": "The Net", "q": "The Net: star 3 of 3 (Catch every factor)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "sort-1", "type": "quest-star", "skill": "Prime or composite?", "tag": "The Twins", "q": "The Twins: star 1 of 3 (Prime or composite?)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "sort-2", "type": "quest-star", "skill": "Prime or composite?", "tag": "The Twins", "q": "The Twins: star 2 of 3 (Prime or composite?)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "sort-3", "type": "quest-star", "skill": "Prime or composite?", "tag": "The Twins", "q": "The Twins: star 3 of 3 (Prime or composite?)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "share-1", "type": "quest-star", "skill": "Share it equally", "tag": "The Party", "q": "The Party: star 1 of 2 (Share it equally)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "share-2", "type": "quest-star", "skill": "Share it equally", "tag": "The Party", "q": "The Party: star 2 of 2 (Share it equally)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "hunt-1", "type": "quest-star", "skill": "Boss: find every prime", "tag": "Prime Hunter", "q": "Prime Hunter: star 1 of 1 (Boss: find every prime)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}], "masteryThreshold": 0.85, "wrapUp": "A prime number has exactly two factors, 1 and itself; a composite number has more than two."}
+</script>
+
+<script>
+(function(){
+"use strict";
+const DECK=JSON.parse(document.getElementById("mb-deck").textContent);
+const MB_HOST_ORIGIN="https://mb-practice.mightyblearning.workers.dev";
+/* ---------- math helpers: every answer is computed, never typed ---------- */
+const factors=n=>{const f=[];for(let d=1;d<=n;d++) if(n%d===0) f.push(d);return f;};
+const isPrime=n=>n>1&&factors(n).length===2;
+const allPairs=n=>{const p=[];for(let a=1;a*a<=n;a++) if(n%a===0) p.push([a,n/a]);return p;};
+const splitOf=n=>{for(let a=2;a*a<=n;a++) if(n%a===0) return [a,n/a];return null;};
+const divText=(n,d)=>{const q=Math.floor(n/d),r=n%d;return `${n} ÷ ${d} = ${q}${r?` R ${r}`:""}`;};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const uuid=()=>(crypto.randomUUID?crypto.randomUUID():"x"+Date.now()+Math.random().toString(16).slice(2));
+
+/* ---------- constellation shapes (the look of each level) ---------- */
+const LOOK=[
+  {pts:[[15,60],[60,20],[105,60],[60,20],[60,90],[35,90],[85,90]],stars:[[15,60],[60,20],[105,60]]},
+  {pts:[[15,20],[105,20],[105,90],[15,90],[15,20],[105,90],[15,90],[105,20]],stars:[[15,20],[105,20],[60,55]]},
+  {pts:[[30,15],[30,90],[30,50],[90,50],[90,15],[90,90]],stars:[[30,15],[90,15],[60,50]]},
+  {pts:[[20,90],[60,20],[100,90],[20,90]],stars:[[60,20],[100,90]]},
+  {pts:[[10,55],[35,25],[60,55],[85,25],[110,55],[85,90],[35,90],[10,55]],stars:[[60,55]]}];
+const LEVELS=DECK.levels.map((c,i)=>Object.assign({},c,LOOK[i]));
+
+/* ---------- student settings (never store a diagnosis) ---------- */
+const PREF_DEF={read:"button",rate:"normal",size:0,spacing:0,bg:"night",calm:0,sound:1};
+const PREF_OK={read:["button","auto"],rate:["slow","normal"],size:[0,1,2],spacing:[0,1],bg:["night","light","cream"],calm:[0,1],sound:[0,1]};
+function loadPrefs(){let p={};try{p=JSON.parse(localStorage.getItem("mb-prefs"))||{};}catch(e){} const o={};for(const k in PREF_DEF) if(PREF_OK[k].includes(p[k])) o[k]=p[k]; return Object.assign({},PREF_DEF,o);}
+let P=loadPrefs();
+function applyPrefs(){const r=document.documentElement;r.dataset.bg=P.bg;r.dataset.size=P.size;r.dataset.spacing=P.spacing;r.dataset.calm=P.calm;syncSound();}
+function savePrefs(){try{localStorage.setItem("mb-prefs",JSON.stringify(P));}catch(e){}}
+
+/* ---------- state ---------- */
+const KEY="mb-"+DECK.deckId;
+let S=load()||fresh();
+function fresh(){return {level:0,stars:LEVELS.map(()=>0),used:LEVELS.map(()=>[]),starred:LEVELS.map(()=>[]),stats:LEVELS.map(()=>({tried:0,own:0,hints:0,together:0})),streak:0,startedAt:new Date().toISOString(),best:0};}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));return s&&s.stars&&s.stars.length===LEVELS.length?s:null;}catch(e){return null;}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const totalStars=()=>LEVELS.reduce((t,L,i)=>t+Math.min(S.stars[i],L.need),0);
+const maxStars=()=>LEVELS.reduce((t,L)=>t+L.need,0);
+/* Grade passback: same result object and message as every Mighty B deck. Sent each time the student earns a
+   star; the host only posts a score that beats the best one already in Canvas. */
+function sendResult(){
+  const g=totalStars(),m=maxStars();
+  const result={formatVersion:1,deckId:DECK.deckId,attemptId:uuid(),startedAt:S.startedAt,completedAt:new Date().toISOString(),
+    scoreGiven:g,scoreMaximum:m,mastered:g/m>=0.85,
+    items:LEVELS.flatMap((L,i)=>Array.from({length:L.need},(_,k)=>({id:L.key+"-"+(k+1),skill:L.skill,firstTryCorrect:S.stars[i]>k,tries:k===0?S.stats[i].tried:0}))),
+    levelStats:LEVELS.map((L,i)=>({id:L.key,skill:L.skill,starsOnOwn:Math.min(S.stars[i],L.need),need:L.need,tries:S.stats[i].tried,hints:S.stats[i].hints,workedTogether:S.stats[i].together}))};
+  window.dispatchEvent(new CustomEvent("mb-deck-complete",{detail:result}));
+  if(window.parent!==window){try{window.parent.postMessage({type:"mb-deck-complete",result},MB_HOST_ORIGIN);}catch(e){}}
+}
+let Q=null;
+
+/* ---------- sound ---------- */
+let ac=null;
+function tone(freqs,dur=.18,gap=.09,vol=.08){ if(!P.sound||P.calm) return; try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+  freqs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.value=f;const t=ac.currentTime+i*gap;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur+.25);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+dur+.3);});}catch(e){} }
+const sfx={good:()=>tone([659,880]),star:()=>tone([523,659,784,1047],.2,.1,.07),soft:()=>tone([392],.15,0,.04),done:()=>tone([523,659,784,988,1175],.25,.12,.07),ping:()=>tone([1047],.12,0,.05)};
+function toast(t){ if(P.calm||matchMedia("(prefers-reduced-motion: reduce)").matches) return; const d=document.createElement("div");d.className="toast";d.setAttribute("aria-hidden","true");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1900); }
+function confetti(){ if(P.calm||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cv=document.createElement("canvas");cv.id="confetti";document.body.appendChild(cv);const cx=cv.getContext("2d");const W=cv.width=innerWidth,H=cv.height=innerHeight;
+  const cs=["#FFD166","#7BDCB5","#B8A6FF","#FF9E7A","#F3EFE0"];const bits=Array.from({length:130},()=>({x:W/2+(Math.random()-.5)*120,y:H/3,vx:(Math.random()-.5)*12,vy:-Math.random()*12-4,r:Math.random()*6+3,c:cs[Math.random()*cs.length|0],a:Math.random()*6}));
+  let f=0;(function step(){cx.clearRect(0,0,W,H);for(const b of bits){b.vy+=.35;b.x+=b.vx;b.y+=b.vy;b.a+=.2;cx.fillStyle=b.c;cx.save();cx.translate(b.x,b.y);cx.rotate(b.a);cx.fillRect(-b.r/2,-b.r/2,b.r,b.r*.6);cx.restore();}if(++f<140)requestAnimationFrame(step);else cv.remove();})(); }
+
+/* ---------- icons ---------- */
+const starSVG=(on,cls="")=>`<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1L3.2 9.2l6.1-.8z" fill="${on?"var(--star)":"none"}" stroke="${on?"var(--star)":"var(--star-dim)"}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+const ICON={
+  good:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>`,
+  look:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--lilac)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>`,
+  hint:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--star)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>`,
+  speak:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>`};
+function conSVG(L,lit,big){
+  const lines=L.pts.map((p,i)=>i?`L${p[0]} ${p[1]}`:`M${p[0]} ${p[1]}`).join(" ");const done=lit>=L.need;const col=L.boss?"var(--boss)":"var(--star)";
+  const dots=L.stars.map((p,i)=>{const on=i<lit;return `<circle cx="${p[0]}" cy="${p[1]}" r="${on?(L.boss?9:6):4}" fill="${on?col:"var(--star-dim)"}" ${on?`class="twinkle" style="animation-delay:${i*.6}s"`:""}/>${on?`<circle cx="${p[0]}" cy="${p[1]}" r="${L.boss?16:11}" fill="${col}" opacity=".15"/>`:""}`;}).join("");
+  const minor=L.pts.filter(p=>!L.stars.some(s=>s[0]===p[0]&&s[1]===p[1])).map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.2" fill="${done?"var(--moon)":"var(--star-dim)"}"/>`).join("");
+  return `<svg ${big?'class="big"':""} viewBox="-6 0 132 100" aria-hidden="true"><path d="${lines}" fill="none" stroke="${done?col:"var(--line)"}" stroke-width="${done?2:1.4}" stroke-dasharray="${done?"none":"4 5"}" stroke-linecap="round"/>${minor}${dots}</svg>`;
+}
+
+/* ---------- map ---------- */
+function bossOpen(){return LEVELS.every((L,i)=>L.boss||S.stars[i]>=L.need);}
+function renderMap(){
+  document.getElementById("map").innerHTML=LEVELS.map((L,i)=>{const lock=L.boss&&!bossOpen()&&!REVIEW;return `<button class="con ${S.stars[i]>=L.need?"done":""} ${L.boss?"boss":""} ${lock?"locked":""}" type="button" data-lv="${i}" ${i===S.level?'aria-current="step"':""} aria-label="${L.name}: ${L.skill}, ${Math.min(S.stars[i],L.need)} of ${L.need} stars${lock?", unlocks after the other four":""}">${conSVG(L,Math.min(S.stars[i],L.need))}<span class="nm">${L.name}</span><span class="sk">${lock?"Light the other 4 first":L.skill}</span></button>`;}).join("");
+  document.querySelectorAll(".con").forEach(b=>b.onclick=()=>{const i=+b.dataset.lv;if(LEVELS[i].boss&&!bossOpen()&&!REVIEW){toast("Light up the other constellations first!");return;}S.level=i;S.cur=null;save();newQuestion();});
+}
+const REVIEW=false; // review copy: every level open. The Canvas copy sets this to false so the boss waits.
+
+/* ---------- picking questions ---------- */
+function pickItem(li){
+  const pool=LEVELS[li].pool;const used=S.used[li];const starred=S.starred[li]||[];
+  let idx=[...pool.keys()].find(i=>!used.includes(i)&&!starred.includes(i));
+  if(idx===undefined){S.used[li]=[];idx=[...pool.keys()].find(i=>!starred.includes(i));}
+  if(idx===undefined) idx=Math.floor(Math.random()*pool.length);
+  S.used[li].push(idx);return {idx,item:pool[idx]};
+}
+function newQuestion(){
+  closeReport();
+  const li=S.level,L=LEVELS[li];
+  if(S.stars[li]>=L.need&&!(Q&&Q.practiceMore)) return celebrate(li);
+  const {idx,item}=pickItem(li);
+  Q={li,idx,item,misses:0,hinted:false,hintStep:0,id:`1.5-${L.key}-${idx+1}`,tool:null};
+  S.stats[li].tried++;
+  ({split:initSplit,factors:initFactors,sort:initSort,share:initShare,hunt:initHunt})[L.key]();
+  save();render();
+}
+
+/* ---------- card chrome ---------- */
+function chrome(inner,promptText){
+  const L=LEVELS[Q.li];const got=Math.min(S.stars[Q.li],L.need);Q.speak=promptText;
+  return `<section class="card ${L.boss?"bosscard":""}" aria-label="${L.name}">
+    <div class="eyebrow"><span class="lv"><b>${L.boss?"Boss level · ":""}${L.name}</b> · ${L.skill}</span>
+      <span class="starrow" aria-label="${got} of ${L.need} stars">${Array.from({length:L.need},(_,i)=>starSVG(i<got,i===got-1&&Q.justStarred?"pop":"")).join("")}</span></div>
+    ${inner.replace(readBtn(),readBtn()+toolbar())}
+  </section>`;
+}
+const readBtn=()=>`<button class="pill readbtn" type="button" data-act="read">${ICON.speak}<span>Read to me</span></button>`;
+function fbBox(){ if(!Q.fb) return ""; const f=Q.fb; return `<div class="fb ${f.kind}" role="status">${ICON[f.kind==="good"?"good":f.kind==="hint"?"hint":"look"]}<div>${f.html}<button class="fbread" type="button" data-act="readfb">${ICON.speak}Read this</button></div></div>`; }
+function actionRow(o={}){
+  const parts=[];
+  if(o.check) parts.push(`<button class="btn" type="button" data-act="check" ${o.checkDisabled?"disabled":""}>${o.checkLabel||"Check"}</button>`);
+  if(o.extra) parts.push(o.extra);
+  if(o.hint!==false&&!Q.solved) parts.push(`<button class="btn ghost" type="button" data-act="hint">Show me a hint</button>`);
+  if(Q.solved) parts.push(`<button class="btn" type="button" data-act="next">${Q.nextLabel||"Next star"}</button>`);
+  return `<div class="actions">${parts.join("")}</div>`;
+}
+
+/* ---------- outcomes ---------- */
+function solved(msg){
+  Q.solved=true;const own=Q.misses===0&&!Q.hinted;const L=LEVELS[Q.li];
+  if(own){S.stars[Q.li]++;S.starred[Q.li].push(Q.idx);S.stats[Q.li].own++;S.streak++;Q.justStarred=true;sfx.star();
+    if([3,5,8].includes(S.streak)) toast(`${S.streak} in a row!`);
+    const left=L.need-Math.min(S.stars[Q.li],L.need);
+    Q.fb={kind:"good",html:`<p><strong>You did that on your own. Star earned!</strong></p><p>${msg}</p>`};
+    Q.nextLabel=left?"Next star":(L.boss?"Claim your victory":"Light up the constellation");
+    if(totalStars()>S.best){S.best=totalStars();sendResult();}
+  } else {S.streak=0;sfx.good();
+    Q.fb={kind:"good",html:`<p><strong>You got it.</strong> ${msg}</p><p>${Q.hinted?"Stars are for solving without hints":"Stars are for getting it right with no wrong tries"}, so try the next one on your own. You're ready.</p>`};
+    Q.nextLabel="Try another";}
+  save();
+}
+function miss(html){
+  Q.misses++;S.streak=0;sfx.soft();
+  if(Q.misses>=2&&Q.together){ Q.fb={kind:"look",html:`<p><strong>Let's work this one out together.</strong></p>${Q.together()}`};S.stats[Q.li].together++;Q.solved=true;Q.nextLabel="Try a new one on your own";Q.locked=true; }
+  else Q.fb={kind:"look",html:`<p><strong>Let's look closer.</strong></p>${html}`};
+  save();
+}
+function hint(){ Q.hinted=true;S.stats[Q.li].hints++;const h=Q.hints[Math.min(Q.hintStep,Q.hints.length-1)];Q.hintStep++;Q.fb={kind:"hint",html:`<p><strong>Hint</strong></p><p>${typeof h==="function"?h():h}</p>`};save();render(); }
+
+/* ---------- level 1: write it as a product every way (notes Ex. 1 and 3) ---------- */
+function initSplit(){
+  const n=Q.item;Q.n=n;Q.pairs=allPairs(n);Q.got=[];Q.slots=["",""];Q.slot=0;
+  Q.hints=[`Start with 1 × ${n}. Then try 2, 3, 4, and so on. Does it divide ${n} with no remainder?`,
+    ()=>{const m=Q.pairs.find(p=>!Q.got.some(g=>g[0]===p[0]));return m?`Try ${m[0]}. What times ${m[0]} makes ${n}?`:"You have them all. Press I found them all.";},
+    `Order doesn't matter: 2 × ${n/2|0} and ${n/2|0} × 2 are the same way. You can stop when the pairs start to repeat.`];
+  Q.together=()=>`<p>Test 1, 2, 3, … and keep the ones that divide ${n} evenly:</p><p><b>${Q.pairs.map(([a,b])=>`${a} × ${b}`).join(" &nbsp;·&nbsp; ")}</b></p><p>That's ${Q.pairs.length} ways to factor ${n}. So the factors of ${n} are <b>${factors(n).join(", ")}</b>.</p>`;
+}
+function viewSplit(){
+  const n=Q.n;const [a,b]=Q.slots;
+  const got=Q.got.map(([x,y])=>`<span class="fp">${x} × ${y}</span>`).join("");
+  return chrome(`<h2 class="prompt">Factor <span class="num">${n}</span>: write it as a product of two whole numbers in <em>every</em> way you can.</h2>
+    <p class="sub">Type the first number, press Next box, type the second number, then press Add this way. Order doesn't matter: 3 × 4 and 4 × 3 are the same way.</p>${readBtn()}
+    <div class="builder">
+      <div class="eq" aria-label="Your product"><span>${n} =</span>
+        <button class="slot ${a?"":"empty"}" type="button" data-slot="0" aria-pressed="${Q.slot===0}" aria-label="First factor ${a||"empty"}" ${Q.solved?"disabled":""}>${a||"tap"}</button><span>×</span>
+        <button class="slot ${b?"":"empty"}" type="button" data-slot="1" aria-pressed="${Q.slot===1}" aria-label="Second factor ${b||"empty"}" ${Q.solved?"disabled":""}>${b||"tap"}</button></div>
+      ${fbBox()}
+      <div><div class="sub" style="margin:0 0 6px">Ways you found (${Q.got.length})</div><div class="found">${got||`<span class="ghostp">none yet</span>`}</div></div>
+      ${Q.solved?"":pad()}
+    </div>
+    ${actionRow({check:!Q.solved,checkLabel:"Add this way",checkDisabled:!(a&&b),extra:Q.solved?"":`<button class="btn soft" type="button" data-act="alldone" ${Q.got.length?"":"disabled"}>I found them all</button>`})}`,
+    `Factor ${n}. Write it as a product of two whole numbers in every way you can.`);
+}
+function addSplit(){
+  const n=Q.n,a=+Q.slots[0],b=+Q.slots[1];Q.slots=["",""];Q.slot=0;
+  if(a*b!==n){ return miss(`<p>${a} × ${b} = ${a*b}, not ${n}. ${n%a===0?`What times ${a} makes ${n}?`:`${divText(n,a)}, so ${a} doesn't go into ${n} evenly.`}</p>`); }
+  const k=[Math.min(a,b),Math.max(a,b)];
+  if(Q.got.some(g=>g[0]===k[0])){ Q.fb={kind:"hint",html:`<p>You already have ${k[0]} × ${k[1]}. Switching the order is the same way. Look for a different pair.</p>`};sfx.soft();return; }
+  Q.got.push(k);Q.got.sort((x,y)=>x[0]-y[0]);sfx.ping();
+  if(Q.got.length===Q.pairs.length) return solved(`${n} = ${Q.pairs.map(([x,y])=>`${x} × ${y}`).join(" = ")}. So the factors of ${n} are ${factors(n).join(", ")}.`);
+  Q.fb={kind:"good",html:`<p><strong>${n} = ${k[0]} × ${k[1]}.</strong> Keep going.</p>`};
+}
+function allDoneSplit(){
+  const left=Q.pairs.length-Q.got.length;
+  miss(`<p>There ${left===1?"is":"are"} still ${left} more way${left===1?"":"s"} to factor ${Q.n}. Test each number in order: 1, 2, 3, 4, …</p>`);
+}
+
+/* ---------- level 2: tap every factor (notes Ex. 2 and 3) ---------- */
+function initFactors(){
+  const n=Q.item,f=factors(n);
+  const non=shuffle([...Array(n-1).keys()].map(i=>i+1).filter(d=>n%d&&d>1)).slice(0,Math.max(5,12-f.length));
+  Q.n=n;Q.f=f;Q.cands=[...f,...non].sort((a,b)=>a-b);Q.sel=new Set();Q.ruled=new Set();
+  Q.hints=[()=>`Factors come in pairs that multiply to ${n}. Start with 1 × ${n}, then try 2, 3, 4, and so on.`,
+    ()=>{const m=allPairs(n).slice(1).concat(allPairs(n).slice(0,1)).find(([a,b])=>!Q.sel.has(a)||!Q.sel.has(b));return m?`Here's a pair to look for: ${m[0]} × ${m[1]} = ${n}.`:"You have every factor. Press Check.";},
+    ()=>`You're looking for ${f.length} factors.`];
+  Q.together=()=>`<p>Every factor has a partner:</p><p><b>${allPairs(n).map(([a,b])=>`${a} × ${b}`).join(" &nbsp;·&nbsp; ")}</b></p><p>So the factors of ${n} are <b>${f.join(", ")}</b>.</p>`;
+}
+function viewFactors(){
+  const n=Q.n;
+  return chrome(`<h2 class="prompt">Catch <em>every</em> factor of <span class="num">${n}</span> in your net.</h2>
+    <p class="sub">A factor is one of the whole numbers you multiply to make ${n}. Tap a number again to let it go.</p>${readBtn()}
+    <div class="tiles" role="group" aria-label="Number choices">${Q.cands.map(d=>{const cls=Q.solved&&Q.f.includes(d)?"locked":Q.ruled.has(d)?"nope":"";return `<button class="tile ${cls}" type="button" data-d="${d}" aria-pressed="${Q.sel.has(d)}" ${Q.ruled.has(d)||Q.locked||Q.solved?"disabled":""}>${d}</button>`;}).join("")}</div>
+    ${fbBox()}${actionRow({check:!Q.solved&&!Q.locked,checkDisabled:!Q.sel.size})}`,`Catch every factor of ${n}.`);
+}
+function checkFactors(){
+  const n=Q.n,extra=[...Q.sel].filter(d=>n%d),missing=Q.f.filter(d=>!Q.sel.has(d));
+  if(!extra.length&&!missing.length) return solved(`The factors of ${n} are ${Q.f.join(", ")}.`);
+  let html="";
+  if(extra.length){const d=extra[0];html+=`<p>${divText(n,d)}. That remainder means <b>${d}</b> is not a factor, so it's crossed out now.</p>`;extra.forEach(x=>{Q.sel.delete(x);Q.ruled.add(x);});}
+  if(missing.length) html+=`<p>You've caught ${Q.f.length-missing.length} of the ${Q.f.length} factors. Think in pairs that multiply to ${n}.</p>`;
+  miss(html);
+}
+
+/* ---------- level 3: prime or composite sort (notes Ex. 4 and 5) ---------- */
+function initSort(){
+  Q.chips=shuffle(Q.item);Q.place={};Q.pick=null;
+  Q.zoneOf=c=>isPrime(c)?"prime":"comp";
+  Q.hints=["Try to factor each number as a product of two <b>smaller</b> whole numbers. If you can, it's composite. If you can't, it's prime.",
+    ()=>{const c=Q.chips.find(c=>Q.place[c]!==Q.zoneOf(c));if(!c) return "Everything is sorted. Press Check.";const s=splitOf(c);return s?`Look at ${c}: can you find two smaller numbers that multiply to it?`:`Look at ${c}: try 2, 3, 5, and 7. Do any divide it evenly?`;},
+    "Remember from your notes: prime numbers are whole numbers greater than 1 that cannot be made by multiplying two smaller whole numbers."];
+  Q.together=()=>`<p>${Q.chips.slice().sort((a,b)=>a-b).map(c=>{const s=splitOf(c);return s?`${c} = ${s[0]} × ${s[1]}, so it's <b>composite</b>`:`${c} can only be 1 × ${c}, so it's <b>prime</b>`;}).join(".<br>")}.</p>`;
+}
+function chipBtn(c){return `<button class="chip" type="button" draggable="${!Q.solved}" data-chip="${c}" aria-pressed="${Q.pick===c}" ${Q.solved?"disabled":""}>${c}</button>`;}
+function viewSort(){
+  const inZone=z=>Q.chips.filter(c=>Q.place[c]===z).sort((x,y)=>x-y);const tray=Q.chips.filter(c=>!Q.place[c]);
+  return chrome(`<h2 class="prompt">Sort each number: <span class="num">prime</span> or <span class="num">composite</span>?</h2>
+    <p class="sub">Drag each number into its box, or tap a number and then tap a box.</p>${readBtn()}
+    <div class="tray zone" data-zone="" aria-label="Numbers to sort">${tray.map(chipBtn).join("")||`<span class="sub" style="margin:0">All sorted. Press Check.</span>`}</div>
+    <div class="zones">
+      <div class="zone" data-zone="prime" tabindex="0" role="button" aria-label="Prime box"><span class="zl"><b>Prime</b> · only 1 × itself</span><div class="zc">${inZone("prime").map(chipBtn).join("")}</div></div>
+      <div class="zone" data-zone="comp" tabindex="0" role="button" aria-label="Composite box"><span class="zl"><b>Composite</b> · two smaller factors</span><div class="zc">${inZone("comp").map(chipBtn).join("")}</div></div>
+    </div>
+    ${fbBox()}${actionRow({check:!Q.solved,checkDisabled:tray.length>0})}`,"Sort each number into prime or composite.");
+}
+function checkSort(){
+  const wrong=Q.chips.filter(c=>Q.place[c]!==Q.zoneOf(c));
+  if(!wrong.length) return solved(`Primes: ${Q.chips.filter(isPrime).sort((a,b)=>a-b).join(", ")}. Composites: ${Q.chips.filter(c=>!isPrime(c)).sort((a,b)=>a-b).map(c=>{const s=splitOf(c);return `${c} = ${s[0]} × ${s[1]}`;}).join(", ")}.`);
+  const c=wrong[0],s=splitOf(c);
+  const why=s?`${c} = ${s[0]} × ${s[1]}. It can be made from two smaller whole numbers, so it's composite.`:`The only way to make ${c} is 1 × ${c}. It can't be made from two smaller whole numbers, so it's prime.`;
+  wrong.forEach(w=>delete Q.place[w]);
+  miss(`<p>${why}</p><p>${wrong.length>1?`${wrong.length} numbers went back to the top`:"It went back to the top"} so you can try again.</p>`);
+}
+
+/* ---------- level 4: share it equally (notes Ex. 6) ---------- */
+function initShare(){
+  const {n,thing}=Q.item;Q.n=n;Q.thing=thing;Q.sizes=[...Array(Math.min(n-2,12)).keys()].map(i=>i+2);Q.sel=new Set();Q.ruled=new Set();
+  Q.ok=Q.sizes.filter(d=>n%d===0);
+  Q.hints=[`A number of friends works if ${n} ${thing} split into that many equal shares with none left over. That means the number is a factor of ${n}.`,
+    ()=>isPrime(n)?`Is ${n} prime? If it is, its only factors are 1 and ${n}.`:`Try dividing: ${divText(n,Q.sizes.find(d=>n%d===0))}.`];
+  Q.together=()=>isPrime(n)?`<p>${n} is prime: its only factors are 1 and ${n}. So there's no way to share ${n} ${thing} equally among 2 to ${Math.min(n-1,13)} friends. Someone always gets a different amount.</p>`
+    :`<p>The numbers of friends that work are the factors of ${n} between 2 and ${Math.min(n-1,13)}: <b>${Q.ok.join(", ")}</b>. For example, ${n} ÷ ${Q.ok[0]} = ${n/Q.ok[0]} each.</p>`;
+}
+function viewShare(){
+  const {n,thing}=Q;
+  return chrome(`<p class="sub" style="margin:0;color:var(--moon);font-size:19px;max-width:60ch">You have <b>${n} ${thing}</b> for a party. Everyone should get the same whole number of ${thing}, with none left over.</p>
+    <h2 class="prompt">How many friends could split the ${thing} evenly? Tap <em>every</em> number that works.</h2>${readBtn()}
+    <div class="tiles" role="group" aria-label="Number of friends">${Q.sizes.map(d=>{const cls=Q.solved&&Q.ok.includes(d)?"locked":Q.ruled.has(d)?"nope":"";return `<button class="tile small ${cls}" type="button" data-d="${d}" aria-pressed="${Q.sel.has(d)}" aria-label="${d} friends" ${Q.ruled.has(d)||Q.solved?"disabled":""}>${d}</button>`;}).join("")}</div>
+    ${fbBox()}${actionRow({check:!Q.solved&&!Q.locked,checkDisabled:!Q.sel.size,extra:Q.solved?"":`<button class="btn soft" type="button" data-act="none">None of these work</button>`})}`,
+    `You have ${n} ${thing}. How many friends could split them evenly? Tap every number that works.`);
+}
+function checkShare(none){
+  const {n,thing}=Q;
+  if(none){ if(!Q.ok.length) return solved(`${n} is a prime number. Its only factors are 1 and ${n}, so ${n} ${thing} can't be split equally among a group of friends. That's what makes prime numbers special.`);
+    return miss(`<p>Some numbers of friends do work. ${divText(n,Q.ok[0])}, so ${Q.ok[0]} friends could each get ${n/Q.ok[0]}.</p>`); }
+  const extra=[...Q.sel].filter(d=>n%d),missing=Q.ok.filter(d=>!Q.sel.has(d));
+  if(!extra.length&&!missing.length) return solved(`${Q.ok.map(d=>`${d} friends get ${n/d} each`).join("; ")}. Each of those numbers of friends is a factor of ${n}.`);
+  let html="";
+  if(extra.length){const d=extra[0];html+=`<p>${divText(n,d)}. With ${d} friends there would be ${n%d} left over, so it's crossed out.</p>`;extra.forEach(x=>{Q.sel.delete(x);Q.ruled.add(x);});}
+  if(missing.length) html+=`<p>There ${missing.length===1?"is":"are"} ${missing.length} more number${missing.length===1?"":"s"} of friends that work${missing.length===1?"s":""}.</p>`;
+  miss(html);
+}
+
+/* ---------- level 5 (boss): find every prime in the sky ---------- */
+function initHunt(){
+  const [lo,hi]=Q.item;Q.nums=[];for(let k=lo;k<=hi;k++) Q.nums.push(k);Q.primes=Q.nums.filter(isPrime);Q.hit=new Set();Q.ruled=new Set();Q.wrongs=0;
+  Q.pos={};const cols=5;Q.nums.forEach((v,i)=>{Q.pos[v]=[40+(i%cols)*110+((Math.floor(i/cols)%2)?30:0)+(v*37%23),35+Math.floor(i/cols)*62+(v*53%17)];});
+  Q.hints=[`Skip the even numbers (except 2) and the ones ending in 5. They're composite.`,
+    ()=>{const p=Q.primes.find(x=>!Q.hit.has(x));return p?`There's a prime between ${p-3} and ${p+3}.`:"You found them all!";},
+    ()=>`Test with 3 and 7 too: for example, ${Q.nums.find(v=>v%3===0&&v%2&&v%5)} = 3 × ${Q.nums.find(v=>v%3===0&&v%2&&v%5)/3}.`];
+  Q.together=()=>`<p>The primes from ${Q.nums[0]} to ${Q.nums[Q.nums.length-1]} are <b>${Q.primes.join(", ")}</b>. Every other number here can be made from two smaller whole numbers.</p>`;
+}
+function viewHunt(){
+  const left=Q.primes.length-Q.hit.size;
+  const stars=Q.nums.map((v,i)=>{const on=Q.hit.has(v),no=Q.ruled.has(v);const dy=((v*37)%3-1)*6;
+    return `<button type="button" class="hstar ${on?"on":""} ${no?"no":""}" data-hunt="${v}" style="transform:translateY(${dy}px)" aria-label="${v}${on?", prime, lit":no?", composite":""}" ${on||no||Q.solved?"disabled":""}>${v}</button>`;}).join("");
+  return chrome(`<h2 class="prompt">Boss level: light up <em>every</em> prime star from <span class="num">${Q.nums[0]}</span> to <span class="num">${Q.nums[Q.nums.length-1]}</span>.</h2>
+    <p class="sub">Tap a star to test it. Primes light up. Composites fade out. ${Q.solved?"":`<b>${left}</b> prime${left===1?"":"s"} still hiding.`}</p>${readBtn()}
+    <div class="skyfield"><div class="hgrid" role="group" aria-label="Number stars">${stars}</div></div>
+    ${fbBox()}${actionRow({})}`,`Boss level. Light up every prime from ${Q.nums[0]} to ${Q.nums[Q.nums.length-1]}.`);
+}
+function tapHunt(v){
+  if(isPrime(v)){ Q.hit.add(v);sfx.ping();Q.fb={kind:"good",html:`<p><strong>${v} is prime!</strong> The only way to make it is 1 × ${v}.</p>`};
+    if(Q.hit.size===Q.primes.length) return solved(`You lit all ${Q.primes.length} primes: ${Q.primes.join(", ")}.`); return; }
+  Q.ruled.add(v);const s=splitOf(v);Q.wrongs++;
+  Q.misses++; S.streak=0; sfx.soft();
+  Q.fb={kind:"look",html:`<p><strong>${v} = ${s[0]} × ${s[1]}.</strong> It's made from two smaller whole numbers, so it's composite. Keep hunting!</p>`};
+  save();
+}
+
+/* ---------- keypad ---------- */
+function pad(){ return `<div class="pad" role="group" aria-label="Number pad">${[1,2,3,4,5,6,7,8,9].map(d=>`<button type="button" data-key="${d}">${d}</button>`).join("")}<button type="button" data-key="clr" aria-label="Clear">C</button><button type="button" data-key="0">0</button><button type="button" data-key="del" aria-label="Delete">⌫</button><button type="button" data-key="next" style="grid-column:1/-1;font-size:18px">${Q.slot?"◀ Back to first box":"Next box ▶"}</button></div>`; }
+function keyIn(k){ if(!Q||Q.solved) return; let v=Q.slots[Q.slot];
+  if(k==="next"){Q.slot=Q.slot?0:1;return render();}
+  if(k==="clr") v=""; else if(k==="del") v=v.slice(0,-1); else if(v.length<3&&!(v===""&&k==="0")) v+=k;
+  Q.slots[Q.slot]=v; render(); }
+
+/* ---------- celebration + summary ---------- */
+function celebrate(li){
+  Q=null;const L=LEVELS[li];const allDone=LEVELS.every((l,i)=>S.stars[i]>=l.need);
+  const nextIdx=LEVELS.findIndex((l,i)=>S.stars[i]<l.need);
+  let html;
+  if(allDone){
+    const rows=LEVELS.map((l,i)=>{const s=S.stats[i];return `<tr><td>${l.skill}</td><td>${s.tried}</td><td>${s.own}</td><td>${s.hints}</td><td>${s.together}</td></tr>`;}).join("");
+    html=`<section class="card cele"><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${LEVELS.map(l=>`<div style="width:110px">${conSVG(l,l.need)}</div>`).join("")}</div>
+      <h2 class="prompt">The Prime Hunter is beaten. Your whole sky is lit!</h2>
+      <p class="sub" style="margin:0">${totalStars()} of ${maxStars()} stars. You can factor numbers, find every factor, and tell prime from composite on your own.</p>
+      <div class="tablewrap"><table class="summary"><thead><tr><th>Skill</th><th>Tried</th><th>On your own</th><th>Hints</th><th>Worked together</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <div class="actions" style="justify-content:center"><button class="btn soft" type="button" data-act="restart">Play again</button></div></section>`;
+    sfx.done();confetti();
+  } else {
+    const nx=LEVELS[nextIdx];const bossNext=nx.boss;
+    html=`<section class="card cele">${conSVG(L,L.need,true)}
+      <h2 class="prompt">You lit up ${L.name}!</h2><p class="sub" style="margin:0">${L.skill}: done on your own.${bossNext?" The Prime Hunter is waiting…":""}</p>
+      <div class="actions" style="justify-content:center"><button class="btn" type="button" data-go="${nextIdx}">${bossNext?"Face the Prime Hunter":"On to "+nx.name}</button>
+      <button class="btn soft" type="button" data-act="more" data-lv="${li}">Practice this one more</button></div></section>`;
+    sfx.done();if(L.boss)confetti();
+  }
+  document.getElementById("stage").innerHTML=html;renderMap();bindStage();lastAutoKey="";setTimeout(autoRead,150);
+}
+
+/* ---------- math tools (never cost a star) ---------- */
+const TOOLS=[["tiles","Tiles"],["tryit","Try it"],["chart","Times chart"]];
+function toolbar(){
+  const n=Q.n; if(!n) return "";
+  const bar=`<div class="toolbar" role="group" aria-label="Math tools"><span class="tl">Math tools</span>${TOOLS.map(([k,l])=>`<button class="pill" type="button" data-tool="${k}" aria-pressed="${Q.tool===k}">${l}</button>`).join("")}</div>`;
+  return bar+(Q.tool?`<div class="tool" id="toolPanel">${toolBody(n)}</div>`:"");
+}
+function toolBody(n){
+  if(Q.tool==="tiles"){
+    const w=Math.min(Q.toolW||2,n),rows=w,cols=Math.ceil(n/w),left=n%w;
+    const sz=Math.max(7,Math.min(30,Math.floor(560/cols),Math.floor(260/rows))),gap=Math.max(1,Math.round(sz*.12));
+    let cells="";for(let k=0;k<n;k++){const r=k%rows,c=Math.floor(k/rows),extra=left&&c===cols-1;
+      cells+=`<rect x="${c*(sz+gap)}" y="${r*(sz+gap)}" width="${sz}" height="${sz}" rx="${sz*.18}" fill="${extra?"none":"var(--star)"}" stroke="${extra?"var(--lilac)":"var(--star-text)"}" stroke-width="${extra?2:1}" ${extra?'stroke-dasharray="3 2"':""}/>`;}
+    const W=cols*(sz+gap),H=rows*(sz+gap);
+    const cap=left?`${n} tiles in ${w} rows: ${Math.floor(n/w)} in each row, with ${left} left over. The rows aren't equal, so ${w} is not a factor of ${n}.`:`${n} tiles make ${w} equal row${w>1?"s":""} of ${n/w}. Nothing is left over, so ${n} = ${w} × ${n/w}.`;
+    return `<div class="ctl"><span>Rows:</span><span class="seg">${Array.from({length:Math.min(12,n)},(_,i)=>i+1).map(k=>`<button type="button" data-tw="${k}" aria-pressed="${k===w}">${k}</button>`).join("")}</span></div>
+      <div class="scroll"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${n} tiles in ${w} rows">${cells}</svg></div><p class="cap">${cap}</p>`;
+  }
+  if(Q.tool==="tryit"){
+    const d=Q.toolD||2,hops=Math.ceil(n/d),end=hops*d,exact=end===n,lo=exact?n:end-d;const X=v=>20+v*(560/Math.max(end,n)),y=46;
+    let marks="";for(let k=0;k<=hops;k++){const v=k*d;marks+=`<line x1="${X(v)}" x2="${X(v)}" y1="${y-6}" y2="${y+6}" stroke="var(--moon)" stroke-width="1.5"/>${hops<=24||k===hops?`<text x="${X(v)}" y="${y+24}" text-anchor="middle" font-size="12" fill="var(--muted)">${v}</text>`:""}`;
+      if(k>0) marks+=`<path d="M${X(v-d)} ${y-8} Q ${(X(v-d)+X(v))/2} ${y-34} ${X(v)} ${y-8}" fill="none" stroke="var(--lilac)" stroke-width="1.6"/>`;}
+    const cap=exact?`Counting by ${d}s lands right on ${n} after ${hops} jumps, so ${n} = ${d} × ${hops}.`:`Counting by ${d}s jumps from ${lo} to ${end}, right over ${n}, so ${d} does not go into ${n} evenly.`;
+    return `<div class="ctl"><span>Count by:</span><span class="seg">${Array.from({length:11},(_,i)=>i+2).filter(k=>k<=n).map(k=>`<button type="button" data-td="${k}" aria-pressed="${k===d}">${k}</button>`).join("")}</span></div>
+      <div class="scroll"><svg viewBox="0 0 600 84" width="600" height="84" role="img" aria-label="Counting by ${d}s toward ${n}"><line x1="16" x2="588" y1="${y}" y2="${y}" stroke="var(--line)" stroke-width="2"/>${marks}<circle cx="${X(n)}" cy="${y}" r="7" fill="var(--star)"/><text x="${X(n)}" y="${y-16}" text-anchor="middle" font-size="13" font-weight="700" fill="var(--star-text)">${n}</text></svg></div><p class="cap">${cap}</p>`;
+  }
+  if(Q.tool==="chart"){
+    const [r0,c0]=Q.toolCell||[0,0];let h=`<tr><th>×</th>${Array.from({length:12},(_,j)=>`<th>${j+1}</th>`).join("")}</tr>`;
+    for(let i=1;i<=12;i++){h+=`<tr><th>${i}</th>`;for(let j=1;j<=12;j++){const hit=i===r0&&j===c0,hl=!hit&&(i===r0||j===c0);h+=`<td class="${hit?"hit":hl?"hl":""}" data-cell="${i},${j}" style="width:32px;height:28px;text-align:center;border:1px solid var(--line);${hit?"background:var(--star);color:var(--btn-ink);font-weight:700":hl?"background:rgba(255,209,102,.25)":""}">${i*j}</td>`;}h+="</tr>";}
+    return `<div class="scroll"><table style="border-collapse:collapse;font-size:14px" aria-label="Multiplication chart">${h.replace(/<th>/g,'<th style="width:32px;height:28px;border:1px solid var(--line);background:var(--panel-2)">')}</table></div><p class="cap">${r0?`${r0} × ${c0} = ${r0*c0}`:"Tap any number to see which row and column make it."}</p>`;
+  }
+  return "";
+}
+
+/* ---------- read aloud ---------- */
+let readTok=0,lastAutoKey="",lastFbHtml="";
+function stopReading(){readTok++;try{speechSynthesis.cancel();}catch(e){}document.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));}
+function sayable(t){return String(t).replace(/×/g," times ").replace(/÷/g," divided by ").replace(/\bR (\d+)/g," remainder $1").replace(/=/g," equals ").replace(/Read this/g,"").replace(/\s+/g," ").trim();}
+function speakBlocks(blocks){stopReading();const tok=readTok;let i=0;
+  const next=()=>{if(tok!==readTok)return;document.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));if(i>=blocks.length)return;const b=blocks[i++];if(!b.text){next();return;}if(b.el)b.el.classList.add("reading");
+    try{const u=new SpeechSynthesisUtterance(sayable(b.text));u.rate=P.rate==="slow"?.72:.92;u.onend=next;u.onerror=next;speechSynthesis.speak(u);}catch(e){}};next();}
+function blockText(el){
+  if(el.matches(".tiles")) return "Choices: "+[...el.querySelectorAll(".tile:not(.nope)")].map(t=>t.textContent).join(", ");
+  if(el.matches(".tray")) return el.querySelector(".chip")?"Numbers to sort: "+[...el.querySelectorAll(".chip")].map(t=>t.textContent).join(", "):"";
+  if(el.matches(".tool")){const c=el.querySelector(".cap");return c?c.innerText:"";}
+  if(el.matches(".fb")){const c=el.cloneNode(true);c.querySelectorAll("button,svg").forEach(x=>x.remove());return c.innerText;}
+  return el.innerText;}
+function cardBlocks(onlyFb){const card=document.querySelector("#stage .card");if(!card)return[];
+  return [...card.querySelectorAll(onlyFb?".fb":".prompt,.sub,.tiles,.tray,.tool,.fb,.cele p")].filter(el=>!el.closest(".zone:not(.tray)")).map(el=>({el,text:blockText(el)}));}
+function autoRead(){ if(P.read!=="auto") return; const key=Q?`${Q.id}|${Q.solved?1:0}`:"cele";const fb=Q&&Q.fb?Q.fb.html:"";
+  if(key!==lastAutoKey){lastAutoKey=key;lastFbHtml=fb;speakBlocks(cardBlocks(false));} else if(fb&&fb!==lastFbHtml){lastFbHtml=fb;speakBlocks(cardBlocks(true));} }
+
+/* ---------- settings ---------- */
+function renderSettings(){
+  const box=document.getElementById("settingsBox");const cur=k=>k==="soundx"?(P.sound&&!P.calm?1:0):P[k];
+  const seg=(k,opts)=>`<span class="seg" role="group">${opts.map(([v,l,al])=>`<button type="button" data-pref="${k}" data-val="${v}" aria-pressed="${String(cur(k))===String(v)}" ${al?`aria-label="${al}"`:""}>${l}</button>`).join("")}</span>`;
+  box.innerHTML=`<h2>My settings</h2>
+   <div class="row"><span class="lbl">Read aloud</span>${seg("read",[["button","When I tap Read to me"],["auto","Read everything to me"]])}</div>
+   <div class="row"><span class="lbl">Reading speed</span>${seg("rate",[["slow","Slower"],["normal","Normal"]])}</div>
+   <div class="row"><span class="lbl">Text size</span>${seg("size",[["0","A","Normal text"],["1","A+","Bigger text"],["2","A++","Biggest text"]])}</div>
+   <div class="row"><span class="lbl">Spacing</span>${seg("spacing",[["0","Normal"],["1","Extra space"]])}</div>
+   <div class="row"><span class="lbl">Background</span>${seg("bg",[["night","Night"],["light","Light"],["cream","Cream"]])}</div>
+   <div class="row"><span class="lbl">Calm mode</span>${seg("calm",[["0","Off"],["1","On"]])}<span class="note">No moving stars and no sounds.</span></div>
+   <div class="row"><span class="lbl">Sound</span>${seg("soundx",[["1","On"],["0","Off"]])}</div>
+   <p class="note">Your settings are saved on this device. Using any setting or math tool never changes your stars.</p>
+   <div class="actions"><button class="btn soft" type="button" id="setDone">Done</button></div>`;
+  box.querySelectorAll("[data-pref]").forEach(b=>b.onclick=()=>{let k=b.dataset.pref;const v=b.dataset.val;if(k==="soundx"){k="sound";if(v==="1")P.calm=0;}P[k]=/^\d+$/.test(v)?+v:v;applyPrefs();savePrefs();renderSettings();if(k==="read"&&P.read==="auto"){lastAutoKey="";autoRead();}if(k==="read"&&P.read!=="auto")stopReading();});
+  document.getElementById("setDone").onclick=toggleSettings;
+}
+function toggleSettings(){const box=document.getElementById("settingsBox"),b=document.getElementById("setBtn");const open=box.hidden;box.hidden=!open;b.setAttribute("aria-expanded",String(open));if(open){renderSettings();box.querySelector("button").focus();}else b.focus();}
+document.getElementById("setBtn").onclick=toggleSettings;
+
+/* ---------- render + events ---------- */
+let lastShownFb=null;
+function render(){
+  renderMap(); if(!Q) return;
+  const v={split:viewSplit,factors:viewFactors,sort:viewSort,share:viewShare,hunt:viewHunt}[LEVELS[Q.li].key]();
+  document.getElementById("stage").innerHTML=v;Q.justStarred=false;bindStage();setTimeout(autoRead,120);
+  const f=document.querySelector("#stage .fb");if(f&&Q.fb!==lastShownFb){lastShownFb=Q.fb;const r=f.getBoundingClientRect();if(r.bottom>innerHeight||r.top<0)f.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches||P.calm?"auto":"smooth"});}
+}
+function bindStage(){
+  const st=document.getElementById("stage");
+  st.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{const a=b.dataset.act;
+    if(a==="read") return speakBlocks(cardBlocks(false));
+    if(a==="readfb") return speakBlocks(cardBlocks(true));
+    if(a==="hint") return hint();
+    if(a==="next") return newQuestion();
+    if(a==="restart"){S=fresh();save();return newQuestion();}
+    if(a==="more"){S.level=+b.dataset.lv;Q={practiceMore:true};return newQuestion();}
+    if(a==="alldone"){allDoneSplit();return render();}
+    if(a==="none"){checkShare(true);return render();}
+    if(a==="check"){const k=LEVELS[Q.li].key;
+      if(k==="split") addSplit(); else if(k==="factors") checkFactors(); else if(k==="sort") checkSort(); else if(k==="share") checkShare(false);
+      render();}
+  });
+  st.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{S.level=+b.dataset.go;newQuestion();});
+  st.querySelectorAll("[data-tool]").forEach(b=>b.onclick=()=>{const k=b.dataset.tool;Q.tool=Q.tool===k?null:k;render();});
+  st.querySelectorAll("[data-tw]").forEach(b=>b.onclick=()=>{Q.toolW=+b.dataset.tw;render();});
+  st.querySelectorAll("[data-td]").forEach(b=>b.onclick=()=>{Q.toolD=+b.dataset.td;render();});
+  st.querySelectorAll("[data-cell]").forEach(b=>b.onclick=()=>{Q.toolCell=b.dataset.cell.split(",").map(Number);render();});
+  st.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const d=+b.dataset.d;Q.sel.has(d)?Q.sel.delete(d):Q.sel.add(d);Q.fb=Q.fb&&Q.fb.kind==="hint"?Q.fb:null;render();});
+  st.querySelectorAll("[data-slot]").forEach(b=>b.onclick=()=>{Q.slot=+b.dataset.slot;render();});
+  st.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>keyIn(b.dataset.key));
+  st.querySelectorAll("[data-hunt]").forEach(b=>b.onclick=()=>{const v=+b.dataset.hunt;tapHunt(v);render();const nx=[...document.querySelectorAll(".hstar:not(:disabled)")].find(x=>+x.dataset.hunt>v)||document.querySelector(".hstar:not(:disabled)");if(nx)nx.focus({preventScroll:true});});
+  st.querySelectorAll("[data-chip]").forEach(b=>{
+    b.onclick=e=>{e.stopPropagation();const c=+b.dataset.chip;const host=b.closest(".zones [data-zone]");
+      if(host&&Q.pick!=null&&Q.pick!==c){Q.place[Q.pick]=host.dataset.zone;Q.pick=null;if(Q.fb&&Q.fb.kind!=="hint")Q.fb=null;return render();}
+      Q.pick=Q.pick===c?null:c;render();};
+    b.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",b.dataset.chip);e.dataTransfer.effectAllowed="move";});
+  });
+  st.querySelectorAll("[data-zone]").forEach(z=>{
+    const place=c=>{const zone=z.dataset.zone;if(zone)Q.place[c]=zone;else delete Q.place[c];Q.pick=null;if(Q.fb&&Q.fb.kind!=="hint")Q.fb=null;render();};
+    z.addEventListener("click",()=>{if(Q&&Q.pick!=null)place(Q.pick);});
+    z.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&Q&&Q.pick!=null){e.preventDefault();place(Q.pick);}});
+    z.addEventListener("dragover",e=>{e.preventDefault();z.classList.add("over");});
+    z.addEventListener("dragleave",()=>z.classList.remove("over"));
+    z.addEventListener("drop",e=>{e.preventDefault();z.classList.remove("over");const c=+e.dataTransfer.getData("text/plain");if(c)place(c);});
+  });
+}
+document.addEventListener("keydown",e=>{ if(!Q||Q.solved||LEVELS[Q.li].key!=="split") return; if(document.activeElement&&document.activeElement.tagName==="TEXTAREA") return;
+  if(/^[0-9]$/.test(e.key)) keyIn(e.key); else if(e.key==="Backspace") keyIn("del"); else if(e.key==="ArrowRight"||e.key==="ArrowLeft"||e.key==="x"||e.key==="*"){e.preventDefault();keyIn("next");} else if(e.key==="Enter"&&Q.slots[0]&&Q.slots[1]){addSplit();render();} });
+
+/* ---------- report a problem ---------- */
+function closeReport(){document.getElementById("reportBox").innerHTML="";}
+document.getElementById("reportBtn").onclick=()=>{
+  const box=document.getElementById("reportBox");if(box.innerHTML){closeReport();return;}
+  const qid=Q&&Q.id?Q.id:"(no question open)";
+  box.innerHTML=`<form class="report" id="repForm"><strong>What's wrong with this question?</strong>
+    <label><input type="radio" name="why" id="r1" value="answer" checked> The answer looks wrong</label>
+    <label><input type="radio" name="why" id="r2" value="typo"> There's a typo</label>
+    <label><input type="radio" name="why" id="r3" value="match"> It doesn't match the video or notes</label>
+    <label><input type="radio" name="why" id="r4" value="other"> Something else</label>
+    <textarea id="repText" placeholder="Tell us more (optional)"></textarea>
+    <div class="actions"><button class="btn" type="submit">Send report</button><button class="btn soft" type="button" id="repCancel">Cancel</button></div></form>`;
+  document.getElementById("repCancel").onclick=closeReport;
+  document.getElementById("repForm").onsubmit=e=>{e.preventDefault();box.innerHTML=`<div class="fb good" role="status">${ICON.good}<div><p><strong>Thanks, report saved.</strong> Question ${esc(qid)} was attached.</p></div></div>`;};
+};
+
+/* ---------- top controls ---------- */
+function syncSound(){const sb=document.getElementById("soundBtn");if(!sb)return;const on=!!P.sound&&!P.calm;sb.setAttribute("aria-pressed",String(on));sb.querySelector("span").textContent=on?"Sound on":"Sound off";}
+document.getElementById("soundBtn").onclick=()=>{P.sound=P.sound&&!P.calm?0:1;if(P.sound)P.calm=0;applyPrefs();savePrefs();};
+
+applyPrefs();
+newQuestion();
+})();
+</script>
+
+</body>
+</html>
