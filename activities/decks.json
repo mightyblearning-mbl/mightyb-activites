@@ -39,7 +39,7 @@
     "file": "sci-lab-safety-amoeba-sisters.html",
     "title": "1.4 Lab Safety: Lab Safety Quest",
     "kind": "lesson",
-    "questions": 13,
+    "questions": 16,
     "course": "Science 801",
     "unit": "1",
     "engine": "quest"
@@ -48,7 +48,7 @@
     "file": "sci7-2-2-prokaryotic-vs-eukaryotic.html",
     "title": "2.2 Prokaryotic vs. Eukaryotic Cells: Cell Detective",
     "kind": "lesson",
-    "questions": 13,
+    "questions": 16,
     "course": "7th Grade Science",
     "unit": "2",
     "engine": "quest"
@@ -57,7 +57,7 @@
     "file": "sci7-2-3-animal-cell.html",
     "title": "2.3 Animal Cell: Cell City",
     "kind": "lesson",
-    "questions": 12,
+    "questions": 16,
     "course": "7th Grade Science",
     "unit": "2",
     "engine": "quest"
@@ -84,7 +84,7 @@
     "file": "sci7-2-4-plant-cell.html",
     "title": "2.4 Plant Cell: Plant Cell Greenhouse",
     "kind": "lesson",
-    "questions": 11,
+    "questions": 14,
     "course": "7th Grade Science",
     "unit": "2",
     "engine": "quest"
@@ -1288,5 +1288,1076 @@
     "course": "12th Grade English",
     "unit": "4",
     "unitTitle": "College and Career Writing"
+  },
+  "alg2-2-1-introduction-to-functions": {
+    "file": "alg2-2-1-introduction-to-functions.html",
+    "title": "2.1 Introduction to Functions: Function Factory",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-2-2-function-notation": {
+    "file": "alg2-2-2-function-notation.html",
+    "title": "2.2 Function Notation: Notation Station",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-2-4-domain-and-range": {
+    "file": "alg2-2-4-domain-and-range.html",
+    "title": "2.4 The Domain and Range of a Function: Domain Islands",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-2-5-average-rate-of-change": {
+    "file": "alg2-2-5-average-rate-of-change.html",
+    "title": "2.5 Average Rate of Change: Rate Rockets",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-3-2-forms-of-a-line": {
+    "file": "alg2-3-2-forms-of-a-line.html",
+    "title": "3.2 Forms of a Line: Sky Lines",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "alg2-3-4-inverses-of-linear-functions": {
+    "file": "alg2-3-4-inverses-of-linear-functions.html",
+    "title": "3.4 Inverses of Linear Functions: Mirror Maze",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "alg2-4-1-basic-exponent-properties": {
+    "file": "alg2-4-1-basic-exponent-properties.html",
+    "title": "4.1 Basic Exponent Properties: Power-Up Arcade",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-4-3-exponential-function-basics": {
+    "file": "alg2-4-3-exponential-function-basics.html",
+    "title": "4.3 Exponential Function Basics: Beanstalk Climb",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-4-6-percent-growth-and-decay": {
+    "file": "alg2-4-6-percent-growth-and-decay.html",
+    "title": "4.6 Exponential Modeling Based on Percent Growth and Decay: Percent Peaks",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-4-8-compound-interest": {
+    "file": "alg2-4-8-compound-interest.html",
+    "title": "4.8 Compound Interest: Dragon&#x27;s Hoard",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-5-1-introduction-to-logarithms": {
+    "file": "alg2-5-1-introduction-to-logarithms.html",
+    "title": "5.1 Introduction to Logarithms: Log Cabin",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Algebra 2",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "alg2-7-3-factoring-simple-trinomials": {
+    "file": "alg2-7-3-factoring-simple-trinomials.html",
+    "title": "7.3 Factoring Simple Trinomials: Factor Forge",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "7",
+    "engine": "quest"
+  },
+  "alg2-7-4-factoring-by-grouping": {
+    "file": "alg2-7-4-factoring-by-grouping.html",
+    "title": "7.4 Factoring by Grouping: Grouping Jungle",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "7",
+    "engine": "quest"
+  },
+  "alg2-7-5-factoring-challenging-trinomials": {
+    "file": "alg2-7-5-factoring-challenging-trinomials.html",
+    "title": "7.5 Factoring Challenging Trinomials: Trinomial Mine",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "7",
+    "engine": "quest"
+  },
+  "ela6-1-3-sensory-language-mood-and-tone": {
+    "file": "ela6-1-3-sensory-language-mood-and-tone.html",
+    "title": "1.3 Sensory Language, Mood, and Tone: Senses Carnival",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-7-theme": {
+    "file": "ela6-1-7-theme.html",
+    "title": "1.7 Theme in Literature: Fable Forest",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-9-characterization": {
+    "file": "ela6-1-9-characterization.html",
+    "title": "1.9 Characterization: STEAL, Direct and Indirect: Character Detectives",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-2-1-independent-and-dependent-clauses": {
+    "file": "ela7-2-1-independent-and-dependent-clauses.html",
+    "title": "2.1 Independent and Dependent Clauses: Clause Castle",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-2-verb-moods": {
+    "file": "ela7-2-2-verb-moods.html",
+    "title": "2.2 Verb Moods: Mood Isles",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-3-internal-and-external-conflict": {
+    "file": "ela7-2-3-internal-and-external-conflict.html",
+    "title": "2.3 Internal and External Conflict: Conflict Arena",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-4-prepositional-phrases": {
+    "file": "ela7-2-4-prepositional-phrases.html",
+    "title": "2.4 Prepositions and Prepositional Phrases: Preposition Run",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-5-participles": {
+    "file": "ela7-2-5-participles.html",
+    "title": "2.5 Participles and Participial Phrases: Participle Park",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela8-3-3-credible-sources": {
+    "file": "ela8-3-3-credible-sources.html",
+    "title": "3.3 Finding Credible Sources Online: Source Detective",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade English",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "ela9-1-9-punctuating-dialogue": {
+    "file": "ela9-1-9-punctuating-dialogue.html",
+    "title": "1.9 Punctuating Dialogue: Script Studio",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "9th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "geo-2-1-transformations": {
+    "file": "geo-2-1-transformations.html",
+    "title": "2.1 Transformations: Transformation Station",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "geo-2-5-line-reflections": {
+    "file": "geo-2-5-line-reflections.html",
+    "title": "2.5 Line Reflections: Mirror Maze",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "geo-2-9-congruence-and-rigid-motions": {
+    "file": "geo-2-9-congruence-and-rigid-motions.html",
+    "title": "2.9 Congruence and Rigid Motions: Shape-Shifter Case",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "geo-3-12-aas-and-isosceles-triangles": {
+    "file": "geo-3-12-aas-and-isosceles-triangles.html",
+    "title": "3.12 AAS and Isosceles Triangles: Congruence Castle",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "geo-3-2-congruent-triangles": {
+    "file": "geo-3-2-congruent-triangles.html",
+    "title": "3.2 Congruent Triangles: Twin Triangle Agency",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Geometry",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "geo-4-4-bisecting-an-angle": {
+    "file": "geo-4-4-bisecting-an-angle.html",
+    "title": "4.4 Bisecting an Angle: Compass Guild",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Geometry",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "geo-5-1-slope-and-parallel-lines": {
+    "file": "geo-5-1-slope-and-parallel-lines.html",
+    "title": "5.1 Slope and Parallel Lines: Twin Tracks",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "geo-5-2-slope-and-perpendicular-lines": {
+    "file": "geo-5-2-slope-and-perpendicular-lines.html",
+    "title": "5.2 Slope and Perpendicular Lines: Corner Crew",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "geo-5-8-midpoint-formula": {
+    "file": "geo-5-8-midpoint-formula.html",
+    "title": "5.8 The Midpoint Formula: Halfway Station",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "geo-6-5-midpoints-of-a-triangle": {
+    "file": "geo-6-5-midpoints-of-a-triangle.html",
+    "title": "6.5 The Midpoints of a Triangle: A-Frame Lodge",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "hist6-1-10-us-regions": {
+    "file": "hist6-1-10-us-regions.html",
+    "title": "1.10 US Regions: Region Rangers",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "6th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist6-1-9-states-and-capitals": {
+    "file": "hist6-1-9-states-and-capitals.html",
+    "title": "1.9 50 States and Capitals: Capital Road Trip",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist6-2-3-hammurabis-code": {
+    "file": "hist6-2-3-hammurabis-code.html",
+    "title": "2.3 Hammurabi's Code: Stone of Laws",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist6-2-4-mesopotamia-achievements": {
+    "file": "hist6-2-4-mesopotamia-achievements.html",
+    "title": "2.4 Advancements from Mesopotamia: Ziggurat Quest",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist6-2-7-egyptian-pharaohs": {
+    "file": "hist6-2-7-egyptian-pharaohs.html",
+    "title": "2.7 Egyptian Pharaohs: Pharaoh&#x27;s Treasury",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist6-2-8-ancient-egypt-life-and-mummies": {
+    "file": "hist6-2-8-ancient-egypt-life-and-mummies.html",
+    "title": "2.8 Ancient Egypt: Nile Expedition",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist8-1-4b-english-colonies": {
+    "file": "hist8-1-4b-english-colonies.html",
+    "title": "1.4b The English Colonies: Colony Voyage",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist8-1-6-cultural-interactions": {
+    "file": "hist8-1-6-cultural-interactions.html",
+    "title": "1.6 Cultural Interactions Between Europeans, Native Americans, and Africans: Worlds Collide",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist8-2-3-regions-of-the-british-colonies": {
+    "file": "hist8-2-3-regions-of-the-british-colonies.html",
+    "title": "2.3 Regions of the British Colonies: Colony Surveyor",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "8th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist8-3-3-road-to-revolution": {
+    "file": "hist8-3-3-road-to-revolution.html",
+    "title": "3.3 Taxation Without Representation: The Road to Revolution: Liberty Lanterns",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "hist8-3-4-the-enlightenment": {
+    "file": "hist8-3-4-the-enlightenment.html",
+    "title": "3.4 Philosophical Foundations of the American Revolution: The Enlightenment: Lamps of Reason",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "hist8-3-5-american-revolution": {
+    "file": "hist8-3-5-american-revolution.html",
+    "title": "3.5 The American Revolution: Patriot Campfires",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-2-2-equivalent-fractions": {
+    "file": "math6-2-2-equivalent-fractions.html",
+    "title": "2.2 Equivalent Fractions: Brownie Bakery",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-2-4-adding-and-subtracting-fractions": {
+    "file": "math6-2-4-adding-and-subtracting-fractions.html",
+    "title": "2.4 Adding and Subtracting Fractions: Fraction Potion Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-2-7-multiplying-fractions": {
+    "file": "math6-2-7-multiplying-fractions.html",
+    "title": "2.7 Multiplying Fractions: Fraction Garden",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-2-8-dividing-fractions": {
+    "file": "math6-2-8-dividing-fractions.html",
+    "title": "2.8 Dividing Fractions: Division Detectives",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-3-2-adding-and-subtracting-decimals": {
+    "file": "math6-3-2-adding-and-subtracting-decimals.html",
+    "title": "3.2 Adding and Subtracting Decimals: Decimal Road Trip",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-3-3-multiplying-decimals": {
+    "file": "math6-3-3-multiplying-decimals.html",
+    "title": "3.3 Multiplying Decimals: Decimal Food Truck",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-3-5-dividing-with-decimal-remainders": {
+    "file": "math6-3-5-dividing-with-decimal-remainders.html",
+    "title": "3.5 Dividing Whole Numbers with Decimal Remainders: Treasure Split",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-3-6-dividing-decimals": {
+    "file": "math6-3-6-dividing-decimals.html",
+    "title": "3.6 Dividing Decimals: Potion Shop",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-4-2-introduction-to-negative-numbers": {
+    "file": "math6-4-2-introduction-to-negative-numbers.html",
+    "title": "4.2 Introduction to Negative Numbers: Below Zero Expedition",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-4-3-ordering-rational-numbers": {
+    "file": "math6-4-3-ordering-rational-numbers.html",
+    "title": "4.3 Ordering the Rational Numbers: Rational Racers",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-4-4-absolute-value": {
+    "file": "math6-4-4-absolute-value.html",
+    "title": "4.4 The Absolute Value of a Number: Mirror Maze",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-4-5-plotting-points-coordinate-plane": {
+    "file": "math6-4-5-plotting-points-coordinate-plane.html",
+    "title": "4.5 Plotting Points in the Coordinate Plane: Treasure Grid",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-5-1-exponents": {
+    "file": "math6-5-1-exponents.html",
+    "title": "5.1 Exponents: Power Tower",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-5-2-order-of-operations": {
+    "file": "math6-5-2-order-of-operations.html",
+    "title": "5.2 Order of Operations: Potion Order",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-5-3-variables-and-expressions": {
+    "file": "math6-5-3-variables-and-expressions.html",
+    "title": "5.3 Variables and Algebraic Expressions: Code Agents",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-5-5-equivalent-expressions": {
+    "file": "math6-5-5-equivalent-expressions.html",
+    "title": "5.5 Equivalent Expressions: Echo Caves",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-6-2-one-step-equations-add-subtract": {
+    "file": "math6-6-2-one-step-equations-add-subtract.html",
+    "title": "6.2 One-Step Equations with Addition and Subtraction: Balance Bazaar",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math6-6-3-one-step-equations-multiply-divide": {
+    "file": "math6-6-3-one-step-equations-multiply-divide.html",
+    "title": "6.3 One-Step Equations with Multiplication and Division: Treasure Split",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-1-5-fractions-and-decimals": {
+    "file": "math7-1-5-fractions-and-decimals.html",
+    "title": "1.5 Fractions and Decimals: Decimal Space Station",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math7-1-6-ratios-and-rates": {
+    "file": "math7-1-6-ratios-and-rates.html",
+    "title": "1.6 Ratios and Rates: Ratio Raceway",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math7-2-2-adding-signed-numbers": {
+    "file": "math7-2-2-adding-signed-numbers.html",
+    "title": "2.2 Adding Signed Numbers: Zero-Pair Arcade",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-2-4-subtracting-signed-numbers": {
+    "file": "math7-2-4-subtracting-signed-numbers.html",
+    "title": "2.4 Subtracting Signed Numbers: Vault Breakers",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-2-8-multiplying-signed-numbers": {
+    "file": "math7-2-8-multiplying-signed-numbers.html",
+    "title": "2.8 Multiplying Signed Numbers: Lily Pad Leap",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-2-9-dividing-signed-numbers": {
+    "file": "math7-2-9-dividing-signed-numbers.html",
+    "title": "2.9 Dividing Signed Numbers: Pirate Divide",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-3-1-ratios": {
+    "file": "math7-3-1-ratios.html",
+    "title": "3.1 Ratios: Ratio Road Trip",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-4-ratio-problems-using-algebra": {
+    "file": "math7-3-4-ratio-problems-using-algebra.html",
+    "title": "3.4 Solving Ratio Problems Using Algebra: Stadium Showdown",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-5-proportional-relationships": {
+    "file": "math7-3-5-proportional-relationships.html",
+    "title": "3.5 Proportional Relationships: Snail Trail",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-6-solving-proportions": {
+    "file": "math7-3-6-solving-proportions.html",
+    "title": "3.6 Solving Proportions: Road Trip Rally",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-8-graphs-of-proportional-relationships": {
+    "file": "math7-3-8-graphs-of-proportional-relationships.html",
+    "title": "3.8 Graphs of Proportional Relationships: Scoop Factory",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-9-equations-of-proportional-relationships": {
+    "file": "math7-3-9-equations-of-proportional-relationships.html",
+    "title": "3.9 Equations of Proportional Relationships: Formula Falls",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-4-10-finding-the-whole": {
+    "file": "math7-4-10-finding-the-whole.html",
+    "title": "4.10 Finding the Whole Using Algebra: Treasure Hunt",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Math 701 (7th Grade Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math7-4-4-decimals-and-percentages": {
+    "file": "math7-4-4-decimals-and-percentages.html",
+    "title": "4.4 Decimals and Percentages: Percent Pizzeria",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math7-4-6-percentage-a-part-represents": {
+    "file": "math7-4-6-percentage-a-part-represents.html",
+    "title": "4.6 The Percentage a Part Represents: Poll Patrol",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 701 (7th Grade Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math7-5-3-equivalent-expressions": {
+    "file": "math7-5-3-equivalent-expressions.html",
+    "title": "5.3 Equivalent Expressions: Clone Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-5-5-combining-like-terms": {
+    "file": "math7-5-5-combining-like-terms.html",
+    "title": "5.5 Combining Like Terms: Cargo Bay",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-5-6-simplifying-complex-expressions": {
+    "file": "math7-5-6-simplifying-complex-expressions.html",
+    "title": "5.6 Simplifying Complex Expressions: Summit Simplify",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-5-7-factoring-binomials": {
+    "file": "math7-5-7-factoring-binomials.html",
+    "title": "5.7 Factoring Binomials: Factor Vault",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-6-2-two-step-equations": {
+    "file": "math7-6-2-two-step-equations.html",
+    "title": "6.2 Two-Step Equations: Rewind Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-6-3-more-two-step-equations": {
+    "file": "math7-6-3-more-two-step-equations.html",
+    "title": "6.3 More Work with Two-Step Equations: Two-Step Summit",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "phys-2-1-newtons-laws": {
+    "file": "phys-2-1-newtons-laws.html",
+    "title": "2.1 Newton's Laws: Force Arena",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Physics",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "phys-2-5-newtons-third-law": {
+    "file": "phys-2-5-newtons-third-law.html",
+    "title": "2.5 Newton's 3rd Law: Echo Canyon",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Physics",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-1-6-variables-on-both-sides": {
+    "file": "prealg-1-6-variables-on-both-sides.html",
+    "title": "1.6 Solving Equations with Variables on Both Sides: Balance Quest",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "prealg-2-2-angles-and-their-measures": {
+    "file": "prealg-2-2-angles-and-their-measures.html",
+    "title": "2.2 Angles and Their Measures: Angle Lighthouse",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-2-5-parallel-lines": {
+    "file": "prealg-2-5-parallel-lines.html",
+    "title": "2.5 Parallel Lines: Rail Crossing",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-2-7-geometry-with-coordinates": {
+    "file": "prealg-2-7-geometry-with-coordinates.html",
+    "title": "2.7 Geometry with Coordinates: Coordinate Cove",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-2-8-congruent-figures": {
+    "file": "prealg-2-8-congruent-figures.html",
+    "title": "2.8 Congruent Figures: Clone Lab",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-3-11-angle-sums-in-a-triangle": {
+    "file": "prealg-3-11-angle-sums-in-a-triangle.html",
+    "title": "3.11 Angle Sums in a Triangle: Triangle Peaks",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "prealg-3-2-reflections": {
+    "file": "prealg-3-2-reflections.html",
+    "title": "3.2 Reflections: Mirror Lake",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "prealg-3-9-transformations-and-congruent-figures": {
+    "file": "prealg-3-9-transformations-and-congruent-figures.html",
+    "title": "3.9 Transformations and Congruent Figures: Docking Bay",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "prealg-4-5-similar-figures": {
+    "file": "prealg-4-5-similar-figures.html",
+    "title": "4.5 Similar Figures: Shrink Ray Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Grade Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "prealg-4-6-more-similar-figures": {
+    "file": "prealg-4-6-more-similar-figures.html",
+    "title": "4.6 More Work with Similar Figures: Shrink Ray Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "prealg-5-3-slope-and-similarity": {
+    "file": "prealg-5-3-slope-and-similarity.html",
+    "title": "5.3 Slope and Similarity: Slope Summit",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-5-slopes-and-negative-numbers": {
+    "file": "prealg-5-5-slopes-and-negative-numbers.html",
+    "title": "5.5 Slopes and Negative Numbers: Ski Patrol",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-7-finding-the-slope": {
+    "file": "prealg-5-7-finding-the-slope.html",
+    "title": "5.7 Finding the Slope of a Line: Slope Patrol",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-8-systems-of-equations": {
+    "file": "prealg-5-8-systems-of-equations.html",
+    "title": "5.8 Systems of Equations: Laser Vault",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-9-solving-systems-algebraically": {
+    "file": "prealg-5-9-solving-systems-algebraically.html",
+    "title": "5.9 Solving Systems of Equations Algebraically: Orbit Rendezvous",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-6-2-features-of-functions": {
+    "file": "prealg-6-2-features-of-functions.html",
+    "title": "6.2 Features of Functions: Coaster Park",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "prealg-6-3-average-rate-of-change": {
+    "file": "prealg-6-3-average-rate-of-change.html",
+    "title": "6.3 Average Rate of Change: Launch Control",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "prealg-6-4-linear-functions": {
+    "file": "prealg-6-4-linear-functions.html",
+    "title": "6.4 Linear Functions: Balloon Festival",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "prealg-6-7-scatter-plots": {
+    "file": "prealg-6-7-scatter-plots.html",
+    "title": "6.7 Scatter Plots and Lines of Best Fit: Firefly Field",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "sci-2-2-elements-compounds-mixtures": {
+    "file": "sci-2-2-elements-compounds-mixtures.html",
+    "title": "2.2 Elements, Atoms, Molecules, and Compounds: Molecule Lab",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "6th Grade Science and 8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci-2-2b-periodic-table-overview": {
+    "file": "sci-2-2b-periodic-table-overview.html",
+    "title": "2.2b The Periodic Table: Overview: Periodic City",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science and 8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci-2-2c-periodic-table-groups": {
+    "file": "sci-2-2c-periodic-table-groups.html",
+    "title": "2.2c Element Classes on the Periodic Table: Element Expedition",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science and 8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci-engineering-design-process": {
+    "file": "sci-engineering-design-process.html",
+    "title": "1.6 / 1.8 The Engineering Design Process: Invention Lab",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science (1.6) and 8th Grade Science (1.8)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci6-2-5-physical-and-chemical-changes": {
+    "file": "sci6-2-5-physical-and-chemical-changes.html",
+    "title": "2.5 Physical and Chemical Changes and the Conservation of Mass: Mystery Kitchen",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci6-2-8-types-of-mixtures": {
+    "file": "sci6-2-8-types-of-mixtures.html",
+    "title": "2.8 Heterogeneous vs Homogeneous Mixtures: Snack Lab",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci6-2-9-solutions-solute-solvent": {
+    "file": "sci6-2-9-solutions-solute-solvent.html",
+    "title": "2.9 Solvent, Solute, and Concentration: Crystal Cave",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci7-1-5-reading-science-graphs": {
+    "file": "sci7-1-5-reading-science-graphs.html",
+    "title": "1.5 Graphing Review: Graph Detectives",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade Science",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci7-2-5-cell-organelles-review": {
+    "file": "sci7-2-5-cell-organelles-review.html",
+    "title": "2.5 Cell Organelles Review: Organelle All-Stars",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci7-3-1-inherited-and-acquired-traits": {
+    "file": "sci7-3-1-inherited-and-acquired-traits.html",
+    "title": "3.1 Alleles and Genes: Inherited and Acquired Traits: Gene Detectives",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade Science",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "sci7-3-3-punnett-squares": {
+    "file": "sci7-3-3-punnett-squares.html",
+    "title": "3.3 Monohybrid Crosses and Punnett Squares: Hutch Genetics",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Science",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "sci7-3-4-sex-linked-traits": {
+    "file": "sci7-3-4-sex-linked-traits.html",
+    "title": "3.4 Punnett Squares and Sex-Linked Traits: Platelet Patrol",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Science",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "sci8-2-7-chemical-reactions": {
+    "file": "sci8-2-7-chemical-reactions.html",
+    "title": "2.7 Chemical Reactions: Campfire Chemistry",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
   }
 }
