@@ -1,0 +1,2516 @@
+{
+  "math6-1-5-factoring-and-prime-numbers": {
+    "file": "math6-1-5-factoring-and-prime-numbers_1.html",
+    "title": "1.5 Factoring and Prime Numbers: Prime Constellations",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math6-1-7-greatest-common-factors": {
+    "file": "math6-1-7-greatest-common-factors.html",
+    "title": "1.7 Greatest Common Factors: GCF Constellations",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "prealg-1-4-solving-two-step-equations": {
+    "file": "prealg-1-4-solving-two-step-equations.html",
+    "title": "1.4 Solving Two-Step Equations: Equation Vault",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "civics7-1-7-checks-and-balances": {
+    "file": "civics7-1-7-checks-and-balances.html",
+    "title": "1.7 Checks and Balances: Checks and Balances",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Civics",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci-lab-safety-amoeba-sisters": {
+    "file": "sci-lab-safety-amoeba-sisters.html",
+    "title": "1.4 Lab Safety: Lab Safety Quest",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "Science 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci7-2-2-prokaryotic-vs-eukaryotic": {
+    "file": "sci7-2-2-prokaryotic-vs-eukaryotic.html",
+    "title": "2.2 Prokaryotic vs. Eukaryotic Cells: Cell Detective",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci7-2-3-animal-cell": {
+    "file": "sci7-2-3-animal-cell.html",
+    "title": "2.3 Animal Cell: Cell City",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-1-5-more-two-step-equations": {
+    "file": "prealg-1-5-more-two-step-equations.html",
+    "title": "1.5 More Work with Two-Step Equations: Deep Vault",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math6-2-1-fractions-and-mixed-numbers": {
+    "file": "math6-2-1-fractions-and-mixed-numbers.html",
+    "title": "2.1 Fractions and Mixed Numbers: Fraction Bakery",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci7-2-4-plant-cell": {
+    "file": "sci7-2-4-plant-cell.html",
+    "title": "2.4 Plant Cell: Plant Cell Greenhouse",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist6-1-3-types-of-maps-and-map-skills": {
+    "file": "hist6-1-3-types-of-maps-and-map-skills.html",
+    "title": "1.3 Types of Maps and Map Skills: Map Quest",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "phys-3-2-review-momentum-impulse": {
+    "file": "3-2-momentum-and-impulse.html",
+    "title": "Review: Momentum & Impulse (3.1–3.2)",
+    "kind": "mini-review",
+    "questions": 13,
+    "course": "Physics"
+  },
+  "phys-3-4-review-collisions": {
+    "file": "3-4-collisions.html",
+    "title": "Review: Collisions (3.3–3.4)",
+    "kind": "mini-review",
+    "questions": 12,
+    "course": "Physics"
+  },
+  "phys-unit-3-review": {
+    "file": "3-5-unit-3-review.html",
+    "title": "Unit 3 Review: Momentum & Impulse",
+    "kind": "unit-review",
+    "questions": 13,
+    "course": "Physics"
+  },
+  "phys-unit-4-review": {
+    "file": "4-unit-4-energy-work-power.html",
+    "title": "Unit 4 Review: Work, Energy & Power",
+    "kind": "unit-review",
+    "questions": 18,
+    "course": "Physics"
+  },
+  "phys-unit-5-review": {
+    "file": "5-unit-5-circular-motion-gravitation.html",
+    "title": "Unit 5 Review: Circular Motion & Gravitation",
+    "kind": "unit-review",
+    "questions": 15,
+    "course": "Physics"
+  },
+  "phys-unit-6-review": {
+    "file": "6-unit-6-waves-sound.html",
+    "title": "Unit 6 Review: Waves & Sound",
+    "kind": "unit-review",
+    "questions": 13,
+    "course": "Physics"
+  },
+  "phys-unit-7-review": {
+    "file": "7-unit-7-light-em-spectrum.html",
+    "title": "Unit 7 Review: Light & the EM Spectrum",
+    "kind": "unit-review",
+    "questions": 11,
+    "course": "Physics"
+  },
+  "phys-unit-8-review": {
+    "file": "8-unit-8-electricity-magnetism.html",
+    "title": "Unit 8 Review: Electricity & Magnetism",
+    "kind": "unit-review",
+    "questions": 13,
+    "course": "Physics"
+  },
+  "phys-unit-9-review": {
+    "file": "9-unit-9-heat-thermal-energy.html",
+    "title": "Unit 9 Review: Heat & Thermal Energy",
+    "kind": "unit-review",
+    "questions": 12,
+    "course": "Physics"
+  },
+  "phys-final-review": {
+    "file": "final-review.html",
+    "title": "Physics Final Review",
+    "kind": "final-review",
+    "questions": 25,
+    "course": "Physics"
+  },
+  "phys-10-1-nuclear-fission": {
+    "file": "10-1-nuclear-fission.html",
+    "title": "10.1 Nuclear Fission",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-10-2-nuclear-fusion": {
+    "file": "10-2-nuclear-fusion.html",
+    "title": "10.2 Nuclear Fusion",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-3-1-momentum": {
+    "file": "3-1-momentum.html",
+    "title": "3.1 Momentum",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-3-2-impulse": {
+    "file": "3-2-impulse.html",
+    "title": "3.2 Impulse",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-3-3-how-helmets-affect-impulse": {
+    "file": "3-3-how-helmets-affect-impulse.html",
+    "title": "3.3 How Helmets Affect Impulse",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-3-4-conservation-of-momentum": {
+    "file": "3-4-conservation-of-momentum.html",
+    "title": "3.4 Conservation of Momentum",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-3-5-elastic-vs-inelastic-collisions": {
+    "file": "3-5-elastic-vs-inelastic-collisions.html",
+    "title": "3.5 Elastic vs. Inelastic Collisions",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "Physics"
+  },
+  "phys-4-1-energy": {
+    "file": "4-1-energy.html",
+    "title": "4.1 Energy",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-4-2-forms-of-energy": {
+    "file": "4-2-forms-of-energy.html",
+    "title": "4.2 Forms of Energy",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-4-3-kinetic-vs-potential-energy": {
+    "file": "4-3-kinetic-vs-potential-energy.html",
+    "title": "4.3 Kinetic vs. Potential Energy",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-4-4-kinetic-energy-bowling": {
+    "file": "4-4-kinetic-energy-bowling.html",
+    "title": "4.4 Kinetic Energy & Bowling",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-4-5-gravitational-pe-dams": {
+    "file": "4-5-gravitational-pe-dams.html",
+    "title": "4.5 Gravitational PE & Dams",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-4-6-work-and-power": {
+    "file": "4-6-work-and-power.html",
+    "title": "4.6 Work and Power",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-4-7-calculating-ke-and-pe": {
+    "file": "4-7-calculating-ke-and-pe.html",
+    "title": "4.7 Calculating KE and PE",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-5-1-circular-motion": {
+    "file": "5-1-circular-motion.html",
+    "title": "5.1 Circular Motion",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-5-2-angular-velocity": {
+    "file": "5-2-angular-velocity.html",
+    "title": "5.2 Angular Velocity",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-5-3-centripetal-force-lab": {
+    "file": "5-3-centripetal-force-lab.html",
+    "title": "5.3 Centripetal Force Lab",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-5-4-the-law-of-gravitation": {
+    "file": "5-4-the-law-of-gravitation.html",
+    "title": "5.4 The Law of Gravitation",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-5-5-mass-vs-weight": {
+    "file": "5-5-mass-vs-weight.html",
+    "title": "5.5 Mass vs. Weight",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-6-1-waves": {
+    "file": "6-1-waves.html",
+    "title": "6.1 Waves",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-6-2-sound-waves": {
+    "file": "6-2-sound-waves.html",
+    "title": "6.2 Sound Waves",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-6-3-simple-harmonic-motion": {
+    "file": "6-3-simple-harmonic-motion.html",
+    "title": "6.3 Simple Harmonic Motion",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-6-4-simple-harmonic-motion-lab": {
+    "file": "6-4-simple-harmonic-motion-lab.html",
+    "title": "6.4 Simple Harmonic Motion Lab",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-6-5-wave-speed": {
+    "file": "6-5-wave-speed.html",
+    "title": "6.5 Wave Speed",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-7-1-visible-light": {
+    "file": "7-1-visible-light.html",
+    "title": "7.1 Visible Light",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-7-2-the-electromagnetic-spectrum": {
+    "file": "7-2-the-electromagnetic-spectrum.html",
+    "title": "7.2 The Electromagnetic Spectrum",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "Physics"
+  },
+  "phys-7-3-digital-and-analog-information": {
+    "file": "7-3-digital-and-analog-information.html",
+    "title": "7.3 Digital and Analog Information",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-8-1-electricity": {
+    "file": "8-1-electricity.html",
+    "title": "8.1 Electricity",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-8-2-circuits": {
+    "file": "8-2-circuits.html",
+    "title": "8.2 Circuits",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-8-3-magnetism": {
+    "file": "8-3-magnetism.html",
+    "title": "8.3 Magnetism",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-8-4-electric-charge-and-coulombs-law": {
+    "file": "8-4-electric-charge-and-coulomb-s-law.html",
+    "title": "8.4 Electric Charge and Coulomb's Law",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-9-1-temperature": {
+    "file": "9-1-temperature.html",
+    "title": "9.1 Temperature",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "phys-9-2-heat-transfer": {
+    "file": "9-2-heat-transfer.html",
+    "title": "9.2 Heat Transfer",
+    "kind": "lesson",
+    "questions": 7,
+    "course": "Physics"
+  },
+  "phys-9-3-specific-heat-capacity": {
+    "file": "9-3-specific-heat-capacity.html",
+    "title": "9.3 Specific Heat Capacity",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "Physics"
+  },
+  "ela10-g1-commas-in-compound-sentences": {
+    "file": "english-10/ela10-g1-commas-in-compound-sentences.html",
+    "title": "G.1 Commas in Compound Sentences",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English"
+  },
+  "ela10-g2-commas-in-complex-sentences": {
+    "file": "english-10/ela10-g2-commas-in-complex-sentences.html",
+    "title": "G.2 Commas in Complex Sentences",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English"
+  },
+  "ela10-g3-semicolons-in-compound-sentences": {
+    "file": "english-10/ela10-g3-semicolons-in-compound-sentences.html",
+    "title": "G.3 Semicolons in Compound Sentences",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English"
+  },
+  "ela10-g4-dangling-participial-phrases": {
+    "file": "english-10/ela10-g4-dangling-participial-phrases.html",
+    "title": "G.4 Dangling Participial Phrases",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English"
+  },
+  "ela10-g5-parallel-structure": {
+    "file": "english-10/ela10-g5-parallel-structure.html",
+    "title": "G.5 Parallel Structure",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English"
+  },
+  "ela10-g6-context-clues-definitions": {
+    "file": "english-10/ela10-g6-context-clues-definitions.html",
+    "title": "G.6 Context Clues: Definitions",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English"
+  },
+  "ela10-g7-affect-vs-effect": {
+    "file": "english-10/ela10-g7-affect-vs-effect.html",
+    "title": "G.7 Affect vs. Effect",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "10th Grade English"
+  },
+  "ela11-g1-compound-complex-sentences": {
+    "file": "english-11/ela11-g1-compound-complex-sentences.html",
+    "title": "G.1 Compound-Complex Sentences",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English"
+  },
+  "ela11-g2-restrictive-and-nonrestrictive-elements": {
+    "file": "english-11/ela11-g2-restrictive-and-nonrestrictive-elements.html",
+    "title": "G.2 Restrictive and Nonrestrictive Elements",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English"
+  },
+  "ela11-g3-colons-to-introduce-quotations": {
+    "file": "english-11/ela11-g3-colons-to-introduce-quotations.html",
+    "title": "G.3 Colons to Introduce Quotations",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English"
+  },
+  "ela11-g4-dashes": {
+    "file": "english-11/ela11-g4-dashes.html",
+    "title": "G.4 Dashes",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English"
+  },
+  "ela11-g5-formal-tone": {
+    "file": "english-11/ela11-g5-formal-tone.html",
+    "title": "G.5 Formal Tone",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English"
+  },
+  "ela11-g6-imply-vs-infer": {
+    "file": "english-11/ela11-g6-imply-vs-infer.html",
+    "title": "G.6 Imply vs. Infer",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English"
+  },
+  "ela10-2-2-tkam-chapter-4": {
+    "file": "english-10/ela10-2-2-tkam-chapter-4.html",
+    "title": "2.2 TKAM Chapter 4",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "2",
+    "unitTitle": "To Kill a Mockingbird"
+  },
+  "ela10-2-3-tkam-chapter-5": {
+    "file": "english-10/ela10-2-3-tkam-chapter-5.html",
+    "title": "2.3 TKAM Chapter 5",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "2",
+    "unitTitle": "To Kill a Mockingbird"
+  },
+  "ela10-2-4-tkam-chapter-12": {
+    "file": "english-10/ela10-2-4-tkam-chapter-12.html",
+    "title": "2.4 TKAM Chapter 12",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "2",
+    "unitTitle": "To Kill a Mockingbird"
+  },
+  "ela10-2-5-tkam-chapter-15": {
+    "file": "english-10/ela10-2-5-tkam-chapter-15.html",
+    "title": "2.5 TKAM Chapter 15",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "2",
+    "unitTitle": "To Kill a Mockingbird"
+  },
+  "ela10-2-6-tkam-chapter-20": {
+    "file": "english-10/ela10-2-6-tkam-chapter-20.html",
+    "title": "2.6 TKAM Chapter 20",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "2",
+    "unitTitle": "To Kill a Mockingbird"
+  },
+  "ela10-2-7-tkam-chapter-31": {
+    "file": "english-10/ela10-2-7-tkam-chapter-31.html",
+    "title": "2.7 TKAM Chapter 31",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "2",
+    "unitTitle": "To Kill a Mockingbird"
+  },
+  "ela10-2-8-tkam-review": {
+    "file": "english-10/ela10-2-8-tkam-review.html",
+    "title": "2.8 To Kill a Mockingbird Review",
+    "kind": "unit-review",
+    "questions": 14,
+    "course": "10th Grade English",
+    "unit": "2",
+    "unitTitle": "To Kill a Mockingbird"
+  },
+  "ela10-3-1-julius-caesar-introduction": {
+    "file": "english-10/ela10-3-1-julius-caesar-introduction.html",
+    "title": "3.1 Julius Caesar Introduction",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-3-2-julius-caesar-act-1": {
+    "file": "english-10/ela10-3-2-julius-caesar-act-1.html",
+    "title": "3.2 Julius Caesar Act 1",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-3-3-julius-caesar-act-2": {
+    "file": "english-10/ela10-3-3-julius-caesar-act-2.html",
+    "title": "3.3 Julius Caesar Act 2",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-3-4-julius-caesar-act-3-scene-1": {
+    "file": "english-10/ela10-3-4-julius-caesar-act-3-scene-1.html",
+    "title": "3.4 Julius Caesar Act 3 Scene 1",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-3-5-julius-caesar-act-3-scenes-2-3": {
+    "file": "english-10/ela10-3-5-julius-caesar-act-3-scenes-2-3.html",
+    "title": "3.5 Julius Caesar Act 3 Scenes 2-3",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-3-6-julius-caesar-act-4": {
+    "file": "english-10/ela10-3-6-julius-caesar-act-4.html",
+    "title": "3.6 Julius Caesar Act 4",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-3-7-julius-caesar-act-5": {
+    "file": "english-10/ela10-3-7-julius-caesar-act-5.html",
+    "title": "3.7 Julius Caesar Act 5",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-3-8-julius-caesar-review": {
+    "file": "english-10/ela10-3-8-julius-caesar-review.html",
+    "title": "3.8 Julius Caesar Review",
+    "kind": "unit-review",
+    "questions": 14,
+    "course": "10th Grade English",
+    "unit": "3",
+    "unitTitle": "Julius Caesar"
+  },
+  "ela10-4-1-mla-in-text-citations": {
+    "file": "english-10/ela10-4-1-mla-in-text-citations.html",
+    "title": "4.1 MLA In-Text Citations",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "4",
+    "unitTitle": "Research-Based Argument"
+  },
+  "ela10-4-2-mla-works-cited-entries": {
+    "file": "english-10/ela10-4-2-mla-works-cited-entries.html",
+    "title": "4.2 MLA Works Cited Entries",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "4",
+    "unitTitle": "Research-Based Argument"
+  },
+  "ela10-4-3-mla-works-cited-page": {
+    "file": "english-10/ela10-4-3-mla-works-cited-page.html",
+    "title": "4.3 MLA Works Cited Page",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "4",
+    "unitTitle": "Research-Based Argument"
+  },
+  "ela10-4-4-formal-tone": {
+    "file": "english-10/ela10-4-4-formal-tone.html",
+    "title": "4.4 Formal Tone",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "4",
+    "unitTitle": "Research-Based Argument"
+  },
+  "ela10-4-5-research-skills-review": {
+    "file": "english-10/ela10-4-5-research-skills-review.html",
+    "title": "4.5 Research Skills Review",
+    "kind": "unit-review",
+    "questions": 9,
+    "course": "10th Grade English",
+    "unit": "4",
+    "unitTitle": "Research-Based Argument"
+  },
+  "ela10-1-1-what-is-an-argument": {
+    "file": "english-10/ela10-1-1-what-is-an-argument.html",
+    "title": "1.1 What Is an Argument?",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-2-parts-of-an-argument": {
+    "file": "english-10/ela10-1-2-parts-of-an-argument.html",
+    "title": "1.2 Parts of an Argument",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-3-choosing-the-best-evidence": {
+    "file": "english-10/ela10-1-3-choosing-the-best-evidence.html",
+    "title": "1.3 Choosing the Best Evidence",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-4-citing-evidence-in-literary-analysis": {
+    "file": "english-10/ela10-1-4-citing-evidence-in-literary-analysis.html",
+    "title": "1.4 Citing Evidence in Literary Analysis",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-5-evaluating-reasoning-and-evidence": {
+    "file": "english-10/ela10-1-5-evaluating-reasoning-and-evidence.html",
+    "title": "1.5 Evaluating Reasoning and Evidence",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-6-rhetorical-appeals": {
+    "file": "english-10/ela10-1-6-rhetorical-appeals.html",
+    "title": "1.6 Rhetorical Appeals",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-7-identifying-parts-of-an-argument": {
+    "file": "english-10/ela10-1-7-identifying-parts-of-an-argument.html",
+    "title": "1.7 Identifying Parts of an Argument",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-8-slippery-slope-fallacy": {
+    "file": "english-10/ela10-1-8-slippery-slope-fallacy.html",
+    "title": "1.8 Slippery Slope Fallacy",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela10-1-9-bootcamp-review": {
+    "file": "english-10/ela10-1-9-bootcamp-review.html",
+    "title": "1.9 Bootcamp Review",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "10th Grade English",
+    "unit": "1",
+    "unitTitle": "Argument & Analysis Bootcamp"
+  },
+  "ela11-4-1-what-is-poetry": {
+    "file": "english-11/ela11-4-1-what-is-poetry.html",
+    "title": "4.1 What Is Poetry",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-2-song-of-myself": {
+    "file": "english-11/ela11-4-2-song-of-myself.html",
+    "title": "4.2 Song of Myself",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-3-o-captain-my-captain": {
+    "file": "english-11/ela11-4-3-o-captain-my-captain.html",
+    "title": "4.3 O Captain My Captain",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-4-hope-is-the-thing-with-feathers": {
+    "file": "english-11/ela11-4-4-hope-is-the-thing-with-feathers.html",
+    "title": "4.4 Hope Is the Thing with Feathers",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-5-because-i-could-not-stop-for-death": {
+    "file": "english-11/ela11-4-5-because-i-could-not-stop-for-death.html",
+    "title": "4.5 Because I Could Not Stop for Death",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-6-the-new-colossus": {
+    "file": "english-11/ela11-4-6-the-new-colossus.html",
+    "title": "4.6 The New Colossus",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-7-the-road-not-taken": {
+    "file": "english-11/ela11-4-7-the-road-not-taken.html",
+    "title": "4.7 The Road Not Taken",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-8-nothing-gold-can-stay": {
+    "file": "english-11/ela11-4-8-nothing-gold-can-stay.html",
+    "title": "4.8 Nothing Gold Can Stay",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-9-mother-to-son": {
+    "file": "english-11/ela11-4-9-mother-to-son.html",
+    "title": "4.9 Mother to Son",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-10-i-too": {
+    "file": "english-11/ela11-4-10-i-too.html",
+    "title": "4.10 I Too",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-11-after-the-winter": {
+    "file": "english-11/ela11-4-11-after-the-winter.html",
+    "title": "4.11 After the Winter",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-4-12-american-voices-review": {
+    "file": "english-11/ela11-4-12-american-voices-review.html",
+    "title": "4.12 American Voices Review",
+    "kind": "unit-review",
+    "questions": 23,
+    "course": "11th Grade English",
+    "unit": "4",
+    "unitTitle": "American Voices: Poetry"
+  },
+  "ela11-6-1-the-celebrated-jumping-frog": {
+    "file": "english-11/ela11-6-1-the-celebrated-jumping-frog.html",
+    "title": "6.1 The Celebrated Jumping Frog",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "6",
+    "unitTitle": "American Short Stories"
+  },
+  "ela11-6-2-the-lady-or-the-tiger": {
+    "file": "english-11/ela11-6-2-the-lady-or-the-tiger.html",
+    "title": "6.2 The Lady or the Tiger",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "6",
+    "unitTitle": "American Short Stories"
+  },
+  "ela11-6-3-a-retrieved-reformation": {
+    "file": "english-11/ela11-6-3-a-retrieved-reformation.html",
+    "title": "6.3 A Retrieved Reformation",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "6",
+    "unitTitle": "American Short Stories"
+  },
+  "ela11-6-4-the-gift-of-the-magi": {
+    "file": "english-11/ela11-6-4-the-gift-of-the-magi.html",
+    "title": "6.4 The Gift of the Magi",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "6",
+    "unitTitle": "American Short Stories"
+  },
+  "ela11-6-5-to-build-a-fire": {
+    "file": "english-11/ela11-6-5-to-build-a-fire.html",
+    "title": "6.5 To Build a Fire",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "6",
+    "unitTitle": "American Short Stories"
+  },
+  "ela11-6-6-american-short-stories-review": {
+    "file": "english-11/ela11-6-6-american-short-stories-review.html",
+    "title": "6.6 American Short Stories Review",
+    "kind": "unit-review",
+    "questions": 13,
+    "course": "11th Grade English",
+    "unit": "6",
+    "unitTitle": "American Short Stories"
+  },
+  "ela11-8-1-12-angry-men-introduction": {
+    "file": "english-11/ela11-8-1-12-angry-men-introduction.html",
+    "title": "8.1 12 Angry Men: Introduction",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-2-12-angry-men-part-1": {
+    "file": "english-11/ela11-8-2-12-angry-men-part-1.html",
+    "title": "8.2 12 Angry Men: Part 1",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-3-12-angry-men-part-2": {
+    "file": "english-11/ela11-8-3-12-angry-men-part-2.html",
+    "title": "8.3 12 Angry Men: Part 2",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-4-12-angry-men-part-3": {
+    "file": "english-11/ela11-8-4-12-angry-men-part-3.html",
+    "title": "8.4 12 Angry Men: Part 3",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-5-12-angry-men-part-4": {
+    "file": "english-11/ela11-8-5-12-angry-men-part-4.html",
+    "title": "8.5 12 Angry Men: Part 4",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-6-12-angry-men-part-5": {
+    "file": "english-11/ela11-8-6-12-angry-men-part-5.html",
+    "title": "8.6 12 Angry Men: Part 5",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-7-12-angry-men-part-6": {
+    "file": "english-11/ela11-8-7-12-angry-men-part-6.html",
+    "title": "8.7 12 Angry Men: Part 6",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-8-12-angry-men-part-7": {
+    "file": "english-11/ela11-8-8-12-angry-men-part-7.html",
+    "title": "8.8 12 Angry Men: Part 7",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-8-9-12-angry-men-review": {
+    "file": "english-11/ela11-8-9-12-angry-men-review.html",
+    "title": "8.9 12 Angry Men Review",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "11th Grade English",
+    "unit": "8",
+    "unitTitle": "12 Angry Men"
+  },
+  "ela11-9-1-motif": {
+    "file": "english-11/ela11-9-1-motif.html",
+    "title": "9.1 Motif in The Old Man and the Sea",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "9",
+    "unitTitle": "The Old Man and the Sea"
+  },
+  "ela11-9-2-imagery": {
+    "file": "english-11/ela11-9-2-imagery.html",
+    "title": "9.2 Imagery in The Old Man and the Sea",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "9",
+    "unitTitle": "The Old Man and the Sea"
+  },
+  "ela11-9-3-personification": {
+    "file": "english-11/ela11-9-3-personification.html",
+    "title": "9.3 Personification in The Old Man and the Sea",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "9",
+    "unitTitle": "The Old Man and the Sea"
+  },
+  "ela11-9-4-allegory": {
+    "file": "english-11/ela11-9-4-allegory.html",
+    "title": "9.4 Allegory in The Old Man and the Sea",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "9",
+    "unitTitle": "The Old Man and the Sea"
+  },
+  "ela11-9-5-paradox": {
+    "file": "english-11/ela11-9-5-paradox.html",
+    "title": "9.5 Paradox in The Old Man and the Sea",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "9",
+    "unitTitle": "The Old Man and the Sea"
+  },
+  "ela11-9-6-theme": {
+    "file": "english-11/ela11-9-6-theme.html",
+    "title": "9.6 Theme in The Old Man and the Sea",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "11th Grade English",
+    "unit": "9",
+    "unitTitle": "The Old Man and the Sea"
+  },
+  "ela11-9-7-old-man-and-the-sea-review": {
+    "file": "english-11/ela11-9-7-old-man-and-the-sea-review.html",
+    "title": "9.7 The Old Man and the Sea Review",
+    "kind": "unit-review",
+    "questions": 14,
+    "course": "11th Grade English",
+    "unit": "9",
+    "unitTitle": "The Old Man and the Sea"
+  },
+  "ela11-5-1-preamble-to-the-constitution": {
+    "file": "english-11/ela11-5-1-preamble-to-the-constitution.html",
+    "title": "5.1 Preamble to the Constitution",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "5",
+    "unitTitle": "Founding Voices"
+  },
+  "ela11-5-2-the-bill-of-rights": {
+    "file": "english-11/ela11-5-2-the-bill-of-rights.html",
+    "title": "5.2 The Bill of Rights",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "5",
+    "unitTitle": "Founding Voices"
+  },
+  "ela11-5-3-washington-s-farewell-address": {
+    "file": "english-11/ela11-5-3-washington-s-farewell-address.html",
+    "title": "5.3 Washington's Farewell Address",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "5",
+    "unitTitle": "Founding Voices"
+  },
+  "ela11-5-4-the-gettysburg-address": {
+    "file": "english-11/ela11-5-4-the-gettysburg-address.html",
+    "title": "5.4 The Gettysburg Address",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "5",
+    "unitTitle": "Founding Voices"
+  },
+  "ela11-5-5-roosevelt-s-four-freedoms": {
+    "file": "english-11/ela11-5-5-roosevelt-s-four-freedoms.html",
+    "title": "5.5 Roosevelt's Four Freedoms",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "5",
+    "unitTitle": "Founding Voices"
+  },
+  "ela11-5-6-founding-voices-review": {
+    "file": "english-11/ela11-5-6-founding-voices-review.html",
+    "title": "5.6 Founding Voices Review",
+    "kind": "unit-review",
+    "questions": 11,
+    "course": "11th Grade English",
+    "unit": "5",
+    "unitTitle": "Founding Voices"
+  },
+  "ela11-7-1-daedalus-and-icarus": {
+    "file": "english-11/ela11-7-1-daedalus-and-icarus.html",
+    "title": "7.1 Daedalus and Icarus",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-2-sonnet-18": {
+    "file": "english-11/ela11-7-2-sonnet-18.html",
+    "title": "7.2 Sonnet 18",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-3-no-man-is-an-island": {
+    "file": "english-11/ela11-7-3-no-man-is-an-island.html",
+    "title": "7.3 No Man Is an Island",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-4-a-poison-tree": {
+    "file": "english-11/ela11-7-4-a-poison-tree.html",
+    "title": "7.4 A Poison Tree",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-5-i-wandered-lonely-as-a-cloud": {
+    "file": "english-11/ela11-7-5-i-wandered-lonely-as-a-cloud.html",
+    "title": "7.5 I Wandered Lonely as a Cloud",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-6-ozymandias": {
+    "file": "english-11/ela11-7-6-ozymandias.html",
+    "title": "7.6 Ozymandias",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-7-jabberwocky": {
+    "file": "english-11/ela11-7-7-jabberwocky.html",
+    "title": "7.7 Jabberwocky",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-8-invictus": {
+    "file": "english-11/ela11-7-8-invictus.html",
+    "title": "7.8 Invictus",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela11-7-9-british-european-review": {
+    "file": "english-11/ela11-7-9-british-european-review.html",
+    "title": "7.9 British & European Voices Review",
+    "kind": "unit-review",
+    "questions": 17,
+    "course": "11th Grade English",
+    "unit": "7",
+    "unitTitle": "British & European Voices"
+  },
+  "ela12-4-1-your-digital-reputation": {
+    "file": "english-12/ela12-4-1-your-digital-reputation.html",
+    "title": "4.1 Your Digital Reputation",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-2-brainstorming-your-college-essay": {
+    "file": "english-12/ela12-4-2-brainstorming-your-college-essay.html",
+    "title": "4.2 Brainstorming Your College Essay",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-3-writing-a-strong-admissions-essay": {
+    "file": "english-12/ela12-4-3-writing-a-strong-admissions-essay.html",
+    "title": "4.3 Writing a Strong Admissions Essay",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-4-avoiding-common-essay-mistakes": {
+    "file": "english-12/ela12-4-4-avoiding-common-essay-mistakes.html",
+    "title": "4.4 Avoiding Common Essay Mistakes",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-5-cover-letters-and-personal-statements": {
+    "file": "english-12/ela12-4-5-cover-letters-and-personal-statements.html",
+    "title": "4.5 Cover Letters and Personal Statements",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-6-your-first-resume": {
+    "file": "english-12/ela12-4-6-your-first-resume.html",
+    "title": "4.6 Your First Resume",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-7-gross-vs-net-pay": {
+    "file": "english-12/ela12-4-7-gross-vs-net-pay.html",
+    "title": "4.7 Gross vs. Net Pay",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-8-acing-an-entry-level-interview": {
+    "file": "english-12/ela12-4-8-acing-an-entry-level-interview.html",
+    "title": "4.8 Acing an Entry-Level Interview",
+    "kind": "lesson",
+    "questions": 8,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-9-tell-me-about-yourself": {
+    "file": "english-12/ela12-4-9-tell-me-about-yourself.html",
+    "title": "4.9 Tell Me About Yourself",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "ela12-4-10-college-and-career-writing-review": {
+    "file": "english-12/ela12-4-10-college-and-career-writing-review.html",
+    "title": "4.10 College and Career Writing Review",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "12th Grade English",
+    "unit": "4",
+    "unitTitle": "College and Career Writing"
+  },
+  "alg1-1-5-like-terms": {
+    "file": "alg1-1-5-like-terms.html",
+    "title": "1.5 Like Terms: Freight Yard",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 1",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "alg1-1-8-multiplying-binomials": {
+    "file": "alg1-1-8-multiplying-binomials.html",
+    "title": "1.8 Multiplying Binomials: Binomial Express",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 1",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "alg1-1-9-area-models": {
+    "file": "alg1-1-9-area-models.html",
+    "title": "1.9 Multiplying Binomials Using Area Models: Metro Grid",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Algebra 1",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "alg2-1-4-basic-exponent-review": {
+    "file": "alg2-1-4-basic-exponent-review.html",
+    "title": "1.4 Basic Exponent Review: Power Path",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "alg2-2-1-introduction-to-functions": {
+    "file": "alg2-2-1-introduction-to-functions.html",
+    "title": "2.1 Introduction to Functions: Function Factory",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-2-2-function-notation": {
+    "file": "alg2-2-2-function-notation.html",
+    "title": "2.2 Function Notation: Notation Station",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-2-4-domain-and-range": {
+    "file": "alg2-2-4-domain-and-range.html",
+    "title": "2.4 The Domain and Range of a Function: Domain Islands",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-2-5-average-rate-of-change": {
+    "file": "alg2-2-5-average-rate-of-change.html",
+    "title": "2.5 Average Rate of Change: Rate Rockets",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "alg2-3-2-forms-of-a-line": {
+    "file": "alg2-3-2-forms-of-a-line.html",
+    "title": "3.2 Forms of a Line: Sky Lines",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "alg2-3-4-inverses-of-linear-functions": {
+    "file": "alg2-3-4-inverses-of-linear-functions.html",
+    "title": "3.4 Inverses of Linear Functions: Mirror Maze",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "alg2-4-1-basic-exponent-properties": {
+    "file": "alg2-4-1-basic-exponent-properties.html",
+    "title": "4.1 Basic Exponent Properties: Power-Up Arcade",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-4-3-exponential-function-basics": {
+    "file": "alg2-4-3-exponential-function-basics.html",
+    "title": "4.3 Exponential Function Basics: Beanstalk Climb",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-4-6-percent-growth-and-decay": {
+    "file": "alg2-4-6-percent-growth-and-decay.html",
+    "title": "4.6 Exponential Modeling Based on Percent Growth and Decay: Percent Peaks",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-4-8-compound-interest": {
+    "file": "alg2-4-8-compound-interest.html",
+    "title": "4.8 Compound Interest: Dragon&#x27;s Hoard",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Algebra 2",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "alg2-5-1-introduction-to-logarithms": {
+    "file": "alg2-5-1-introduction-to-logarithms.html",
+    "title": "5.1 Introduction to Logarithms: Log Cabin",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Algebra 2",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "alg2-7-3-factoring-simple-trinomials": {
+    "file": "alg2-7-3-factoring-simple-trinomials.html",
+    "title": "7.3 Factoring Simple Trinomials: Factor Forge",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "7",
+    "engine": "quest"
+  },
+  "alg2-7-4-factoring-by-grouping": {
+    "file": "alg2-7-4-factoring-by-grouping.html",
+    "title": "7.4 Factoring by Grouping: Grouping Jungle",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "7",
+    "engine": "quest"
+  },
+  "alg2-7-5-factoring-challenging-trinomials": {
+    "file": "alg2-7-5-factoring-challenging-trinomials.html",
+    "title": "7.5 Factoring Challenging Trinomials: Trinomial Mine",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Algebra 2",
+    "unit": "7",
+    "engine": "quest"
+  },
+  "chem-1-3-atomic-structure": {
+    "file": "chem-1-3-atomic-structure.html",
+    "title": "1.3 The Structure of the Atom: The Nucleus: Atom Escape",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Chemistry",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "chem-1-5-units-and-conversions": {
+    "file": "chem-1-5-units-and-conversions.html",
+    "title": "1.5 Units, Measurement, Unit Conversion & Significant Figures: Metric Escape",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Chemistry",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "civics7-1-8-bill-of-rights": {
+    "file": "civics7-1-8-bill-of-rights.html",
+    "title": "1.8 The Bill of Rights: Liberty Line",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Civics",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-3-sensory-language-mood-and-tone": {
+    "file": "ela6-1-3-sensory-language-mood-and-tone.html",
+    "title": "1.3 Sensory Language, Mood, and Tone: Senses Carnival",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-7-theme": {
+    "file": "ela6-1-7-theme.html",
+    "title": "1.7 Theme in Literature: Fable Forest",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-9-characterization": {
+    "file": "ela6-1-9-characterization.html",
+    "title": "1.9 Characterization: STEAL, Direct and Indirect: Character Detectives",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-1-7-strong-verbs": {
+    "file": "ela7-1-7-strong-verbs.html",
+    "title": "1.7 Replacing Weak Verbs with Strong Verbs: Verb Quest",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-2-1-independent-and-dependent-clauses": {
+    "file": "ela7-2-1-independent-and-dependent-clauses.html",
+    "title": "2.1 Independent and Dependent Clauses: Clause Castle",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-2-verb-moods": {
+    "file": "ela7-2-2-verb-moods.html",
+    "title": "2.2 Verb Moods: Mood Isles",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-3-internal-and-external-conflict": {
+    "file": "ela7-2-3-internal-and-external-conflict.html",
+    "title": "2.3 Internal and External Conflict: Conflict Arena",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-4-prepositional-phrases": {
+    "file": "ela7-2-4-prepositional-phrases.html",
+    "title": "2.4 Prepositions and Prepositional Phrases: Preposition Run",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela7-2-5-participles": {
+    "file": "ela7-2-5-participles.html",
+    "title": "2.5 Participles and Participial Phrases: Participle Park",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade English",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "ela8-3-3-credible-sources": {
+    "file": "ela8-3-3-credible-sources.html",
+    "title": "3.3 Finding Credible Sources Online: Source Detective",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade English",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "ela9-1-9-punctuating-dialogue": {
+    "file": "ela9-1-9-punctuating-dialogue.html",
+    "title": "1.9 Punctuating Dialogue: Script Studio",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "9th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "geo-1-9-parallel-lines": {
+    "file": "geo-1-9-parallel-lines.html",
+    "title": "1.9 Parallel Lines and Transversals: Transversal Tower",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Geometry",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "geo-2-1-transformations": {
+    "file": "geo-2-1-transformations.html",
+    "title": "2.1 Transformations: Transformation Station",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "geo-2-5-line-reflections": {
+    "file": "geo-2-5-line-reflections.html",
+    "title": "2.5 Line Reflections: Mirror Maze",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "geo-2-9-congruence-and-rigid-motions": {
+    "file": "geo-2-9-congruence-and-rigid-motions.html",
+    "title": "2.9 Congruence and Rigid Motions: Shape-Shifter Case",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "geo-3-12-aas-and-isosceles-triangles": {
+    "file": "geo-3-12-aas-and-isosceles-triangles.html",
+    "title": "3.12 AAS and Isosceles Triangles: Congruence Castle",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "geo-3-2-congruent-triangles": {
+    "file": "geo-3-2-congruent-triangles.html",
+    "title": "3.2 Congruent Triangles: Twin Triangle Agency",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Geometry",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "geo-4-4-bisecting-an-angle": {
+    "file": "geo-4-4-bisecting-an-angle.html",
+    "title": "4.4 Bisecting an Angle: Compass Guild",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Geometry",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "geo-5-1-slope-and-parallel-lines": {
+    "file": "geo-5-1-slope-and-parallel-lines.html",
+    "title": "5.1 Slope and Parallel Lines: Twin Tracks",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "geo-5-2-slope-and-perpendicular-lines": {
+    "file": "geo-5-2-slope-and-perpendicular-lines.html",
+    "title": "5.2 Slope and Perpendicular Lines: Corner Crew",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "geo-5-8-midpoint-formula": {
+    "file": "geo-5-8-midpoint-formula.html",
+    "title": "5.8 The Midpoint Formula: Halfway Station",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "geo-6-5-midpoints-of-a-triangle": {
+    "file": "geo-6-5-midpoints-of-a-triangle.html",
+    "title": "6.5 The Midpoints of a Triangle: A-Frame Lodge",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Geometry",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "hist6-1-10-us-regions": {
+    "file": "hist6-1-10-us-regions.html",
+    "title": "1.10 US Regions: Region Rangers",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "6th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist6-1-9-states-and-capitals": {
+    "file": "hist6-1-9-states-and-capitals.html",
+    "title": "1.9 50 States and Capitals: Capital Road Trip",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist6-2-3-hammurabis-code": {
+    "file": "hist6-2-3-hammurabis-code.html",
+    "title": "2.3 Hammurabi's Code: Stone of Laws",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist6-2-4-mesopotamia-achievements": {
+    "file": "hist6-2-4-mesopotamia-achievements.html",
+    "title": "2.4 Advancements from Mesopotamia: Ziggurat Quest",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist6-2-7-egyptian-pharaohs": {
+    "file": "hist6-2-7-egyptian-pharaohs.html",
+    "title": "2.7 Egyptian Pharaohs: Pharaoh&#x27;s Treasury",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist6-2-8-ancient-egypt-life-and-mummies": {
+    "file": "hist6-2-8-ancient-egypt-life-and-mummies.html",
+    "title": "2.8 Ancient Egypt: Nile Expedition",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist8-1-4b-english-colonies": {
+    "file": "hist8-1-4b-english-colonies.html",
+    "title": "1.4b The English Colonies: Colony Voyage",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist8-1-6-cultural-interactions": {
+    "file": "hist8-1-6-cultural-interactions.html",
+    "title": "1.6 Cultural Interactions Between Europeans, Native Americans, and Africans: Worlds Collide",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist8-2-3-regions-of-the-british-colonies": {
+    "file": "hist8-2-3-regions-of-the-british-colonies.html",
+    "title": "2.3 Regions of the British Colonies: Colony Surveyor",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "8th Grade History",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "hist8-3-3-road-to-revolution": {
+    "file": "hist8-3-3-road-to-revolution.html",
+    "title": "3.3 Taxation Without Representation: The Road to Revolution: Liberty Lanterns",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "hist8-3-4-the-enlightenment": {
+    "file": "hist8-3-4-the-enlightenment.html",
+    "title": "3.4 Philosophical Foundations of the American Revolution: The Enlightenment: Lamps of Reason",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "hist8-3-5-american-revolution": {
+    "file": "hist8-3-5-american-revolution.html",
+    "title": "3.5 The American Revolution: Patriot Campfires",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade History",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-2-2-equivalent-fractions": {
+    "file": "math6-2-2-equivalent-fractions.html",
+    "title": "2.2 Equivalent Fractions: Brownie Bakery",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-2-4-adding-and-subtracting-fractions": {
+    "file": "math6-2-4-adding-and-subtracting-fractions.html",
+    "title": "2.4 Adding and Subtracting Fractions: Fraction Potion Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-2-7-multiplying-fractions": {
+    "file": "math6-2-7-multiplying-fractions.html",
+    "title": "2.7 Multiplying Fractions: Fraction Garden",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-2-8-dividing-fractions": {
+    "file": "math6-2-8-dividing-fractions.html",
+    "title": "2.8 Dividing Fractions: Division Detectives",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math6-3-2-adding-and-subtracting-decimals": {
+    "file": "math6-3-2-adding-and-subtracting-decimals.html",
+    "title": "3.2 Adding and Subtracting Decimals: Decimal Road Trip",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-3-3-multiplying-decimals": {
+    "file": "math6-3-3-multiplying-decimals.html",
+    "title": "3.3 Multiplying Decimals: Decimal Food Truck",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-3-5-dividing-with-decimal-remainders": {
+    "file": "math6-3-5-dividing-with-decimal-remainders.html",
+    "title": "3.5 Dividing Whole Numbers with Decimal Remainders: Treasure Split",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-3-6-dividing-decimals": {
+    "file": "math6-3-6-dividing-decimals.html",
+    "title": "3.6 Dividing Decimals: Potion Shop",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math6-4-2-introduction-to-negative-numbers": {
+    "file": "math6-4-2-introduction-to-negative-numbers.html",
+    "title": "4.2 Introduction to Negative Numbers: Below Zero Expedition",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-4-3-ordering-rational-numbers": {
+    "file": "math6-4-3-ordering-rational-numbers.html",
+    "title": "4.3 Ordering the Rational Numbers: Rational Racers",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-4-4-absolute-value": {
+    "file": "math6-4-4-absolute-value.html",
+    "title": "4.4 The Absolute Value of a Number: Mirror Maze",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-4-5-plotting-points-coordinate-plane": {
+    "file": "math6-4-5-plotting-points-coordinate-plane.html",
+    "title": "4.5 Plotting Points in the Coordinate Plane: Treasure Grid",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math6-5-1-exponents": {
+    "file": "math6-5-1-exponents.html",
+    "title": "5.1 Exponents: Power Tower",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-5-2-order-of-operations": {
+    "file": "math6-5-2-order-of-operations.html",
+    "title": "5.2 Order of Operations: Potion Order",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-5-3-variables-and-expressions": {
+    "file": "math6-5-3-variables-and-expressions.html",
+    "title": "5.3 Variables and Algebraic Expressions: Code Agents",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-5-5-equivalent-expressions": {
+    "file": "math6-5-5-equivalent-expressions.html",
+    "title": "5.5 Equivalent Expressions: Echo Caves",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math6-6-2-one-step-equations-add-subtract": {
+    "file": "math6-6-2-one-step-equations-add-subtract.html",
+    "title": "6.2 One-Step Equations with Addition and Subtraction: Balance Bazaar",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math6-6-3-one-step-equations-multiply-divide": {
+    "file": "math6-6-3-one-step-equations-multiply-divide.html",
+    "title": "6.3 One-Step Equations with Multiplication and Division: Treasure Split",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math6-6-5-translating-into-equations": {
+    "file": "math6-6-5-translating-into-equations.html",
+    "title": "6.5 Translating into Math Equations: Translation Tower",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601 (6th Grade Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-1-5-fractions-and-decimals": {
+    "file": "math7-1-5-fractions-and-decimals.html",
+    "title": "1.5 Fractions and Decimals: Decimal Space Station",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math7-1-6-ratios-and-rates": {
+    "file": "math7-1-6-ratios-and-rates.html",
+    "title": "1.6 Ratios and Rates: Ratio Raceway",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math7-2-2-adding-signed-numbers": {
+    "file": "math7-2-2-adding-signed-numbers.html",
+    "title": "2.2 Adding Signed Numbers: Zero-Pair Arcade",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-2-4-subtracting-signed-numbers": {
+    "file": "math7-2-4-subtracting-signed-numbers.html",
+    "title": "2.4 Subtracting Signed Numbers: Vault Breakers",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-2-8-multiplying-signed-numbers": {
+    "file": "math7-2-8-multiplying-signed-numbers.html",
+    "title": "2.8 Multiplying Signed Numbers: Lily Pad Leap",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-2-9-dividing-signed-numbers": {
+    "file": "math7-2-9-dividing-signed-numbers.html",
+    "title": "2.9 Dividing Signed Numbers: Pirate Divide",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "math7-3-1-ratios": {
+    "file": "math7-3-1-ratios.html",
+    "title": "3.1 Ratios: Ratio Road Trip",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-4-ratio-problems-using-algebra": {
+    "file": "math7-3-4-ratio-problems-using-algebra.html",
+    "title": "3.4 Solving Ratio Problems Using Algebra: Stadium Showdown",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-5-proportional-relationships": {
+    "file": "math7-3-5-proportional-relationships.html",
+    "title": "3.5 Proportional Relationships: Snail Trail",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-6-solving-proportions": {
+    "file": "math7-3-6-solving-proportions.html",
+    "title": "3.6 Solving Proportions: Road Trip Rally",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-8-graphs-of-proportional-relationships": {
+    "file": "math7-3-8-graphs-of-proportional-relationships.html",
+    "title": "3.8 Graphs of Proportional Relationships: Scoop Factory",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-3-9-equations-of-proportional-relationships": {
+    "file": "math7-3-9-equations-of-proportional-relationships.html",
+    "title": "3.9 Equations of Proportional Relationships: Formula Falls",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "math7-4-10-finding-the-whole": {
+    "file": "math7-4-10-finding-the-whole.html",
+    "title": "4.10 Finding the Whole Using Algebra: Treasure Hunt",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Math 701 (7th Grade Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math7-4-4-decimals-and-percentages": {
+    "file": "math7-4-4-decimals-and-percentages.html",
+    "title": "4.4 Decimals and Percentages: Percent Pizzeria",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Math",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math7-4-6-percentage-a-part-represents": {
+    "file": "math7-4-6-percentage-a-part-represents.html",
+    "title": "4.6 The Percentage a Part Represents: Poll Patrol",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 701 (7th Grade Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "math7-5-3-equivalent-expressions": {
+    "file": "math7-5-3-equivalent-expressions.html",
+    "title": "5.3 Equivalent Expressions: Clone Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-5-5-combining-like-terms": {
+    "file": "math7-5-5-combining-like-terms.html",
+    "title": "5.5 Combining Like Terms: Cargo Bay",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-5-6-simplifying-complex-expressions": {
+    "file": "math7-5-6-simplifying-complex-expressions.html",
+    "title": "5.6 Simplifying Complex Expressions: Summit Simplify",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-5-7-factoring-binomials": {
+    "file": "math7-5-7-factoring-binomials.html",
+    "title": "5.7 Factoring Binomials: Factor Vault",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "math7-6-2-demo-v2-boardgame": {
+    "file": "math7-6-2-demo-v2-boardgame.html",
+    "title": "6.2 Two-Step Equations (engine v2 demo): Equation Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-6-2-demo-v2-constellation": {
+    "file": "math7-6-2-demo-v2-constellation.html",
+    "title": "6.2 Two-Step Equations (engine v2 demo): Equation Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-6-2-demo-v2-escape": {
+    "file": "math7-6-2-demo-v2-escape.html",
+    "title": "6.2 Two-Step Equations (engine v2 demo): Equation Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-6-2-demo-v2-tower": {
+    "file": "math7-6-2-demo-v2-tower.html",
+    "title": "6.2 Two-Step Equations (engine v2 demo): Equation Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-6-2-demo-v2-trainline": {
+    "file": "math7-6-2-demo-v2-trainline.html",
+    "title": "6.2 Two-Step Equations (engine v2 demo): Equation Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-6-2-two-step-equations": {
+    "file": "math7-6-2-two-step-equations.html",
+    "title": "6.2 Two-Step Equations: Rewind Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "math7-6-3-more-two-step-equations": {
+    "file": "math7-6-3-more-two-step-equations.html",
+    "title": "6.3 More Work with Two-Step Equations: Two-Step Summit",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Math",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "phys-2-1-newtons-laws": {
+    "file": "phys-2-1-newtons-laws.html",
+    "title": "2.1 Newton's Laws: Force Arena",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Physics",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "phys-2-5-newtons-third-law": {
+    "file": "phys-2-5-newtons-third-law.html",
+    "title": "2.5 Newton's 3rd Law: Echo Canyon",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Physics",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-1-6-variables-on-both-sides": {
+    "file": "prealg-1-6-variables-on-both-sides.html",
+    "title": "1.6 Solving Equations with Variables on Both Sides: Balance Quest",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "prealg-2-2-angles-and-their-measures": {
+    "file": "prealg-2-2-angles-and-their-measures.html",
+    "title": "2.2 Angles and Their Measures: Angle Lighthouse",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-2-5-parallel-lines": {
+    "file": "prealg-2-5-parallel-lines.html",
+    "title": "2.5 Parallel Lines: Rail Crossing",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-2-7-geometry-with-coordinates": {
+    "file": "prealg-2-7-geometry-with-coordinates.html",
+    "title": "2.7 Geometry with Coordinates: Coordinate Cove",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-2-8-congruent-figures": {
+    "file": "prealg-2-8-congruent-figures.html",
+    "title": "2.8 Congruent Figures: Clone Lab",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "prealg-3-11-angle-sums-in-a-triangle": {
+    "file": "prealg-3-11-angle-sums-in-a-triangle.html",
+    "title": "3.11 Angle Sums in a Triangle: Triangle Peaks",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "prealg-3-2-reflections": {
+    "file": "prealg-3-2-reflections.html",
+    "title": "3.2 Reflections: Mirror Lake",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "prealg-3-9-transformations-and-congruent-figures": {
+    "file": "prealg-3-9-transformations-and-congruent-figures.html",
+    "title": "3.9 Transformations and Congruent Figures: Docking Bay",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "prealg-4-5-similar-figures": {
+    "file": "prealg-4-5-similar-figures.html",
+    "title": "4.5 Similar Figures: Shrink Ray Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Grade Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "prealg-4-6-more-similar-figures": {
+    "file": "prealg-4-6-more-similar-figures.html",
+    "title": "4.6 More Work with Similar Figures: Shrink Ray Lab",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "4",
+    "engine": "quest"
+  },
+  "prealg-5-3-slope-and-similarity": {
+    "file": "prealg-5-3-slope-and-similarity.html",
+    "title": "5.3 Slope and Similarity: Slope Summit",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-5-slopes-and-negative-numbers": {
+    "file": "prealg-5-5-slopes-and-negative-numbers.html",
+    "title": "5.5 Slopes and Negative Numbers: Ski Patrol",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-7-finding-the-slope": {
+    "file": "prealg-5-7-finding-the-slope.html",
+    "title": "5.7 Finding the Slope of a Line: Slope Patrol",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-8-systems-of-equations": {
+    "file": "prealg-5-8-systems-of-equations.html",
+    "title": "5.8 Systems of Equations: Laser Vault",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-5-9-solving-systems-algebraically": {
+    "file": "prealg-5-9-solving-systems-algebraically.html",
+    "title": "5.9 Solving Systems of Equations Algebraically: Orbit Rendezvous",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "5",
+    "engine": "quest"
+  },
+  "prealg-6-2-features-of-functions": {
+    "file": "prealg-6-2-features-of-functions.html",
+    "title": "6.2 Features of Functions: Coaster Park",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "prealg-6-3-average-rate-of-change": {
+    "file": "prealg-6-3-average-rate-of-change.html",
+    "title": "6.3 Average Rate of Change: Launch Control",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "prealg-6-4-linear-functions": {
+    "file": "prealg-6-4-linear-functions.html",
+    "title": "6.4 Linear Functions: Balloon Festival",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "prealg-6-7-scatter-plots": {
+    "file": "prealg-6-7-scatter-plots.html",
+    "title": "6.7 Scatter Plots and Lines of Best Fit: Firefly Field",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Pre-Algebra (8th Math)",
+    "unit": "6",
+    "engine": "quest"
+  },
+  "sci-1-2-scientific-method": {
+    "file": "sci-1-2-scientific-method.html",
+    "title": "1.2 Scientific Method & Nature of Science: Method Escape",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Science and Science 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci-1-4-lab-tools": {
+    "file": "sci-1-4-lab-tools.html",
+    "title": "1.4 Lab Tools: Tool Room Escape",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Science and Science 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci-2-2-elements-compounds-mixtures": {
+    "file": "sci-2-2-elements-compounds-mixtures.html",
+    "title": "2.2 Elements, Atoms, Molecules, and Compounds: Molecule Lab",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "6th Grade Science and 8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci-2-2b-periodic-table-overview": {
+    "file": "sci-2-2b-periodic-table-overview.html",
+    "title": "2.2b The Periodic Table: Overview: Periodic City",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science and 8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci-2-2c-periodic-table-groups": {
+    "file": "sci-2-2c-periodic-table-groups.html",
+    "title": "2.2c Element Classes on the Periodic Table: Element Expedition",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science and 8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci-engineering-design-process": {
+    "file": "sci-engineering-design-process.html",
+    "title": "1.6 / 1.8 The Engineering Design Process: Invention Lab",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science (1.6) and 8th Grade Science (1.8)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci6-2-5-physical-and-chemical-changes": {
+    "file": "sci6-2-5-physical-and-chemical-changes.html",
+    "title": "2.5 Physical and Chemical Changes and the Conservation of Mass: Mystery Kitchen",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "6th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci6-2-8-types-of-mixtures": {
+    "file": "sci6-2-8-types-of-mixtures.html",
+    "title": "2.8 Heterogeneous vs Homogeneous Mixtures: Snack Lab",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci6-2-9-solutions-solute-solvent": {
+    "file": "sci6-2-9-solutions-solute-solvent.html",
+    "title": "2.9 Solvent, Solute, and Concentration: Crystal Cave",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci7-1-5-reading-science-graphs": {
+    "file": "sci7-1-5-reading-science-graphs.html",
+    "title": "1.5 Graphing Review: Graph Detectives",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade Science",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci7-2-5-cell-organelles-review": {
+    "file": "sci7-2-5-cell-organelles-review.html",
+    "title": "2.5 Cell Organelles Review: Organelle All-Stars",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "7th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "sci7-3-1-inherited-and-acquired-traits": {
+    "file": "sci7-3-1-inherited-and-acquired-traits.html",
+    "title": "3.1 Alleles and Genes: Inherited and Acquired Traits: Gene Detectives",
+    "kind": "lesson",
+    "questions": 16,
+    "course": "7th Grade Science",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "sci7-3-3-punnett-squares": {
+    "file": "sci7-3-3-punnett-squares.html",
+    "title": "3.3 Monohybrid Crosses and Punnett Squares: Hutch Genetics",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Science",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "sci7-3-4-sex-linked-traits": {
+    "file": "sci7-3-4-sex-linked-traits.html",
+    "title": "3.4 Punnett Squares and Sex-Linked Traits: Platelet Patrol",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "7th Grade Science",
+    "unit": "3",
+    "engine": "quest"
+  },
+  "sci8-2-7-chemical-reactions": {
+    "file": "sci8-2-7-chemical-reactions.html",
+    "title": "2.7 Chemical Reactions: Campfire Chemistry",
+    "kind": "lesson",
+    "questions": 15,
+    "course": "8th Grade Science",
+    "unit": "2",
+    "engine": "quest"
+  }
+}
