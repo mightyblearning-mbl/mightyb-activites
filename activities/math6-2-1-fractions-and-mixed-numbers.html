@@ -138,7 +138,7 @@ footer.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;a
 @keyframes pop{0%{transform:scale(.6);opacity:.3}60%{transform:scale(1.25)}100%{transform:scale(1);opacity:1}}
 .twinkle{animation:tw 3.5s ease-in-out infinite}
 @keyframes tw{50%{opacity:.55}}
-.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:var(--star);color:var(--btn-ink);font-family:var(--display);font-weight:700;padding:8px 18px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:10;animation:toast 1.8s ease forwards;pointer-events:none}
+.toast{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--star);color:var(--btn-ink);font-family:var(--display);font-weight:700;padding:8px 18px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:10;animation:toast 1.3s ease forwards;pointer-events:none}
 @keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}15%{opacity:1;transform:translate(-50%,0)}80%{opacity:1}100%{opacity:0}}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:20}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -164,6 +164,8 @@ footer.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;a
 .tool .scroll{overflow-x:auto}
 .notebox{border-left:4px solid var(--star);background:var(--well);border-radius:0 12px 12px 0;padding:10px 14px;font-size:15.5px}
 .notebox b{color:var(--star-text)}
+
+@media (max-width:480px){table.summary{font-size:12.5px;width:100%}table.summary th,table.summary td{padding:6px 4px}table.summary th{white-space:normal;line-height:1.15;letter-spacing:0}.cele table.summary th:nth-child(2),.cele table.summary td:nth-child(2){display:none}table.summary td:first-child{min-width:6.5em}}
 
 /* ---- quest engine widgets (added to the Prime Constellations look) ---- */
 .choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
@@ -211,6 +213,10 @@ footer.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;a
 .zone .chip.txt{height:auto;font-size:15.5px}
 .zones.z3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:620px){.zones.z3{grid-template-columns:1fr}}
+
+.fig svg{max-width:100%;height:auto}
+.fig{padding:10px}
+.rbar{text-decoration:overline;text-decoration-thickness:2px}
 :root{--sky:#2A1B22;--sky-deep:#1C1117;--sky-top:#3E2832;--panel:#3A2530;--panel-2:#4A3040;--panel-b:#321F29;--line:#64435A;--hover:#86607A;--star-dim:#6E5068}</style>
 </head>
 <body>
@@ -251,7 +257,7 @@ const isPrime=n=>n>1&&factors(n).length===2;
 const allPairs=n=>{const p=[];for(let a=1;a*a<=n;a++) if(n%a===0) p.push([a,n/a]);return p;};
 const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a;};
 const primeFactors=n=>{const f=[];let m=n;for(let p=2;p*p<=m;p++) while(m%p===0){f.push(p);m/=p;} if(m>1) f.push(m);return f;};
-const divText=(n,d)=>{const q=Math.floor(n/d),r=n%d;return `${n} ÷ ${d} = ${q}${r?` R ${r}`:""}`;};
+const divText=(n,d)=>{if(d>n) return `${d} is bigger than ${n}, so it can't divide ${n} evenly`;const q=Math.floor(n/d),r=n%d;return `${n} ÷ ${d} = ${q}${r?` R ${r}`:""}`;};
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const uuid=()=>(crypto.randomUUID?crypto.randomUUID():"x"+Date.now()+Math.random().toString(16).slice(2));
@@ -372,8 +378,8 @@ pool:{
     const W0=it.parts.reduce((t,[w])=>t+w,0),N0=it.parts.reduce((t,[,n])=>t+n,0);Q.W0=W0;Q.N0=N0;
     Q.hints=[`Add the whole numbers: ${it.parts.map(p=>p[0]).join(" + ")} = ${W0}. Then add the fractions.`,`The fractions: ${it.parts.map(p=>fracHTML(p[1],d)).join(" + ")} = ${fracHTML(N0,d)}${N0>=d?` = ${mixTxt(...toMixed(N0,d))}`:""}.`,`Put them together, and simplify if you can.`];
     Q.together=()=>`<p>Wholes: ${it.parts.map(p=>p[0]).join(" + ")} = ${W0}.</p><p>Fractions: ${it.parts.map(p=>fracHTML(p[1],d)).join(" + ")} = ${fracHTML(N0,d)}${N0>=d?` = ${mixTxt(...toMixed(N0,d))}`:""}.</p><p>Total: <b>${mixTxt(...toMixed(tot,d))}</b> ${it.unit}.</p>`; },
-  view(){ const it=Q.it,d=Q.d; return chrome(`<p class="story">${it.who}. They add ${it.parts.map(([w,n])=>mixTxt(w,n,d)).join(", then ")} ${it.unit}.</p>
-    <h2 class="prompt">How many ${it.unit} in all? Write your answer as a mixed number.</h2>%READ%${mixBox("Total =")}${fbBox()}${actionRow({check:true})}`,`${it.who}. They add ${it.parts.map(([w,n])=>`${w} and ${n} over ${d}`).join(", then ")} ${it.unit}. How many in all?`); },
+  view(){ const it=Q.it,d=Q.d; return chrome(`<p class="story">${it.who}, adding ${it.parts.map(([w,n])=>mixTxt(w,n,d)).join(", then ")} ${it.unit}.</p>
+    <h2 class="prompt">How many ${it.unit} in all? Write your answer as a mixed number.</h2>%READ%${mixBox("Total =")}${fbBox()}${actionRow({check:true})}`,`${it.who}, adding ${it.parts.map(([w,n])=>`${w} and ${n} over ${d}`).join(", then ")} ${it.unit}. How many in all?`); },
   bind(st){ bindMix(st); },
   check(){ const it=Q.it,d=Q.d; const r=checkMix(); if(!r) return solved(`${Q.W0} + ${fracHTML(Q.N0,d)} = ${mixTxt(...toMixed(Q.target.n,Q.target.d))} ${it.unit}.`);
     if(r.nudge){Q.fb={kind:"hint",html:`<p>${r.nudge}</p>`};return;}
@@ -453,7 +459,7 @@ function tone(freqs,dur=.18,gap=.09,vol=.08){ if(!P.sound||P.calm) return; try{a
   freqs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.value=f;const t=ac.currentTime+i*gap;
   g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur+.25);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+dur+.3);});}catch(e){} }
 const sfx={good:()=>tone([659,880]),star:()=>tone([523,659,784,1047],.2,.1,.07),soft:()=>tone([392],.15,0,.04),done:()=>tone([523,659,784,988,1175],.25,.12,.07),ping:()=>tone([1047],.12,0,.05)};
-function toast(t){ if(P.calm||matchMedia("(prefers-reduced-motion: reduce)").matches) return; const d=document.createElement("div");d.className="toast";d.setAttribute("aria-hidden","true");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1900); }
+function toast(t){ if(P.calm||matchMedia("(prefers-reduced-motion: reduce)").matches) return; const d=document.createElement("div");d.className="toast";d.setAttribute("aria-hidden","true");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1400); }
 function confetti(){ if(P.calm||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const cv=document.createElement("canvas");cv.id="confetti";document.body.appendChild(cv);const cx=cv.getContext("2d");const W=cv.width=innerWidth,H=cv.height=innerHeight;
   const cs=["#FFD166","#7BDCB5","#B8A6FF","#FF9E7A","#F3EFE0"];const bits=Array.from({length:130},()=>({x:W/2+(Math.random()-.5)*120,y:H/3,vx:(Math.random()-.5)*12,vy:-Math.random()*12-4,r:Math.random()*6+3,c:cs[Math.random()*cs.length|0],a:Math.random()*6}));
@@ -485,11 +491,13 @@ function renderMap(){
 
 /* ---------- picking questions ---------- */
 function pickItem(li){
-  const pool=LEVELS[li].pool;const used=S.used[li];const starred=S.starred[li]||[];
-  let idx=[...pool.keys()].find(i=>!used.includes(i)&&!starred.includes(i));
-  if(idx===undefined){S.used[li]=[];idx=[...pool.keys()].find(i=>!starred.includes(i));}
-  if(idx===undefined) idx=Math.floor(Math.random()*pool.length);
-  S.used[li].push(idx);return {idx,item:pool[idx]};
+  const pool=LEVELS[li].pool;const starred=S.starred[li]||[];const last=S.lastIdx&&S.lastIdx[li];
+  const rnd=a=>a[Math.floor(Math.random()*a.length)];
+  let cand=[...pool.keys()].filter(i=>!S.used[li].includes(i)&&!starred.includes(i));
+  if(!cand.length){S.used[li]=[];cand=[...pool.keys()].filter(i=>!starred.includes(i));}
+  if(cand.length>1) cand=cand.filter(i=>i!==last);
+  let idx=cand.length?rnd(cand):Math.floor(Math.random()*pool.length);
+  S.used[li].push(idx);S.lastIdx=S.lastIdx||{};S.lastIdx[li]=idx;return {idx,item:pool[idx]};
 }
 function newQuestion(){
   closeReport();
@@ -586,8 +594,9 @@ function chooseDefault(i){
 function checkSortDefault(){
   const wrong=Q.chips.filter(c=>Q.place[c.id]!==c.zone);
   if(!wrong.length) return solved(Q.explain());
-  const c=wrong[0]; wrong.forEach(w=>delete Q.place[w.id]);
-  miss(`<p>${Q.whyChip(c)}</p><p>${wrong.length>1?`${wrong.length} cards went back to the top`:"It went back to the top"} so you can try again.</p>`);
+  const c=wrong[0]; const first=!Q.misses; const placed=Q.zones.find(z=>z.key===Q.place[c.id]);
+  wrong.forEach(w=>delete Q.place[w.id]);
+  miss(`<p>${first?`"${esc(c.label)}" doesn't go in <b>${esc(placed?placed.label:"that box")}</b>. Think about it again.`:Q.whyChip(c)}</p><p>${wrong.length>1?`${wrong.length} cards went back to the top`:"It went back to the top"} so you can try again.</p>`);
 }
 function checkOrderDefault(){
   const k=Q.seq.findIndex((id,i)=>id!==Q.order[i]);
@@ -615,13 +624,13 @@ function celebrate(li){
     html=`<section class="card cele"><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${LEVELS.map(l=>`<div style="width:110px">${conSVG(l,l.need)}</div>`).join("")}</div>
       <h2 class="prompt">${TEXT.allDoneTitle}</h2>
       <p class="sub" style="margin:0">${totalStars()} of ${maxStars()} stars. ${TEXT.allDoneSub}</p>
-      <div class="tablewrap"><table class="summary"><thead><tr><th>Skill</th><th>Tried</th><th>On your own</th><th>Hints</th><th>Worked together</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <div class="tablewrap"><table class="summary"><thead><tr><th>Skill</th><th>Tried</th><th>On your own</th><th>Hints</th><th>Together</th></tr></thead><tbody>${rows}</tbody></table></div>
       <div class="actions" style="justify-content:center"><button class="btn soft" type="button" data-act="more" data-lv="${li}">Keep practicing</button></div></section>`;
     sfx.done();confetti();
   } else {
     const nx=LEVELS[nextIdx];const bossNext=nx.boss;
     html=`<section class="card cele">${conSVG(L,L.need,true)}
-      <h2 class="prompt">${(TEXT.levelDone||"You finished {name}!").replace("{name}",L.name)}</h2><p class="sub" style="margin:0">${L.skill}: done on your own.${bossNext?" "+TEXT.bossWaiting:""}</p>
+      <h2 class="prompt">${(TEXT.levelDone||"You finished {name}!").replace("{name}",L.name).replace(/\bthe The\b/g,"The")}</h2><p class="sub" style="margin:0">${L.skill}: done on your own.${bossNext?" "+TEXT.bossWaiting:""}</p>
       <div class="actions" style="justify-content:center"><button class="btn" type="button" data-go="${nextIdx}">${bossNext?TEXT.faceBoss:"On to "+nx.name}</button>
       <button class="btn soft" type="button" data-act="more" data-lv="${li}">Practice this one more</button></div></section>`;
     sfx.done();if(L.boss)confetti();
