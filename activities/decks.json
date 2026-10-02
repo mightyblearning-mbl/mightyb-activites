@@ -1451,6 +1451,15 @@
     "unit": "7",
     "engine": "quest"
   },
+  "bio-1-3-scientific-theory-vs": {
+    "file": "bio-1-3-scientific-theory-vs.html",
+    "title": "1.3 Scientific Theory vs. Law: Evidence Escape",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Biology",
+    "unit": "1",
+    "engine": "quest"
+  },
   "chem-1-3-atomic-structure": {
     "file": "chem-1-3-atomic-structure.html",
     "title": "1.3 The Structure of the Atom: The Nucleus: Atom Escape",
@@ -1478,11 +1487,65 @@
     "unit": "1",
     "engine": "quest"
   },
+  "ela10-1-5b-active-passive-voice": {
+    "file": "ela10-1-5b-active-passive-voice.html",
+    "title": "1.5b Active and Passive Voice: Voice Express",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "10th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-2-hamburger-paragraph-organizer": {
+    "file": "ela6-1-2-hamburger-paragraph-organizer.html",
+    "title": "1.2 Hamburger Paragraph: Burger Builder",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-3-figurative-language-and": {
+    "file": "ela6-1-3-figurative-language-and.html",
+    "title": "1.3 Figurative Language and Literary Devices: Figurative Fair",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
   "ela6-1-3-sensory-language-mood-and-tone": {
     "file": "ela6-1-3-sensory-language-mood-and-tone.html",
     "title": "1.3 Sensory Language, Mood, and Tone: Senses Carnival",
     "kind": "lesson",
     "questions": 14,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-5-complete-fragment-or": {
+    "file": "ela6-1-5-complete-fragment-or.html",
+    "title": "1.5 Complete, Fragment or Run-On Sentence?: Sentence Safari",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-6-transitional-phrases-choosing": {
+    "file": "ela6-1-6-transitional-phrases-choosing.html",
+    "title": "1.6 Transitional Phrases: Choosing the Best Transition: Transition Trail",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela6-1-7-quotation-marks": {
+    "file": "ela6-1-7-quotation-marks.html",
+    "title": "1.7 Quotation Marks: Quote Quest",
+    "kind": "lesson",
+    "questions": 13,
     "course": "6th Grade English",
     "unit": "1",
     "engine": "quest"
@@ -1505,12 +1568,75 @@
     "unit": "1",
     "engine": "quest"
   },
+  "ela7-1-1-complex-sentences-1": {
+    "file": "ela7-1-1-complex-sentences-1.html",
+    "title": "1.1 Complex Sentences: Clause Crossing",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-1-1-coordinating-conjunctions": {
+    "file": "ela7-1-1-coordinating-conjunctions.html",
+    "title": "1.1 Coordinating Conjunctions: FANBOYS Rally",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-1-11-multiple-character-perspectives": {
+    "file": "ela7-1-11-multiple-character-perspectives.html",
+    "title": "1.11 Multiple Character Perspectives: Viewpoint Venture",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-1-11-point-of-view": {
+    "file": "ela7-1-11-point-of-view.html",
+    "title": "1.11 Point of View: Narrator Quest",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-1-6-dialogue-in-writing": {
+    "file": "ela7-1-6-dialogue-in-writing.html",
+    "title": "1.6 Dialogue in Writing: Synonyms for Said: Said Swap",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-1-6-quotation-marks-in": {
+    "file": "ela7-1-6-quotation-marks-in.html",
+    "title": "1.6 Quotation Marks in Dialogue: Punctuating Dialogue: Dialogue Dash",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "7th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
   "ela7-1-7-strong-verbs": {
     "file": "ela7-1-7-strong-verbs.html",
     "title": "1.7 Replacing Weak Verbs with Strong Verbs: Verb Quest",
     "kind": "lesson",
     "questions": 13,
     "course": "7th English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela7-1-9-race-strategy-reading": {
+    "file": "ela7-1-9-race-strategy-reading.html",
+    "title": "1.9 RACE Strategy Reading: Nonfiction: RACE Rally",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade English",
     "unit": "1",
     "engine": "quest"
   },
@@ -1559,6 +1685,24 @@
     "unit": "2",
     "engine": "quest"
   },
+  "ela8-1-4-describing-pictures-descriptive": {
+    "file": "ela8-1-4-describing-pictures-descriptive.html",
+    "title": "1.4 Describing Pictures / Descriptive Language: Picture Painters",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Language Arts 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela8-2-1d-correct-sentences-advanced": {
+    "file": "ela8-2-1d-correct-sentences-advanced.html",
+    "title": "2.1d Correct Sentences: Advanced Version: Grammar Gauntlet",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Language Arts 801",
+    "unit": "2",
+    "engine": "quest"
+  },
   "ela8-3-3-credible-sources": {
     "file": "ela8-3-3-credible-sources.html",
     "title": "3.3 Finding Credible Sources Online: Source Detective",
@@ -1568,12 +1712,444 @@
     "unit": "3",
     "engine": "quest"
   },
+  "ela8-editing-and-revising-2": {
+    "file": "ela8-editing-and-revising-2.html",
+    "title": "1.7 Editing and Revising Task Cards: Editing with COPS: Editing Patrol",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Language Arts 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela8-editing-and-revising": {
+    "file": "ela8-editing-and-revising.html",
+    "title": "1.7 Editing and Revising Task Cards: Revising with ARMS: Revision Rally",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Language Arts 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "ela9-1-8-shakespeare-figurative-language": {
+    "file": "ela9-1-8-shakespeare-figurative-language.html",
+    "title": "1.8 Shakespeare Figurative Language: What Was He Trying to Say?: Bard Express",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "9th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
   "ela9-1-9-punctuating-dialogue": {
     "file": "ela9-1-9-punctuating-dialogue.html",
     "title": "1.9 Punctuating Dialogue: Script Studio",
     "kind": "lesson",
     "questions": 15,
     "course": "9th Grade English",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "g2-classify-by-attribute-common-items-big": {
+    "file": "g2-classify-by-attribute-common-items-big.html",
+    "title": "Classify by Attribute: Big, Small, Long, Short, Soft, Hard: Toy Box Trail",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 5",
+    "engine": "quest"
+  },
+  "g2-commutative-property-of-addition-to-20": {
+    "file": "g2-commutative-property-of-addition-to-20.html",
+    "title": "Commutative Property of Addition to 20: Flip-Flop Train",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 23",
+    "engine": "quest"
+  },
+  "g2-comparing-and-ordering-numbers": {
+    "file": "g2-comparing-and-ordering-numbers.html",
+    "title": "Comparing and Ordering Numbers Space Theme: Galaxy Compare",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 28",
+    "engine": "quest"
+  },
+  "g2-cvc-short-vowels-short-a-short": {
+    "file": "g2-cvc-short-vowels-short-a-short.html",
+    "title": "CVC Short Vowels: Short A & Short I: Vowel Quest",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 15",
+    "engine": "quest"
+  },
+  "g2-ing-word-ending-on-progressive-verb": {
+    "file": "g2-ing-word-ending-on-progressive-verb.html",
+    "title": "-ing Word Ending on Progressive Verb Forms: Ending Quest",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 16",
+    "engine": "quest"
+  },
+  "g2-level-f-g-reading-passage-questions": {
+    "file": "g2-level-f-g-reading-passage-questions.html",
+    "title": "Level F/G Reading Passage & Questions: How Plants Grow: Garden Game",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 16",
+    "engine": "quest"
+  },
+  "g2-make-a-ten-to-add-to": {
+    "file": "g2-make-a-ten-to-add-to.html",
+    "title": "Make a Ten to Add to 20: Ten Town Trail",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 29",
+    "engine": "quest"
+  },
+  "g2-map-skills": {
+    "file": "g2-map-skills.html",
+    "title": "Map Skills: Treasure Map",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 9",
+    "engine": "quest"
+  },
+  "g2-parts-of-a-plant": {
+    "file": "g2-parts-of-a-plant.html",
+    "title": "Parts of a Plant: Garden Path",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 22",
+    "engine": "quest"
+  },
+  "g2-place-value-comparing-base-ten-blocks": {
+    "file": "g2-place-value-comparing-base-ten-blocks.html",
+    "title": "Place Value - Comparing Base Ten Blocks to 100: Dragon Hoard",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 2",
+    "engine": "quest"
+  },
+  "g2-plant-flower-life-cycle": {
+    "file": "g2-plant-flower-life-cycle.html",
+    "title": "Plant and Flower Life Cycle: Seed to Bloom",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 29",
+    "engine": "quest"
+  },
+  "g2-plural-nouns": {
+    "file": "g2-plural-nouns.html",
+    "title": "Plural Nouns (adding -s and -es): Plural Party",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 16",
+    "engine": "quest"
+  },
+  "g2-rounding-rounding-to-the-nearest-10": {
+    "file": "g2-rounding-rounding-to-the-nearest-10.html",
+    "title": "Rounding - Rounding to the Nearest 10: Rounding Rally",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 30",
+    "engine": "quest"
+  },
+  "g2-rounding-rounding-to-the-nearest-100": {
+    "file": "g2-rounding-rounding-to-the-nearest-100.html",
+    "title": "Rounding - Rounding to the Nearest 100: Hundred Summit",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 1",
+    "engine": "quest"
+  },
+  "g2-skip-counting-by-100s": {
+    "file": "g2-skip-counting-by-100s.html",
+    "title": "Skip Counting by 100s: Hundred Highway",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 22",
+    "engine": "quest"
+  },
+  "g2-skip-counting-by-5-s-and": {
+    "file": "g2-skip-counting-by-5-s-and.html",
+    "title": "Skip Counting by 5's and 10's to 100: Frog Hop Count",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Sept. 18",
+    "engine": "quest"
+  },
+  "g2-soft-c-and-g-spelling": {
+    "file": "g2-soft-c-and-g-spelling.html",
+    "title": "Soft C and G Spelling: Soft Sound Castle",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 30",
+    "engine": "quest"
+  },
+  "g2-use-doubles": {
+    "file": "g2-use-doubles.html",
+    "title": "Use Doubles: Double Dice Trail",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "2nd Grade (HLA 200)",
+    "unit": "Oct. 20",
+    "engine": "quest"
+  },
+  "g3-4-digit-compare-numbers-fill-in": {
+    "file": "g3-4-digit-compare-numbers-fill-in.html",
+    "title": "4-Digit Compare Numbers: Fill in the Blank: Canyon Line",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Place Value",
+    "engine": "quest"
+  },
+  "g3-comparing-ordering-numbers-to-thousands": {
+    "file": "g3-comparing-ordering-numbers-to-thousands.html",
+    "title": "Comparing & Ordering Numbers to Thousands: Canyon Railroad",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Oct. 7",
+    "engine": "quest"
+  },
+  "g3-estimating-sums-and-differences-rounding-to": {
+    "file": "g3-estimating-sums-and-differences-rounding-to.html",
+    "title": "Estimating Sums and Differences - Rounding to 100: Market Train",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Sept. 29",
+    "engine": "quest"
+  },
+  "g3-natural-man-made": {
+    "file": "g3-natural-man-made.html",
+    "title": "Natural and Man-made: Nature Line",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Oct. 1",
+    "engine": "quest"
+  },
+  "g3-number-order-up-to-1000": {
+    "file": "g3-number-order-up-to-1000.html",
+    "title": "Number Order up to 1,000: Circus Train",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Place Value",
+    "engine": "quest"
+  },
+  "g3-place-value-expanded-notation-4-digit": {
+    "file": "g3-place-value-expanded-notation-4-digit.html",
+    "title": "Place Value: Expanded Notation (4-Digit Numbers): Rocket Rail",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Place Value",
+    "engine": "quest"
+  },
+  "g3-place-value-number-forms-match-3": {
+    "file": "g3-place-value-number-forms-match-3.html",
+    "title": "Place Value Number Forms: 3-Digit Numbers: Night Owl Express",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Place Value",
+    "engine": "quest"
+  },
+  "g3-plural-noun-spelling-rules-change-y": {
+    "file": "g3-plural-noun-spelling-rules-change-y.html",
+    "title": "Plural Nouns: Change Y to I and Add -es: Plural Express",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Oct. 28",
+    "engine": "quest"
+  },
+  "g3-properties-of-addition": {
+    "file": "g3-properties-of-addition.html",
+    "title": "Properties of Addition: Orchard Express",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Oct. 21",
+    "engine": "quest"
+  },
+  "g3-round-to-the-nearest-10-on": {
+    "file": "g3-round-to-the-nearest-10-on.html",
+    "title": "Round to the Nearest 10 on a Number Line: Ten Hill Express",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Sept. 22",
+    "engine": "quest"
+  },
+  "g3-rounding-to-the-nearest-10-100": {
+    "file": "g3-rounding-to-the-nearest-10-100.html",
+    "title": "Rounding to the Nearest 10 & 100: Hundred Moons Express",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Sept. 28",
+    "engine": "quest"
+  },
+  "g3-spelling-long-a": {
+    "file": "g3-spelling-long-a.html",
+    "title": "Spelling Long A: Long A Line",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Oct. 8",
+    "engine": "quest"
+  },
+  "g3-standard-word-and-expanded-form-through": {
+    "file": "g3-standard-word-and-expanded-form-through.html",
+    "title": "Standard, Word and Expanded Form through Thousands: Number Mail Train",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Oct. 5",
+    "engine": "quest"
+  },
+  "g3-synonyms-and-antonyms": {
+    "file": "g3-synonyms-and-antonyms.html",
+    "title": "Synonyms and Antonyms: Word Twin Express",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Sept. 16",
+    "engine": "quest"
+  },
+  "g3-three-digit-addition-with-regrouping": {
+    "file": "g3-three-digit-addition-with-regrouping.html",
+    "title": "Three-Digit Addition with Regrouping: Beach Express",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Oct. 21",
+    "engine": "quest"
+  },
+  "g3-typing-compound-words": {
+    "file": "g3-typing-compound-words.html",
+    "title": "Compound Words: Coupling Express",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Sept. 30",
+    "engine": "quest"
+  },
+  "g3-value-of-a-3-digit-number": {
+    "file": "g3-value-of-a-3-digit-number.html",
+    "title": "Value of a 3-Digit Number: Cargo Express",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "3rd Grade (HLA 300 / Math 301)",
+    "unit": "Place Value",
+    "engine": "quest"
+  },
+  "g4-four-types-of-sentences": {
+    "file": "g4-four-types-of-sentences.html",
+    "title": "Four Types of Sentences: Sentence Escape",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "4th Grade Language Arts (400)",
+    "unit": "Section 2 Charlie and the Chocolate Factory",
+    "engine": "quest"
+  },
+  "g4-types-of-sentences-ending-punctuation-grammar": {
+    "file": "g4-types-of-sentences-ending-punctuation-grammar.html",
+    "title": "Types of Sentences & Ending Punctuation: Punctuation Escape",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "4th Grade Language Arts (400)",
+    "unit": "",
+    "engine": "quest"
+  },
+  "g4-unit-1-quiz-steps-of-the": {
+    "file": "g4-unit-1-quiz-steps-of-the.html",
+    "title": "Steps of the Scientific Method: Method Escape",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "4th Grade Science (400)",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "g5-4-digit-by-2-digit-long": {
+    "file": "g5-4-digit-by-2-digit-long.html",
+    "title": "4-Digit by 2-Digit Long Division: Frost Tower",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "5th Grade Math (Math 501)",
+    "unit": "2",
+    "engine": "quest"
+  },
+  "g5-area-model-for-multiplication": {
+    "file": "g5-area-model-for-multiplication.html",
+    "title": "Area Model for Multiplication: Area Tower",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "5th Grade Math (Math 501)",
+    "unit": "Unit 2 Multiplication and Division",
+    "engine": "quest"
+  },
+  "g5-decimals-place-value-decimals-to-the": {
+    "file": "g5-decimals-place-value-decimals-to-the.html",
+    "title": "Decimal Place Value to the Thousandths: Decimal Tower",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "5th Grade Math (Math 501)",
+    "unit": "Decimals",
+    "engine": "quest"
+  },
+  "g5-evaluating-expressions-with-order-of-operations": {
+    "file": "g5-evaluating-expressions-with-order-of-operations.html",
+    "title": "Evaluating Expressions with Order of Operations: Order Tower",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "5th Grade Math (Math 501)",
+    "unit": "Unit 1 Order of Operations",
+    "engine": "quest"
+  },
+  "g5-multiplication-3-digit-by-1-digit": {
+    "file": "g5-multiplication-3-digit-by-1-digit.html",
+    "title": "Multiplication: 3 Digit by 1 Digit: Product Tower",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "5th Grade Math (Math 501)",
+    "unit": "Unit 2 Multiplication and Division",
+    "engine": "quest"
+  },
+  "geo-1-5-intro-to-angle": {
+    "file": "geo-1-5-intro-to-angle.html",
+    "title": "1.5 Intro to Angle Pairs: Angle Pair Hotel",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Geometry",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "geo-1-5-types-of-angles": {
+    "file": "geo-1-5-types-of-angles.html",
+    "title": "1.4 Types of Angles: Angle Tower",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Geometry",
     "unit": "1",
     "engine": "quest"
   },
@@ -1685,6 +2261,15 @@
     "unit": "1",
     "engine": "quest"
   },
+  "hist6-1-4-latitude-and-longitude": {
+    "file": "hist6-1-4-latitude-and-longitude.html",
+    "title": "1.4 Latitude and Longitude: Coordinate Tower",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "6th Grade History",
+    "unit": "1",
+    "engine": "quest"
+  },
   "hist6-1-9-states-and-capitals": {
     "file": "hist6-1-9-states-and-capitals.html",
     "title": "1.9 50 States and Capitals: Capital Road Trip",
@@ -1728,6 +2313,33 @@
     "questions": 14,
     "course": "6th Grade History",
     "unit": "2",
+    "engine": "quest"
+  },
+  "hist8-1-2-vocabulary-native-american-societies": {
+    "file": "hist8-1-2-vocabulary-native-american-societies.html",
+    "title": "1.2 Vocabulary: Native American Societies: First Peoples Line",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "History 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist8-1-3-3-g-s-exploration": {
+    "file": "hist8-1-3-3-g-s-exploration.html",
+    "title": "1.3 The 3 G's of Exploration: Explorer Express",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "History 801",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "hist8-1-3-vocabulary-exploration-terms": {
+    "file": "hist8-1-3-vocabulary-exploration-terms.html",
+    "title": "1.3 Vocabulary: Exploration Terms: Word Voyage",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "History 801",
+    "unit": "1",
     "engine": "quest"
   },
   "hist8-1-4b-english-colonies": {
@@ -1782,6 +2394,51 @@
     "questions": 15,
     "course": "8th Grade History",
     "unit": "3",
+    "engine": "quest"
+  },
+  "math6-1-1-2-digit-by": {
+    "file": "math6-1-1-2-digit-by.html",
+    "title": "1.1 2-Digit by 2-Digit Multiplication: Product Escape",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math6-1-1-multi-step-problems": {
+    "file": "math6-1-1-multi-step-problems.html",
+    "title": "1.1 Multi-Step Problems: Step Escape",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Math 601",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math6-1-3-2-digit-by": {
+    "file": "math6-1-3-2-digit-by.html",
+    "title": "1.3 2-Digit by 1-Digit Long Division (No Remainders): Division Station",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Math 601",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math6-1-3-division-math-facts": {
+    "file": "math6-1-3-division-math-facts.html",
+    "title": "1.3 Division Math Facts: Zoo Escape",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Math 601",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "math6-1-3-multi-step-word": {
+    "file": "math6-1-3-multi-step-word.html",
+    "title": "1.3 Multi-Step Word Problems: Multiplication and Division: Kitchen Escape",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "Math 601",
+    "unit": "1",
     "engine": "quest"
   },
   "math6-2-2-equivalent-fractions": {
@@ -2207,6 +2864,33 @@
     "unit": "2",
     "engine": "quest"
   },
+  "prealg-1-1-matching-adding-integers": {
+    "file": "prealg-1-1-matching-adding-integers.html",
+    "title": "1.1 Adding Integers Using Chips: Chip Tower",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "prealg-1-1b-matching-adding-integers": {
+    "file": "prealg-1-1b-matching-adding-integers.html",
+    "title": "1.1b Adding Integers on a Number Line: Number Line Tower",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "prealg-1-2-parts-of-an": {
+    "file": "prealg-1-2-parts-of-an.html",
+    "title": "1.2 Parts of an Expression: Expression Tower",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "Pre-Algebra",
+    "unit": "1",
+    "engine": "quest"
+  },
   "prealg-1-6-variables-on-both-sides": {
     "file": "prealg-1-6-variables-on-both-sides.html",
     "title": "1.6 Solving Equations with Variables on Both Sides: Balance Quest",
@@ -2432,6 +3116,15 @@
     "unit": "1",
     "engine": "quest"
   },
+  "sci6-1-1-scientific-method": {
+    "file": "sci6-1-1-scientific-method.html",
+    "title": "1.1 Scientific Method Review: Lab Escape",
+    "kind": "lesson",
+    "questions": 14,
+    "course": "6th Grade Science",
+    "unit": "1",
+    "engine": "quest"
+  },
   "sci6-2-5-physical-and-chemical-changes": {
     "file": "sci6-2-5-physical-and-chemical-changes.html",
     "title": "2.5 Physical and Chemical Changes and the Conservation of Mass: Mystery Kitchen",
@@ -2462,6 +3155,15 @@
   "sci7-1-5-reading-science-graphs": {
     "file": "sci7-1-5-reading-science-graphs.html",
     "title": "1.5 Graphing Review: Graph Detectives",
+    "kind": "lesson",
+    "questions": 13,
+    "course": "7th Grade Science",
+    "unit": "1",
+    "engine": "quest"
+  },
+  "sci7-1-6-scientific-method-variables": {
+    "file": "sci7-1-6-scientific-method-variables.html",
+    "title": "1.6 Scientific Method, Variables and Graphing: Lab Escape",
     "kind": "lesson",
     "questions": 13,
     "course": "7th Grade Science",
