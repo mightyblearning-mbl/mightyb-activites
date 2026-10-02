@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hundred Highway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --sky:#14213D; --sky-deep:#0E1830; --panel:#1E2F55; --panel-2:#26396A; --line:#34497D;
+  --moon:#F3EFE0; --muted:#A3AECB; --star:#FFD166; --star-dim:#4A5A86;
+  --mint:#7BDCB5; --mint-ink:#0F3B2E; --lilac:#B8A6FF;
+  --star-text:#FFD166; --sky-top:#22346A; --panel-b:#1A2A4E; --well:rgba(0,0,0,.25); --hover:#4B63A3; --btn-ink:#2B2208;
+  --boss:#FF9E7A;
+  --display:"Baloo 2","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Verdana","Segoe UI",system-ui,sans-serif;
+  --r:14px;
+}
+:root[data-bg="light"]{color-scheme:light;--sky:#F4F6FB;--sky-deep:#E6EAF3;--sky-top:#FFFFFF;--panel:#FFFFFF;--panel-2:#EEF1F8;--panel-b:#F8F9FD;--line:#C5CEE0;
+  --moon:#1B2440;--muted:#4F5A73;--star:#F5B83D;--star-text:#8A5A00;--star-dim:#B7C0D6;--mint:#1F8A63;--mint-ink:#FFFFFF;--lilac:#5B45C9;--well:rgba(27,36,64,.06);--hover:#8FA2CC;--boss:#C2410C}
+:root[data-bg="cream"]{color-scheme:light;--sky:#FBF6E9;--sky-deep:#F2EAD3;--sky-top:#FFFDF6;--panel:#FFFCF3;--panel-2:#F4EDDA;--panel-b:#FBF6E8;--line:#D9CBA6;
+  --moon:#2A2418;--muted:#62573F;--star:#F0B43A;--star-text:#855600;--star-dim:#CDBF9A;--mint:#23805E;--mint-ink:#FFFFFF;--lilac:#5E4AB8;--well:rgba(60,45,10,.06);--hover:#C7B480;--boss:#B4410F}
+:root[data-size="1"] .wrap{zoom:1.15}
+:root[data-size="2"] .wrap{zoom:1.32}
+:root[data-spacing="1"] body{letter-spacing:.05em;word-spacing:.16em;line-height:1.85}
+:root[data-calm="1"] *{animation:none!important;transition:none!important}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,var(--sky-top) 0%,var(--sky) 55%,var(--sky-deep) 100%) fixed,var(--sky);color:var(--moon);font-family:var(--body);font-size:17px;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px;padding-block:18px 40px;display:flex;flex-direction:column;gap:16px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,.chip:focus-visible,.zone:focus-visible{outline:3px solid var(--star);outline-offset:3px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column}
+.brand h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,5vw,34px);line-height:1;margin:0}
+.brand h1 span{color:var(--star-text)}
+.brand small{color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;display:inline-flex;align-items:center;gap:7px}
+.pill svg{width:16px;height:16px}
+.proto{font-size:13px;color:var(--muted);background:rgba(184,166,255,.08);border:1px dashed rgba(184,166,255,.35);border-radius:10px;padding:8px 12px}
+.proto b{color:var(--lilac)}
+.map{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.con{background:transparent;border:1px solid transparent;border-radius:12px;padding:6px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--muted)}
+.con:hover{border-color:var(--line)}
+.con[aria-current="step"]{background:rgba(255,209,102,.07);border-color:rgba(255,209,102,.35);color:var(--moon)}
+.con svg{width:100%;max-width:120px;height:auto;aspect-ratio:12/9}
+.con .nm{font-family:var(--display);font-weight:600;font-size:14px;line-height:1.1;text-align:center}
+.con .sk{font-size:11.5px;text-align:center;line-height:1.2}
+.con.done .nm{color:var(--star-text)}
+.con.boss .nm{color:var(--boss)}
+.con.locked{opacity:.55}
+@media (max-width:560px){.map{gap:2px}.con .sk{display:none}.con .nm{font-size:12px}}
+.card{background:linear-gradient(180deg,var(--panel) 0%,var(--panel-b) 100%);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);display:flex;flex-direction:column;gap:18px;box-shadow:0 20px 50px -30px rgba(0,0,0,.7)}
+.card.bosscard{border-color:var(--boss);box-shadow:0 0 0 2px rgba(255,158,122,.25),0 20px 50px -30px rgba(0,0,0,.7)}
+.eyebrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.eyebrow .lv{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.eyebrow .lv b{color:var(--star-text);font-weight:700}
+.bosscard .eyebrow .lv b{color:var(--boss)}
+.starrow{display:flex;gap:4px}
+.starrow svg{width:22px;height:22px}
+.prompt{font-family:var(--display);font-weight:600;font-size:clamp(22px,4.2vw,30px);line-height:1.2;margin:0;text-wrap:balance}
+.prompt .num{color:var(--star-text)}
+.sub{color:var(--muted);margin:-8px 0 0;max-width:62ch}
+.readbtn{align-self:flex-start}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px}
+.tile{background:var(--panel-2);border:2px solid var(--line);border-radius:var(--r);min-height:60px;font-family:var(--display);font-weight:700;font-size:24px;font-variant-numeric:tabular-nums;transition:transform .12s ease,background .15s,border-color .15s}
+.tile:hover{transform:translateY(-2px);border-color:var(--hover)}
+.tile[aria-pressed="true"]{background:var(--star);color:var(--btn-ink);border-color:var(--star)}
+.tile.locked{background:var(--mint);color:var(--mint-ink);border-color:var(--mint);cursor:default;transform:none}
+.tile.nope{border-color:var(--lilac);border-style:dashed;color:var(--muted);background:transparent}
+.tile.small{min-height:50px;font-size:20px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:none;border-radius:999px;padding:12px 22px;font-family:var(--display);font-weight:700;font-size:18px;background:var(--star);color:var(--btn-ink);transition:transform .1s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none;filter:grayscale(1)}
+.btn.ghost{background:transparent;color:var(--lilac);border:2px solid rgba(184,166,255,.5)}
+.btn.soft{background:var(--panel-2);color:var(--moon);border:1px solid var(--line)}
+.fb{border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;font-size:16.5px}
+.fb svg{flex:none;width:26px;height:26px;margin-top:1px}
+.fb.good{background:rgba(123,220,181,.12);border:1px solid rgba(123,220,181,.45)}
+.fb.good strong{color:var(--mint)}
+.fb.look{background:rgba(184,166,255,.10);border:1px solid rgba(184,166,255,.45)}
+.fb.look strong{color:var(--lilac)}
+.fb.hint{background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.35)}
+.fb.hint strong{color:var(--star-text)}
+.fb p{margin:0}
+.fb p+p{margin-top:6px}
+.tray{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border-radius:14px;background:var(--well);border:1px dashed var(--line)}
+.chip{background:var(--panel-2);border:2px solid var(--line);border-radius:12px;min-width:52px;height:46px;padding:0 10px;font-family:var(--display);font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;touch-action:none;user-select:none}
+.chip[aria-pressed="true"]{border-color:var(--star);box-shadow:0 0 0 3px rgba(255,209,102,.25)}
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.zones{grid-template-columns:1fr}}
+.zone{border:2px solid var(--line);border-radius:18px;padding:10px;min-height:120px;display:flex;flex-direction:column;gap:8px;background:rgba(255,255,255,.02);text-align:left}
+.zone.over{border-color:var(--star);background:rgba(255,209,102,.12)}
+.zone .zl{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.zone .zl b{color:var(--moon);font-family:var(--display);font-size:18px;letter-spacing:0;text-transform:none}
+.zone .zc{display:flex;flex-wrap:wrap;gap:6px}
+.zone .chip{height:40px;min-width:46px;font-size:19px}
+.tray.zone{flex-direction:row;align-items:center;min-height:62px;border-style:dashed}
+/* factor builder */
+.builder{display:flex;flex-direction:column;gap:12px}
+.eq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--display);font-weight:700;font-size:32px;font-variant-numeric:tabular-nums}
+.slot{min-width:84px;height:62px;border-radius:14px;background:var(--well);border:2px solid var(--line);display:inline-flex;align-items:center;justify-content:center;padding:0 12px;font:inherit;color:var(--moon)}
+.slot[aria-pressed="true"]{border-color:var(--star);box-shadow:0 0 0 3px rgba(255,209,102,.25)}
+.slot.empty{color:var(--muted);font-family:var(--body);font-weight:400;font-size:15px}
+.found{display:flex;flex-wrap:wrap;gap:8px}
+.found .fp{border:2px solid var(--mint);color:var(--mint);border-radius:999px;padding:4px 14px;font-family:var(--display);font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+.found .ghostp{border:2px dashed var(--line);color:var(--muted);border-radius:999px;padding:4px 14px;font-size:15px}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:320px}
+.pad button{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;height:54px;font-family:var(--display);font-weight:700;font-size:22px}
+.pad button:hover{border-color:var(--hover)}
+/* boss sky */
+.skyfield{position:relative;border-radius:16px;background:var(--well);border:1px solid var(--line);overflow:hidden}
+.skyfield svg{display:block;width:100%;height:auto}
+.hgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px 8px;padding:20px 12px 24px;justify-items:center}
+.hstar{width:clamp(48px,13vw,62px);aspect-ratio:1;border-radius:50%;border:2px solid var(--line);background:radial-gradient(circle at 35% 30%,var(--panel-2),var(--sky-deep));font-family:var(--display);font-weight:700;font-size:clamp(18px,4.6vw,22px);color:var(--moon);font-variant-numeric:tabular-nums;transition:transform .15s,box-shadow .2s}
+.hstar:hover:not(:disabled){border-color:var(--hover)}
+.hstar.on{background:var(--boss);border-color:var(--boss);color:var(--btn-ink);box-shadow:0 0 0 6px rgba(255,158,122,.18),0 0 22px rgba(255,158,122,.55)}
+.hstar.no{opacity:.35;border-style:dashed;border-color:var(--lilac)}
+.hstar:disabled{cursor:default}
+.cele{text-align:center;align-items:center}
+.cele svg.big{width:min(320px,90%);height:auto}
+.cele .prompt{max-width:22ch}
+.summary{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
+.summary th,.summary td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+.summary th{color:var(--muted);font-weight:400;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+.tablewrap{overflow-x:auto;width:100%}
+footer.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:13.5px}
+.linkish{background:none;border:none;color:var(--lilac);text-decoration:underline;text-underline-offset:3px;padding:0}
+.report{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.report label{display:flex;gap:8px;align-items:center}
+.report textarea{font:inherit;background:var(--well);color:var(--moon);border:1px solid var(--line);border-radius:10px;padding:10px;min-height:70px;resize:vertical}
+.pop{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(.6);opacity:.3}60%{transform:scale(1.25)}100%{transform:scale(1);opacity:1}}
+.twinkle{animation:tw 3.5s ease-in-out infinite}
+@keyframes tw{50%{opacity:.55}}
+.toast{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--star);color:var(--btn-ink);font-family:var(--display);font-weight:700;padding:8px 18px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:10;animation:toast 1.3s ease forwards;pointer-events:none}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,-8px)}15%{opacity:1;transform:translate(-50%,0)}80%{opacity:1}100%{opacity:0}}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:20}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+[hidden]{display:none!important}
+.settings{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.settings h2{margin:0;font-family:var(--display);font-size:22px}
+.settings .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.settings .lbl{min-width:150px;font-weight:700}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+.seg button{background:var(--panel-2);border:2px solid var(--line);border-radius:999px;padding:7px 14px;font-size:15px}
+.seg button[aria-pressed="true"]{border-color:var(--star);background:var(--star);color:var(--btn-ink);font-weight:700}
+.settings .note{color:var(--muted);font-size:14px;margin:0}
+.reading{outline:3px solid var(--lilac);outline-offset:4px;border-radius:10px;background-color:rgba(184,166,255,.10)}
+.fbread{background:none;border:1px solid currentColor;border-radius:999px;color:inherit;padding:3px 10px;font-size:13px;margin-top:8px;display:inline-flex;gap:6px;align-items:center}
+.fbread svg{width:14px;height:14px;margin:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar .tl{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+.toolbar .pill[aria-pressed="true"]{border-color:var(--lilac);color:var(--moon);background:rgba(184,166,255,.18)}
+.tool{border:1px dashed var(--lilac);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px;background:var(--well)}
+.tool .ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tool .ctl .seg button{padding:5px 12px;font-size:15px;font-variant-numeric:tabular-nums}
+.tool .cap{margin:0;font-size:16.5px;max-width:62ch}
+.tool .scroll{overflow-x:auto}
+.notebox{border-left:4px solid var(--star);background:var(--well);border-radius:0 12px 12px 0;padding:10px 14px;font-size:15.5px}
+.notebox b{color:var(--star-text)}
+
+@media (max-width:480px){table.summary{font-size:12.5px;width:100%}table.summary th,table.summary td{padding:6px 4px}table.summary th{white-space:normal;line-height:1.15;letter-spacing:0}.cele table.summary th:nth-child(2),.cele table.summary td:nth-child(2){display:none}table.summary td:first-child{min-width:6.5em}}
+
+/* ---- quest engine widgets (added to the Prime Constellations look) ---- */
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.choice{background:var(--panel-2);border:2px solid var(--line);border-radius:16px;padding:14px 16px;text-align:left;font-size:18px;line-height:1.35;min-height:58px;transition:transform .12s,border-color .15s}
+.choice:hover:not(:disabled){transform:translateY(-2px);border-color:var(--hover)}
+.choice.right{background:var(--mint);color:var(--mint-ink);border-color:var(--mint);font-weight:700}
+.choice.out{opacity:.4;border-style:dashed;border-color:var(--lilac);text-decoration:line-through}
+.choice:disabled{cursor:default}
+.choice .math,.math{font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.entry{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--display);font-weight:700;font-size:30px;font-variant-numeric:tabular-nums}
+.entry .box{min-width:120px;height:62px;border-radius:14px;background:var(--well);border:2px solid var(--star);display:inline-flex;align-items:center;justify-content:center;padding:0 16px;color:var(--moon)}
+.entry .box.empty{color:var(--muted);font-family:var(--body);font-weight:400;font-size:15px;border-color:var(--line)}
+.pad.wide{grid-template-columns:repeat(4,1fr);max-width:380px}
+.eqline{font-family:var(--display);font-weight:700;font-size:clamp(26px,5vw,36px);font-variant-numeric:tabular-nums;letter-spacing:.02em;background:var(--well);border:1px solid var(--line);border-radius:16px;padding:12px 18px;align-self:flex-start}
+.eqline .hl{color:var(--star-text)}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;margin:0 .08em;font-size:.82em}
+.frac>span:first-child{border-bottom:2px solid currentColor;padding:0 .12em .06em}
+.frac>span:last-child{padding:.06em .12em 0}
+.seq{display:flex;flex-direction:column;gap:8px;counter-reset:s}
+.seq .slotline{display:flex;align-items:center;gap:10px;min-height:52px;border-radius:14px;border:2px dashed var(--line);padding:6px 10px;background:var(--well)}
+.seq .slotline::before{counter-increment:s;content:counter(s);font-family:var(--display);font-weight:800;color:var(--star-text);width:24px;text-align:center}
+.seq .slotline .stepchip{flex:1}
+.stepchip{background:var(--panel-2);border:2px solid var(--line);border-radius:12px;padding:10px 14px;text-align:left;font-size:17px;line-height:1.3}
+.stepchip:hover:not(:disabled){border-color:var(--hover)}
+.stepchip.done{border-color:var(--mint);background:rgba(123,220,181,.12)}
+.bank{display:flex;flex-direction:column;gap:8px}
+.factline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:24px}
+.factline .lbl{min-width:70px}
+.pchip{min-width:48px;height:48px;border-radius:50%;border:2px solid var(--line);background:var(--panel-2);font-family:var(--display);font-weight:700;font-size:21px}
+.pchip[aria-pressed="true"]{background:var(--star);color:var(--btn-ink);border-color:var(--star)}
+.pchip.locked{background:var(--mint);color:var(--mint-ink);border-color:var(--mint)}
+.pchip.nope{opacity:.4;border-style:dashed}
+.times{color:var(--muted);font-size:20px}
+.stepdone{color:var(--mint);font-weight:700}
+.story{font-size:19px;max-width:62ch;margin:0}
+.wordbank{display:flex;flex-wrap:wrap;gap:8px}
+.blank{display:inline-block;min-width:120px;border-bottom:3px solid var(--star);text-align:center;color:var(--star-text);font-weight:700;padding:0 6px}
+.rects{display:flex;flex-direction:column;gap:8px}
+.rect{display:flex;gap:3px}
+.rect span{flex:1;height:34px;border:2px solid var(--moon);border-radius:4px;background:transparent}
+.rect span.on{background:var(--star);border-color:var(--star-text)}
+.rect button{flex:1;height:38px;border:2px solid var(--moon);border-radius:4px;background:transparent;padding:0}
+.rect button.on{background:var(--star);border-color:var(--star-text)}
+.chip.txt{height:auto;min-height:46px;padding:8px 12px;font-family:var(--body);font-weight:700;font-size:16px;text-align:left;line-height:1.25;max-width:100%}
+.zone .chip.txt{height:auto;font-size:15.5px}
+.zones.z3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:620px){.zones.z3{grid-template-columns:1fr}}
+
+.fig svg{max-width:100%;height:auto}
+.fig{padding:10px}
+.rbar{text-decoration:overline;text-decoration-thickness:2px}
+
+/* ================= engine v2: map styles ================= */
+.con .nmwrap{display:flex;flex-direction:column;align-items:center;gap:2px}
+.map:not(.ms-constellation){background:var(--well);border:1px solid var(--line);border-radius:18px;padding:8px 6px}
+.map.ms-trainline,.map.ms-boardgame{gap:0}
+.map.ms-trainline .con,.map.ms-boardgame .con{padding-inline:0;border-radius:10px}
+.map.ms-trainline,.map.ms-escape,.map.ms-boardgame{grid-template-columns:repeat(var(--n,6),minmax(0,1fr))}
+.map.ms-trainline .con svg,.map.ms-escape .con svg,.map.ms-boardgame .con svg{aspect-ratio:120/72;max-width:170px}
+@media (max-width:560px){.map.ms-trainline,.map.ms-escape,.map.ms-boardgame{grid-template-columns:repeat(var(--n2,3),minmax(0,1fr));row-gap:6px}}
+.train.arrive{animation:trainIn .9s ease-out}
+@keyframes trainIn{from{transform:translateX(-110px)}to{transform:none}}
+.pawn{animation:pawnHop .5s ease-out}
+@keyframes pawnHop{0%{transform:translateY(-8px)}100%{transform:none}}
+.map.ms-escape{gap:4px}
+.map.ms-escape .con.boss .nm,.map.ms-tower .con.boss .nm{color:var(--boss)}
+/* tower: floors stacked bottom to top, rooftop boss on top; DOM order stays level 1 first */
+.map.ms-tower{display:flex;flex-direction:column-reverse;gap:0;padding:10px 10px 8px}
+.map.ms-tower .con{flex-direction:row;align-items:center;gap:10px;padding:0 6px;border-radius:8px;min-height:44px}
+.map.ms-tower .con svg{width:132px;max-width:42%;flex:none;aspect-ratio:3/1}
+.map.ms-tower .con .nmwrap{align-items:flex-start;text-align:left}
+.map.ms-tower .con .nm,.map.ms-tower .con .sk{text-align:left}
+.map.ms-tower .con .sk{display:block}
+.cele .minimap{width:110px}
+.cele .minimap svg{width:100%;height:auto}
+@media (max-width:560px){.map.ms-tower .con .nm{font-size:14px}.map.ms-tower .con .sk{font-size:12px}}
+
+/* ================= engine v2: level types ================= */
+/* fixit */
+.fxlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.fxstep{width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel-2);border:2px solid var(--line);border-radius:14px;padding:10px 14px;font-size:18px;line-height:1.35;font-variant-numeric:tabular-nums}
+.fxstep:hover:not(:disabled){border-color:var(--hover)}
+.fxstep:disabled{cursor:default}
+.fxn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--sky-deep);color:var(--star-text);display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:16px}
+.fxt{display:flex;flex-direction:column;gap:4px}
+.fxstep.ok{border-style:dashed;border-color:var(--mint)}
+.fxok{font-size:14px;color:var(--mint)}
+.fxstep.bad{border-color:var(--boss);background:var(--well)}
+.fxstep.bad .fxt>:first-child{text-decoration:none}
+.fxfix{font-weight:700;color:var(--mint)}
+/* match */
+.mtch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:flex;flex-direction:column;gap:8px}
+.mitem{position:relative;display:flex;align-items:center;gap:8px;text-align:left;background:var(--panel-2);border:2px solid var(--line);border-radius:14px;padding:10px 12px;min-height:56px;font-size:17px;line-height:1.3;font-variant-numeric:tabular-nums}
+.mitem:hover:not(:disabled){border-color:var(--hover)}
+.mitem.pick{border-color:var(--star);box-shadow:0 0 0 3px rgba(255,209,102,.3)}
+.mitem.linked{border-style:solid}
+.mbadge{flex:none;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:15px;color:var(--btn-ink)}
+.mitem.p0{border-color:var(--star)}.mitem.p0 .mbadge{background:var(--star)}
+.mitem.p1{border-color:var(--mint)}.mitem.p1 .mbadge{background:var(--mint);color:var(--mint-ink)}
+.mitem.p2{border-color:var(--lilac)}.mitem.p2 .mbadge{background:var(--lilac);color:var(--sky-deep)}
+.mitem.p3{border-color:var(--boss)}.mitem.p3 .mbadge{background:var(--boss);color:var(--sky-deep)}
+.mitem:disabled{cursor:default}
+@media (max-width:420px){.mitem{font-size:15.5px;padding:8px 10px}}
+/* numberline */
+.nlwrap{display:flex;flex-direction:column;gap:8px}
+.nlslider{background:var(--well);border:2px solid var(--line);border-radius:16px;padding:6px 4px;cursor:pointer;touch-action:manipulation}
+.nlslider:focus-visible{outline:3px solid var(--star);outline-offset:3px}
+.nlslider svg{display:block;width:100%;height:auto}
+.nlctl{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nlctl .nlb{min-width:56px;padding:10px 16px}
+.nlread{margin:0;font-size:18px;text-align:center}
+.nlread b{color:var(--star-text);font-family:var(--display);font-size:22px}
+/* tiles */
+.tbuild{display:flex;flex-wrap:wrap;gap:8px;min-height:64px;align-items:center;padding:10px;border-radius:14px;background:var(--well);border:2px dashed var(--line)}
+.tph{color:var(--muted);font-size:15px}
+.tbank{display:flex;flex-wrap:wrap;gap:8px}
+.tk{background:var(--panel-2);border:2px solid var(--line);border-radius:12px;min-width:48px;height:50px;padding:0 12px;font-family:var(--display);font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.tk:hover:not(:disabled){border-color:var(--hover)}
+.tk.in{border-color:var(--star)}
+.tk.done{background:var(--mint);color:var(--mint-ink);border-color:var(--mint)}
+/* lock */
+.lockcode{display:flex;align-items:center;gap:14px;align-self:flex-start;background:var(--well);border:1px solid var(--line);border-radius:16px;padding:10px 14px}
+.padlock{width:44px;height:52px}
+.dials{display:flex;gap:8px}
+.dial{width:44px;height:54px;border-radius:10px;border:2px solid var(--line);background:var(--panel-2);display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:28px;color:var(--muted)}
+.dial.on{background:var(--star);border-color:var(--star);color:var(--btn-ink)}
+
+/* ================= engine v2: contrast fixes (WCAG AA 4.5:1 for text in night, light and cream) ================= */
+:root{--mint-text:var(--mint)}
+:root[data-bg="light"]{--star-text:#7A4F00;--boss:#A83A0A;--mint-text:#14684A}
+:root[data-bg="cream"]{--star-text:#744B00;--boss:#9A390C;--mint-text:#17654A}
+.fb.good strong,.fxok,.fxfix{color:var(--mint-text)}
+.mitem.p1 .mbadge{background:var(--mint-text)}
+:root[data-bg="light"] .mitem.p1 .mbadge,:root[data-bg="cream"] .mitem.p1 .mbadge{color:#fff}
+/* a locked node dims its picture, not its words */
+.map .con.locked{opacity:1}
+.map .con.locked svg{opacity:.6}
+.map .con.locked .nm{color:var(--boss)}
+:root{--sign-ink:var(--mint-ink)}
+:root[data-bg="light"],:root[data-bg="cream"]{--sign-ink:#FFFFFF}
+:root{--sky:#1B1A12;--sky-deep:#11100A;--sky-top:#302D1C;--panel:#232115;--panel-2:#2E2B1C;--panel-b:#1C1A11;--line:#5A5432;--hover:#857B48;--star-dim:#7A7350;--mint:#8FE0C2;--lilac:#C9C0FF;--boss:#FFA86B}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>Hundred <span>Highway</span></h1>
+      <small>2nd Grade Math · Sept. 22 · Skip Counting by 100s</small>
+    </div>
+    <div class="tools">
+      <button class="pill" id="setBtn" aria-expanded="false" aria-controls="settingsBox" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>My settings</span></button>
+      <button class="pill" id="soundBtn" aria-pressed="true" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg><span>Sound on</span></button>
+    </div>
+  </header>
+  <section class="settings" id="settingsBox" hidden aria-label="My settings"></section>
+  <div class="proto" id="proto">Every coin you earn on your own counts toward your grade. Finish four spaces to reach the Thousand Gate.</div>
+  <nav class="map" id="map" aria-label="Spaces"></nav>
+  <main id="stage" aria-live="polite"></main>
+  <div id="reportBox"></div>
+  <footer class="foot">
+    <span>No timer. Take your time. Practice for skip counting by 100s, built from the Boom it replaces and the class video.</span>
+    <button class="linkish" id="reportBtn" type="button">Report a problem with this question</button>
+  </footer>
+</div>
+
+<script type="application/json" id="mb-deck">
+{"formatVersion": 1, "engine": "quest", "deckId": "g2-skip-counting-by-100s", "engineVersion": 2, "mapStyle": "boardgame", "title": "Skip Counting by 100s", "course": "2nd Grade (HLA 200)", "unit": "Sept. 22", "lesson": "Skip counting by 100s", "kind": "lesson", "theme": "road trip board game", "sourceNotes": "none (K-5 module; built from the Boom topic)", "sourceVideo": "Skip counting by 5s 10s 100s (Edpuzzle e9_6aaa9c818ace33b241fb4c4d, from the Sept. 18 module; its 100s part)", "replacesBoom": [], "replacesCanvasAssignments": ["c253:a29524"], "accuracyReview": {"status": "pending", "by": "", "date": ""}, "wrapUp": "Skip counting by 100s adds 100 each time. The tens and ones digits stay the same, and 10 hundreds make 1000.", "levels": [{"key": "next", "type": "mc", "name": "Mile Marker Road", "skill": "What comes next", "need": 3, "pool": [{"s": "Count by 100s. What comes next? 100, 200, 300, ___", "a": "400", "x": ["301", "500"], "why": "Add 100 each time. 300 + 100 = 400. The tens and ones stay the same.", "hint": "Add 100 to 300.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? 300, 400, 500, ___", "a": "600", "x": ["501", "700"], "why": "Add 100 each time. 500 + 100 = 600. The tens and ones stay the same.", "hint": "Add 100 to 500.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? 600, 700, 800, ___", "a": "900", "x": ["801", "1000"], "why": "Add 100 each time. 800 + 100 = 900. The tens and ones stay the same.", "hint": "Add 100 to 800.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? 700, 800, 900, ___", "a": "1000", "x": ["901", "910"], "why": "900 + 100 = 1000. Ten hundreds make one thousand.", "hint": "Add 100 to 900.", "nudge": "What is 10 hundreds?"}, {"s": "Count by 100s. What comes next? 150, 250, 350, ___", "a": "450", "x": ["360", "550"], "why": "Add 100 each time. 350 + 100 = 450. The tens and ones stay the same.", "hint": "Add 100 to 350.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? 120, 220, 320, ___", "a": "420", "x": ["330", "520"], "why": "Add 100 each time. 320 + 100 = 420. The tens and ones stay the same.", "hint": "Add 100 to 320.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? 205, 305, 405, ___", "a": "505", "x": ["415", "605"], "why": "Add 100 each time. 405 + 100 = 505. The tens and ones stay the same.", "hint": "Add 100 to 405.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What number is missing? 200, ___, 400, 500", "a": "300", "x": ["210", "350"], "why": "200 + 100 = 300. Then 300 + 100 = 400.", "hint": "Look at the number before the blank. Add 100.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What number is missing? 430, 530, ___, 730", "a": "630", "x": ["640", "830"], "why": "530 + 100 = 630. Then 630 + 100 = 730.", "hint": "Look at the number before the blank. Add 100.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "When you count by 100s, what happens to the ones digit?", "a": "It stays the same.", "x": ["It goes up by 1.", "It goes up by 5."], "why": "Adding 100 changes only the hundreds. The ones digit stays the same each time.", "hint": "Count 205, 305, 405. Look at the last digit.", "nudge": "Look at the ones digit in 205, 305, 405."}, {"s": "When you count by 100s, which digit goes up by 1?", "a": "the hundreds digit", "x": ["the tens digit", "the ones digit"], "why": "Adding 100 adds 1 hundred. So the hundreds digit goes up by 1.", "hint": "Count 120, 220, 320. Which digit changes?", "nudge": "Look at 120, 220, 320. Find the digit that changes."}, {"s": "Which one shows counting by 100s?", "a": "100, 200, 300, 400", "x": ["100, 110, 120, 130", "100, 101, 102, 103"], "why": "Counting by 100s adds 100 each time: 100, 200, 300, 400.", "hint": "Check that each number is 100 more than the one before.", "nudge": "Look at how much each number grows."}]}, {"key": "flat", "type": "num", "name": "Flat Stack Stop", "skill": "Count by 100s", "need": 3, "pool": [{"s": "Each flat is 100. How many in all?", "a": "200", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 122.0 74.0\" width=\"122.0\" role=\"img\" aria-label=\"Base-ten blocks: 2 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 2 flats, so there are 200 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "300", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 178.0 74.0\" width=\"178.0\" role=\"img\" aria-label=\"Base-ten blocks: 3 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 3 flats, so there are 300 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "400", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 234.0 74.0\" width=\"234.0\" role=\"img\" aria-label=\"Base-ten blocks: 4 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><rect x=\"176.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 8.0v50.0M176.0 13.0h50.0\"/><path d=\"M186.0 8.0v50.0M176.0 18.0h50.0\"/><path d=\"M191.0 8.0v50.0M176.0 23.0h50.0\"/><path d=\"M196.0 8.0v50.0M176.0 28.0h50.0\"/><path d=\"M201.0 8.0v50.0M176.0 33.0h50.0\"/><path d=\"M206.0 8.0v50.0M176.0 38.0h50.0\"/><path d=\"M211.0 8.0v50.0M176.0 43.0h50.0\"/><path d=\"M216.0 8.0v50.0M176.0 48.0h50.0\"/><path d=\"M221.0 8.0v50.0M176.0 53.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 4 flats, so there are 400 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "500", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 290.0 74.0\" width=\"290.0\" role=\"img\" aria-label=\"Base-ten blocks: 5 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><rect x=\"176.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 8.0v50.0M176.0 13.0h50.0\"/><path d=\"M186.0 8.0v50.0M176.0 18.0h50.0\"/><path d=\"M191.0 8.0v50.0M176.0 23.0h50.0\"/><path d=\"M196.0 8.0v50.0M176.0 28.0h50.0\"/><path d=\"M201.0 8.0v50.0M176.0 33.0h50.0\"/><path d=\"M206.0 8.0v50.0M176.0 38.0h50.0\"/><path d=\"M211.0 8.0v50.0M176.0 43.0h50.0\"/><path d=\"M216.0 8.0v50.0M176.0 48.0h50.0\"/><path d=\"M221.0 8.0v50.0M176.0 53.0h50.0\"/><\/g><rect x=\"232.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M237.0 8.0v50.0M232.0 13.0h50.0\"/><path d=\"M242.0 8.0v50.0M232.0 18.0h50.0\"/><path d=\"M247.0 8.0v50.0M232.0 23.0h50.0\"/><path d=\"M252.0 8.0v50.0M232.0 28.0h50.0\"/><path d=\"M257.0 8.0v50.0M232.0 33.0h50.0\"/><path d=\"M262.0 8.0v50.0M232.0 38.0h50.0\"/><path d=\"M267.0 8.0v50.0M232.0 43.0h50.0\"/><path d=\"M272.0 8.0v50.0M232.0 48.0h50.0\"/><path d=\"M277.0 8.0v50.0M232.0 53.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 5 flats, so there are 500 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "600", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 290.0 130.0\" width=\"290.0\" role=\"img\" aria-label=\"Base-ten blocks: 6 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><rect x=\"176.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 8.0v50.0M176.0 13.0h50.0\"/><path d=\"M186.0 8.0v50.0M176.0 18.0h50.0\"/><path d=\"M191.0 8.0v50.0M176.0 23.0h50.0\"/><path d=\"M196.0 8.0v50.0M176.0 28.0h50.0\"/><path d=\"M201.0 8.0v50.0M176.0 33.0h50.0\"/><path d=\"M206.0 8.0v50.0M176.0 38.0h50.0\"/><path d=\"M211.0 8.0v50.0M176.0 43.0h50.0\"/><path d=\"M216.0 8.0v50.0M176.0 48.0h50.0\"/><path d=\"M221.0 8.0v50.0M176.0 53.0h50.0\"/><\/g><rect x=\"232.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M237.0 8.0v50.0M232.0 13.0h50.0\"/><path d=\"M242.0 8.0v50.0M232.0 18.0h50.0\"/><path d=\"M247.0 8.0v50.0M232.0 23.0h50.0\"/><path d=\"M252.0 8.0v50.0M232.0 28.0h50.0\"/><path d=\"M257.0 8.0v50.0M232.0 33.0h50.0\"/><path d=\"M262.0 8.0v50.0M232.0 38.0h50.0\"/><path d=\"M267.0 8.0v50.0M232.0 43.0h50.0\"/><path d=\"M272.0 8.0v50.0M232.0 48.0h50.0\"/><path d=\"M277.0 8.0v50.0M232.0 53.0h50.0\"/><\/g><rect x=\"8.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 64.0v50.0M8.0 69.0h50.0\"/><path d=\"M18.0 64.0v50.0M8.0 74.0h50.0\"/><path d=\"M23.0 64.0v50.0M8.0 79.0h50.0\"/><path d=\"M28.0 64.0v50.0M8.0 84.0h50.0\"/><path d=\"M33.0 64.0v50.0M8.0 89.0h50.0\"/><path d=\"M38.0 64.0v50.0M8.0 94.0h50.0\"/><path d=\"M43.0 64.0v50.0M8.0 99.0h50.0\"/><path d=\"M48.0 64.0v50.0M8.0 104.0h50.0\"/><path d=\"M53.0 64.0v50.0M8.0 109.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 6 flats, so there are 600 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "700", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 290.0 130.0\" width=\"290.0\" role=\"img\" aria-label=\"Base-ten blocks: 7 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><rect x=\"176.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 8.0v50.0M176.0 13.0h50.0\"/><path d=\"M186.0 8.0v50.0M176.0 18.0h50.0\"/><path d=\"M191.0 8.0v50.0M176.0 23.0h50.0\"/><path d=\"M196.0 8.0v50.0M176.0 28.0h50.0\"/><path d=\"M201.0 8.0v50.0M176.0 33.0h50.0\"/><path d=\"M206.0 8.0v50.0M176.0 38.0h50.0\"/><path d=\"M211.0 8.0v50.0M176.0 43.0h50.0\"/><path d=\"M216.0 8.0v50.0M176.0 48.0h50.0\"/><path d=\"M221.0 8.0v50.0M176.0 53.0h50.0\"/><\/g><rect x=\"232.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M237.0 8.0v50.0M232.0 13.0h50.0\"/><path d=\"M242.0 8.0v50.0M232.0 18.0h50.0\"/><path d=\"M247.0 8.0v50.0M232.0 23.0h50.0\"/><path d=\"M252.0 8.0v50.0M232.0 28.0h50.0\"/><path d=\"M257.0 8.0v50.0M232.0 33.0h50.0\"/><path d=\"M262.0 8.0v50.0M232.0 38.0h50.0\"/><path d=\"M267.0 8.0v50.0M232.0 43.0h50.0\"/><path d=\"M272.0 8.0v50.0M232.0 48.0h50.0\"/><path d=\"M277.0 8.0v50.0M232.0 53.0h50.0\"/><\/g><rect x=\"8.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 64.0v50.0M8.0 69.0h50.0\"/><path d=\"M18.0 64.0v50.0M8.0 74.0h50.0\"/><path d=\"M23.0 64.0v50.0M8.0 79.0h50.0\"/><path d=\"M28.0 64.0v50.0M8.0 84.0h50.0\"/><path d=\"M33.0 64.0v50.0M8.0 89.0h50.0\"/><path d=\"M38.0 64.0v50.0M8.0 94.0h50.0\"/><path d=\"M43.0 64.0v50.0M8.0 99.0h50.0\"/><path d=\"M48.0 64.0v50.0M8.0 104.0h50.0\"/><path d=\"M53.0 64.0v50.0M8.0 109.0h50.0\"/><\/g><rect x=\"64.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 64.0v50.0M64.0 69.0h50.0\"/><path d=\"M74.0 64.0v50.0M64.0 74.0h50.0\"/><path d=\"M79.0 64.0v50.0M64.0 79.0h50.0\"/><path d=\"M84.0 64.0v50.0M64.0 84.0h50.0\"/><path d=\"M89.0 64.0v50.0M64.0 89.0h50.0\"/><path d=\"M94.0 64.0v50.0M64.0 94.0h50.0\"/><path d=\"M99.0 64.0v50.0M64.0 99.0h50.0\"/><path d=\"M104.0 64.0v50.0M64.0 104.0h50.0\"/><path d=\"M109.0 64.0v50.0M64.0 109.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 7 flats, so there are 700 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "800", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 290.0 130.0\" width=\"290.0\" role=\"img\" aria-label=\"Base-ten blocks: 8 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><rect x=\"176.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 8.0v50.0M176.0 13.0h50.0\"/><path d=\"M186.0 8.0v50.0M176.0 18.0h50.0\"/><path d=\"M191.0 8.0v50.0M176.0 23.0h50.0\"/><path d=\"M196.0 8.0v50.0M176.0 28.0h50.0\"/><path d=\"M201.0 8.0v50.0M176.0 33.0h50.0\"/><path d=\"M206.0 8.0v50.0M176.0 38.0h50.0\"/><path d=\"M211.0 8.0v50.0M176.0 43.0h50.0\"/><path d=\"M216.0 8.0v50.0M176.0 48.0h50.0\"/><path d=\"M221.0 8.0v50.0M176.0 53.0h50.0\"/><\/g><rect x=\"232.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M237.0 8.0v50.0M232.0 13.0h50.0\"/><path d=\"M242.0 8.0v50.0M232.0 18.0h50.0\"/><path d=\"M247.0 8.0v50.0M232.0 23.0h50.0\"/><path d=\"M252.0 8.0v50.0M232.0 28.0h50.0\"/><path d=\"M257.0 8.0v50.0M232.0 33.0h50.0\"/><path d=\"M262.0 8.0v50.0M232.0 38.0h50.0\"/><path d=\"M267.0 8.0v50.0M232.0 43.0h50.0\"/><path d=\"M272.0 8.0v50.0M232.0 48.0h50.0\"/><path d=\"M277.0 8.0v50.0M232.0 53.0h50.0\"/><\/g><rect x=\"8.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 64.0v50.0M8.0 69.0h50.0\"/><path d=\"M18.0 64.0v50.0M8.0 74.0h50.0\"/><path d=\"M23.0 64.0v50.0M8.0 79.0h50.0\"/><path d=\"M28.0 64.0v50.0M8.0 84.0h50.0\"/><path d=\"M33.0 64.0v50.0M8.0 89.0h50.0\"/><path d=\"M38.0 64.0v50.0M8.0 94.0h50.0\"/><path d=\"M43.0 64.0v50.0M8.0 99.0h50.0\"/><path d=\"M48.0 64.0v50.0M8.0 104.0h50.0\"/><path d=\"M53.0 64.0v50.0M8.0 109.0h50.0\"/><\/g><rect x=\"64.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 64.0v50.0M64.0 69.0h50.0\"/><path d=\"M74.0 64.0v50.0M64.0 74.0h50.0\"/><path d=\"M79.0 64.0v50.0M64.0 79.0h50.0\"/><path d=\"M84.0 64.0v50.0M64.0 84.0h50.0\"/><path d=\"M89.0 64.0v50.0M64.0 89.0h50.0\"/><path d=\"M94.0 64.0v50.0M64.0 94.0h50.0\"/><path d=\"M99.0 64.0v50.0M64.0 99.0h50.0\"/><path d=\"M104.0 64.0v50.0M64.0 104.0h50.0\"/><path d=\"M109.0 64.0v50.0M64.0 109.0h50.0\"/><\/g><rect x=\"120.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 64.0v50.0M120.0 69.0h50.0\"/><path d=\"M130.0 64.0v50.0M120.0 74.0h50.0\"/><path d=\"M135.0 64.0v50.0M120.0 79.0h50.0\"/><path d=\"M140.0 64.0v50.0M120.0 84.0h50.0\"/><path d=\"M145.0 64.0v50.0M120.0 89.0h50.0\"/><path d=\"M150.0 64.0v50.0M120.0 94.0h50.0\"/><path d=\"M155.0 64.0v50.0M120.0 99.0h50.0\"/><path d=\"M160.0 64.0v50.0M120.0 104.0h50.0\"/><path d=\"M165.0 64.0v50.0M120.0 109.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 8 flats, so there are 800 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "900", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 290.0 130.0\" width=\"290.0\" role=\"img\" aria-label=\"Base-ten blocks: 9 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><rect x=\"176.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 8.0v50.0M176.0 13.0h50.0\"/><path d=\"M186.0 8.0v50.0M176.0 18.0h50.0\"/><path d=\"M191.0 8.0v50.0M176.0 23.0h50.0\"/><path d=\"M196.0 8.0v50.0M176.0 28.0h50.0\"/><path d=\"M201.0 8.0v50.0M176.0 33.0h50.0\"/><path d=\"M206.0 8.0v50.0M176.0 38.0h50.0\"/><path d=\"M211.0 8.0v50.0M176.0 43.0h50.0\"/><path d=\"M216.0 8.0v50.0M176.0 48.0h50.0\"/><path d=\"M221.0 8.0v50.0M176.0 53.0h50.0\"/><\/g><rect x=\"232.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M237.0 8.0v50.0M232.0 13.0h50.0\"/><path d=\"M242.0 8.0v50.0M232.0 18.0h50.0\"/><path d=\"M247.0 8.0v50.0M232.0 23.0h50.0\"/><path d=\"M252.0 8.0v50.0M232.0 28.0h50.0\"/><path d=\"M257.0 8.0v50.0M232.0 33.0h50.0\"/><path d=\"M262.0 8.0v50.0M232.0 38.0h50.0\"/><path d=\"M267.0 8.0v50.0M232.0 43.0h50.0\"/><path d=\"M272.0 8.0v50.0M232.0 48.0h50.0\"/><path d=\"M277.0 8.0v50.0M232.0 53.0h50.0\"/><\/g><rect x=\"8.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 64.0v50.0M8.0 69.0h50.0\"/><path d=\"M18.0 64.0v50.0M8.0 74.0h50.0\"/><path d=\"M23.0 64.0v50.0M8.0 79.0h50.0\"/><path d=\"M28.0 64.0v50.0M8.0 84.0h50.0\"/><path d=\"M33.0 64.0v50.0M8.0 89.0h50.0\"/><path d=\"M38.0 64.0v50.0M8.0 94.0h50.0\"/><path d=\"M43.0 64.0v50.0M8.0 99.0h50.0\"/><path d=\"M48.0 64.0v50.0M8.0 104.0h50.0\"/><path d=\"M53.0 64.0v50.0M8.0 109.0h50.0\"/><\/g><rect x=\"64.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 64.0v50.0M64.0 69.0h50.0\"/><path d=\"M74.0 64.0v50.0M64.0 74.0h50.0\"/><path d=\"M79.0 64.0v50.0M64.0 79.0h50.0\"/><path d=\"M84.0 64.0v50.0M64.0 84.0h50.0\"/><path d=\"M89.0 64.0v50.0M64.0 89.0h50.0\"/><path d=\"M94.0 64.0v50.0M64.0 94.0h50.0\"/><path d=\"M99.0 64.0v50.0M64.0 99.0h50.0\"/><path d=\"M104.0 64.0v50.0M64.0 104.0h50.0\"/><path d=\"M109.0 64.0v50.0M64.0 109.0h50.0\"/><\/g><rect x=\"120.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 64.0v50.0M120.0 69.0h50.0\"/><path d=\"M130.0 64.0v50.0M120.0 74.0h50.0\"/><path d=\"M135.0 64.0v50.0M120.0 79.0h50.0\"/><path d=\"M140.0 64.0v50.0M120.0 84.0h50.0\"/><path d=\"M145.0 64.0v50.0M120.0 89.0h50.0\"/><path d=\"M150.0 64.0v50.0M120.0 94.0h50.0\"/><path d=\"M155.0 64.0v50.0M120.0 99.0h50.0\"/><path d=\"M160.0 64.0v50.0M120.0 104.0h50.0\"/><path d=\"M165.0 64.0v50.0M120.0 109.0h50.0\"/><\/g><rect x=\"176.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 64.0v50.0M176.0 69.0h50.0\"/><path d=\"M186.0 64.0v50.0M176.0 74.0h50.0\"/><path d=\"M191.0 64.0v50.0M176.0 79.0h50.0\"/><path d=\"M196.0 64.0v50.0M176.0 84.0h50.0\"/><path d=\"M201.0 64.0v50.0M176.0 89.0h50.0\"/><path d=\"M206.0 64.0v50.0M176.0 94.0h50.0\"/><path d=\"M211.0 64.0v50.0M176.0 99.0h50.0\"/><path d=\"M216.0 64.0v50.0M176.0 104.0h50.0\"/><path d=\"M221.0 64.0v50.0M176.0 109.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 9 flats, so there are 900 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Each flat is 100. How many in all?", "a": "1000", "keys": [], "form": null, "label": "In all =", "fig": "<svg viewBox=\"0 0 290.0 130.0\" width=\"290.0\" role=\"img\" aria-label=\"Base-ten blocks: 10 hundred flats\"><rect x=\"8.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 8.0v50.0M8.0 13.0h50.0\"/><path d=\"M18.0 8.0v50.0M8.0 18.0h50.0\"/><path d=\"M23.0 8.0v50.0M8.0 23.0h50.0\"/><path d=\"M28.0 8.0v50.0M8.0 28.0h50.0\"/><path d=\"M33.0 8.0v50.0M8.0 33.0h50.0\"/><path d=\"M38.0 8.0v50.0M8.0 38.0h50.0\"/><path d=\"M43.0 8.0v50.0M8.0 43.0h50.0\"/><path d=\"M48.0 8.0v50.0M8.0 48.0h50.0\"/><path d=\"M53.0 8.0v50.0M8.0 53.0h50.0\"/><\/g><rect x=\"64.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 8.0v50.0M64.0 13.0h50.0\"/><path d=\"M74.0 8.0v50.0M64.0 18.0h50.0\"/><path d=\"M79.0 8.0v50.0M64.0 23.0h50.0\"/><path d=\"M84.0 8.0v50.0M64.0 28.0h50.0\"/><path d=\"M89.0 8.0v50.0M64.0 33.0h50.0\"/><path d=\"M94.0 8.0v50.0M64.0 38.0h50.0\"/><path d=\"M99.0 8.0v50.0M64.0 43.0h50.0\"/><path d=\"M104.0 8.0v50.0M64.0 48.0h50.0\"/><path d=\"M109.0 8.0v50.0M64.0 53.0h50.0\"/><\/g><rect x=\"120.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 8.0v50.0M120.0 13.0h50.0\"/><path d=\"M130.0 8.0v50.0M120.0 18.0h50.0\"/><path d=\"M135.0 8.0v50.0M120.0 23.0h50.0\"/><path d=\"M140.0 8.0v50.0M120.0 28.0h50.0\"/><path d=\"M145.0 8.0v50.0M120.0 33.0h50.0\"/><path d=\"M150.0 8.0v50.0M120.0 38.0h50.0\"/><path d=\"M155.0 8.0v50.0M120.0 43.0h50.0\"/><path d=\"M160.0 8.0v50.0M120.0 48.0h50.0\"/><path d=\"M165.0 8.0v50.0M120.0 53.0h50.0\"/><\/g><rect x=\"176.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 8.0v50.0M176.0 13.0h50.0\"/><path d=\"M186.0 8.0v50.0M176.0 18.0h50.0\"/><path d=\"M191.0 8.0v50.0M176.0 23.0h50.0\"/><path d=\"M196.0 8.0v50.0M176.0 28.0h50.0\"/><path d=\"M201.0 8.0v50.0M176.0 33.0h50.0\"/><path d=\"M206.0 8.0v50.0M176.0 38.0h50.0\"/><path d=\"M211.0 8.0v50.0M176.0 43.0h50.0\"/><path d=\"M216.0 8.0v50.0M176.0 48.0h50.0\"/><path d=\"M221.0 8.0v50.0M176.0 53.0h50.0\"/><\/g><rect x=\"232.0\" y=\"8.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M237.0 8.0v50.0M232.0 13.0h50.0\"/><path d=\"M242.0 8.0v50.0M232.0 18.0h50.0\"/><path d=\"M247.0 8.0v50.0M232.0 23.0h50.0\"/><path d=\"M252.0 8.0v50.0M232.0 28.0h50.0\"/><path d=\"M257.0 8.0v50.0M232.0 33.0h50.0\"/><path d=\"M262.0 8.0v50.0M232.0 38.0h50.0\"/><path d=\"M267.0 8.0v50.0M232.0 43.0h50.0\"/><path d=\"M272.0 8.0v50.0M232.0 48.0h50.0\"/><path d=\"M277.0 8.0v50.0M232.0 53.0h50.0\"/><\/g><rect x=\"8.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M13.0 64.0v50.0M8.0 69.0h50.0\"/><path d=\"M18.0 64.0v50.0M8.0 74.0h50.0\"/><path d=\"M23.0 64.0v50.0M8.0 79.0h50.0\"/><path d=\"M28.0 64.0v50.0M8.0 84.0h50.0\"/><path d=\"M33.0 64.0v50.0M8.0 89.0h50.0\"/><path d=\"M38.0 64.0v50.0M8.0 94.0h50.0\"/><path d=\"M43.0 64.0v50.0M8.0 99.0h50.0\"/><path d=\"M48.0 64.0v50.0M8.0 104.0h50.0\"/><path d=\"M53.0 64.0v50.0M8.0 109.0h50.0\"/><\/g><rect x=\"64.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M69.0 64.0v50.0M64.0 69.0h50.0\"/><path d=\"M74.0 64.0v50.0M64.0 74.0h50.0\"/><path d=\"M79.0 64.0v50.0M64.0 79.0h50.0\"/><path d=\"M84.0 64.0v50.0M64.0 84.0h50.0\"/><path d=\"M89.0 64.0v50.0M64.0 89.0h50.0\"/><path d=\"M94.0 64.0v50.0M64.0 94.0h50.0\"/><path d=\"M99.0 64.0v50.0M64.0 99.0h50.0\"/><path d=\"M104.0 64.0v50.0M64.0 104.0h50.0\"/><path d=\"M109.0 64.0v50.0M64.0 109.0h50.0\"/><\/g><rect x=\"120.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M125.0 64.0v50.0M120.0 69.0h50.0\"/><path d=\"M130.0 64.0v50.0M120.0 74.0h50.0\"/><path d=\"M135.0 64.0v50.0M120.0 79.0h50.0\"/><path d=\"M140.0 64.0v50.0M120.0 84.0h50.0\"/><path d=\"M145.0 64.0v50.0M120.0 89.0h50.0\"/><path d=\"M150.0 64.0v50.0M120.0 94.0h50.0\"/><path d=\"M155.0 64.0v50.0M120.0 99.0h50.0\"/><path d=\"M160.0 64.0v50.0M120.0 104.0h50.0\"/><path d=\"M165.0 64.0v50.0M120.0 109.0h50.0\"/><\/g><rect x=\"176.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M181.0 64.0v50.0M176.0 69.0h50.0\"/><path d=\"M186.0 64.0v50.0M176.0 74.0h50.0\"/><path d=\"M191.0 64.0v50.0M176.0 79.0h50.0\"/><path d=\"M196.0 64.0v50.0M176.0 84.0h50.0\"/><path d=\"M201.0 64.0v50.0M176.0 89.0h50.0\"/><path d=\"M206.0 64.0v50.0M176.0 94.0h50.0\"/><path d=\"M211.0 64.0v50.0M176.0 99.0h50.0\"/><path d=\"M216.0 64.0v50.0M176.0 104.0h50.0\"/><path d=\"M221.0 64.0v50.0M176.0 109.0h50.0\"/><\/g><rect x=\"232.0\" y=\"64.0\" width=\"50.0\" height=\"50.0\" fill=\"var(--mint)\" fill-opacity=\".35\" stroke=\"var(--moon)\" stroke-width=\"1.5\"/><g stroke=\"var(--moon)\" stroke-width=\".5\" opacity=\".7\"><path d=\"M237.0 64.0v50.0M232.0 69.0h50.0\"/><path d=\"M242.0 64.0v50.0M232.0 74.0h50.0\"/><path d=\"M247.0 64.0v50.0M232.0 79.0h50.0\"/><path d=\"M252.0 64.0v50.0M232.0 84.0h50.0\"/><path d=\"M257.0 64.0v50.0M232.0 89.0h50.0\"/><path d=\"M262.0 64.0v50.0M232.0 94.0h50.0\"/><path d=\"M267.0 64.0v50.0M232.0 99.0h50.0\"/><path d=\"M272.0 64.0v50.0M232.0 104.0h50.0\"/><path d=\"M277.0 64.0v50.0M232.0 109.0h50.0\"/><\/g><\/svg>", "why": "Count by 100s, one count for each flat. There are 10 flats, so there are 1000 in all.", "hint": "Count by 100s. Say one number for each flat.", "hint2": "Touch each flat as you count.", "nudge": "Count again slowly. Each flat is 100."}, {"s": "Count by 100s. What comes next? <b>50, 150, 250, ___<\/b>", "a": "350", "keys": [], "form": null, "label": "Next =", "why": "250 + 100 = 350. Only the hundreds digit changes.", "hint": "Add 100 to 250.", "hint2": "The hundreds digit goes up by 1. The other digits stay the same.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? <b>310, 410, 510, ___<\/b>", "a": "610", "keys": [], "form": null, "label": "Next =", "why": "510 + 100 = 610. Only the hundreds digit changes.", "hint": "Add 100 to 510.", "hint2": "The hundreds digit goes up by 1. The other digits stay the same.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? <b>75, 175, 275, ___<\/b>", "a": "375", "keys": [], "form": null, "label": "Next =", "why": "275 + 100 = 375. Only the hundreds digit changes.", "hint": "Add 100 to 275.", "hint2": "The hundreds digit goes up by 1. The other digits stay the same.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? <b>482, 582, 682, ___<\/b>", "a": "782", "keys": [], "form": null, "label": "Next =", "why": "682 + 100 = 782. Only the hundreds digit changes.", "hint": "Add 100 to 682.", "hint2": "The hundreds digit goes up by 1. The other digits stay the same.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. What comes next? <b>125, 225, 325, ___<\/b>", "a": "425", "keys": [], "form": null, "label": "Next =", "why": "325 + 100 = 425. Only the hundreds digit changes.", "hint": "Add 100 to 325.", "hint2": "The hundreds digit goes up by 1. The other digits stay the same.", "nudge": "When you count by 100s, only the hundreds digit goes up."}]}, {"key": "hop", "type": "numberline", "name": "Hundred Highway", "skill": "Hop by 100s", "need": 3, "pool": [{"s": "Start at <b>100<\/b>. Hop by <b>100s<\/b>. Make <b>3<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 400, "label": "You land on", "why": "Count by 100s from 100: 100, 200, 300, 400. That is 3 hops.", "hint": "Count by 100s from 100. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>0<\/b>. Hop by <b>100s<\/b>. Make <b>6<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 600, "label": "You land on", "why": "Count by 100s from 0: 0, 100, 200, 300, 400, 500, 600. That is 6 hops.", "hint": "Count by 100s from 0. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>200<\/b>. Hop by <b>100s<\/b>. Make <b>5<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 700, "label": "You land on", "why": "Count by 100s from 200: 200, 300, 400, 500, 600, 700. That is 5 hops.", "hint": "Count by 100s from 200. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>300<\/b>. Hop by <b>100s<\/b>. Make <b>2<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 500, "label": "You land on", "why": "Count by 100s from 300: 300, 400, 500. That is 2 hops.", "hint": "Count by 100s from 300. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>50<\/b>. Hop by <b>100s<\/b>. Make <b>3<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 350, "label": "You land on", "why": "Count by 100s from 50: 50, 150, 250, 350. That is 3 hops.", "hint": "Count by 100s from 50. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>150<\/b>. Hop by <b>100s<\/b>. Make <b>4<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 550, "label": "You land on", "why": "Count by 100s from 150: 150, 250, 350, 450, 550. That is 4 hops.", "hint": "Count by 100s from 150. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>250<\/b>. Hop by <b>100s<\/b>. Make <b>5<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 750, "label": "You land on", "why": "Count by 100s from 250: 250, 350, 450, 550, 650, 750. That is 5 hops.", "hint": "Count by 100s from 250. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>500<\/b>. Hop by <b>100s<\/b>. Make <b>4<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 900, "label": "You land on", "why": "Count by 100s from 500: 500, 600, 700, 800, 900. That is 4 hops.", "hint": "Count by 100s from 500. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>450<\/b>. Hop by <b>100s<\/b>. Make <b>4<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 850, "label": "You land on", "why": "Count by 100s from 450: 450, 550, 650, 750, 850. That is 4 hops.", "hint": "Count by 100s from 450. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>0<\/b>. Hop by <b>100s<\/b>. Make <b>10<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 1000, "label": "You land on", "why": "Count by 100s from 0: 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000. That is 10 hops.", "hint": "Count by 100s from 0. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}, {"s": "Start at <b>600<\/b>. Hop by <b>100s<\/b>. Make <b>2<\/b> hops. Where do you land?", "min": 0, "max": 1000, "step": 50, "a": 800, "label": "You land on", "why": "Count by 100s from 600: 600, 700, 800. That is 2 hops.", "hint": "Count by 100s from 600. Say one number for each hop.", "nudge": "Count the hops again. Each hop is 100."}]}, {"key": "build", "type": "tiles", "name": "Road Sign Builder", "skill": "Fill in the pattern", "need": 2, "prompt": "Tap the numbers in order.", "pool": [{"s": "Count by 100s. Build the two missing numbers: 300, ___, ___, 600", "tiles": ["400", "500", "310", "700"], "a": ["400", "500"], "why": "Count by 100s: 300, 400, 500, 600.", "hint": "Add 100 to 300 to find the first missing number.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. Build the two missing numbers: 150, ___, ___, 450", "tiles": ["250", "350", "160", "550"], "a": ["250", "350"], "why": "Count by 100s: 150, 250, 350, 450.", "hint": "Add 100 to 150 to find the first missing number.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. Build the two missing numbers: 620, ___, ___, 920", "tiles": ["720", "820", "630", "920"], "a": ["720", "820"], "why": "Count by 100s: 620, 720, 820, 920.", "hint": "Add 100 to 620 to find the first missing number.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. Build the two missing numbers: 100, ___, ___, 400", "tiles": ["200", "300", "110", "500"], "a": ["200", "300"], "why": "Count by 100s: 100, 200, 300, 400.", "hint": "Add 100 to 100 to find the first missing number.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. Build the two missing numbers: 480, ___, ___, 780", "tiles": ["580", "680", "490", "880"], "a": ["580", "680"], "why": "Count by 100s: 480, 580, 680, 780.", "hint": "Add 100 to 480 to find the first missing number.", "nudge": "When you count by 100s, only the hundreds digit goes up."}, {"s": "Count by 100s. Build the two missing numbers: 205, ___, ___, 505", "tiles": ["305", "405", "215", "605"], "a": ["305", "405"], "why": "Count by 100s: 205, 305, 405, 505.", "hint": "Add 100 to 205 to find the first missing number.", "nudge": "When you count by 100s, only the hundreds digit goes up."}]}, {"key": "boss", "type": "lock", "boss": true, "name": "Thousand Gate", "skill": "Crack the code", "need": 1, "pool": [{"code": "246", "qs": [{"s": "Count by 100s. What comes next? 400, 500, 600, ___", "a": "700", "x": ["610", "800"], "why": "600 + 100 = 700.", "hint": "Add 100."}, {"s": "Start at 60. Make 3 hops of 100. Where do you land?", "a": "360", "x": ["90", "460"], "why": "60, 160, 260, 360. That is 3 hops.", "hint": "Count by 100s from 60. Say one number for each hop."}, {"s": "Count by 100s from 237. Which digit changes?", "a": "the hundreds digit", "x": ["the tens digit", "the ones digit"], "why": "237, 337, 437. Only the hundreds digit goes up.", "hint": "Write the next number. Compare the digits."}]}, {"code": "813", "qs": [{"s": "Count by 100s. What number is missing? 340, 440, ___, 640", "a": "540", "x": ["550", "740"], "why": "440 + 100 = 540. Then 540 + 100 = 640.", "hint": "Add 100 to the number before the blank."}, {"s": "Start at 100. Make 8 hops of 100. Where do you land?", "a": "900", "x": ["800", "1000"], "why": "100, 200, 300, 400, 500, 600, 700, 800, 900. That is 8 hops.", "hint": "Count by 100s. Say one number for each hop."}, {"s": "Count by 100s. What comes next? 515, 615, 715, ___", "a": "815", "x": ["725", "915"], "why": "715 + 100 = 815. Only the hundreds digit changes.", "hint": "Add 100 to 715."}]}, {"code": "570", "qs": [{"s": "Count by 100s. What comes next? 260, 360, 460, ___", "a": "560", "x": ["470", "660"], "why": "460 + 100 = 560.", "hint": "Add 100."}, {"s": "What number is 10 hundreds?", "a": "1000", "x": ["100", "110"], "why": "Count by 100s ten times: 100, 200, … 900, 1000. Ten hundreds make one thousand.", "hint": "Count by 100s. Say ten numbers."}, {"s": "Which number do you say when you count by 100s from 30?", "a": "530", "x": ["500", "535"], "why": "30, 130, 230, 330, 430, 530. The tens and ones stay 30.", "hint": "Start at 30. Add 100 each time."}]}]}], "ui": {"text": {"allDoneTitle": "You won the game!", "allDoneSub": "You can skip count by 100s on your own.", "bossWaiting": "The Thousand Gate is at the end of the road…", "faceBoss": "Open the Thousand Gate", "lockedToast": "Finish the other four spaces first!"}, "bossWin": "The Thousand Gate opens. You win!", "lockWin": "Code cracked! The Thousand Gate swings open."}, "problems": [{"id": "next-1", "type": "quest-star", "skill": "What comes next", "tag": "Mile Marker Road", "q": "Mile Marker Road: star 1 of 3 (What comes next)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "next-2", "type": "quest-star", "skill": "What comes next", "tag": "Mile Marker Road", "q": "Mile Marker Road: star 2 of 3 (What comes next)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "next-3", "type": "quest-star", "skill": "What comes next", "tag": "Mile Marker Road", "q": "Mile Marker Road: star 3 of 3 (What comes next)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "flat-1", "type": "quest-star", "skill": "Count by 100s", "tag": "Flat Stack Stop", "q": "Flat Stack Stop: star 1 of 3 (Count by 100s)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "flat-2", "type": "quest-star", "skill": "Count by 100s", "tag": "Flat Stack Stop", "q": "Flat Stack Stop: star 2 of 3 (Count by 100s)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "flat-3", "type": "quest-star", "skill": "Count by 100s", "tag": "Flat Stack Stop", "q": "Flat Stack Stop: star 3 of 3 (Count by 100s)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "hop-1", "type": "quest-star", "skill": "Hop by 100s", "tag": "Hundred Highway", "q": "Hundred Highway: star 1 of 3 (Hop by 100s)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "hop-2", "type": "quest-star", "skill": "Hop by 100s", "tag": "Hundred Highway", "q": "Hundred Highway: star 2 of 3 (Hop by 100s)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "hop-3", "type": "quest-star", "skill": "Hop by 100s", "tag": "Hundred Highway", "q": "Hundred Highway: star 3 of 3 (Hop by 100s)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "build-1", "type": "quest-star", "skill": "Fill in the pattern", "tag": "Road Sign Builder", "q": "Road Sign Builder: star 1 of 2 (Fill in the pattern)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "build-2", "type": "quest-star", "skill": "Fill in the pattern", "tag": "Road Sign Builder", "q": "Road Sign Builder: star 2 of 2 (Fill in the pattern)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}, {"id": "boss-1", "type": "quest-star", "skill": "Crack the code", "tag": "Thousand Gate", "q": "Thousand Gate: star 1 of 1 (Crack the code)", "hint": "Played in the game", "explain": "Earned by solving a question in this level on your own"}], "masteryThreshold": 0.85}
+</script>
+
+<script>
+(function(){
+"use strict";
+const DECK=JSON.parse(document.getElementById("mb-deck").textContent);
+const MB_HOST_ORIGIN="https://mb-practice.mightyblearning.workers.dev";
+/* ---------- helpers: every answer is computed, never typed ---------- */
+const factors=n=>{const f=[];for(let d=1;d<=n;d++) if(n%d===0) f.push(d);return f;};
+const isPrime=n=>n>1&&factors(n).length===2;
+const allPairs=n=>{const p=[];for(let a=1;a*a<=n;a++) if(n%a===0) p.push([a,n/a]);return p;};
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a;};
+const primeFactors=n=>{const f=[];let m=n;for(let p=2;p*p<=m;p++) while(m%p===0){f.push(p);m/=p;} if(m>1) f.push(m);return f;};
+const divText=(n,d)=>{if(d>n) return `${d} is bigger than ${n}, so it can't divide ${n} evenly`;const q=Math.floor(n/d),r=n%d;return `${n} ÷ ${d} = ${q}${r?` R ${r}`:""}`;};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const uuid=()=>(crypto.randomUUID?crypto.randomUUID():"x"+Date.now()+Math.random().toString(16).slice(2));
+/* fractions: {n,d} with d>0, always reduced */
+const R=(n,d=1)=>{if(d<0){n=-n;d=-d;}const g=gcd(n,d)||1;return {n:n/g,d:d/g};};
+const rAdd=(a,b)=>R(a.n*b.d+b.n*a.d,a.d*b.d), rSub=(a,b)=>R(a.n*b.d-b.n*a.d,a.d*b.d), rMul=(a,b)=>R(a.n*b.n,a.d*b.d), rDiv=(a,b)=>R(a.n*b.d,a.d*b.n);
+const rEq=(a,b)=>a&&b&&a.n*b.d===b.n*a.d;
+const rTxt=r=>r.d===1?`${r.n<0?"−":""}${Math.abs(r.n)}`:`${r.n<0?"−":""}${Math.abs(r.n)}/${r.d}`;
+const fracHTML=(n,d)=>`<span class="frac" aria-label="${n} over ${d}"><span>${n}</span><span>${d}</span></span>`;
+const rHTML=r=>r.d===1?`${r.n<0?"−":""}${Math.abs(r.n)}`:`${r.n<0?"−":""}${fracHTML(Math.abs(r.n),r.d)}`;
+const mixedHTML=(w,n,d)=>`${w}${fracHTML(n,d)}`;
+/* parse what a student typed: "7", "-5", "3/4", "-2/3", "1.25", "2 1/2" */
+function parseAns(s){ s=String(s).replace(/−/g,"-").trim(); if(!s) return null;
+  let m=s.match(/^(-?)(\d+) (\d+)\/(\d+)$/); if(m){const d=+m[4];if(!d)return null;const v=R(+m[2]*d+ +m[3],d);return m[1]?R(-v.n,v.d):v;}
+  m=s.match(/^(-?\d+)\/(-?\d+)$/); if(m){const d=+m[2];if(!d)return null;return R(+m[1],d);}
+  m=s.match(/^(-?)(\d*)\.(\d+)$/); if(m){const d=10**m[3].length;const v=R(+(m[2]||0)*d+ +m[3],d);return m[1]?R(-v.n,v.d):v;}
+  m=s.match(/^-?\d+$/); if(m) return R(+s,1);
+  return null; }
+
+/* ================= this lesson's levels ================= */
+/* ENGINE v2 (games with "engineVersion": 2). v1 types plus fixit, match, numberline, tiles, lock.
+   Shared level types for content lessons (science, social studies, ELA). The lesson's questions live in the
+   mb-deck data; each level says which type it is: fill (notes sentence), sort (cards into boxes), mc (scenario
+   question), order (put events/steps in order), boss (three questions in a row, no misses). */
+const PG=DECK.ui||{};
+const SHAPES=[
+  {pts:[[25,90],[25,20],[85,20],[95,35],[95,90],[25,90]],stars:[[25,20],[85,20],[95,90],[25,90]]},
+  {pts:[[20,90],[20,45],[60,15],[100,45],[100,90],[20,90]],stars:[[20,45],[60,15],[100,45]]},
+  {pts:[[10,85],[35,60],[50,70],[75,35],[110,20]],stars:[[35,60],[75,35],[110,20]]},
+  {pts:[[60,15],[60,90],[30,90],[90,90],[60,90],[60,30],[25,45],[95,45]],stars:[[25,45],[95,45],[60,15]]},
+  {pts:[[20,30],[100,30],[100,80],[20,80],[20,30]],stars:[[20,30],[100,30],[60,80]]},
+  {pts:[[30,90],[30,45],[60,20],[90,45],[90,90]],stars:[[30,45],[60,20],[90,45]]}];
+const BOSS_SHAPE={pts:[[60,10],[75,45],[110,45],[82,65],[92,98],[60,78],[28,98],[38,65],[10,45],[45,45],[60,10]],stars:[[60,55]]};
+let _si=0;
+const LOOK=DECK.levels.map(L=>{ if(L.boss) return BOSS_SHAPE; const s=SHAPES[_si%SHAPES.length];_si++;
+  const n=Math.min(L.need,s.stars.length); return {pts:s.pts,stars:s.stars.slice(0,Math.max(n,1)).concat(Array(Math.max(0,L.need-s.stars.length)).fill(s.stars[s.stars.length-1]))}; });
+const TEXT=Object.assign({idPrefix:DECK.deckId,lockedToast:"Finish the other levels first!",levelDone:"You finished {name}!",bossWaiting:"The final challenge is next…",
+  faceBoss:"Take the final challenge",claimBoss:"Claim your victory",finishLevel:"Finish this level",allDoneTitle:"You did it!",allDoneSub:"You showed what you learned, on your own.",toolsLabel:"Helpers"},PG.text||{});
+const TOOLS=PG.helper?[["help",PG.helperLabel||"My notes"]]:[];
+function toolBody(){ return PG.helper||""; }
+/* esc + repeating-decimal bar: write [bar]142857[/bar] in text */
+const fmt=s=>esc(s).replace(/\[bar\](.*?)\[\/bar\]/g,'<span class="rbar">$1</span>');
+function mcFrom(it,nudge){ const all=[it.a,...it.x]; Q.vals=shuffle(all); Q.opts=Q.vals.map(fmt); Q.ans=Q.vals.indexOf(it.a);
+  Q.whyNot=i=>{const v=String(Q.vals[i]);return `<p>${/["“”]/.test(v)?fmt(v):`"${fmt(v)}"`} isn't it. ${esc(it.nudge||nudge)}</p>`;}; }
+/* v2 helpers */
+const nlTxt=v=>{const d=Q&&Q.nl?Q.nl.dec:0;const s=String(+(+v).toFixed(Math.max(d,0)));return s.replace(/^-/,"−");};
+const tkSeq=()=>Q.build.map(id=>Q.tk.find(t=>t.id===id).label);
+function arrowNav(e,root,sel){ const d={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key]; if(!d) return; const els=[...root.querySelectorAll(sel)].filter(x=>!x.disabled); const i=els.indexOf(e.currentTarget); if(i<0) return; e.preventDefault(); els[(i+d+els.length)%els.length].focus(); }
+const LAST_SORT={};
+const endP=t=>/[.!?]["”’')]*$/.test(String(t).replace(/<[^>]*>/g,"").trim())?"":".";
+const tj=a=>a.join(" ").replace(/ ([,.;:!?])/g,"$1");
+const fxW=it=>it.steps.some(t=>/[=0-9]/.test(t))?"step":"line";
+const TYPES={
+fill:{
+  init(it){ Q.it=it; mcFrom(it,PG.fillNudge||"Read the sentence again and think about what your notes say.");
+    Q.explain=()=>`${esc(it.s).replace("____",`<b>${esc(it.a)}</b>`)}${it.why?` ${esc(it.why)}`:""}`;
+    Q.hints=[`Read the sentence out loud with each choice. Which one matches your notes?`,...(it.hint?[esc(it.hint)]:[])];
+    Q.together=()=>`<p>${esc(it.s).replace("____",`<b>${esc(it.a)}</b>`)}</p>${it.why?`<p>${esc(it.why)}</p>`:""}`; },
+  view(){ const it=Q.it; return chrome(`<h2 class="prompt">Fill in the blank.</h2><p class="story">${esc(it.s).replace("____",`<span class="blank">${Q.solved||Q.locked?esc(it.a):"&nbsp;"}</span>`)}</p>%READ%
+    ${W.choices("Word choices")}${fbBox()}${actionRow({})}`,it.s.replace("____","blank")); },
+  check(){}
+},
+mc:{
+  init(it){ Q.it=it; mcFrom(it,PG.mcNudge||"Think about what your notes say about this.");
+    Q.explain=()=>fmt(it.why||it.a);
+    Q.hints=[esc(it.hint||PG.mcHint||"Cross out the choices you know are wrong first.")];
+    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
+  view(){ const it=Q.it; return chrome(`${it.story?`<p class="story">${esc(it.story)}</p>`:""}${it.fig?`<div class="tool fig" style="border-style:solid;text-align:center">${it.fig}</div>`:""}<h2 class="prompt">${fmt(it.s)}</h2>%READ%${W.choices("Choices")}${fbBox()}${actionRow({})}`,(it.story?it.story+" ":"")+it.s); },
+  check(){}
+},
+sort:{
+  init(set){ const L=LEVELS[Q.li];
+    // Mix cards from every set in the pool so a level doesn't repeat the same four cards.
+    const seen=new Set(), all=[]; L.pool.forEach(s=>s.forEach(([t,z])=>{if(!seen.has(t)){seen.add(t);all.push([t,z]);}}));
+    if(all.length>set.length){ const n=set.length, pick=[], zs=[...new Set(all.map(c=>c[1]))]; const prev=LAST_SORT[Q.li]||[];
+      for(let tries=0;tries<20;tries++){ pick.length=0; const bag=shuffle(all);
+        zs.forEach(z=>{const c=bag.find(c=>c[1]===z&&!pick.includes(c));if(c&&pick.length<n)pick.push(c);});
+        for(const c of bag){ if(pick.length>=n)break; if(!pick.includes(c))pick.push(c); }
+        if(pick.filter(c=>prev.includes(c[0])).length<n-1) break; }
+      set=pick; }
+    LAST_SORT[Q.li]=set.map(c=>c[0]);
+    Q.chips=shuffle(set).map(([t,z],i)=>({id:"c"+i,label:t,zone:z}));
+    Q.zones=L.zones.map(([key,label,sub])=>({key,label,sub}));
+    const ZL=Object.fromEntries(L.zones.map(z=>[z[0],z[1]])); const why=L.whyZone||{};
+    Q.whyChip=c=>`"${esc(c.label)}" goes with <b>${esc(ZL[c.zone])}</b>.${why[c.zone]?" "+esc(why[c.zone]):""}`;
+    Q.explain=()=>esc(L.sortExplain||"Every card is in the right place.");
+    Q.hints=[esc(L.sortHint||"Read each card and ask which box it belongs to."),()=>{const c=Q.chips.find(c=>Q.place[c.id]!==c.zone);return c?`Look at "${esc(c.label)}" again.`:"Everything is placed. Press Check.";}];
+    Q.together=()=>`<p>${Q.chips.map(c=>`"${esc(c.label)}" → <b>${esc(ZL[c.zone])}</b>`).join("<br>")}</p>`; },
+  view(){ const L=LEVELS[Q.li]; return chrome(`<h2 class="prompt">${esc(L.prompt||"Sort each card into the right box.")}</h2><p class="sub">Drag each card to a box, or tap a card and then tap a box.</p>%READ%
+    ${W.sort()}${fbBox()}${actionRow({check:true,checkDisabled:Q.chips.some(c=>!Q.place[c.id])})}`,L.prompt||"Sort each card into the right box."); },
+  check(){ checkSortDefault(); }
+},
+order:{
+  init(steps){ const L=LEVELS[Q.li]; Q.steps=shuffle(steps.map((t,i)=>({id:"s"+i,label:esc(t)})));Q.order=steps.map((_,i)=>"s"+i);
+    Q.whyStep=(k,s)=>s?`"${s.label}" comes later. Something else happens first.`:"";
+    Q.explain=()=>steps.map((t,i)=>`${i+1}. ${esc(t)}`).join("<br>");
+    Q.hints=[esc(L.orderHint||"Think about what has to happen first."),()=>`Step 1 is: ${esc(steps[0])}.`];
+    Q.together=()=>`<p>${steps.map((t,i)=>`${i+1}. <b>${esc(t)}</b>`).join("<br>")}</p>`; },
+  view(){ const L=LEVELS[Q.li]; return chrome(`<h2 class="prompt">${esc(L.prompt||"Put these in order.")}</h2><p class="sub">Tap what comes first, then the next, and so on. Tap a placed card to take it back.</p>%READ%
+    ${W.order()}${fbBox()}${actionRow({check:true,checkDisabled:Q.seq.length<Q.order.length})}`,L.prompt||"Put these in order."); },
+  check(){ checkOrderDefault(); }
+},
+num:{
+  /* typed numeric answer: {s, a:"3/4"|"0.75"|"-12", keys:["/","-","."], form:"fraction"|"decimal"|"mixed"|null, unit, story, why, hint, hint2, nudge}. s/story may hold simple trusted HTML. */
+  init(it){ Q.it=it; Q.usesPad=true; Q.padKeys=it.keys||[]; Q.answer=parseAns(it.a); Q.needSimplest=it.simplest!==false;
+    const want=it.form;
+    Q.whyNot=v=>`<p>${rHTML(v)}${it.unit?" "+esc(it.unit):""} isn't it. ${it.nudge||"Work it out one step at a time, the way your notes show."}</p>`;
+    Q.explain=()=>it.why||`The answer is ${esc(it.a)}${it.unit?" "+esc(it.unit):""}.`;
+    Q.hints=[it.hint||"Look back at the example in your notes that matches this one.",...(it.hint2?[it.hint2]:[])];
+    Q.together=()=>`<p>The answer is <b>${esc(it.a.replace(/-/g,"−"))}${it.unit?" "+esc(it.unit):""}</b>.</p>${it.why?`<p>${it.why}</p>`:""}`;
+    Q.onRight=()=>{ const e=Q.entry.replace(/−/g,"-");
+      if(want==="fraction"&&!/\//.test(e)&&Q.answer.d!==1){ Q.fb={kind:"hint",html:"<p>That's the right value. This one asks for a fraction: use the ⁄ key.</p>"}; return; }
+      if(want==="decimal"&&/\//.test(e)){ Q.fb={kind:"hint",html:"<p>That's the right value. This one asks for a decimal: use the . key.</p>"}; return; }
+      solved(Q.explain()); }; },
+  view(){ const it=Q.it; return chrome(`${it.story?`<p class="story">${it.story}</p>`:""}${it.fig?`<div class="tool fig" style="border-style:solid;text-align:center">${it.fig}</div>`:""}<h2 class="prompt">${it.s}</h2>%READ%${W.entry(it.label||"Answer =",it.unit?esc(it.unit):"")}${W.pad()}${fbBox()}${actionRow({check:true,checkDisabled:!Q.entry})}`,(it.story?it.story.replace(/<[^>]+>/g,"")+" ":"")+it.s.replace(/<[^>]+>/g,"")); },
+  check(){ checkEntryDefault(); }
+},
+boss:{
+  init(rounds){ Q.rounds=rounds;Q.round=0;this.setRound(); },
+  setRound(){ const it=Q.rounds[Q.round];Q.it=it;Q.stage=Q.round;Q.out=new Set();mcFrom(it,PG.bossNudge||"Think back to your notes.");
+    Q.hints=[esc(it.hint||PG.bossHint||"Think back to your notes.")];
+    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
+    Q.choose=i=>{ if(i!==Q.ans){Q.out.add(i);return miss(Q.whyNot(i));}
+      if(Q.round<Q.rounds.length-1){const a=it.a;Q.round++;this.setRound();stepOK(`<p><strong>Yes: ${fmt(a)}${endP(a)}</strong> ${Q.rounds.length-Q.round===2?"Two":"One"} more to go.</p>`);}
+      else solved(`${fmt(it.a)}. ${esc(PG.bossWin||"You did it!")}`); }; },
+  view(){ const it=Q.it; return chrome(`${it.story?`<p class="story">${esc(it.story)}</p>`:""}${it.fig?`<div class="tool fig" style="border-style:solid;text-align:center">${it.fig}</div>`:""}<h2 class="prompt">${fmt(it.s)}</h2><p class="sub">Question ${Q.round+1} of ${Q.rounds.length}. Answer all of them with no misses.</p>%READ%
+    <div class="starrow" aria-label="Questions won: ${Q.round}">${Q.rounds.map((_,i)=>tokenSVG(i<Q.round)).join("")}</div>${W.choices("Choices")}${fbBox()}${actionRow({})}`,it.s); },
+  check(){}
+},
+/* ================= engine v2 level types ================= */
+fixit:{
+  /* find the mistake: {s, steps:[...], bad:index of the wrong step, fix:"corrected step", why, hint, nudge?} */
+  init(it){ Q.it=it; Q.bad=it.bad;
+    Q.explain=()=>`${fxW(it)==='step'?'Step':'Line'} ${it.bad+1} has the mistake. It should be <b>${fmt(it.fix)}</b>${endP(it.fix)}${it.why?" "+fmt(it.why):""}`;
+    const n=it.steps.length, h=Math.ceil(n/2), half=it.bad<h?[1,h]:[h+1,n];
+    Q.hints=[esc(it.hint||"Redo each step yourself. Does it follow from the step above it?"),n>2?`The mistake is somewhere in ${fxW(it)}s ${half[0]}–${half[1]}.`:`Check the last ${fxW(it)} carefully.`];
+    Q.together=()=>`<p>${it.steps.map((t,i)=>i===it.bad?`${i+1}. <s>${fmt(t)}</s> → <b>${fmt(it.fix)}</b>`:`${i+1}. ${fmt(t)}`).join("<br>")}</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
+  view(){ const it=Q.it, done=Q.solved||Q.locked, P2=LEVELS[Q.li].prompt||(fxW(Q.it)==="step"?"Which step has the mistake?":"Which line has the mistake?");
+    return chrome(`<p class="story">${fmt(it.s)}</p><h2 class="prompt">${esc(P2)}</h2><p class="sub">Tap the ${fxW(it)} where the mistake first happens.</p>%READ%
+    <ol class="fxlist" aria-label="Worked solution">${it.steps.map((t,i)=>{const bad=done&&i===it.bad, ok=Q.out.has(i);
+      return `<li><button class="fxstep ${bad?"bad":""} ${ok?"ok":""}" type="button" data-fx="${i}" ${done||ok?"disabled":""} aria-label="${fxW(it)==='step'?'Step':'Line'} ${i+1}: ${esc(t)}${ok?`. Checked: this ${fxW(it)} is fine`:""}${bad?`. This ${fxW(it)} has the mistake. Fix: ${esc(it.fix)}`:""}"><span class="fxn" aria-hidden="true">${i+1}</span><span class="fxt">${fmt(t)}${bad?`<span class="fxfix">Fix: ${fmt(it.fix)}</span>`:""}${ok?`<span class="fxok">This ${fxW(it)} is fine</span>`:""}</span></button></li>`;}).join("")}</ol>
+    ${fbBox()}${actionRow({})}`,`${it.s}. ${P2}`); },
+  pick(i){ const it=Q.it; if(i===it.bad) return solved(Q.explain());
+    Q.out.add(i); miss(`<p>${fxW(it)==='step'?'Step':'Line'} ${i+1} is correct. ${esc(it.nudge||PG.fixNudge||"Keep checking: redo the math in each step yourself.")}</p>`); },
+  bind(st){ st.querySelectorAll("[data-fx]").forEach(b=>{ b.onclick=()=>{this.pick(+b.dataset.fx);Q.refocus=Q.solved?'[data-act="next"]':"[data-fx]:not(:disabled)";render();}; b.onkeydown=e=>arrowNav(e,st,"[data-fx]:not(:disabled)"); }); },
+  check(){}
+},
+match:{
+  /* tap to pair: {prompt?, pairs:[[left,right],…4], hint?, why?} */
+  init(it){ Q.it=it; const n=it.pairs.length; Q.mL=it.pairs.map((_,i)=>i); Q.mR=shuffle(Q.mL);
+    if(Q.mR.every((v,i)=>v===i)) Q.mR.push(Q.mR.shift());
+    Q.link={}; Q.mPick=null;
+    const list=()=>it.pairs.map(p=>`${fmt(p[0])} → <b>${fmt(p[1])}</b>`).join("<br>");
+    Q.explain=()=>`${list()}${it.why?`<br>${fmt(it.why)}`:""}`;
+    Q.hints=[esc(it.hint||"Start with the pair you are surest about. Then match what is left."),()=>{let i=Q.mL.find(i=>Q.link[i]!==i);if(i==null)i=0;return `"${fmt(it.pairs[i][0])}" goes with "${fmt(it.pairs[i][1])}".`;}];
+    Q.together=()=>`<p>${list()}</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
+  view(){ const it=Q.it, done=Q.solved||Q.locked, P2=it.prompt||LEVELS[Q.li].prompt||"Match each item on the left with its partner on the right.";
+    const L1="ABCDEFGH", leftOf=j=>Q.mL.find(i=>Q.link[i]===j);
+    const item=(side,idx,txt,pairPos)=>{const pk=Q.mPick&&Q.mPick.side===side&&Q.mPick.i===idx, linked=pairPos!=null;
+      const other=linked?(side==="l"?it.pairs[Q.link[idx]][1]:it.pairs[Q.mL[pairPos]][0]):"";
+      return `<button class="mitem ${pk?"pick":""} ${linked?"linked p"+pairPos:""}" type="button" data-m${side}="${idx}" data-say="${esc(txt)}" aria-pressed="${pk}" ${done?"disabled":""} aria-label="${esc(txt)}${linked?`, paired with ${esc(other)}`:""}">${linked?`<span class="mbadge" aria-hidden="true">${L1[pairPos]}</span>`:""}<span>${fmt(txt)}</span></button>`;};
+    const cols=`<div class="mtch" role="group" aria-label="Match the pairs"><div class="mcol l">${Q.mL.map((i,pos)=>item("l",i,it.pairs[i][0],Q.link[i]!=null?pos:null)).join("")}</div>
+      <div class="mcol r">${Q.mR.map(j=>{const li=leftOf(j);return item("r",j,it.pairs[j][1],li!=null?Q.mL.indexOf(li):null);}).join("")}</div></div>`;
+    return chrome(`<h2 class="prompt">${esc(P2)}</h2><p class="sub">Tap one on the left, then its partner on the right. Tap a matched one to undo it.</p>%READ%${cols}${fbBox()}${actionRow({check:true,checkDisabled:Object.keys(Q.link).length<Q.mL.length})}`,P2); },
+  tap(side,idx){ const linkL=side==="l"?(Q.link[idx]!=null?idx:null):Q.mL.find(i=>Q.link[i]===idx);
+    if(linkL!=null){ delete Q.link[linkL]; Q.mPick={side,i:idx}; }
+    else if(!Q.mPick||Q.mPick.side===side){ Q.mPick=Q.mPick&&Q.mPick.i===idx?null:{side,i:idx}; }
+    else { const l=side==="l"?idx:Q.mPick.i, r=side==="r"?idx:Q.mPick.i; Q.link[l]=r; Q.mPick=null; }
+    if(Q.fb&&Q.fb.kind!=="hint") Q.fb=null;
+    const other=Q.mPick?(Q.mPick.side==="l"?"r":"l"):"l";
+    Q.refocus=Object.keys(Q.link).length===Q.mL.length&&!Q.mPick?'[data-act="check"]':`.mcol.${other} .mitem:not(.linked)`; },
+  bind(st){ st.querySelectorAll("[data-ml],[data-mr]").forEach(b=>{ b.onclick=()=>{const s=b.dataset.ml!=null?"l":"r";this.tap(s,+(b.dataset.ml??b.dataset.mr));render();};
+    b.onkeydown=e=>arrowNav(e,b.parentElement,".mitem"); }); },
+  check(){ const it=Q.it, wrong=Q.mL.filter(i=>Q.link[i]!==i);
+    if(!wrong.length) return solved(Q.explain());
+    const w=wrong[0]; const msg=`<p>"${fmt(it.pairs[w][0])}" and "${fmt(it.pairs[Q.link[w]][1])}" don't go together.${wrong.length>1?` ${wrong.length} pairs are not right yet.`:""}</p><p>${esc(it.nudge||PG.matchNudge||"The pairs that were wrong came apart so you can try again.")}</p>`;
+    wrong.forEach(i=>delete Q.link[i]); Q.mPick=null; miss(msg); }
+},
+numberline:{
+  /* place a point: {s, min, max, step, a, label?, why, hint, nudge?} — the answer must be exactly a on the step grid */
+  init(it){ Q.it=it; const st=+it.step||1, dec=(String(it.step).split(".")[1]||"").length;
+    Q.nl={min:+it.min,max:+it.max,step:st,dec,n:Math.round((it.max-it.min)/st)}; Q.ai=Math.round((it.a-it.min)/st); Q.val=null;
+    Q.explain=()=>`The point goes at <b>${nlTxt(+it.a)}</b>.${it.why?" "+fmt(it.why):""}`;
+    Q.hints=[esc(it.hint||"Work out the answer first, then find it on the line."),`Each tick mark is worth ${nlTxt(st)}. Count the ticks from a labeled number.`];
+    Q.together=()=>`<p>The point goes at <b>${nlTxt(+it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
+  view(){ const it=Q.it, N=Q.nl, done=Q.solved||Q.locked, x=i=>20+300*i/N.n, v=Q.val;
+    const kStep=[1,2,4,5,10,20,25,50,100].find(k=>N.n/k<=10)||Math.ceil(N.n/10);
+    let ticks=""; if(N.n<=60) for(let i=0;i<=N.n;i++){ const big=i%kStep===0; ticks+=`<path d="M${x(i).toFixed(1)} ${big?34:38}v${big?20:12}" stroke="var(--moon)" stroke-width="${big?2:1.2}" opacity="${big?1:.7}"/>`+(big?`<text x="${x(i).toFixed(1)}" y="74" text-anchor="middle" font-size="15" font-family="var(--body)" fill="var(--moon)">${nlTxt(N.min+i*N.step)}</text>`:""); }
+    const right=done?`<circle cx="${x(Q.ai)}" cy="44" r="9" fill="var(--mint)" stroke="var(--sky-deep)" stroke-width="2"/>`:"";
+    const pt=v!=null&&!(done&&v===Q.ai)?`<circle cx="${x(v)}" cy="44" r="9" fill="var(--star)" stroke="var(--sky-deep)" stroke-width="2"/><text x="${x(v)}" y="22" text-anchor="middle" font-size="15" font-weight="700" font-family="var(--display)" fill="var(--star-text)">${nlTxt(N.min+v*N.step)}</text>`:"";
+    const svg=`<svg viewBox="0 0 340 84" aria-hidden="true"><path d="M8 44H332" stroke="var(--moon)" stroke-width="2.4"/><path d="M14 38 6 44l8 6M326 38l8 6-8 6" fill="none" stroke="var(--moon)" stroke-width="2.4"/>${ticks}${right}${pt}</svg>`;
+    const now=v==null?"":nlTxt(N.min+v*N.step);
+    return chrome(`${it.story?`<p class="story">${fmt(it.story)}</p>`:""}<h2 class="prompt">${it.s}</h2><p class="sub">Tap the line to place your point. You can also use the arrow keys or the ◀ ▶ buttons.</p>%READ%
+      <div class="nlwrap"><div class="nlslider" role="slider" tabindex="${done?-1:0}" aria-label="${esc(it.label||"Your point on the number line")}" aria-valuemin="${N.min}" aria-valuemax="${N.max}" ${v!=null?`aria-valuenow="${(N.min+v*N.step).toFixed(N.dec)}"`:""} aria-valuetext="${v==null?"not placed yet":now.replace("−","minus ")}" ${done?'aria-disabled="true"':""}>${svg}</div>
+      <div class="nlctl"><button class="btn soft nlb" type="button" data-nl="-1" aria-label="Move point left" ${done?"disabled":""}>◀</button><p class="nlread" aria-live="polite">${v==null?"No point yet.":`${esc(it.label||"Your point")}: <b>${now}</b>`}</p><button class="btn soft nlb" type="button" data-nl="1" aria-label="Move point right" ${done?"disabled":""}>▶</button></div></div>
+      ${fbBox()}${actionRow({check:true,checkDisabled:v==null})}`,String(it.s).replace(/<[^>]+>/g,"")); },
+  move(d,abs){ const N=Q.nl; let v=abs!=null?abs:(Q.val==null?Math.round(N.n/2):Q.val+d); Q.val=Math.max(0,Math.min(N.n,v)); if(Q.fb&&Q.fb.kind!=="hint") Q.fb=null; },
+  bind(st){ const sl=st.querySelector(".nlslider"); if(!sl||Q.solved||Q.locked) return;
+    sl.onclick=e=>{const svg=sl.querySelector("svg").getBoundingClientRect();const px=(e.clientX-svg.left)/svg.width*340;this.move(0,Math.round((px-20)/300*Q.nl.n));Q.refocus=".nlslider";render();};
+    sl.onkeydown=e=>{const m={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1,PageUp:5,PageDown:-5}[e.key];
+      if(m!=null){e.preventDefault();this.move(m);} else if(e.key==="Home"){e.preventDefault();this.move(0,0);} else if(e.key==="End"){e.preventDefault();this.move(0,Q.nl.n);}
+      else if(e.key==="Enter"&&Q.val!=null){e.preventDefault();this.check();Q.refocus=Q.solved?'[data-act="next"]':".nlslider";return render();} else return;
+      Q.refocus=".nlslider";render();};
+    st.querySelectorAll("[data-nl]").forEach(b=>b.onclick=()=>{this.move(+b.dataset.nl);Q.refocus=`[data-nl="${b.dataset.nl}"]`;render();}); },
+  check(){ if(Q.val==null) return; const it=Q.it; if(Q.val===Q.ai) return solved(Q.explain());
+    const v=Q.nl.min+Q.val*Q.nl.step; miss(`<p>${nlTxt(v)} isn't it. The answer is to the <b>${Q.val<Q.ai?"right":"left"}</b> of your point. ${esc(it.nudge||PG.lineNudge||"Check your work, then move the point.")}</p>`); }
+},
+tiles:{
+  /* build an answer from tiles: {s, tiles:[...], a:[ordered tile strings], alts?:[[...],…], why, hint, nudge?} */
+  init(it){ Q.it=it; Q.tk=shuffle(it.tiles.map((t,i)=>({id:"k"+i,label:String(t)}))); Q.build=[]; Q.okOrders=[it.a,...(it.alts||[])].map(o=>o.map(String));
+    const best=()=>{const seq=tkSeq();let b=Q.okOrders[0],k=-1;Q.okOrders.forEach(o=>{let j=0;while(j<seq.length&&j<o.length&&seq[j]===o[j])j++;if(j>k){k=j;b=o;}});return [b,k];};
+    Q.tkBest=best;
+    Q.explain=()=>`<b>${fmt(tj(it.a))}</b>${endP(tj(it.a))}${it.why?" "+fmt(it.why):""}`;
+    Q.hints=[esc(it.hint||"Say the answer out loud first, then build it one tile at a time."),()=>{const [o,k]=best();return k>=o.length?"Your answer is complete. Press Check.":`${k?`Your first ${k} tile${k>1?"s are":" is"} right. `:""}The next tile is "${fmt(o[k])}".`;}];
+    Q.together=()=>`<p><b>${fmt(it.a.join(" "))}</b></p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
+  view(){ const it=Q.it, done=Q.solved||Q.locked, bank=Q.tk.filter(t=>!Q.build.includes(t.id)), P2=LEVELS[Q.li].prompt||"Build the answer.";
+    const built=Q.build.map((id,i)=>{const t=Q.tk.find(x=>x.id===id);return `<button class="tk in ${done?"done":""}" type="button" data-tb="${id}" ${done?"disabled":""} aria-label="Tile ${i+1}: ${esc(t.label)}. Tap to take it back.">${fmt(t.label)}</button>`;}).join("");
+    return chrome(`${it.story?`<p class="story">${fmt(it.story)}</p>`:""}<h2 class="prompt">${fmt(it.s)}</h2><p class="sub">${esc(P2)} Tap the tiles in order. Tap a placed tile to take it back.</p>%READ%
+      <div class="tbuild" role="group" aria-label="Your answer">${built||`<span class="tph">Your answer goes here</span>`}</div>
+      ${done?"":`<div class="tbank" role="group" aria-label="Tiles to use">${bank.map(t=>`<button class="tk" type="button" data-tk="${t.id}">${fmt(t.label)}</button>`).join("")}</div>`}
+      ${fbBox()}${actionRow({check:true,checkDisabled:!Q.build.length,extra:Q.build.length&&!done?`<button class="btn soft" type="button" data-act="tclear">Clear</button>`:""})}`,String(it.s)); },
+  act(a){ if(a==="tclear"){ Q.build=[]; if(Q.fb&&Q.fb.kind!=="hint") Q.fb=null; Q.refocus=".tbank .tk"; } },
+  bind(st){ st.querySelectorAll("[data-tk]").forEach(b=>{ b.onclick=()=>{Q.build.push(b.dataset.tk);if(Q.fb&&Q.fb.kind!=="hint")Q.fb=null;Q.refocus=st.querySelectorAll(".tbank .tk").length>1?".tbank .tk":'[data-act="check"]';render();}; b.onkeydown=e=>arrowNav(e,b.parentElement,".tk"); });
+    st.querySelectorAll("[data-tb]").forEach(b=>{ b.onclick=()=>{Q.build=Q.build.filter(x=>x!==b.dataset.tb);Q.refocus=".tbank .tk";render();}; b.onkeydown=e=>arrowNav(e,b.parentElement,".tk"); }); },
+  check(){ const it=Q.it, seq=tkSeq();
+    if(Q.okOrders.some(o=>o.length===seq.length&&o.every((t,i)=>t===seq[i]))) return solved(Q.explain());
+    const [o,k]=Q.tkBest();
+    const what=k>=seq.length?"That's right so far, but the answer isn't finished.":k===0?"The first tile isn't right yet.":`The first ${k} tile${k>1?"s are":" is"} right, but tile ${k+1} isn't.`;
+    Q.build=Q.build.slice(0,Math.min(k,seq.length));
+    miss(`<p>${what} ${esc(it.nudge||PG.tilesNudge||"")}</p><p>${k?"The tiles after that":"Your tiles"} went back so you can try again.</p>`); }
+},
+lock:{
+  /* code lock: pool = rounds; each round is exactly 3 mc items {s,a,x,why?,hint?,fig?,digit?} (or {qs:[3 items], code:"472"}).
+     Each right answer reveals one digit; all 3 open the lock. Works as a boss (boss:true, need:1) or a regular level. */
+  init(r){ const qs=Array.isArray(r)?r:r.qs, code=r&&r.code!=null?String(r.code):null;
+    Q.rounds=qs; Q.round=0; Q.code=qs.map((q,i)=>String(code?code[i]:(q.digit!=null?q.digit:Math.floor(Math.random()*10)))); this.setRound(); },
+  setRound(){ const it=Q.rounds[Q.round]; Q.it=it; Q.stage=Q.round; Q.out=new Set(); mcFrom(it,PG.lockNudge||PG.bossNudge||"Think back to your notes.");
+    Q.hints=[esc(it.hint||PG.bossHint||"Think back to your notes.")];
+    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
+    Q.choose=i=>{ if(i!==Q.ans){Q.out.add(i);return miss(Q.whyNot(i));}
+      const d=Q.code[Q.round];
+      if(Q.round<Q.rounds.length-1){const a=it.a;Q.round++;this.setRound();stepOK(`<p><strong>Yes: ${fmt(a)}${endP(a)}</strong> Digit ${Q.round} of the code is <b>${d}</b>. ${Q.rounds.length-Q.round===2?"Two":"One"} more to go.</p>`);}
+      else { Q.round++; solved(`${fmt(it.a)}. The code is <b>${Q.code.join(" ")}</b> and the lock opens! ${esc(PG.lockWin||PG.bossWin||"You did it!")}`); } }; },
+  view(){ const it=Q.it, open=Q.solved&&Q.round>=Q.rounds.length, shown=Q.code.map((d,i)=>i<Q.round||open?d:null);
+    const lk=`<svg class="padlock ${open?"open":""}" viewBox="0 0 48 56" aria-hidden="true"><path d="M13 ${open?14:24}V16a11 11 0 0 1 22 0${open?"":"v8"}" fill="none" stroke="${open?"var(--mint)":"var(--boss)"}" stroke-width="5" stroke-linecap="round"/><rect x="5" y="24" width="38" height="30" rx="6" fill="${open?"var(--mint)":"var(--boss)"}"/><circle cx="24" cy="37" r="4" fill="var(--sky-deep)"/><path d="M24 39v7" stroke="var(--sky-deep)" stroke-width="3"/></svg>`;
+    const code=`<div class="lockcode" aria-label="Code so far: ${shown.map(d=>d==null?"unknown":d).join(", ")}">${lk}<div class="dials">${shown.map(d=>`<span class="dial ${d==null?"":"on"}" aria-hidden="true">${d==null?"?":d}</span>`).join("")}</div></div>`;
+    const q=Math.min(Q.round,Q.rounds.length-1);
+    return chrome(`${code}${it.story?`<p class="story">${fmt(it.story)}</p>`:""}${it.fig?`<div class="tool fig" style="border-style:solid;text-align:center">${it.fig}</div>`:""}<h2 class="prompt">${fmt(it.s)}</h2><p class="sub">Question ${q+1} of ${Q.rounds.length}. Each right answer shows one digit of the code. Get all ${Q.rounds.length} with no misses.</p>%READ%
+      ${W.choices("Choices")}${fbBox()}${actionRow({})}`,`Code lock. ${it.s}`); },
+  check(){}
+}};
+const IMPL=Object.fromEntries(DECK.levels.map(L=>[L.key,TYPES[L.type||(L.boss?"boss":"mc")]]));
+
+/* ================= engine part B (v2): the quest frame with map styles, for games with "engineVersion": 2 ================= */
+const LEVELS=DECK.levels.map((c,i)=>Object.assign({},c,LOOK[i]));
+
+/* ---------- student settings (never store a diagnosis) ---------- */
+const PREF_DEF={read:"button",rate:"normal",size:0,spacing:0,bg:"night",calm:0,sound:1};
+const PREF_OK={read:["button","auto"],rate:["slow","normal"],size:[0,1,2],spacing:[0,1],bg:["night","light","cream"],calm:[0,1],sound:[0,1]};
+function loadPrefs(){let p={};try{p=JSON.parse(localStorage.getItem("mb-prefs"))||{};}catch(e){} const o={};for(const k in PREF_DEF) if(PREF_OK[k].includes(p[k])) o[k]=p[k]; return Object.assign({},PREF_DEF,o);}
+let P=loadPrefs();
+function applyPrefs(){const r=document.documentElement;r.dataset.bg=P.bg;r.dataset.size=P.size;r.dataset.spacing=P.spacing;r.dataset.calm=P.calm;syncSound();}
+function savePrefs(){try{localStorage.setItem("mb-prefs",JSON.stringify(P));}catch(e){}}
+
+/* ---------- state ---------- */
+/* In Canvas the game runs inside the Mighty B Practice page, which keeps each student's stars on the
+   server so they belong to that student and follow them to any device. Opened on its own (GitHub Pages),
+   the game keeps stars in this browser only. */
+const EMBED=window.parent!==window;
+let KEY="mb-"+DECK.deckId, READY=!EMBED, HOSTED=false;
+let S=EMBED?fresh():(load()||fresh());
+function mergeState(a,b){
+  const ok=s=>s&&Array.isArray(s.stars)&&s.stars.length===LEVELS.length;
+  if(!ok(a)) return ok(b)?b:null; if(!ok(b)) return a;
+  const n=(+a.at||0)>=(+b.at||0)?a:b, o=n===a?b:a, out=Object.assign({},n);
+  out.stars=n.stars.map((v,i)=>Math.max(+v||0,+o.stars[i]||0));
+  out.starred=out.stars.map((_,i)=>[...new Set([...((n.starred||[])[i]||[]),...((o.starred||[])[i]||[])])]);
+  if(o.startedAt&&(!n.startedAt||o.startedAt<n.startedAt)) out.startedAt=o.startedAt;
+  return out;
+}
+function fresh(){return {level:0,stars:LEVELS.map(()=>0),used:LEVELS.map(()=>[]),starred:LEVELS.map(()=>[]),stats:LEVELS.map(()=>({tried:0,own:0,hints:0,together:0})),streak:0,startedAt:new Date().toISOString(),best:0};}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));return s&&s.stars&&s.stars.length===LEVELS.length?s:null;}catch(e){return null;}}
+function save(){ if(!READY) return; S.at=Date.now(); try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+  if(HOSTED){try{window.parent.postMessage({type:"mb-save-state",deckId:DECK.deckId,state:S},MB_HOST_ORIGIN);}catch(e){}} }
+const totalStars=()=>LEVELS.reduce((t,L,i)=>t+Math.min(S.stars[i],L.need),0);
+const maxStars=()=>LEVELS.reduce((t,L)=>t+L.need,0);
+/* Grade passback: same result object and message as every Mighty B deck. Sent each time the student earns a
+   star; the host only posts a score that beats the best one already in Canvas. */
+function sendResult(){
+  const g=totalStars(),m=maxStars();
+  const result={formatVersion:1,deckId:DECK.deckId,attemptId:uuid(),startedAt:S.startedAt,completedAt:new Date().toISOString(),
+    scoreGiven:g,scoreMaximum:m,mastered:g/m>=(DECK.masteryThreshold||0.85),
+    items:LEVELS.flatMap((L,i)=>Array.from({length:L.need},(_,k)=>({id:L.key+"-"+(k+1),skill:L.skill,firstTryCorrect:S.stars[i]>k,tries:k===0?S.stats[i].tried:0}))),
+    levelStats:LEVELS.map((L,i)=>({id:L.key,skill:L.skill,starsOnOwn:Math.min(S.stars[i],L.need),need:L.need,tries:S.stats[i].tried,hints:S.stats[i].hints,workedTogether:S.stats[i].together}))};
+  window.dispatchEvent(new CustomEvent("mb-deck-complete",{detail:result}));
+  if(window.parent!==window){try{window.parent.postMessage({type:"mb-deck-complete",result},MB_HOST_ORIGIN);}catch(e){}}
+}
+let Q=null;
+
+/* ---------- sound ---------- */
+let ac=null;
+function tone(freqs,dur=.18,gap=.09,vol=.08){ if(!P.sound||P.calm) return; try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+  freqs.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.value=f;const t=ac.currentTime+i*gap;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur+.25);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+dur+.3);});}catch(e){} }
+const sfx={good:()=>tone([659,880]),star:()=>tone([523,659,784,1047],.2,.1,.07),soft:()=>tone([392],.15,0,.04),done:()=>tone([523,659,784,988,1175],.25,.12,.07),ping:()=>tone([1047],.12,0,.05)};
+function toast(t){ if(P.calm||matchMedia("(prefers-reduced-motion: reduce)").matches) return; const d=document.createElement("div");d.className="toast";d.setAttribute("aria-hidden","true");d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1400); }
+function confetti(){ if(P.calm||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cv=document.createElement("canvas");cv.id="confetti";document.body.appendChild(cv);const cx=cv.getContext("2d");const W=cv.width=innerWidth,H=cv.height=innerHeight;
+  const cs=["#FFD166","#7BDCB5","#B8A6FF","#FF9E7A","#F3EFE0"];const bits=Array.from({length:130},()=>({x:W/2+(Math.random()-.5)*120,y:H/3,vx:(Math.random()-.5)*12,vy:-Math.random()*12-4,r:Math.random()*6+3,c:cs[Math.random()*cs.length|0],a:Math.random()*6}));
+  let f=0;(function step(){cx.clearRect(0,0,W,H);for(const b of bits){b.vy+=.35;b.x+=b.vx;b.y+=b.vy;b.a+=.2;cx.fillStyle=b.c;cx.save();cx.translate(b.x,b.y);cx.rotate(b.a);cx.fillRect(-b.r/2,-b.r/2,b.r,b.r*.6);cx.restore();}if(++f<140)requestAnimationFrame(step);else cv.remove();})(); }
+
+/* ---------- icons ---------- */
+const starSVG=(on,cls="")=>`<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.6l-5.4 2.9 1.1-6.1L3.2 9.2l6.1-.8z" fill="${on?"var(--star)":"none"}" stroke="${on?"var(--star)":"var(--star-dim)"}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+const ICON={
+  good:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>`,
+  look:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--lilac)" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>`,
+  hint:`<svg viewBox="0 0 24 24" fill="none" stroke="var(--star)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>`,
+  speak:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>`};
+function conSVG(L,lit,big){
+  const lines=L.pts.map((p,i)=>i?`L${p[0]} ${p[1]}`:`M${p[0]} ${p[1]}`).join(" ");const done=lit>=L.need;const col=L.boss?"var(--boss)":"var(--star)";
+  const dots=L.stars.map((p,i)=>{const on=i<lit;return `<circle cx="${p[0]}" cy="${p[1]}" r="${on?(L.boss?9:6):4}" fill="${on?col:"var(--star-dim)"}" ${on?`class="twinkle" style="animation-delay:${i*.6}s"`:""}/>${on?`<circle cx="${p[0]}" cy="${p[1]}" r="${L.boss?16:11}" fill="${col}" opacity=".15"/>`:""}`;}).join("");
+  const minor=L.pts.filter(p=>!L.stars.some(s=>s[0]===p[0]&&s[1]===p[1])).map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.2" fill="${done?"var(--moon)":"var(--star-dim)"}"/>`).join("");
+  return `<svg ${big?'class="big"':""} viewBox="-6 0 132 100" aria-hidden="true"><path d="${lines}" fill="none" stroke="${done?col:"var(--line)"}" stroke-width="${done?2:1.4}" stroke-dasharray="${done?"none":"4 5"}" stroke-linecap="round"/>${minor}${dots}</svg>`;
+}
+
+/* ================= engine v2: map styles (meta "mapStyle") =================
+   Each style draws its own level node, progress, boss node and token word. Stars stay stars inside the engine
+   (S.stars, grade passback); only what the student sees is renamed (ui.text.star / ui.text.stars override). */
+const MAPSTYLES=["constellation","trainline","escape","tower","boardgame"];
+const MAPSTYLE=MAPSTYLES.includes(DECK.mapStyle)?DECK.mapStyle:"constellation";
+const STYLE_WORDS={constellation:["star","stars"],trainline:["ticket","tickets"],escape:["key","keys"],tower:["gem","gems"],boardgame:["coin","coins"]};
+const W1=TEXT.star||STYLE_WORDS[MAPSTYLE][0], WN=TEXT.stars||STYLE_WORDS[MAPSTYLE][1];
+const cap=s=>String(s).charAt(0).toUpperCase()+String(s).slice(1);
+const TOKEN_PATH={
+  ticket:(on)=>`<path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z" fill="${on?"var(--star)":"none"}" stroke="${on?"var(--star)":"var(--star-dim)"}" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 7.5v9" stroke="${on?"var(--btn-ink)":"var(--star-dim)"}" stroke-width="1.3" stroke-dasharray="1.6 1.6"/>`,
+  key:(on)=>`<circle cx="7.5" cy="12" r="4.2" fill="${on?"var(--star)":"none"}" stroke="${on?"var(--star)":"var(--star-dim)"}" stroke-width="1.8"/><path d="M11.7 12H21.5M18 12v3.5M21 12v2.6" fill="none" stroke="${on?"var(--star)":"var(--star-dim)"}" stroke-width="2" stroke-linecap="round"/>`,
+  gem:(on)=>`<path d="M6.5 4h11l4.3 6L12 21 2.2 10z" fill="${on?"var(--star)":"none"}" stroke="${on?"var(--star)":"var(--star-dim)"}" stroke-width="1.6" stroke-linejoin="round"/><path d="M2.5 10h19M9 4.2 12 10l3-5.8M12 10v10.5" fill="none" stroke="${on?"var(--btn-ink)":"var(--star-dim)"}" stroke-width="1" opacity=".6"/>`,
+  coin:(on)=>`<circle cx="12" cy="12" r="9" fill="${on?"var(--star)":"none"}" stroke="${on?"var(--star)":"var(--star-dim)"}" stroke-width="1.7"/><circle cx="12" cy="12" r="5.6" fill="none" stroke="${on?"var(--btn-ink)":"var(--star-dim)"}" stroke-width="1.2" opacity=".55"/>`};
+const STYLE_ICON={trainline:"ticket",escape:"key",tower:"gem",boardgame:"coin"};
+/* the earned-token icon for this game's style (star by default) */
+function tokenSVG(on,cls=""){ const k=STYLE_ICON[MAPSTYLE]; if(!k) return starSVG(on,cls); return `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${TOKEN_PATH[k](on)}</svg>`; }
+const LOCK_GLYPH=(x,y,s=1,col="var(--muted)")=>`<g transform="translate(${x} ${y}) scale(${s})"><rect x="-7" y="-2" width="14" height="11" rx="2" fill="${col}"/><path d="M-4.5-2v-3a4.5 4.5 0 0 1 9 0v3" fill="none" stroke="${col}" stroke-width="2.2"/></g>`;
+const BG_COLS=["var(--star)","var(--mint)","var(--lilac)","var(--boss)"];
+let lastTrainAt=null;
+const firstOpen=()=>{const k=LEVELS.findIndex((l,i)=>S.stars[i]<l.need);return k<0?LEVELS.length-1:k;};
+const levelNo=i=>LEVELS.slice(0,i+1).filter(l=>!l.boss).length;
+const NODE={
+  constellation(L,lit,i,o={}){ return conSVG(L,lit,o.big); },
+  /* stations on a track; the train waits at the station you are working on and pulls in as levels finish */
+  trainline(L,lit,i,o={}){ const done=lit>=L.need, last=i===LEVELS.length-1, first=i===0, cls=o.big?'class="big"':"";
+    const rail=done?"var(--mint)":"var(--star-dim)";
+    const sleepers=Array.from({length:10},(_,k)=>`<rect x="${k*12+3}" y="47" width="5" height="13" rx="1" fill="var(--line)"/>`).join("");
+    const tk=Array.from({length:L.need},(_,k)=>`<rect x="${60-L.need*8+k*16+2}" y="63" width="12" height="7" rx="1.5" fill="${k<lit?"var(--star)":"none"}" stroke="${k<lit?"var(--star)":"var(--star-dim)"}" stroke-width="1.4"/>`).join("");
+    const train=o.train?`<g class="train ${o.arrive?"arrive":""}"><rect x="30" y="28" width="44" height="19" rx="5" fill="var(--star)"/><rect x="74" y="20" width="18" height="27" rx="4" fill="var(--star)"/><rect x="36" y="32" width="10" height="8" rx="1.5" fill="var(--sky-deep)"/><rect x="52" y="32" width="10" height="8" rx="1.5" fill="var(--sky-deep)"/><rect x="78" y="25" width="10" height="9" rx="1.5" fill="var(--sky-deep)"/><circle cx="41" cy="49" r="5" fill="var(--moon)"/><circle cx="63" cy="49" r="5" fill="var(--moon)"/><circle cx="83" cy="49" r="5" fill="var(--moon)"/></g>`:"";
+    let sign;
+    if(L.boss) sign=`<path d="M34 18 60 2 86 18z" fill="${done?"var(--boss)":"var(--panel-2)"}" stroke="var(--boss)" stroke-width="2" stroke-linejoin="round"/><rect x="38" y="18" width="44" height="${o.train?8:28}" fill="var(--panel-2)" stroke="var(--boss)" stroke-width="2"/>${o.train?"":o.lock?LOCK_GLYPH(60,30,.95,"var(--boss)"):`<path d="M60 22v20" stroke="var(--boss)" stroke-width="2"/><path d="M60 22h13l-3 4 3 4H60" fill="var(--boss)"/>`}`;
+    else if(o.train) sign=`<rect x="47" y="2" width="26" height="17" rx="4" fill="${done?"var(--mint-text)":"var(--panel-2)"}" stroke="${done?"var(--mint)":"var(--star-dim)"}" stroke-width="1.8"/><text x="60" y="15" text-anchor="middle" font-size="12" font-weight="700" font-family="var(--display)" fill="${done?"var(--sign-ink)":"var(--moon)"}">${levelNo(i)}</text>`;
+    else sign=`<path d="M60 26v22" stroke="var(--star-dim)" stroke-width="2.5"/><rect x="42" y="4" width="36" height="24" rx="5" fill="${done?"var(--mint-text)":"var(--panel-2)"}" stroke="${done?"var(--mint)":"var(--star-dim)"}" stroke-width="2"/><text x="60" y="21.5" text-anchor="middle" font-size="16" font-weight="700" font-family="var(--display)" fill="${done?"var(--sign-ink)":"var(--moon)"}">${levelNo(i)}</text>`;
+    const x0=first?10:0, x1=last?(L.boss?112:110):120;
+    return `<svg ${cls} viewBox="0 0 120 72" aria-hidden="true" style="overflow:visible">${sleepers}<path d="M${x0} 50H${x1}M${x0} 57H${x1}" stroke="${rail}" stroke-width="2.6"/>${last?`<rect x="110" y="44" width="6" height="18" rx="1" fill="var(--boss)"/>`:""}${sign}${train}${tk}</svg>`; },
+  /* a locked door per level; each key you earn hangs under the door; the boss is the EXIT */
+  escape(L,lit,i,o={}){ const done=lit>=L.need, cls=o.big?'class="big"':"";
+    const keys=Array.from({length:L.need},(_,k)=>{const x=60-L.need*9+k*18+1;return `<g transform="translate(${x} 58) scale(.66)">${TOKEN_PATH.key(k<lit)}</g>`;}).join("");
+    if(L.boss) return `<svg ${cls} viewBox="0 0 120 72" aria-hidden="true"><rect x="26" y="1" width="68" height="56" rx="4" fill="var(--panel-b)" stroke="var(--line)" stroke-width="1.5"/>
+      <rect x="42" y="4" width="36" height="12" rx="2.5" fill="var(--mint-text)"/><text x="60" y="13.5" text-anchor="middle" font-size="10" font-weight="800" letter-spacing="1.5" font-family="var(--body)" fill="var(--sign-ink)">EXIT</text>
+      ${done?`<rect x="36" y="19" width="48" height="38" fill="var(--star)" opacity=".85"/><path d="M36 19l10 4v31l-10 3zM84 19l-10 4v31l10 3z" fill="var(--boss)"/>`
+      :`<rect x="36" y="19" width="48" height="38" rx="2" fill="var(--panel-2)" stroke="var(--boss)" stroke-width="2.4"/><path d="M60 19v38" stroke="var(--boss)" stroke-width="2"/>${o.lock?LOCK_GLYPH(60,34,1.1,"var(--boss)"):`<circle cx="55" cy="39" r="2" fill="var(--boss)"/><circle cx="65" cy="39" r="2" fill="var(--boss)"/>`}`}
+      <g transform="translate(52 58) scale(.66)">${TOKEN_PATH.key(done)}</g></svg>`;
+    const door=done
+      ?`<rect x="42" y="6" width="36" height="51" rx="2" fill="var(--star)" opacity=".9"/><path d="M42 6l15 5v41l-15 5z" fill="var(--panel-2)" stroke="var(--mint)" stroke-width="2"/><g transform="translate(68 30)"><rect x="-6" y="0" width="12" height="10" rx="2" fill="var(--mint)"/><path d="M-4 0v-4a4 4 0 0 1 8 0" fill="none" stroke="var(--mint)" stroke-width="2" transform="translate(0 -4)"/></g>`
+      :`<rect x="42" y="6" width="36" height="51" rx="2" fill="var(--panel-2)" stroke="var(--star-dim)" stroke-width="2"/><rect x="47" y="11" width="26" height="16" rx="1.5" fill="none" stroke="var(--line)" stroke-width="1.4"/><rect x="47" y="34" width="26" height="18" rx="1.5" fill="none" stroke="var(--line)" stroke-width="1.4"/>${LOCK_GLYPH(60,30,.95,lit?"var(--star)":"var(--star-dim)")}`;
+    return `<svg ${cls} viewBox="0 0 120 72" aria-hidden="true"><rect x="32" y="1" width="56" height="56" rx="3" fill="var(--panel-b)" stroke="var(--line)" stroke-width="1.2"/>${door}${keys}</svg>`; },
+  /* one floor of a tower: a window lights up for each gem; the boss is the rooftop */
+  tower(L,lit,i,o={}){ const done=lit>=L.need;
+    if(L.boss) return `<svg ${o.big?'class="big"':""} viewBox="0 0 120 40" aria-hidden="true"><path d="M8 40 24 16H96L112 40z" fill="${done?"var(--boss)":"var(--panel-2)"}" stroke="var(--boss)" stroke-width="2" stroke-linejoin="round"/><path d="M60 16V2" stroke="var(--boss)" stroke-width="2"/><path d="M60 2h14l-4 4 4 4H60" fill="var(--boss)"/>${o.lock?LOCK_GLYPH(60,25,.9,"var(--boss)"):`<circle cx="60" cy="29" r="6" fill="none" stroke="${done?"var(--btn-ink)":"var(--boss)"}" stroke-width="2"/><text x="60" y="32.5" text-anchor="middle" font-size="9" font-weight="800" font-family="var(--body)" fill="${done?"var(--btn-ink)":"var(--boss)"}">H</text>`}</svg>`;
+    const n=L.need, w=Math.min(18,72/n), gap=(80-n*w)/(n+1);
+    const win=Array.from({length:n},(_,k)=>`<rect x="${20+gap+k*(w+gap)}" y="10" width="${w}" height="20" rx="2" fill="${k<lit?"var(--star)":"var(--sky-deep)"}" stroke="${k<lit?"var(--star)":"var(--star-dim)"}" stroke-width="1.4"/>`).join("");
+    const climber=o.here?`<g class="climber"><circle cx="110" cy="13" r="4" fill="var(--mint)"/><path d="M110 17v10M104 21h12M110 27l-4 7M110 27l4 7" stroke="var(--mint)" stroke-width="2.4" stroke-linecap="round"/></g>`:"";
+    return `<svg ${o.big?'class="big"':""} viewBox="0 0 120 40" aria-hidden="true"><rect x="14" y="0" width="92" height="40" fill="${done?"var(--panel-2)":"var(--well)"}" stroke="${done?"var(--mint)":"var(--line)"}" stroke-width="2"/>${i===0?`<path d="M0 39.5H120" stroke="var(--line)" stroke-width="3"/>`:""}<text x="8" y="25" text-anchor="middle" font-size="12" font-weight="700" font-family="var(--display)" fill="var(--muted)">${levelNo(i)}</text>${win}${climber}</svg>`; },
+  /* a winding path of spaces; the token moves one space for every coin */
+  boardgame(L,lit,i,o={}){ const done=lit>=L.need, dir=i%2?1:-1, col=L.boss?"var(--boss)":BG_COLS[i%3], cls=o.big?'class="big"':"";
+    const pt=t=>[+(4+112*t).toFixed(1),+(40+dir*17*Math.sin(Math.PI*t)).toFixed(1)];
+    const line=Array.from({length:25},(_,k)=>pt(k/24)).map((p,k)=>(k?"L":"M")+p[0]+" "+p[1]).join(" ");
+    let spaces="",tok=null;
+    if(L.boss){ const [x,y]=pt(.55); spaces=`<circle cx="${x}" cy="${y}" r="16" fill="${done?col:"var(--panel-2)"}" stroke="${col}" stroke-width="3"/>${o.lock?LOCK_GLYPH(x,y-3,1,col):`<path d="M${x-7} ${y-7}h14v4a7 7 0 0 1-14 0zM${x} ${y+4}v4M${x-5} ${y+9}h10" fill="${done?"var(--btn-ink)":"none"}" stroke="${done?"var(--btn-ink)":col}" stroke-width="2" stroke-linejoin="round"/>`}`; if(o.token) tok=done?[x,y]:pt(.1); }
+    else { const n=L.need; for(let k=0;k<n;k++){ const [x,y]=pt((k+.5)/n); const on=k<lit; spaces+=`<circle cx="${x}" cy="${y}" r="10.5" fill="${on?col:"var(--panel-2)"}" stroke="${on?col:"var(--star-dim)"}" stroke-width="2.2"/>`; }
+      if(o.token) tok=lit>0?pt((Math.min(lit,n)-.5)/n):pt(.08); }
+    const token=tok?`<g class="pawn"><ellipse cx="${tok[0]}" cy="${tok[1]+3}" rx="8" ry="3" fill="rgba(0,0,0,.35)"/><path d="M${tok[0]-7} ${tok[1]+2}l2.5-13h9l2.5 13z" fill="var(--moon)" stroke="var(--sky-deep)" stroke-width="1.5"/><circle cx="${tok[0]}" cy="${tok[1]-14}" r="6" fill="var(--moon)" stroke="var(--sky-deep)" stroke-width="1.5"/></g>`:"";
+    return `<svg ${cls} viewBox="0 0 120 72" aria-hidden="true" style="overflow:visible"><path d="${line}" fill="none" stroke="${done?col:"var(--line)"}" stroke-width="8" stroke-linecap="round" opacity="${done?.5:1}"/>${spaces}${token}</svg>`; }
+};
+/* draw level i's node in this game's style; o.big for the celebration card */
+function nodeSVG(i,lit,o={}){ const L=LEVELS[i], lock=L.boss&&!bossOpen()&&!REVIEW, cur=firstOpen();
+  const extra={lock,big:o.big}, still=o.big||o.mini;
+  if(still) return NODE[MAPSTYLE](L,lit,i,extra);
+  if(MAPSTYLE==="trainline"&&i===cur){ extra.train=true; extra.arrive=o.map&&lastTrainAt!==null&&cur>lastTrainAt; }
+  if(MAPSTYLE==="tower") extra.here=i===cur&&!L.boss;
+  if(MAPSTYLE==="boardgame") extra.token=i===(S.stars[S.level]>=LEVELS[S.level].need&&!LEVELS[S.level].boss?cur:S.level);
+  return NODE[MAPSTYLE](L,lit,i,extra); }
+
+/* ---------- map ---------- */
+const REVIEW=false; // review copy: every level open. The Canvas copy keeps the boss locked until the others are lit.
+const NBOSS=LEVELS.filter(L=>!L.boss).length;
+function bossOpen(){return LEVELS.every((L,i)=>L.boss||S.stars[i]>=L.need);}
+function renderMap(){
+  const map=document.getElementById("map"), cur=firstOpen();
+  map.className="map ms-"+MAPSTYLE;
+  if(MAPSTYLE==="constellation") map.style.gridTemplateColumns=`repeat(${LEVELS.length},minmax(0,1fr))`;
+  else { map.style.setProperty("--n",LEVELS.length); map.style.setProperty("--n2",Math.ceil(LEVELS.length/2)); }
+  map.innerHTML=LEVELS.map((L,i)=>{const lock=L.boss&&!bossOpen()&&!REVIEW;const lit=Math.min(S.stars[i],L.need);return `<button class="con ${S.stars[i]>=L.need?"done":""} ${L.boss?"boss":""} ${lock?"locked":""}" type="button" data-lv="${i}" ${i===S.level?'aria-current="step"':""} aria-label="${L.name}: ${L.skill}, ${lit} of ${L.need} ${L.need===1?W1:WN}${lock?`, unlocks after the other ${NBOSS}`:""}">${nodeSVG(i,lit,{map:true})}<span class="nmwrap"><span class="nm">${L.name}</span><span class="sk">${lock?`Finish the other ${NBOSS} first`:L.skill}</span></span></button>`;}).join("");
+  lastTrainAt=cur;
+  document.querySelectorAll(".con").forEach(b=>b.onclick=()=>{const i=+b.dataset.lv;if(LEVELS[i].boss&&!bossOpen()&&!REVIEW){toast(TEXT.lockedToast||"Finish the other levels first!");return;}S.level=i;S.cur=null;save();newQuestion();});
+}
+
+/* ---------- picking questions ---------- */
+function pickItem(li){
+  const pool=LEVELS[li].pool;const starred=S.starred[li]||[];const last=S.lastIdx&&S.lastIdx[li];
+  const rnd=a=>a[Math.floor(Math.random()*a.length)];
+  let cand=[...pool.keys()].filter(i=>!S.used[li].includes(i)&&!starred.includes(i));
+  if(!cand.length){S.used[li]=[];cand=[...pool.keys()].filter(i=>!starred.includes(i));}
+  if(cand.length>1) cand=cand.filter(i=>i!==last);
+  let idx=cand.length?rnd(cand):Math.floor(Math.random()*pool.length);
+  S.used[li].push(idx);S.lastIdx=S.lastIdx||{};S.lastIdx[li]=idx;return {idx,item:pool[idx]};
+}
+function newQuestion(){
+  closeReport();
+  const li=S.level,L=LEVELS[li];
+  if(S.stars[li]>=L.need&&!(Q&&Q.practiceMore)) return celebrate(li);
+  const {idx,item}=pickItem(li);
+  Q={li,idx,item,misses:0,hinted:false,hintStep:0,id:`${TEXT.idPrefix}-${L.key}-${idx+1}`,tool:null,sel:new Set(),ruled:new Set(),out:new Set(),entry:"",place:{},pick:null,seq:[]};
+  S.stats[li].tried++;
+  IMPL[L.key].init(item);
+  save();render();
+}
+const IM=()=>IMPL[LEVELS[Q.li].key];
+
+/* ---------- card chrome ---------- */
+function chrome(inner,promptText){
+  const L=LEVELS[Q.li];const got=Math.min(S.stars[Q.li],L.need);Q.speak=promptText;
+  return `<section class="card ${L.boss?"bosscard":""}" aria-label="${L.name}">
+    <div class="eyebrow"><span class="lv"><b>${L.boss?"Boss level · ":""}${L.name}</b> · ${L.skill}</span>
+      <span class="starrow" aria-label="${got} of ${L.need} ${L.need===1?W1:WN}">${Array.from({length:L.need},(_,i)=>tokenSVG(i<got,i===got-1&&Q.justStarred?"pop":"")).join("")}</span></div>
+    ${inner.replace("%READ%",readBtn()+toolbar())}
+  </section>`;
+}
+const readBtn=()=>`<button class="pill readbtn" type="button" data-act="read">${ICON.speak}<span>Read to me</span></button>`;
+function fbBox(){ if(!Q.fb) return ""; const f=Q.fb; return `<div class="fb ${f.kind}" role="status">${ICON[f.kind==="good"?"good":f.kind==="hint"?"hint":"look"]}<div>${f.html}<button class="fbread" type="button" data-act="readfb">${ICON.speak}Read this</button></div></div>`; }
+function actionRow(o={}){
+  const parts=[];
+  if(o.check&&!Q.solved&&!Q.locked) parts.push(`<button class="btn" type="button" data-act="check" ${o.checkDisabled?"disabled":""}>${o.checkLabel||"Check"}</button>`);
+  if(o.extra&&!Q.solved) parts.push(o.extra);
+  if(o.hint!==false&&!Q.solved) parts.push(`<button class="btn ghost" type="button" data-act="hint">Show me a hint</button>`);
+  if(Q.solved) parts.push(`<button class="btn" type="button" data-act="next">${Q.nextLabel||"Next "+W1}</button>`);
+  return `<div class="actions">${parts.join("")}</div>`;
+}
+
+/* ---------- outcomes ---------- */
+function solved(msg){
+  Q.solved=true;const own=Q.misses===0&&!Q.hinted;const L=LEVELS[Q.li];
+  if(own){S.stars[Q.li]++;S.starred[Q.li].push(Q.idx);S.stats[Q.li].own++;S.streak++;Q.justStarred=true;sfx.star();
+    if([3,5,8].includes(S.streak)) toast(`${S.streak} in a row!`);
+    const left=L.need-Math.min(S.stars[Q.li],L.need);
+    Q.fb={kind:"good",html:`<p><strong>You did that on your own. ${cap(W1)} earned!</strong></p><p>${msg}</p>`};
+    Q.nextLabel=left?"Next "+W1:(L.boss?(TEXT.claimBoss||"Claim your victory"):(TEXT.finishLevel||"Finish this level"));
+    if(totalStars()>S.best){S.best=totalStars();sendResult();}
+  } else {S.streak=0;sfx.good();
+    Q.fb={kind:"good",html:`<p><strong>You got it.</strong> ${msg}</p><p>${Q.hinted?cap(WN)+" are for solving without hints":cap(WN)+" are for getting it right with no wrong tries"}, so try the next one on your own. You're ready.</p>`};
+    Q.nextLabel="Try another";}
+  save();
+}
+function miss(html){
+  Q.misses++;S.streak=0;sfx.soft();
+  if(Q.misses>=2&&Q.together){ Q.fb={kind:"look",html:`<p><strong>Let's work this one out together.</strong></p>${Q.together()}`};S.stats[Q.li].together++;Q.solved=true;Q.nextLabel="Try a new one on your own";Q.locked=true; }
+  else Q.fb={kind:"look",html:`<p><strong>Let's look closer.</strong></p>${html}`};
+  save();
+}
+/* a correct step inside a longer question: no star yet, no penalty */
+function stepOK(html){ sfx.ping(); Q.fb={kind:"good",html}; }
+function hint(){ Q.hinted=true;S.stats[Q.li].hints++;const h=Q.hints[Math.min(Q.hintStep,Q.hints.length-1)];Q.hintStep++;Q.fb={kind:"hint",html:`<p><strong>Hint</strong></p><p>${typeof h==="function"?h():h}</p>`};save();render(); }
+
+/* ---------- widgets every game can use ---------- */
+const W={
+  /* multi-select tiles: Q.items = [{label, ok}] */
+  tiles(aria,small){ return `<div class="tiles" role="group" aria-label="${aria}">${Q.items.map((t,i)=>{const cls=(Q.solved||Q.locked)&&t.ok?"locked":Q.ruled.has(i)?"nope":"";return `<button class="tile ${small?"small":""} ${cls}" type="button" data-t="${i}" aria-pressed="${Q.sel.has(i)}" ${Q.ruled.has(i)||Q.locked||Q.solved?"disabled":""}>${t.label}</button>`;}).join("")}</div>`; },
+  /* single choice: Q.opts = [html], Q.ans = index */
+  choices(aria){ return `<div class="choices" role="group" aria-label="${aria||"Choices"}">${Q.opts.map((o,i)=>{const right=(Q.solved||Q.locked)&&i===Q.ans;return `<button class="choice ${right?"right":""} ${Q.out.has(i)?"out":""}" type="button" data-opt="${i}" ${Q.out.has(i)||Q.solved||Q.locked?"disabled":""}>${o}</button>`;}).join("")}</div>`; },
+  /* typed answer with a number pad */
+  entry(label,after=""){ const v=Q.entry; return `<div class="entry" aria-live="polite"><span>${label}</span><span class="box ${v?"":"empty"}" aria-label="Your answer ${v||"empty"}">${v?esc(v.replace(/-/g,"−")):"tap the keys"}</span><span>${after}</span></div>`; },
+  pad(){ if(Q.solved||Q.locked) return ""; const ex=Q.padKeys||[];
+    const lab={"-":"negative sign","/":"fraction bar",".":"decimal point"}, face={"-":"−","/":"⁄"};
+    const key=k=>k==null?"<span></span>":`<button type="button" data-key="${k}" ${lab[k]?`aria-label="${lab[k]}"`:k==="clr"?'aria-label="Clear"':k==="del"?'aria-label="Delete"':""}>${face[k]||(k==="clr"?"C":k==="del"?"⌫":k)}</button>`;
+    const rows=ex.length?[["1","2","3",ex[0]],["4","5","6",ex[1]],["7","8","9",ex[2]],["clr","0","del",null]]:[["1","2","3"],["4","5","6"],["7","8","9"],["clr","0","del"]];
+    return `<div class="pad ${ex.length?"wide":""}" role="group" aria-label="Number pad">${rows.flat().map(key).join("")}</div>`; },
+  /* sort into boxes: Q.chips=[{id,label,zone}], Q.zones=[{key,label,sub}] */
+  sort(){ const chip=c=>`<button class="chip ${String(c.label).length>4?"txt":""}" type="button" draggable="${!Q.solved}" data-chip="${c.id}" aria-pressed="${Q.pick===c.id}" ${Q.solved||Q.locked?"disabled":""}>${c.label}</button>`;
+    const tray=Q.chips.filter(c=>!Q.place[c.id]);
+    return `<div class="tray zone" data-zone="" aria-label="Cards to sort">${tray.map(chip).join("")||`<span class="sub" style="margin:0">All sorted. Press Check.</span>`}</div>
+    <div class="zones ${Q.zones.length===3?"z3":""}">${Q.zones.map(z=>`<div class="zone" data-zone="${z.key}" tabindex="0" role="button" aria-label="${z.label} box"><span class="zl"><b>${z.label}</b>${z.sub?` · ${z.sub}`:""}</span><div class="zc">${Q.chips.filter(c=>Q.place[c.id]===z.key).map(chip).join("")}</div></div>`).join("")}</div>`; },
+  /* put steps in order: Q.steps=[{id,label}], Q.order=[ids in the right order] */
+  order(){ const left=Q.steps.filter(s=>!Q.seq.includes(s.id));
+    return `<div class="seq" aria-label="Your order">${Q.order.map((_,i)=>{const id=Q.seq[i];const s=Q.steps.find(x=>x.id===id);return `<div class="slotline">${s?`<button class="stepchip ${Q.solved?"done":""}" type="button" data-unstep="${s.id}" ${Q.solved||Q.locked?"disabled":""} aria-label="Step ${i+1}: ${esc(s.label.replace(/<[^>]+>/g,""))}. Tap to take it back.">${s.label}</button>`:`<span class="sub" style="margin:0">Step ${i+1}</span>`}</div>`;}).join("")}</div>
+      ${left.length&&!Q.solved&&!Q.locked?`<div class="bank" role="group" aria-label="Steps to place">${left.map(s=>`<button class="stepchip" type="button" data-step="${s.id}">${s.label}</button>`).join("")}</div>`:""}`; }
+};
+/* generic checks */
+function checkTilesDefault(){
+  const extra=[...Q.sel].filter(i=>!Q.items[i].ok),missing=Q.items.map((t,i)=>i).filter(i=>Q.items[i].ok&&!Q.sel.has(i));
+  if(!extra.length&&!missing.length) return solved(Q.explain());
+  let html="";
+  if(extra.length){html+=`<p>${Q.whyNot(extra[0])} It's crossed out now.</p>`;extra.forEach(x=>{Q.sel.delete(x);Q.ruled.add(x);});}
+  if(missing.length) html+=`<p>${Q.missingMsg?Q.missingMsg(missing.length):`There ${missing.length===1?"is":"are"} still ${missing.length} more to find.`}</p>`;
+  miss(html);
+}
+function chooseDefault(i){
+  if(i===Q.ans) return solved(Q.explain());
+  Q.out.add(i); miss(Q.whyNot(i));
+}
+function checkSortDefault(){
+  const wrong=Q.chips.filter(c=>Q.place[c.id]!==c.zone);
+  if(!wrong.length) return solved(Q.explain());
+  const c=wrong[0]; const first=!Q.misses; const placed=Q.zones.find(z=>z.key===Q.place[c.id]);
+  wrong.forEach(w=>delete Q.place[w.id]);
+  miss(`<p>${first?`"${esc(c.label)}" doesn't go in <b>${esc(placed?placed.label:"that box")}</b>. Think about it again.`:Q.whyChip(c)}</p><p>${wrong.length>1?`${wrong.length} cards went back to the top`:"It went back to the top"} so you can try again.</p>`);
+}
+function checkOrderDefault(){
+  const k=Q.seq.findIndex((id,i)=>id!==Q.order[i]);
+  if(k<0&&Q.seq.length===Q.order.length) return solved(Q.explain());
+  const wrongStep=Q.steps.find(s=>s.id===Q.seq[k]);
+  Q.seq=Q.seq.slice(0,k);
+  miss(`<p>${k===0?"Step 1 isn't right yet.":`Step${k>1?"s":""} 1${k>1?`–${k}`:""} ${k>1?"are":"is"} right, but step ${k+1} isn't.`} ${Q.whyStep?Q.whyStep(k,wrongStep):""}</p><p>${k===0?"Your steps":"The steps after that"} went back so you can try again.</p>`);
+}
+function checkEntryDefault(){
+  const v=parseAns(Q.entry);
+  if(!v){ Q.fb={kind:"hint",html:`<p>Type a number first${(Q.padKeys||[]).includes("/")?" (like 7, −5 or 3/4)":""}.</p>`};return; }
+  if(rEq(v,Q.answer)) { if(Q.needSimplest&&/\//.test(Q.entry)){const m=Q.entry.replace(/−/g,"-").match(/^(-?\d+)\/(-?\d+)$/); if(m&&gcd(+m[1],+m[2])>1){Q.fb={kind:"hint",html:`<p>That's the right value. Your notes ask for simplest form: can you reduce ${esc(Q.entry)}?</p>`};return;}}
+    if(Q.needSimplest&&/\//.test(Q.entry)&&Q.answer.d===1){Q.fb={kind:"hint",html:`<p>That's the right value. Write it as a whole number.</p>`};return;}
+    return Q.onRight?Q.onRight():solved(Q.explain()); }
+  Q.entry=""; miss(Q.whyNot(v));
+}
+
+/* ---------- celebration + summary ---------- */
+function celebrate(li){
+  Q=null;const L=LEVELS[li];const allDone=LEVELS.every((l,i)=>S.stars[i]>=l.need);
+  const nextIdx=LEVELS.findIndex((l,i)=>S.stars[i]<l.need);
+  let html;
+  if(allDone){
+    const rows=LEVELS.map((l,i)=>{const s=S.stats[i];return `<tr><td>${l.skill}</td><td>${s.tried}</td><td>${s.own}</td><td>${s.hints}</td><td>${s.together}</td></tr>`;}).join("");
+    html=`<section class="card cele"><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${LEVELS.map((l,i)=>`<div class="minimap">${nodeSVG(i,l.need,{mini:true})}</div>`).join("")}</div>
+      <h2 class="prompt">${TEXT.allDoneTitle}</h2>
+      <p class="sub" style="margin:0">${totalStars()} of ${maxStars()} ${WN}. ${TEXT.allDoneSub}</p>
+      <div class="tablewrap"><table class="summary"><thead><tr><th>Skill</th><th>Tried</th><th>On your own</th><th>Hints</th><th>Together</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <div class="actions" style="justify-content:center"><button class="btn soft" type="button" data-act="more" data-lv="${li}">Keep practicing</button></div></section>`;
+    sfx.done();confetti();
+  } else {
+    const nx=LEVELS[nextIdx];const bossNext=nx.boss;
+    html=`<section class="card cele">${nodeSVG(li,L.need,{big:true})}
+      <h2 class="prompt">${(TEXT.levelDone||"You finished {name}!").replace("{name}",L.name).replace(/\bthe The\b/g,"The")}</h2><p class="sub" style="margin:0">${L.skill}: done on your own.${bossNext?" "+TEXT.bossWaiting:""}</p>
+      <div class="actions" style="justify-content:center"><button class="btn" type="button" data-go="${nextIdx}">${bossNext?TEXT.faceBoss:"On to "+nx.name}</button>
+      <button class="btn soft" type="button" data-act="more" data-lv="${li}">Practice this one more</button></div></section>`;
+    sfx.done();if(L.boss)confetti();
+  }
+  document.getElementById("stage").innerHTML=html;renderMap();bindStage();lastAutoKey="";setTimeout(autoRead,150);
+}
+
+/* ---------- math tools (never cost a star) ---------- */
+function toolbar(){
+  const T=(typeof TOOLS!=="undefined"&&TOOLS)||[]; if(!T.length||(Q.noTools)) return "";
+  const bar=`<div class="toolbar" role="group" aria-label="Tools"><span class="tl">${TEXT.toolsLabel||"Math tools"}</span>${T.map(([k,l])=>`<button class="pill" type="button" data-tool="${k}" aria-pressed="${Q.tool===k}">${l}</button>`).join("")}</div>`;
+  return bar+(Q.tool?`<div class="tool" id="toolPanel">${toolBody(Q.tool)}</div>`:"");
+}
+function chartTool(){
+  const [r0,c0]=Q.toolCell||[0,0];let h=`<tr><th>×</th>${Array.from({length:12},(_,j)=>`<th>${j+1}</th>`).join("")}</tr>`;
+  for(let i=1;i<=12;i++){h+=`<tr><th>${i}</th>`;for(let j=1;j<=12;j++){const hit=i===r0&&j===c0,hl=!hit&&(i===r0||j===c0);h+=`<td class="${hit?"hit":hl?"hl":""}" data-cell="${i},${j}" style="width:32px;height:28px;text-align:center;border:1px solid var(--line);cursor:pointer;${hit?"background:var(--star);color:var(--btn-ink);font-weight:700":hl?"background:rgba(255,209,102,.25)":""}">${i*j}</td>`;}h+="</tr>";}
+  return `<div class="scroll"><table style="border-collapse:collapse;font-size:14px" aria-label="Multiplication chart">${h.replace(/<th>/g,'<th style="width:32px;height:28px;border:1px solid var(--line);background:var(--panel-2)">')}</table></div><p class="cap">${r0?`${r0} × ${c0} = ${r0*c0}`:"Tap any number to see which row and column make it."}</p>`;
+}
+
+/* ---------- read aloud ---------- */
+let readTok=0,lastAutoKey="",lastFbHtml="";
+function stopReading(){readTok++;try{speechSynthesis.cancel();}catch(e){}document.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));}
+function sayable(t){return String(t).replace(/×/g," times ").replace(/÷/g," divided by ").replace(/\bR (\d+)/g," remainder $1").replace(/−/g," minus ").replace(/=/g," equals ").replace(/Read this/g,"").replace(/\s+/g," ").trim();}
+function speakBlocks(blocks){stopReading();const tok=readTok;let i=0;
+  const next=()=>{if(tok!==readTok)return;document.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));if(i>=blocks.length)return;const b=blocks[i++];if(!b.text){next();return;}if(b.el)b.el.classList.add("reading");
+    try{const u=new SpeechSynthesisUtterance(sayable(b.text));u.rate=P.rate==="slow"?.72:.92;u.onend=next;u.onerror=next;speechSynthesis.speak(u);}catch(e){}};next();}
+function blockText(el){
+  if(el.matches(".tiles")) return "Choices: "+[...el.querySelectorAll(".tile:not(.nope)")].map(t=>t.textContent).join(", ");
+  if(el.matches(".choices")) return "Choices: "+[...el.querySelectorAll(".choice:not(.out)")].map(t=>t.innerText).join(". ");
+  if(el.matches(".tray")) return el.querySelector(".chip")?"Cards to sort: "+[...el.querySelectorAll(".chip")].map(t=>t.textContent).join(", "):"";
+  if(el.matches(".bank")) return "Steps: "+[...el.querySelectorAll(".stepchip")].map(t=>t.innerText).join(". ");
+  if(el.matches(".fxlist")) return [...el.querySelectorAll(".fxstep")].map(t=>t.innerText.replace(/\n+/g," ")).join(". ");
+  if(el.matches(".mtch")) return "Left: "+[...el.querySelectorAll(".mcol.l .mitem")].map(t=>t.dataset.say).join(", ")+". Right: "+[...el.querySelectorAll(".mcol.r .mitem")].map(t=>t.dataset.say).join(", ");
+  if(el.matches(".tbank")) return el.querySelector(".tk")?"Tiles: "+[...el.querySelectorAll(".tk")].map(t=>t.textContent).join(", "):"";
+  if(el.matches(".tool")){const c=el.querySelector(".cap");return c?c.innerText:"";}
+  if(el.matches(".fb")){const c=el.cloneNode(true);c.querySelectorAll("button,svg").forEach(x=>x.remove());return c.innerText;}
+  if(el.querySelector&&el.querySelector(".frac")){const c=el.cloneNode(true);c.querySelectorAll(".frac").forEach(f=>{f.textContent=` ${f.children[0].textContent} over ${f.children[1].textContent} `;});return c.innerText;}
+  return el.innerText;}
+function cardBlocks(onlyFb){const card=document.querySelector("#stage .card");if(!card)return[];
+  return [...card.querySelectorAll(onlyFb?".fb":".story,.prompt,.eqline,.sub,.fxlist,.mtch,.nlread,.tbuild,.tbank,.lockcode,.tiles,.choices,.tray,.bank,.tool,.fb,.cele p")].filter(el=>!el.closest(".zone:not(.tray)")).map(el=>({el,text:blockText(el)}));}
+function autoRead(){ if(P.read!=="auto") return; const key=Q?`${Q.id}|${Q.solved?1:0}|${Q.stage||0}`:"cele";const fb=Q&&Q.fb?Q.fb.html:"";
+  if(key!==lastAutoKey){lastAutoKey=key;lastFbHtml=fb;speakBlocks(cardBlocks(false));} else if(fb&&fb!==lastFbHtml){lastFbHtml=fb;speakBlocks(cardBlocks(true));} }
+
+/* ---------- settings ---------- */
+function renderSettings(){
+  const box=document.getElementById("settingsBox");const cur=k=>k==="soundx"?(P.sound&&!P.calm?1:0):P[k];
+  const seg=(k,opts)=>`<span class="seg" role="group">${opts.map(([v,l,al])=>`<button type="button" data-pref="${k}" data-val="${v}" aria-pressed="${String(cur(k))===String(v)}" ${al?`aria-label="${al}"`:""}>${l}</button>`).join("")}</span>`;
+  box.innerHTML=`<h2>My settings</h2>
+   <div class="row"><span class="lbl">Read aloud</span>${seg("read",[["button","When I tap Read to me"],["auto","Read everything to me"]])}</div>
+   <div class="row"><span class="lbl">Reading speed</span>${seg("rate",[["slow","Slower"],["normal","Normal"]])}</div>
+   <div class="row"><span class="lbl">Text size</span>${seg("size",[["0","A","Normal text"],["1","A+","Bigger text"],["2","A++","Biggest text"]])}</div>
+   <div class="row"><span class="lbl">Spacing</span>${seg("spacing",[["0","Normal"],["1","Extra space"]])}</div>
+   <div class="row"><span class="lbl">Background</span>${seg("bg",[["night","Night"],["light","Light"],["cream","Cream"]])}</div>
+   <div class="row"><span class="lbl">Calm mode</span>${seg("calm",[["0","Off"],["1","On"]])}<span class="note">No moving pieces and no sounds.</span></div>
+   <div class="row"><span class="lbl">Sound</span>${seg("soundx",[["1","On"],["0","Off"]])}</div>
+   <p class="note">Your settings are saved on this device. Using any setting or tool never changes your ${WN}.</p>
+   <div class="actions"><button class="btn soft" type="button" id="setDone">Done</button></div>`;
+  box.querySelectorAll("[data-pref]").forEach(b=>b.onclick=()=>{let k=b.dataset.pref;const v=b.dataset.val;if(k==="soundx"){k="sound";if(v==="1")P.calm=0;}P[k]=/^\d+$/.test(v)?+v:v;applyPrefs();savePrefs();renderSettings();if(k==="read"&&P.read==="auto"){lastAutoKey="";autoRead();}if(k==="read"&&P.read!=="auto")stopReading();});
+  document.getElementById("setDone").onclick=toggleSettings;
+}
+function toggleSettings(){const box=document.getElementById("settingsBox"),b=document.getElementById("setBtn");const open=box.hidden;box.hidden=!open;b.setAttribute("aria-expanded",String(open));if(open){renderSettings();box.querySelector("button").focus();}else b.focus();}
+document.getElementById("setBtn").onclick=toggleSettings;
+
+/* ---------- keypad input ---------- */
+function keyIn(k){ if(!Q||Q.solved||Q.locked||!Q.usesPad) return; let v=Q.entry;
+  if(k==="clr") v=""; else if(k==="del") v=v.slice(0,-1);
+  else if(k==="-"){ if(v==="") v="-"; else if(v==="-") v=""; else return; }
+  else if(k==="/"){ if(!v||/[\/.]/.test(v)||v==="-") return; v+="/"; }
+  else if(k==="."){ if(/[\/.]/.test(v)) return; v+=(v===""||v==="-")?"0.":"."; }
+  else if(/^\d$/.test(k)){ if(v.replace(/[^\d]/g,"").length>=7) return; v+=k; }
+  Q.entry=v; if(Q.fb&&Q.fb.kind!=="hint") Q.fb=null; render(); }
+
+/* ---------- render + events ---------- */
+let lastShownFb=null;
+function render(){
+  renderMap(); if(!Q) return;
+  const v=IM().view();
+  document.getElementById("stage").innerHTML=v;Q.justStarred=false;bindStage();setTimeout(autoRead,120);
+  if(Q.refocus){const el=document.querySelector("#stage "+Q.refocus);Q.refocus=null;if(el)el.focus({preventScroll:true});}
+  const f=document.querySelector("#stage .fb");if(f&&Q.fb!==lastShownFb){lastShownFb=Q.fb;const r=f.getBoundingClientRect();if(r.bottom>innerHeight||r.top<0)f.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches||P.calm?"auto":"smooth"});}
+}
+function bindStage(){
+  const st=document.getElementById("stage");
+  st.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{const a=b.dataset.act;
+    if(a==="read") return speakBlocks(cardBlocks(false));
+    if(a==="readfb") return speakBlocks(cardBlocks(true));
+    if(a==="hint") return hint();
+    if(a==="next") return newQuestion();
+    if(a==="more"){S.level=+b.dataset.lv;Q={practiceMore:true};return newQuestion();}
+    if(a==="check"){IM().check();return render();}
+    if(IM().act){IM().act(a);render();}
+  });
+  st.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{S.level=+b.dataset.go;newQuestion();});
+  st.querySelectorAll("[data-tool]").forEach(b=>b.onclick=()=>{const k=b.dataset.tool;Q.tool=Q.tool===k?null:k;render();});
+  st.querySelectorAll("[data-tv]").forEach(b=>b.onclick=()=>{Q.tv=Q.tv||{};const [k,v]=b.dataset.tv.split(":");Q.tv[k]=v;render();});
+  st.querySelectorAll("[data-cell]").forEach(b=>b.onclick=()=>{Q.toolCell=b.dataset.cell.split(",").map(Number);render();});
+  st.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{const d=+b.dataset.t;Q.sel.has(d)?Q.sel.delete(d):Q.sel.add(d);if(IM().onTap)IM().onTap(d);Q.fb=Q.fb&&Q.fb.kind==="hint"?Q.fb:null;render();});
+  st.querySelectorAll("[data-opt]").forEach(b=>b.onclick=()=>{const i=+b.dataset.opt;(Q.choose||IM().choose||chooseDefault)(i);render();});
+  st.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>keyIn(b.dataset.key));
+  st.querySelectorAll("[data-step]").forEach(b=>b.onclick=()=>{Q.seq.push(b.dataset.step);if(Q.fb&&Q.fb.kind!=="hint")Q.fb=null;render();const n=document.querySelector("#stage .bank .stepchip");if(n)n.focus({preventScroll:true});});
+  st.querySelectorAll("[data-unstep]").forEach(b=>b.onclick=()=>{const k=Q.seq.indexOf(b.dataset.unstep);if(k>=0)Q.seq.splice(k,1);render();});
+  st.querySelectorAll("[data-pc]").forEach(b=>b.onclick=()=>{IM().onPc(b.dataset.pc);render();});
+  st.querySelectorAll("[data-chip]").forEach(b=>{
+    b.onclick=e=>{e.stopPropagation();const c=b.dataset.chip;const host=b.closest(".zones [data-zone]");
+      if(host&&Q.pick!=null&&Q.pick!==c){Q.place[Q.pick]=host.dataset.zone;Q.pick=null;if(Q.fb&&Q.fb.kind!=="hint")Q.fb=null;return render();}
+      Q.pick=Q.pick===c?null:c;render();};
+    b.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",b.dataset.chip);e.dataTransfer.effectAllowed="move";});
+  });
+  st.querySelectorAll("[data-zone]").forEach(z=>{
+    const place=c=>{const zone=z.dataset.zone;if(zone)Q.place[c]=zone;else delete Q.place[c];Q.pick=null;if(Q.fb&&Q.fb.kind!=="hint")Q.fb=null;render();};
+    z.addEventListener("click",()=>{if(Q&&Q.pick!=null)place(Q.pick);});
+    z.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&Q&&Q.pick!=null){e.preventDefault();place(Q.pick);}});
+    z.addEventListener("dragover",e=>{e.preventDefault();z.classList.add("over");});
+    z.addEventListener("dragleave",()=>z.classList.remove("over"));
+    z.addEventListener("drop",e=>{e.preventDefault();z.classList.remove("over");const c=e.dataTransfer.getData("text/plain");if(c)place(c);});
+  });
+  if(Q&&Q.li!=null&&IM().bind) IM().bind(st);
+  if(Q&&typeof bindTools==="function") bindTools(st);
+}
+document.addEventListener("keydown",e=>{ if(!Q||Q.solved||Q.locked||!Q.usesPad) return; const t=document.activeElement&&document.activeElement.tagName; if(t==="TEXTAREA"||t==="INPUT") return;
+  if(/^[0-9]$/.test(e.key)) keyIn(e.key); else if(e.key==="Backspace") keyIn("del"); else if(e.key==="-"&&(Q.padKeys||[]).includes("-")) keyIn("-"); else if(e.key==="/"&&(Q.padKeys||[]).includes("/")){e.preventDefault();keyIn("/");} else if(e.key==="."&&(Q.padKeys||[]).includes(".")) keyIn(".");
+  else if(e.key==="Enter"&&Q.entry){e.preventDefault();IM().check();render();} });
+
+/* ---------- report a problem ---------- */
+function closeReport(){document.getElementById("reportBox").innerHTML="";}
+document.getElementById("reportBtn").onclick=()=>{
+  const box=document.getElementById("reportBox");if(box.innerHTML){closeReport();return;}
+  const qid=Q&&Q.id?Q.id:"(no question open)";
+  box.innerHTML=`<form class="report" id="repForm"><strong>What's wrong with this question?</strong>
+    <label><input type="radio" name="why" id="r1" value="answer" checked> The answer looks wrong</label>
+    <label><input type="radio" name="why" id="r2" value="typo"> There's a typo</label>
+    <label><input type="radio" name="why" id="r3" value="match"> It doesn't match the video or notes</label>
+    <label><input type="radio" name="why" id="r4" value="other"> Something else</label>
+    <textarea id="repText" placeholder="Tell us more (optional)"></textarea>
+    <div class="actions"><button class="btn" type="submit">Send report</button><button class="btn soft" type="button" id="repCancel">Cancel</button></div></form>`;
+  document.getElementById("repCancel").onclick=closeReport;
+  document.getElementById("repForm").onsubmit=e=>{e.preventDefault();box.innerHTML=`<div class="fb good" role="status">${ICON.good}<div><p><strong>Thanks, report saved.</strong> Question ${esc(qid)} was attached.</p></div></div>`;};
+};
+
+/* ---------- top controls ---------- */
+function syncSound(){const sb=document.getElementById("soundBtn");if(!sb)return;const on=!!P.sound&&!P.calm;sb.setAttribute("aria-pressed",String(on));sb.querySelector("span").textContent=on?"Sound on":"Sound off";}
+document.getElementById("soundBtn").onclick=()=>{P.sound=P.sound&&!P.calm?0:1;if(P.sound)P.calm=0;applyPrefs();savePrefs();};
+
+if(location.hash==="#mbtest") window.__mb={Q:()=>Q,S:()=>S,LEVELS,v:2,style:MAPSTYLE};   // used only by the automated play-tests
+applyPrefs();
+function start(){ READY=true; newQuestion(); }
+if(!EMBED) start();
+else{
+  document.getElementById("stage").innerHTML=`<p class="prompt" role="status">${TEXT.loading||`Loading your ${WN}...`}</p>`;
+  let done=false;
+  window.addEventListener("message",e=>{
+    if(done||e.origin!==MB_HOST_ORIGIN||e.source!==window.parent) return;
+    const m=e.data; if(!m||m.type!=="mb-state"||m.deckId!==DECK.deckId||!/^[A-Za-z0-9_-]{8,64}$/.test(m.uh||"")) return;
+    done=true; HOSTED=true; KEY="mb-"+DECK.deckId+"-"+m.uh;   // this student's own copy on this device
+    S=mergeState(m.state,load())||fresh();
+    if(!S.used||S.used.length!==LEVELS.length) S.used=LEVELS.map(()=>[]);
+    if(!S.stats||S.stats.length!==LEVELS.length) S.stats=LEVELS.map(()=>({tried:0,own:0,hints:0,together:0}));
+    S.cur=null; start(); save();
+    if(totalStars()>0) sendResult();   // makes sure Canvas has this student's best score
+  });
+  try{window.parent.postMessage({type:"mb-deck-ready",deckId:DECK.deckId},MB_HOST_ORIGIN);}catch(e){}
+  // Older Mighty B Practice page that doesn't answer: keep the old behavior (stars saved in this browser).
+  setTimeout(()=>{ if(done) return; done=true; S=load()||fresh(); start(); },5000);
+}
+
+})();
+</script>
+</body>
+</html>
