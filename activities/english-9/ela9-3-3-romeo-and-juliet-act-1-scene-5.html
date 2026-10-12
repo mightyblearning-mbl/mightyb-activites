@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3 Romeo and Juliet Act 1, Scene 5 Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.3 Romeo and Juliet Act 1, Scene 5</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela9-3-3-romeo-and-juliet-act-1-scene-5",
+ "title": "3.3 Romeo and Juliet Act 1, Scene 5",
+ "course": "9th Grade English",
+ "unit": "3",
+ "lesson": "3.3",
+ "kind": "lesson",
+ "theme": "poetry",
+ "sourceVideo": "Romeo and Juliet: Act 1, Scene 5 Summary and Close Reading (Shakespeare)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Romeo and Juliet fall in love at first sight and share a sonnet. Then they learn their families are enemies, bringing together the themes of love and conflict.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "Why are the masks at the party important?",
+   "choices": [
+    "They hide identities, so guests can put family loyalties aside for the night.",
+    "They show which family each guest belongs to.",
+    "They keep the prince from finding out about the party.",
+    "They are a sign that someone is getting married."
+   ],
+   "answer": "They hide identities, so guests can put family loyalties aside for the night.",
+   "hint": "What does a mask hide?",
+   "explain": "Masks hide everyone's identities, so guests can put family loyalties aside for the night."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "Why does Juliet attend the party?",
+   "choices": [
+    "to please her parents by meeting Paris, a possible husband",
+    "to meet Romeo, whom she already loves",
+    "to find Rosaline and talk to her",
+    "to help the Nurse serve the guests"
+   ],
+   "answer": "to please her parents by meeting Paris, a possible husband",
+   "hint": "Her parents have someone in mind for her.",
+   "explain": "Juliet attends to please her parents by meeting Paris, a possible husband."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "What does this scene show about Romeo?",
+   "choices": [
+    "He is impulsive and easily consumed by passion.",
+    "He is cautious and slow to fall in love.",
+    "He is still in love with Rosaline.",
+    "He is cynical about love and dreams."
+   ],
+   "answer": "He is impulsive and easily consumed by passion.",
+   "hint": "How quickly does he forget Rosaline?",
+   "explain": "This scene shows Romeo is impulsive and easily consumed by passion. He has already forgotten Rosaline.",
+   "hints": {
+    "He is cynical about love and dreams.": "That describes Mercutio, not Romeo."
+   }
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "What form does Romeo and Juliet's first conversation take?",
+   "choices": [
+    "a sonnet",
+    "a prologue",
+    "a soliloquy",
+    "a prose speech"
+   ],
+   "answer": "a sonnet",
+   "hint": "It is a 14-line poem ending with a rhyming couplet.",
+   "explain": "Their first conversation is a sonnet, a 14-line poem ending with a rhyming couplet.",
+   "hints": {
+    "a soliloquy": "A soliloquy is spoken by one character alone on stage. Here two characters are talking."
+   }
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "Romeo compares himself to a pilgrim and Juliet to a holy shrine. This comparison carried through several lines is called...",
+   "choices": [
+    "an extended metaphor",
+    "an oxymoron",
+    "a pun",
+    "a juxtaposition"
+   ],
+   "answer": "an extended metaphor",
+   "hint": "It is a comparison that keeps going.",
+   "explain": "This is an extended metaphor: Romeo compares himself to a pilgrim and Juliet to a holy shrine."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "Why do Romeo and Juliet use religious imagery in their first conversation?",
+   "choices": [
+    "to flirt and to suggest their love is sacred",
+    "to show that they are both planning to become priests",
+    "to warn each other about the feud",
+    "to make fun of Friar Lawrence"
+   ],
+   "answer": "to flirt and to suggest their love is sacred",
+   "hint": "Think about the pilgrim and the shrine.",
+   "explain": "They use religious imagery to flirt and to suggest their love is sacred."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "\"My only love sprung from my only hate!\" What has Juliet just learned?",
+   "choices": [
+    "Romeo is a Montague.",
+    "Romeo loves Rosaline.",
+    "Paris wants to marry her.",
+    "Tybalt is her cousin."
+   ],
+   "answer": "Romeo is a Montague.",
+   "hint": "Her \"only hate\" is her family's enemy.",
+   "explain": "Juliet learns Romeo is a Montague. The line shows the themes of love and conflict and family loyalty."
+  },
+  {
+   "id": "q08",
+   "type": "match",
+   "tag": "3.3 Romeo and Juliet Act 1, Scene 5",
+   "q": "Match each comparison from Act 1, Scene 5 to who or what it describes.",
+   "pairs": [
+    [
+     "a pilgrim",
+     "Romeo"
+    ],
+    [
+     "a holy shrine",
+     "Juliet"
+    ],
+    [
+     "a snowy dove trooping with crows",
+     "Juliet standing out from the other ladies"
+    ],
+    [
+     "teaching the torches to burn bright",
+     "Juliet being brighter than the torches"
+    ]
+   ],
+   "hint": "Use \"Love at First Sight\" and \"A Shared Sonnet.\"",
+   "explain": "Romeo describes Juliet as bright and standing out, and the pilgrim and shrine make up their shared extended metaphor."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

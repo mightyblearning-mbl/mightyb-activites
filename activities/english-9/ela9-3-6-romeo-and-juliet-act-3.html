@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.6 Romeo and Juliet Act 3 Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.6 Romeo and Juliet Act 3</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela9-3-6-romeo-and-juliet-act-3",
+ "title": "3.6 Romeo and Juliet Act 3",
+ "course": "9th Grade English",
+ "unit": "3",
+ "lesson": "3.6",
+ "kind": "lesson",
+ "theme": "poetry",
+ "sourceVideo": "Romeo and Juliet: Act 3 Summary and Close Reading (Shakespeare)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Act 3 is the turning point: the fight in the street leads to Romeo's banishment. Juliet now puts her loyalty to her husband first, even as her family pressures her to marry Paris.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "Why does Romeo refuse to fight Tybalt at first?",
+   "choices": [
+    "Tybalt is now his relative through his secret marriage.",
+    "Romeo is afraid of Tybalt.",
+    "Mercutio tells him not to fight.",
+    "Romeo has already been banished."
+   ],
+   "answer": "Tybalt is now his relative through his secret marriage.",
+   "hint": "Think about whom Romeo just married.",
+   "explain": "Romeo refuses because Tybalt is now his relative through his secret marriage to Juliet."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "Why is Romeo's refusal to fight Tybalt an example of dramatic irony?",
+   "choices": [
+    "The audience knows about the marriage, but Tybalt does not.",
+    "Tybalt knows about the marriage, but the audience does not.",
+    "Romeo is speaking alone on stage.",
+    "Romeo uses two contradictory words together."
+   ],
+   "answer": "The audience knows about the marriage, but Tybalt does not.",
+   "hint": "Who knows about the secret marriage?",
+   "explain": "The audience knows about the marriage, but Tybalt does not. That is dramatic irony."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "Which character cries, \"A plague o' both your houses!\"?",
+   "choices": [
+    "Mercutio",
+    "Benvolio",
+    "Tybalt",
+    "Prince Escalus"
+   ],
+   "answer": "Mercutio",
+   "hint": "He is Romeo's friend, who fights Tybalt.",
+   "explain": "Mercutio cries \"A plague o' both your houses!\" after he fights Tybalt, blaming both families."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "What is the prince's punishment for Romeo?",
+   "choices": [
+    "Romeo is banished from Verona.",
+    "Romeo is sentenced to death.",
+    "Romeo must marry Rosaline.",
+    "Romeo must pay a fine to the Capulets."
+   ],
+   "answer": "Romeo is banished from Verona.",
+   "hint": "He has to leave the city.",
+   "explain": "The prince banishes Romeo from Verona.",
+   "hints": {
+    "Romeo is sentenced to death.": "The prince chooses a different punishment for Romeo."
+   }
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "After avenging Mercutio, what does Romeo cry out?",
+   "choices": [
+    "\"O, I am fortune's fool!\"",
+    "\"Parting is such sweet sorrow.\"",
+    "\"Wisely and slow.\"",
+    "\"Wherefore art thou Romeo?\""
+   ],
+   "answer": "\"O, I am fortune's fool!\"",
+   "hint": "He blames fortune, or fate.",
+   "explain": "Romeo cries, \"O, I am fortune's fool!\" He feels like a victim of fate."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "\"Beautiful tyrant, fiend angelical.\" What does Juliet use to describe Romeo?",
+   "choices": [
+    "oxymorons",
+    "similes",
+    "puns",
+    "rhetorical questions"
+   ],
+   "answer": "oxymorons",
+   "hint": "Look for pairs of contradictory words.",
+   "explain": "\"Beautiful tyrant\" and \"fiend angelical\" are oxymorons, showing Juliet's mixed feelings."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "After Romeo is banished, where is Juliet's greater loyalty?",
+   "choices": [
+    "to her husband, Romeo",
+    "to the Capulet family",
+    "to the Nurse",
+    "to Paris"
+   ],
+   "answer": "to her husband, Romeo",
+   "hint": "She says Romeo's banishment is worse than ten thousand dead Tybalts.",
+   "explain": "Juliet's greater loyalty is now to her husband rather than to the Capulets."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "3.6 Romeo and Juliet Act 3",
+   "q": "Besides her parents, who tells Juliet to obey and marry Paris?",
+   "choices": [
+    "the Nurse",
+    "Friar Lawrence",
+    "Benvolio",
+    "Mercutio"
+   ],
+   "answer": "the Nurse",
+   "hint": "Check \"More Pressure.\"",
+   "explain": "Juliet's parents order her to marry Paris, and even the Nurse tells her to obey."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

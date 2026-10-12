@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.9 Romeo and Juliet Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.9 Romeo and Juliet Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "ela9-3-9-romeo-and-juliet-review",
+ "title": "3.9 Romeo and Juliet Review",
+ "course": "9th Grade English",
+ "unit": "3",
+ "lesson": "3.9",
+ "kind": "unit-review",
+ "theme": "poetry",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "From the star-crossed prologue to the final truce, Romeo and Juliet shows how love and conflict, family loyalty, and fate shape a tragedy.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "The prologue calls Romeo and Juliet \"star-crossed\" lovers. What does star-crossed mean?",
+   "choices": [
+    "ill-fated",
+    "famous",
+    "secretly married",
+    "born on the same day"
+   ],
+   "answer": "ill-fated",
+   "hint": "Think about the stars and fate.",
+   "explain": "Star-crossed means ill-fated. The prologue tells us from the start that the lovers are unlucky."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "Why is Romeo sad at the start of the play?",
+   "choices": [
+    "Rosaline does not return his love.",
+    "Juliet is going to marry Paris.",
+    "He has been banished from Verona.",
+    "Tybalt has challenged him to a duel."
+   ],
+   "answer": "Rosaline does not return his love.",
+   "hint": "Who is Romeo in love with before he meets Juliet?",
+   "explain": "Romeo is sad because Rosaline does not return his love.",
+   "hints": {
+    "Juliet is going to marry Paris.": "Romeo has not even met Juliet yet."
+   }
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "Why does Romeo go to the Capulet party?",
+   "choices": [
+    "He knows Rosaline will be there.",
+    "He wants to meet Juliet.",
+    "Prince Escalus orders him to go.",
+    "He wants to fight Tybalt."
+   ],
+   "answer": "He knows Rosaline will be there.",
+   "hint": "He has not met Juliet yet.",
+   "explain": "Romeo goes to the Capulet party because he knows Rosaline will be there.",
+   "hints": {
+    "He wants to meet Juliet.": "Romeo does not know Juliet yet when he decides to go."
+   }
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "What does this scene show about Romeo?",
+   "choices": [
+    "He is impulsive and easily consumed by passion.",
+    "He is cautious and slow to fall in love.",
+    "He is still in love with Rosaline.",
+    "He is cynical about love and dreams."
+   ],
+   "answer": "He is impulsive and easily consumed by passion.",
+   "hint": "How quickly does he forget Rosaline?",
+   "explain": "This scene shows Romeo is impulsive and easily consumed by passion. He has already forgotten Rosaline.",
+   "hints": {
+    "He is cynical about love and dreams.": "That describes Mercutio, not Romeo."
+   }
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "\"My only love sprung from my only hate!\" What has Juliet just learned?",
+   "choices": [
+    "Romeo is a Montague.",
+    "Romeo loves Rosaline.",
+    "Paris wants to marry her.",
+    "Tybalt is her cousin."
+   ],
+   "answer": "Romeo is a Montague.",
+   "hint": "Her \"only hate\" is her family's enemy.",
+   "explain": "Juliet learns Romeo is a Montague. The line shows the themes of love and conflict and family loyalty."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "In \"Wherefore art thou Romeo?\", what does \"wherefore\" mean?",
+   "choices": [
+    "why",
+    "where",
+    "when",
+    "who"
+   ],
+   "answer": "why",
+   "hint": "It is not asking about a place.",
+   "explain": "Wherefore means why, not where.",
+   "hints": {
+    "where": "This is a common mistake. Wherefore does not mean where."
+   }
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "\"That which we call a rose by any other word would smell as sweet.\" What does Juliet mean?",
+   "choices": [
+    "Calling Romeo a different name would not change who he is.",
+    "Romeo should bring her roses every day.",
+    "Names are the most important thing about a person.",
+    "The Montagues and Capulets both grow roses."
+   ],
+   "answer": "Calling Romeo a different name would not change who he is.",
+   "hint": "Would a rose smell different if it had a different name?",
+   "explain": "A rose would smell as sweet with any name, and Romeo would be the same person with any name."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "Why does Friar Lawrence agree to help Romeo and Juliet marry?",
+   "choices": [
+    "He hopes the marriage will turn the families' rancor to pure love.",
+    "He wants Juliet to marry Paris instead.",
+    "Prince Escalus orders him to do it.",
+    "He wants Romeo to forget about Rosaline."
+   ],
+   "answer": "He hopes the marriage will turn the families' rancor to pure love.",
+   "hint": "Rancor means hatred.",
+   "explain": "The Friar hopes the marriage will turn the families' rancor, or hatred, to pure love."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "\"Wisely and slow; they stumble that run fast.\" What is Friar Lawrence telling Romeo?",
+   "choices": [
+    "Rushing can lead to mistakes.",
+    "He should run to Juliet as fast as he can.",
+    "He should take up fencing to stay strong.",
+    "He should never get married."
+   ],
+   "answer": "Rushing can lead to mistakes.",
+   "hint": "What happens to people who run too fast?",
+   "explain": "The Friar warns Romeo that people who rush stumble. He should move wisely and slowly."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "Why does Romeo refuse to fight Tybalt at first?",
+   "choices": [
+    "Tybalt is now his relative through his secret marriage.",
+    "Romeo is afraid of Tybalt.",
+    "Mercutio tells him not to fight.",
+    "Romeo has already been banished."
+   ],
+   "answer": "Tybalt is now his relative through his secret marriage.",
+   "hint": "Think about whom Romeo just married.",
+   "explain": "Romeo refuses because Tybalt is now his relative through his secret marriage to Juliet."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "What is the prince's punishment for Romeo?",
+   "choices": [
+    "Romeo is banished from Verona.",
+    "Romeo is sentenced to death.",
+    "Romeo must marry Rosaline.",
+    "Romeo must pay a fine to the Capulets."
+   ],
+   "answer": "Romeo is banished from Verona.",
+   "hint": "He has to leave the city.",
+   "explain": "The prince banishes Romeo from Verona.",
+   "hints": {
+    "Romeo is sentenced to death.": "The prince chooses a different punishment for Romeo."
+   }
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "Why is the timing of the Friar's plan thrown off?",
+   "choices": [
+    "Juliet pretends to agree to marry Paris, so Capulet moves the wedding up a day.",
+    "Romeo comes back to Verona a week early.",
+    "The Nurse tells Capulet about the plan.",
+    "Paris decides to call off the wedding."
+   ],
+   "answer": "Juliet pretends to agree to marry Paris, so Capulet moves the wedding up a day.",
+   "hint": "What does Capulet change after Juliet agrees?",
+   "explain": "Juliet pretends to agree to marry Paris, so Capulet moves the wedding up a day."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "While the Capulets grieve for Juliet, what does the audience know that they do not?",
+   "choices": [
+    "Juliet is really alive, and she is already married to Romeo.",
+    "Paris has left Verona for good.",
+    "Romeo is planning to marry Rosaline.",
+    "The Nurse made the potion."
+   ],
+   "answer": "Juliet is really alive, and she is already married to Romeo.",
+   "hint": "There are two layers of dramatic irony here.",
+   "explain": "Two layers of dramatic irony: Juliet is really alive, and she is already married to Romeo."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "Who or what does Romeo blame, saying they were written in \"sour misfortune's book\"?",
+   "choices": [
+    "fate",
+    "Friar Lawrence",
+    "the Nurse",
+    "Paris"
+   ],
+   "answer": "fate",
+   "hint": "Misfortune is bad luck.",
+   "explain": "Romeo blames fate, saying they were both written in \"sour misfortune's book.\""
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "How does the feud finally end?",
+   "choices": [
+    "Capulet and Montague agree to a truce.",
+    "Prince Escalus banishes both families.",
+    "Friar Lawrence leaves Verona.",
+    "The families fight one last duel."
+   ],
+   "answer": "Capulet and Montague agree to a truce.",
+   "hint": "Check \"Resolution.\"",
+   "explain": "Capulet and Montague agree to a truce. The children's deaths end the feud, just as the prologue predicted."
+  },
+  {
+   "id": "q16",
+   "type": "match",
+   "tag": "3.9 Romeo and Juliet Review",
+   "q": "Match each literary term to its meaning.",
+   "pairs": [
+    [
+     "Juxtaposition",
+     "two ideas placed side by side to highlight their differences"
+    ],
+    [
+     "Oxymoron",
+     "two contradictory words paired together"
+    ],
+    [
+     "Dramatic irony",
+     "the audience knows something a character does not"
+    ],
+    [
+     "Foil",
+     "a character whose personality contrasts with another character"
+    ],
+    [
+     "Soliloquy",
+     "a speech a character gives when alone on stage"
+    ]
+   ],
+   "hint": "Think back to the terms across the unit, like \"sweet sorrow\" and Mercutio.",
+   "explain": "These literary terms appear throughout Romeo and Juliet, from \"O brawling love\" to Friar Lawrence's speeches."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>
