@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.8 Unit 6 Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 6.8 Unit 6 Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "econ12-6-8-unit-6-review",
+ "title": "6.8 Unit 6 Review",
+ "course": "12th Grade Economics",
+ "unit": "6",
+ "lesson": "6.8",
+ "kind": "unit-review",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "You reviewed trade, globalization, aid, inequality, education, healthcare, and happiness. Each topic asks the same question: what helps people most, and who wins and loses?",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "A country's imports are greater than its exports. It has...",
+   "choices": [
+    "a trade deficit",
+    "a trade surplus",
+    "positive net exports",
+    "a pegged currency"
+   ],
+   "answer": "a trade deficit",
+   "hint": "Imports are bigger.",
+   "explain": "When imports are greater than exports, net exports are negative and the country has a trade deficit."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "The dollar depreciates, so each dollar buys fewer pesos. What happens to U.S. exports to Mexico?",
+   "choices": [
+    "They get cheaper, so they rise.",
+    "They get more expensive, so they fall.",
+    "They stop completely.",
+    "They stay exactly the same."
+   ],
+   "answer": "They get cheaper, so they rise.",
+   "hint": "A weaker dollar makes U.S. goods cheaper for others.",
+   "explain": "When the dollar depreciates, U.S. exports get cheaper and rise, while imports get more expensive and fall."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Which technology did economist Jeffrey Sachs call the single most transformative technology in the developing world?",
+   "choices": [
+    "mobile phones",
+    "personal computers",
+    "televisions",
+    "cars"
+   ],
+   "answer": "mobile phones",
+   "hint": "They give access to banking and better prices.",
+   "explain": "Jeffrey Sachs called mobile phones the most transformative technology in the developing world."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Some say the strongest argument against globalization is its lack of...",
+   "choices": [
+    "sustainability",
+    "competition",
+    "consumers",
+    "technology"
+   ],
+   "answer": "sustainability",
+   "hint": "Think about deforestation, pollution, and climate change.",
+   "explain": "The lack of sustainability, including pollution and climate change, may be the strongest argument against globalization."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "In 2013, how did remittances compare to government foreign aid?",
+   "choices": [
+    "They were more than three times as large.",
+    "They were about one tenth as large.",
+    "They were exactly the same size.",
+    "They did not exist yet."
+   ],
+   "answer": "They were more than three times as large.",
+   "hint": "The video calls the size of remittance flows shocking.",
+   "explain": "In 2013, remittances were more than three times the size of government foreign aid."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "In which field has foreign aid been an especially positive force?",
+   "choices": [
+    "public health",
+    "military spending",
+    "space travel",
+    "stock trading"
+   ],
+   "answer": "public health",
+   "hint": "Think about the Guinea Worm, malaria, and HIV.",
+   "explain": "Aid has nearly eradicated the Guinea Worm and reduced malaria and HIV."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Wealth is accumulated assets minus...",
+   "choices": [
+    "liabilities",
+    "income",
+    "taxes",
+    "savings"
+   ],
+   "answer": "liabilities",
+   "hint": "What you own minus what you owe.",
+   "explain": "Wealth is accumulated assets minus liabilities."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "On the GINI Index, what does 100 represent?",
+   "choices": [
+    "complete inequality",
+    "complete equality",
+    "the poverty line",
+    "average income"
+   ],
+   "answer": "complete inequality",
+   "hint": "0 is the opposite.",
+   "explain": "On the GINI Index, 0 is complete equality and 100 is complete inequality."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Studies comparing people who nearly finished college with people who got a degree suggest which theory explains higher pay?",
+   "choices": [
+    "both human capital and signalling",
+    "only human capital",
+    "only signalling",
+    "neither theory"
+   ],
+   "answer": "both human capital and signalling",
+   "hint": "Degree holders earned more, but the gap was smaller than expected.",
+   "explain": "The evidence suggests both theories apply."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Which path can also lead to good pay, according to the video?",
+   "choices": [
+    "an apprenticeship to become an electrician",
+    "dropping out of high school",
+    "borrowing for college and not finishing",
+    "avoiding all job training"
+   ],
+   "answer": "an apprenticeship to become an electrician",
+   "hint": "Think about mechanics, plumbers, and electricians.",
+   "explain": "Good pay can be found in careers learned through community college or apprenticeships."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "About how much more does the U.S. spend per person on healthcare than most other developed countries?",
+   "choices": [
+    "about twice as much",
+    "about half as much",
+    "about the same",
+    "about ten times as much"
+   ],
+   "answer": "about twice as much",
+   "hint": "In 2012 it was $8,745 per person.",
+   "explain": "The U.S. spends about twice as much per person as most other developed countries."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Members of Congress, government bureaucrats, and lobbyists working together to keep the status quo is called the...",
+   "choices": [
+    "Iron Triangle",
+    "Easterlin Paradox",
+    "Lorenz curve",
+    "balance of payments"
+   ],
+   "answer": "Iron Triangle",
+   "hint": "It has three sides.",
+   "explain": "The Iron Triangle is the relationship between Congress, bureaucrats, and lobbyists, which tends to maintain the status quo."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Researchers Stevenson and Wolfers found that happiness rises with...",
+   "choices": [
+    "GDP per capita",
+    "longer commutes",
+    "credit card debt",
+    "unemployment"
+   ],
+   "answer": "GDP per capita",
+   "hint": "They argued the Easterlin Paradox is not a paradox.",
+   "explain": "Stevenson and Wolfers found happiness does rise with GDP per capita."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Bhutan measures progress by tracking...",
+   "choices": [
+    "Gross National Happiness",
+    "only Gross Domestic Product",
+    "only net exports",
+    "only the GINI Index"
+   ],
+   "answer": "Gross National Happiness",
+   "hint": "It considers social, physical, spiritual, and environmental health.",
+   "explain": "Bhutan tracks Gross National Happiness, not just economic output."
+  },
+  {
+   "id": "q15",
+   "type": "match",
+   "tag": "6.8 Unit 6 Review",
+   "q": "Match each term to the lesson idea it describes.",
+   "pairs": [
+    [
+     "leapfrogging",
+     "skipping straight to newer, more efficient technology"
+    ],
+    [
+     "microcredit",
+     "small loans to low-income people to start businesses"
+    ],
+    [
+     "remittances",
+     "money migrants send to their home country"
+    ],
+    [
+     "positive externality",
+     "a benefit that spreads to society, like education"
+    ]
+   ],
+   "hint": "Two of these terms come from the globalization lesson.",
+   "explain": "Leapfrogging and microcredit come from 6.2, remittances from 6.3, and positive externality from 6.5."
+  }
+ ]
+}
+</script>
+<script>
+/* Mighty B Practice Deck player - Format v1 */
+const MB_HOST_ORIGIN = "https://mb-practice.mightyblearning.workers.dev";
+const DECK = JSON.parse(document.getElementById('mb-deck').textContent);
+const MASTERY = typeof DECK.masteryThreshold === 'number' ? DECK.masteryThreshold : 0.85;
+const card = document.getElementById('card');
+const feedbackLive = document.getElementById('feedbackLive');
+const progressLabel = document.getElementById('progressLabel');
+const progressFill = document.getElementById('progressFill');
+const starsEl = document.getElementById('stars');
+let order = [], current = 0, streak = 0, bestStreak = 0, triedWrong = false;
+let tries = {}, firstTry = {}, attemptId = '', startedAt = '';
+
+function uuid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16); });
+}
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function tableHTML(t) {
+  if (!t) return '';
+  return '<table class="data"><thead><tr>' + t[0].map(h => `<th scope="col">${h}</th>`).join('') + '</tr></thead><tbody>' +
+    t.slice(1).map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody></table>';
+}
+function announce(html) { feedbackLive.innerHTML = html; }
+function startAttempt() {
+  order = shuffle(DECK.problems); current = 0; streak = 0; bestStreak = 0;
+  tries = {}; firstTry = {}; attemptId = uuid(); startedAt = new Date().toISOString();
+  DECK.problems.forEach(p => { tries[p.id] = 0; firstTry[p.id] = false; });
+  render();
+}
+function updateTop() {
+  progressLabel.textContent = `Question ${Math.min(current + 1, order.length)} of ${order.length}`;
+  progressFill.style.width = `${(current / order.length) * 100}%`;
+  starsEl.textContent = streak >= 2 ? `⭐ ${streak} in a row` : '';
+}
+function showNext() {
+  const actions = document.getElementById('actionsArea');
+  const btn = document.createElement('button');
+  btn.className = 'btn-primary'; btn.type = 'button';
+  btn.textContent = current === order.length - 1 ? 'See summary' : 'Next question';
+  btn.addEventListener('click', () => { if (current < order.length - 1) { current++; render(); } else { renderDone(); } });
+  actions.appendChild(btn); btn.focus();
+}
+function correctFeedback(p) {
+  tries[p.id]++;
+  if (!triedWrong) { firstTry[p.id] = true; streak++; bestStreak = Math.max(bestStreak, streak); }
+  updateTop();
+  const html = `<div class="feedback correct"><strong><span aria-hidden="true">✓ </span>${triedWrong ? 'Correct - you got it!' : 'Correct - nice work!'}</strong>${p.explain}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+  showNext();
+}
+function wrongFeedback(p, hint) {
+  tries[p.id]++;
+  if (!triedWrong) { streak = 0; updateTop(); }
+  triedWrong = true;
+  const html = `<div class="feedback incorrect"><strong><span aria-hidden="true">✗ </span>Not quite yet. Here's a hint:</strong>${hint}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+}
+function nudge(text) {
+  const html = `<div class="feedback incorrect"><strong>One step first:</strong>${text}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+}
+function render() {
+  triedWrong = false;
+  const p = order[current];
+  updateTop(); announce('');
+  card.innerHTML = `<span class="tag">${p.tag || DECK.title}</span>
+    <h2 class="question-text" tabindex="-1" id="qText">${p.q}</h2>${tableHTML(p.table)}
+    <div id="body"></div><div id="feedbackArea"></div><div class="actions" id="actionsArea"></div>`;
+  if (p.type === 'match') renderMatch(p); else renderMC(p);
+  if (current > 0) document.getElementById('qText').focus();
+}
+function renderMC(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = '<div class="choices" role="group" aria-label="Answer choices"></div>';
+  const wrap = body.firstChild;
+  shuffle(p.choices).forEach(val => {
+    const b = document.createElement('button');
+    b.className = 'choice'; b.type = 'button'; b.innerHTML = val;
+    b.addEventListener('click', () => {
+      if (val === p.answer) {
+        wrap.querySelectorAll('.choice').forEach(x => x.disabled = true);
+        b.classList.add('correct'); b.innerHTML = '<span aria-hidden="true">✓ </span>' + val; correctFeedback(p);
+      } else {
+        b.classList.add('incorrect'); b.disabled = true; b.innerHTML = '<span aria-hidden="true">✗ </span>' + val;
+        wrongFeedback(p, (p.hints && p.hints[val]) || p.hint);
+      }
+    });
+    wrap.appendChild(b);
+  });
+}
+function renderMatch(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = `<p class="match-help">Click a word on the left, then click what it matches on the right.</p>
+    <div class="match-grid"><div class="match-col" id="left" role="group" aria-label="Terms"></div><div class="match-col" id="right" role="group" aria-label="Matches"></div></div>`;
+  let picked = null, done = 0;
+  const left = document.getElementById('left'), right = document.getElementById('right');
+  const L = {};
+  shuffle(p.pairs).forEach(([a]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = a; b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      Object.values(L).forEach(x => { x.classList.remove('picked'); x.setAttribute('aria-pressed', 'false'); });
+      b.classList.add('picked'); b.setAttribute('aria-pressed', 'true'); picked = a;
+    });
+    L[a] = b; left.appendChild(b);
+  });
+  shuffle(p.pairs).forEach(([a, bText]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = bText;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (!picked) { nudge('First click a word on the left, then click its match here.'); return; }
+      const pair = p.pairs.find(x => x[0] === picked);
+      if (pair[1] === bText) {
+        L[picked].classList.remove('picked'); L[picked].classList.add('correct'); L[picked].disabled = true;
+        L[picked].innerHTML = '<span aria-hidden="true">✓ </span>' + picked;
+        b.classList.add('correct'); b.disabled = true; b.innerHTML = '<span aria-hidden="true">✓ </span>' + bText;
+        picked = null; done++;
+        if (done === p.pairs.length) correctFeedback(p);
+        else { document.getElementById('feedbackArea').innerHTML = ''; announce('Matched. Keep going.'); }
+      } else {
+        b.classList.add('incorrect'); setTimeout(() => b.classList.remove('incorrect'), 900);
+        wrongFeedback(p, (p.pairHints && p.pairHints[picked]) || p.hint);
+      }
+    });
+    right.appendChild(b);
+  });
+}
+function sendResult(result) {
+  window.dispatchEvent(new CustomEvent('mb-deck-complete', { detail: result }));
+  if (window.parent !== window) window.parent.postMessage({ type: 'mb-deck-complete', result }, MB_HOST_ORIGIN);
+}
+function renderDone() {
+  const n = DECK.problems.length;
+  const given = DECK.problems.filter(p => firstTry[p.id]).length;
+  const mastered = given / n >= MASTERY;
+  current = order.length;
+  progressLabel.textContent = `Question ${n} of ${n}`;
+  progressFill.style.width = '100%'; starsEl.textContent = '';
+  const missed = DECK.problems.filter(p => !firstTry[p.id]);
+  const missedHTML = missed.length ? `<div class="missed"><h3>Worth another look</h3><ul>${missed.map(p => `<li>${p.skill ? p.skill.replace(/-/g, ' ') + ': ' : ''}${p.q}</li>`).join('')}</ul></div>` : '';
+  card.innerHTML = `<div class="done-card"><h2 tabindex="-1" id="doneTitle">${mastered ? '<span aria-hidden="true">✓ </span>Mastered!' : 'Not yet - keep practicing'}</h2>
+    <p class="score-line">You got <strong>${given} of ${n}</strong> right on your first try (${Math.round(given / n * 100)}%). Mastery is ${Math.round(MASTERY * 100)}%.<br>Your best streak was ${bestStreak} in a row.</p>
+    <p>${DECK.wrapUp}</p>${missedHTML}
+    <div class="actions" style="justify-content:center; margin-top:20px;">
+    <button class="btn-primary" type="button" id="restartBtn">Try again</button></div></div>`;
+  announce(mastered ? 'Mastered.' : 'Not yet.');
+  document.getElementById('doneTitle').focus();
+  document.getElementById('restartBtn').addEventListener('click', startAttempt);
+  sendResult({
+    formatVersion: 1, deckId: DECK.deckId, attemptId, startedAt, completedAt: new Date().toISOString(),
+    scoreGiven: given, scoreMaximum: n, mastered,
+    items: DECK.problems.map(p => { const it = { id: p.id, firstTryCorrect: firstTry[p.id], tries: tries[p.id] }; if (p.skill) it.skill = p.skill; return it; })
+  });
+}
+document.getElementById('contrastToggle').addEventListener('click', function () {
+  const root = document.documentElement; const isHigh = root.getAttribute('data-contrast') === 'high';
+  root.setAttribute('data-contrast', isHigh ? 'normal' : 'high');
+  this.setAttribute('aria-pressed', String(!isHigh)); this.textContent = isHigh ? 'High contrast' : 'Normal contrast';
+});
+document.getElementById('fontToggle').addEventListener('click', function () {
+  const isLarge = document.getElementById('wrap').classList.toggle('font-lg');
+  this.setAttribute('aria-pressed', String(isLarge)); this.textContent = isLarge ? 'Smaller text' : 'Larger text';
+});
+startAttempt();
+</script>
+</body>
+</html>
