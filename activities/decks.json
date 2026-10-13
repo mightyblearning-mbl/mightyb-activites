@@ -3295,5 +3295,734 @@
   "course": "9th Grade English",
   "unit": "3",
   "unitTitle": "Romeo and Juliet"
+ },
+ "econ12-1-1-intro-to-economics": {
+  "file": "economics-12/econ12-1-1-intro-to-economics.html",
+  "title": "1.1 Intro to Economics",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "1",
+  "unitTitle": "Economic Foundations"
+ },
+ "econ12-1-2-specialization-and-trade": {
+  "file": "economics-12/econ12-1-2-specialization-and-trade.html",
+  "title": "1.2 Specialization and Trade",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "1",
+  "unitTitle": "Economic Foundations"
+ },
+ "econ12-1-3-economic-systems-and-macroeconomics": {
+  "file": "economics-12/econ12-1-3-economic-systems-and-macroeconomics.html",
+  "title": "1.3 Economic Systems and Macroeconomics",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "1",
+  "unitTitle": "Economic Foundations"
+ },
+ "econ12-1-4-supply-and-demand": {
+  "file": "economics-12/econ12-1-4-supply-and-demand.html",
+  "title": "1.4 Supply and Demand",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "1",
+  "unitTitle": "Economic Foundations"
+ },
+ "econ12-1-5-unit-1-review": {
+  "file": "economics-12/econ12-1-5-unit-1-review.html",
+  "title": "1.5 Unit 1 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "12th Grade Economics",
+  "unit": "1",
+  "unitTitle": "Economic Foundations"
+ },
+ "econ12-2-1-marginal-analysis-and-elasticity": {
+  "file": "economics-12/econ12-2-1-marginal-analysis-and-elasticity.html",
+  "title": "2.1 Marginal Analysis and Elasticity",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "2",
+  "unitTitle": "How Markets Work"
+ },
+ "econ12-2-2-markets-efficiency-and-price-signals": {
+  "file": "economics-12/econ12-2-2-markets-efficiency-and-price-signals.html",
+  "title": "2.2 Markets, Efficiency, and Price Signals",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "2",
+  "unitTitle": "How Markets Work"
+ },
+ "econ12-2-3-price-controls-and-subsidies": {
+  "file": "economics-12/econ12-2-3-price-controls-and-subsidies.html",
+  "title": "2.3 Price Controls and Subsidies",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "2",
+  "unitTitle": "How Markets Work"
+ },
+ "econ12-2-4-market-failures-taxes-and-subsidies": {
+  "file": "economics-12/econ12-2-4-market-failures-taxes-and-subsidies.html",
+  "title": "2.4 Market Failures, Taxes, and Subsidies",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "2",
+  "unitTitle": "How Markets Work"
+ },
+ "econ12-2-5-environmental-economics": {
+  "file": "economics-12/econ12-2-5-environmental-economics.html",
+  "title": "2.5 Environmental Economics",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "2",
+  "unitTitle": "How Markets Work"
+ },
+ "econ12-2-6-unit-2-review": {
+  "file": "economics-12/econ12-2-6-unit-2-review.html",
+  "title": "2.6 Unit 2 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "12th Grade Economics",
+  "unit": "2",
+  "unitTitle": "How Markets Work"
+ },
+ "econ12-3-1-revenue-profits-and-price": {
+  "file": "economics-12/econ12-3-1-revenue-profits-and-price.html",
+  "title": "3.1 Revenue, Profits, and Price",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "3",
+  "unitTitle": "Businesses, Competition, and Choices"
+ },
+ "econ12-3-2-monopolies-and-anti-competitive-markets": {
+  "file": "economics-12/econ12-3-2-monopolies-and-anti-competitive-markets.html",
+  "title": "3.2 Monopolies and Anti-Competitive Markets",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "3",
+  "unitTitle": "Businesses, Competition, and Choices"
+ },
+ "econ12-3-3-game-theory-and-oligopoly": {
+  "file": "economics-12/econ12-3-3-game-theory-and-oligopoly.html",
+  "title": "3.3 Game Theory and Oligopoly",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "3",
+  "unitTitle": "Businesses, Competition, and Choices"
+ },
+ "econ12-3-4-behavioral-economics": {
+  "file": "economics-12/econ12-3-4-behavioral-economics.html",
+  "title": "3.4 Behavioral Economics",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "3",
+  "unitTitle": "Businesses, Competition, and Choices"
+ },
+ "econ12-3-5-labor-markets-and-minimum-wage": {
+  "file": "economics-12/econ12-3-5-labor-markets-and-minimum-wage.html",
+  "title": "3.5 Labor Markets and Minimum Wage",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "3",
+  "unitTitle": "Businesses, Competition, and Choices"
+ },
+ "econ12-3-6-unit-3-review": {
+  "file": "economics-12/econ12-3-6-unit-3-review.html",
+  "title": "3.6 Unit 3 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "12th Grade Economics",
+  "unit": "3",
+  "unitTitle": "Businesses, Competition, and Choices"
+ },
+ "econ12-4-1-macroeconomics-gdp-and-unemployment": {
+  "file": "economics-12/econ12-4-1-macroeconomics-gdp-and-unemployment.html",
+  "title": "4.1 Macroeconomics: GDP and Unemployment",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "4",
+  "unitTitle": "Macroeconomics"
+ },
+ "econ12-4-2-productivity-and-growth": {
+  "file": "economics-12/econ12-4-2-productivity-and-growth.html",
+  "title": "4.2 Productivity and Growth",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "4",
+  "unitTitle": "Macroeconomics"
+ },
+ "econ12-4-3-inflation-and-bubbles": {
+  "file": "economics-12/econ12-4-3-inflation-and-bubbles.html",
+  "title": "4.3 Inflation and Bubbles",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "4",
+  "unitTitle": "Macroeconomics"
+ },
+ "econ12-4-4-recession-hyperinflation-and-stagflation": {
+  "file": "economics-12/econ12-4-4-recession-hyperinflation-and-stagflation.html",
+  "title": "4.4 Recession, Hyperinflation, and Stagflation",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "4",
+  "unitTitle": "Macroeconomics"
+ },
+ "econ12-4-5-economic-schools-of-thought": {
+  "file": "economics-12/econ12-4-5-economic-schools-of-thought.html",
+  "title": "4.5 Economic Schools of Thought",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "4",
+  "unitTitle": "Macroeconomics"
+ },
+ "econ12-4-6-unit-4-review": {
+  "file": "economics-12/econ12-4-6-unit-4-review.html",
+  "title": "4.6 Unit 4 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "12th Grade Economics",
+  "unit": "4",
+  "unitTitle": "Macroeconomics"
+ },
+ "econ12-5-1-money-and-finance": {
+  "file": "economics-12/econ12-5-1-money-and-finance.html",
+  "title": "5.1 Money and Finance",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "5",
+  "unitTitle": "Money, Banking, and Government"
+ },
+ "econ12-5-2-monetary-policy-and-the-federal-reserve": {
+  "file": "economics-12/econ12-5-2-monetary-policy-and-the-federal-reserve.html",
+  "title": "5.2 Monetary Policy and the Federal Reserve",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "5",
+  "unitTitle": "Money, Banking, and Government"
+ },
+ "econ12-5-3-fiscal-policy-and-stimulus": {
+  "file": "economics-12/econ12-5-3-fiscal-policy-and-stimulus.html",
+  "title": "5.3 Fiscal Policy and Stimulus",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "5",
+  "unitTitle": "Money, Banking, and Government"
+ },
+ "econ12-5-4-deficits-and-debts": {
+  "file": "economics-12/econ12-5-4-deficits-and-debts.html",
+  "title": "5.4 Deficits and Debts",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "5",
+  "unitTitle": "Money, Banking, and Government"
+ },
+ "econ12-5-5-taxes": {
+  "file": "economics-12/econ12-5-5-taxes.html",
+  "title": "5.5 Taxes",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "5",
+  "unitTitle": "Money, Banking, and Government"
+ },
+ "econ12-5-6-the-2008-financial-crisis": {
+  "file": "economics-12/econ12-5-6-the-2008-financial-crisis.html",
+  "title": "5.6 The 2008 Financial Crisis",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "5",
+  "unitTitle": "Money, Banking, and Government"
+ },
+ "econ12-5-7-unit-5-review": {
+  "file": "economics-12/econ12-5-7-unit-5-review.html",
+  "title": "5.7 Unit 5 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "12th Grade Economics",
+  "unit": "5",
+  "unitTitle": "Money, Banking, and Government"
+ },
+ "econ12-6-1-imports-exports-and-exchange-rates": {
+  "file": "economics-12/econ12-6-1-imports-exports-and-exchange-rates.html",
+  "title": "6.1 Imports, Exports, and Exchange Rates",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "econ12-6-2-globalization-trade-and-poverty": {
+  "file": "economics-12/econ12-6-2-globalization-trade-and-poverty.html",
+  "title": "6.2 Globalization, Trade, and Poverty",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "econ12-6-3-foreign-aid-and-remittances": {
+  "file": "economics-12/econ12-6-3-foreign-aid-and-remittances.html",
+  "title": "6.3 Foreign Aid and Remittances",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "econ12-6-4-income-and-wealth-inequality": {
+  "file": "economics-12/econ12-6-4-income-and-wealth-inequality.html",
+  "title": "6.4 Income and Wealth Inequality",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "econ12-6-5-the-economics-of-education": {
+  "file": "economics-12/econ12-6-5-the-economics-of-education.html",
+  "title": "6.5 The Economics of Education",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "econ12-6-6-the-economics-of-healthcare": {
+  "file": "economics-12/econ12-6-6-the-economics-of-healthcare.html",
+  "title": "6.6 The Economics of Healthcare",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "econ12-6-7-the-economics-of-happiness": {
+  "file": "economics-12/econ12-6-7-the-economics-of-happiness.html",
+  "title": "6.7 The Economics of Happiness",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "econ12-6-8-unit-6-review": {
+  "file": "economics-12/econ12-6-8-unit-6-review.html",
+  "title": "6.8 Unit 6 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "12th Grade Economics",
+  "unit": "6",
+  "unitTitle": "The Global Economy and Society"
+ },
+ "math4-10-1-lines-rays-and-line-segments": {
+  "file": "math-4/math4-10-1-lines-rays-and-line-segments.html",
+  "title": "10.1 Lines, Rays and Line Segments",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-2-parallel-and-perpendicular-lines": {
+  "file": "math-4/math4-10-2-parallel-and-perpendicular-lines.html",
+  "title": "10.2 Parallel and Perpendicular Lines",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-3-types-of-angles": {
+  "file": "math-4/math4-10-3-types-of-angles.html",
+  "title": "10.3 Types of Angles",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-4-measuring-angles-with-a-protractor": {
+  "file": "math-4/math4-10-4-measuring-angles-with-a-protractor.html",
+  "title": "10.4 Measuring Angles with a Protractor",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-5-drawing-angles": {
+  "file": "math-4/math4-10-5-drawing-angles.html",
+  "title": "10.5 Drawing Angles",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-6-missing-angles": {
+  "file": "math-4/math4-10-6-missing-angles.html",
+  "title": "10.6 Missing Angles",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-7-identifying-triangles-by-angle": {
+  "file": "math-4/math4-10-7-identifying-triangles-by-angle.html",
+  "title": "10.7 Identifying Triangles by Angle",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-8-symmetry": {
+  "file": "math-4/math4-10-8-symmetry.html",
+  "title": "10.8 Symmetry",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-10-9-unit-10-review": {
+  "file": "math-4/math4-10-9-unit-10-review.html",
+  "title": "10.9 Unit 10 Review",
+  "kind": "unit-review",
+  "questions": 16,
+  "course": "4th Grade Math",
+  "unit": "10",
+  "unitTitle": "Geometry"
+ },
+ "math4-11-1-metric-length": {
+  "file": "math-4/math4-11-1-metric-length.html",
+  "title": "11.1 Metric Length",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "11",
+  "unitTitle": "Measurement"
+ },
+ "math4-11-2-customary-length": {
+  "file": "math-4/math4-11-2-customary-length.html",
+  "title": "11.2 Customary Length",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "11",
+  "unitTitle": "Measurement"
+ },
+ "math4-11-3-metric-mass": {
+  "file": "math-4/math4-11-3-metric-mass.html",
+  "title": "11.3 Metric Mass",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "11",
+  "unitTitle": "Measurement"
+ },
+ "math4-11-4-metric-capacity": {
+  "file": "math-4/math4-11-4-metric-capacity.html",
+  "title": "11.4 Metric Capacity",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "11",
+  "unitTitle": "Measurement"
+ },
+ "math4-11-5-area-and-perimeter": {
+  "file": "math-4/math4-11-5-area-and-perimeter.html",
+  "title": "11.5 Area and Perimeter",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "11",
+  "unitTitle": "Measurement"
+ },
+ "math4-11-6-line-plots": {
+  "file": "math-4/math4-11-6-line-plots.html",
+  "title": "11.6 Line Plots",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "4th Grade Math",
+  "unit": "11",
+  "unitTitle": "Measurement"
+ },
+ "math4-11-7-unit-11-review": {
+  "file": "math-4/math4-11-7-unit-11-review.html",
+  "title": "11.7 Unit 11 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "4th Grade Math",
+  "unit": "11",
+  "unitTitle": "Measurement"
+ },
+ "alg1-8-1-introduction-to-quadratic-functions": {
+  "file": "algebra-1/alg1-8-1-introduction-to-quadratic-functions.html",
+  "title": "8.1 Introduction to Quadratic Functions",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-2-the-leading-coefficient-of-a-quadratic": {
+  "file": "algebra-1/alg1-8-2-the-leading-coefficient-of-a-quadratic.html",
+  "title": "8.2 The Leading Coefficient of a Quadratic",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-3-the-symmetry-of-a-quadratic-function": {
+  "file": "algebra-1/alg1-8-3-the-symmetry-of-a-quadratic-function.html",
+  "title": "8.3 The Symmetry of a Quadratic Function",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-4-solving-quadratic-equations-using-inverse-operations": {
+  "file": "algebra-1/alg1-8-4-solving-quadratic-equations-using-inverse-operations.html",
+  "title": "8.4 Solving Quadratic Equations Using Inverse Operations",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-5-solving-quadratics-by-completing-the-square": {
+  "file": "algebra-1/alg1-8-5-solving-quadratics-by-completing-the-square.html",
+  "title": "8.5 Solving Quadratics by Completing the Square",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-6-area-and-completing-the-square": {
+  "file": "algebra-1/alg1-8-6-area-and-completing-the-square.html",
+  "title": "8.6 Area and Completing the Square",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-7-more-work-solving-quadratics-by-completing-the-square": {
+  "file": "algebra-1/alg1-8-7-more-work-solving-quadratics-by-completing-the-square.html",
+  "title": "8.7 More Work Solving Quadratics by Completing the Square",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-8-the-zero-product-law": {
+  "file": "algebra-1/alg1-8-8-the-zero-product-law.html",
+  "title": "8.8 The Zero Product Law",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-8-9-unit-8-review": {
+  "file": "algebra-1/alg1-8-9-unit-8-review.html",
+  "title": "8.9 Unit 8 Review",
+  "kind": "unit-review",
+  "questions": 16,
+  "course": "Algebra 1",
+  "unit": "8",
+  "unitTitle": "Quadratic Functions"
+ },
+ "alg1-9-1-integers-and-rational-numbers": {
+  "file": "algebra-1/alg1-9-1-integers-and-rational-numbers.html",
+  "title": "9.1 Integers and Rational Numbers",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-9-2-square-roots": {
+  "file": "algebra-1/alg1-9-2-square-roots.html",
+  "title": "9.2 Square Roots",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-9-3-irrational-numbers": {
+  "file": "algebra-1/alg1-9-3-irrational-numbers.html",
+  "title": "9.3 Irrational Numbers",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-9-4-square-root-arithmetic": {
+  "file": "algebra-1/alg1-9-4-square-root-arithmetic.html",
+  "title": "9.4 Square Root Arithmetic",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-9-5-quadratic-equations-with-irrational-solutions": {
+  "file": "algebra-1/alg1-9-5-quadratic-equations-with-irrational-solutions.html",
+  "title": "9.5 Quadratic Equations with Irrational Solutions",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-9-6-the-quadratic-formula": {
+  "file": "algebra-1/alg1-9-6-the-quadratic-formula.html",
+  "title": "9.6 The Quadratic Formula",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-9-7-final-work-with-quadratic-equations": {
+  "file": "algebra-1/alg1-9-7-final-work-with-quadratic-equations.html",
+  "title": "9.7 Final Work with Quadratic Equations",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-9-8-unit-9-review": {
+  "file": "algebra-1/alg1-9-8-unit-9-review.html",
+  "title": "9.8 Unit 9 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "Algebra 1",
+  "unit": "9",
+  "unitTitle": "Roots and Irrational Numbers"
+ },
+ "alg1-10-1-parent-functions": {
+  "file": "algebra-1/alg1-10-1-parent-functions.html",
+  "title": "10.1 Parent Functions",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "10",
+  "unitTitle": "Functions and Their Transformations"
+ },
+ "alg1-10-5-vertical-stretching-and-compressing-of-functions": {
+  "file": "algebra-1/alg1-10-5-vertical-stretching-and-compressing-of-functions.html",
+  "title": "10.5 Vertical Stretching and Compressing of Functions",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "10",
+  "unitTitle": "Functions and Their Transformations"
+ },
+ "alg1-10-7-the-vertex-form-of-a-quadratic-function": {
+  "file": "algebra-1/alg1-10-7-the-vertex-form-of-a-quadratic-function.html",
+  "title": "10.7 The Vertex Form of a Quadratic Function",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "10",
+  "unitTitle": "Functions and Their Transformations"
+ },
+ "alg1-10-8-unit-10-review": {
+  "file": "algebra-1/alg1-10-8-unit-10-review.html",
+  "title": "10.8 Unit 10 Review",
+  "kind": "unit-review",
+  "questions": 14,
+  "course": "Algebra 1",
+  "unit": "10",
+  "unitTitle": "Functions and Their Transformations"
+ },
+ "alg1-11-1-the-purpose-of-statistics": {
+  "file": "algebra-1/alg1-11-1-the-purpose-of-statistics.html",
+  "title": "11.1 The Purpose of Statistics",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "11",
+  "unitTitle": "Statistics"
+ },
+ "alg1-11-2-the-standard-deviation-of-a-data-set": {
+  "file": "algebra-1/alg1-11-2-the-standard-deviation-of-a-data-set.html",
+  "title": "11.2 The Standard Deviation of a Data Set",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "11",
+  "unitTitle": "Statistics"
+ },
+ "alg1-11-3-more-work-with-standard-deviation": {
+  "file": "algebra-1/alg1-11-3-more-work-with-standard-deviation.html",
+  "title": "11.3 More Work with Standard Deviation",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "11",
+  "unitTitle": "Statistics"
+ },
+ "alg1-11-4-data-distribution-shapes": {
+  "file": "algebra-1/alg1-11-4-data-distribution-shapes.html",
+  "title": "11.4 Data Distribution Shapes",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "11",
+  "unitTitle": "Statistics"
+ },
+ "alg1-11-5-comparing-samples": {
+  "file": "algebra-1/alg1-11-5-comparing-samples.html",
+  "title": "11.5 Comparing Samples",
+  "kind": "lesson",
+  "questions": 8,
+  "course": "Algebra 1",
+  "unit": "11",
+  "unitTitle": "Statistics"
+ },
+ "alg1-11-6-unit-11-review": {
+  "file": "algebra-1/alg1-11-6-unit-11-review.html",
+  "title": "11.6 Unit 11 Review",
+  "kind": "unit-review",
+  "questions": 15,
+  "course": "Algebra 1",
+  "unit": "11",
+  "unitTitle": "Statistics"
  }
 }
