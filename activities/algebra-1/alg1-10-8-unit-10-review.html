@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10.8 Unit 10 Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 10.8 Unit 10 Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "alg1-10-8-unit-10-review",
+ "title": "10.8 Unit 10 Review",
+ "course": "Algebra 1",
+ "unit": "10",
+ "lesson": "10.8",
+ "kind": "unit-review",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "You reviewed parent functions, vertical stretches and compressions, and vertex form. Remember: k f(x) multiplies the y-values, and y = a(x - h)^2 + k has its turning point at (h, k).",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "Which parent function has a graph that is half of a sideways parabola starting at the origin?",
+   "choices": [
+    "y = sqrt(x)",
+    "y = x^2",
+    "y = |x|",
+    "y = 2^x"
+   ],
+   "answer": "y = sqrt(x)",
+   "hint": "Which function is the inverse of squaring?",
+   "explain": "y = sqrt(x) starts at (0, 0) and curves to the right, like half of a parabola turned on its side."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "Which describes the domain of y = sqrt(x)?",
+   "choices": [
+    "x >= 0",
+    "all real numbers",
+    "x <= 0",
+    "y >= 0"
+   ],
+   "answer": "x >= 0",
+   "hint": "Which inputs can you take the square root of?",
+   "explain": "You cannot take the square root of a negative number, so the inputs must be 0 or greater.",
+   "hints": {
+    "y >= 0": "Domain is about the x-values (inputs)."
+   }
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "For y = sqrt(x), what is the average rate of change from x = 0 to x = 4?",
+   "choices": [
+    "1/2",
+    "2",
+    "4",
+    "1/4"
+   ],
+   "answer": "1/2",
+   "hint": "Find sqrt(0) and sqrt(4), then divide the change in y by the change in x.",
+   "explain": "The outputs are 0 and 2, so the rate is (2 - 0)/(4 - 0) = 1/2.",
+   "hints": {
+    "2": "That is only the change in y. Divide it by the change in x."
+   }
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "If f(x) = 3 sqrt(x + 4) - 1, what is f(0)?",
+   "choices": [
+    "5",
+    "11",
+    "1",
+    "7"
+   ],
+   "answer": "5",
+   "hint": "Substitute 0, take the square root of 4, multiply by 3, then subtract 1.",
+   "explain": "f(0) = 3 sqrt(4) - 1 = 3(2) - 1 = 5.",
+   "hints": {
+    "11": "Take the square root of 4 before multiplying by 3."
+   }
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "If f(x) = x^2 - 5 and g(x) = 2 f(x), which is a formula for g(x)?",
+   "choices": [
+    "g(x) = 2x^2 - 10",
+    "g(x) = 2x^2 - 5",
+    "g(x) = 4x^2 - 5",
+    "g(x) = x^2 - 3"
+   ],
+   "answer": "g(x) = 2x^2 - 10",
+   "hint": "g(x) = 2(x^2 - 5). Distribute the 2.",
+   "explain": "g(x) = 2(x^2 - 5) = 2x^2 - 10."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "The point (3, -6) is on the graph of f. Which point must be on the graph of g(x) = (1/3) f(x)?",
+   "choices": [
+    "(3, -2)",
+    "(1, -6)",
+    "(3, -18)",
+    "(1, -2)"
+   ],
+   "answer": "(3, -2)",
+   "hint": "Only the y-coordinate is multiplied by 1/3.",
+   "explain": "The x-value stays 3 and the y-value becomes (1/3)(-6) = -2."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "The maximum of f is 8 and the maximum of g(x) = k f(x) is 2. What is k?",
+   "choices": [
+    "1/4",
+    "4",
+    "6",
+    "-6"
+   ],
+   "answer": "1/4",
+   "hint": "Solve g max = k times f max: 2 = 8k.",
+   "explain": "2 = 8k, so k = 2/8 = 1/4. The graph was compressed toward the x-axis.",
+   "hints": {
+    "4": "That compares them backwards. g is smaller than f, so k is less than 1."
+   }
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "A function f has zeros at x = -2 and x = 6. Where are the zeros of g(x) = 5 f(x)?",
+   "choices": [
+    "x = -2 and x = 6",
+    "x = -10 and x = 30",
+    "x = 3 and x = 11",
+    "x = -0.4 and x = 1.2"
+   ],
+   "answer": "x = -2 and x = 6",
+   "hint": "What is 5 times 0?",
+   "explain": "At a zero f(x) = 0, and 5(0) = 0, so a vertical stretch does not move the zeros."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "tag": "10.8 Unit 10 Review",
+   "q": "Match each form of a quadratic function to the feature it shows most easily.",
+   "pairs": [
+    [
+     "standard form: y = x^2 - 6x + 8",
+     "the y-intercept"
+    ],
+    [
+     "factored form: y = (x - 2)(x - 4)",
+     "the zeros"
+    ],
+    [
+     "vertex form: y = (x - 3)^2 - 1",
+     "the turning point"
+    ]
+   ],
+   "hint": "Ask yourself: what can I read right off each formula without doing any work?",
+   "explain": "Standard form shows the y-intercept (8), factored form shows the zeros (2 and 4), and vertex form shows the turning point (3, -1)."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "What is the turning point of f(x) = x^2 - 10x + 21?",
+   "choices": [
+    "(5, -4)",
+    "(5, 21)",
+    "(-5, -4)",
+    "(10, 21)"
+   ],
+   "answer": "(5, -4)",
+   "hint": "Factor to find the zeros, average them for the axis of symmetry, then find the y-value there.",
+   "explain": "f(x) = (x - 3)(x - 7), so the axis is x = 5 and f(5) = (2)(-2) = -4. The turning point is (5, -4)."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "How is y = (x + 1)^2 + 8 shifted from the graph of y = x^2?",
+   "choices": [
+    "left 1 and up 8",
+    "right 1 and up 8",
+    "left 1 and down 8",
+    "right 8 and up 1"
+   ],
+   "answer": "left 1 and up 8",
+   "hint": "Adding inside the parentheses shifts left; adding outside shifts up.",
+   "explain": "x + 1 shifts the graph left 1, and + 8 shifts it up 8."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "What is the turning point of y = 2(x - 7)^2 - 3?",
+   "choices": [
+    "(7, -3)",
+    "(-7, -3)",
+    "(7, 3)",
+    "(14, -3)"
+   ],
+   "answer": "(7, -3)",
+   "hint": "In y = a(x - h)^2 + k the turning point is (h, k).",
+   "explain": "Here h = 7 and k = -3. The 2 stretches the graph but does not move the vertex."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "A parabola has turning point (6, 9) and passes through (0, 0). In y = a(x - 6)^2 + 9, what is a?",
+   "choices": [
+    "-1/4",
+    "1/4",
+    "-4",
+    "-3/2"
+   ],
+   "answer": "-1/4",
+   "hint": "Substitute x = 0 and y = 0: 0 = a(0 - 6)^2 + 9.",
+   "explain": "0 = 36a + 9, so -9 = 36a and a = -1/4.",
+   "hints": {
+    "1/4": "Subtract 9 from both sides. The result is negative."
+   }
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "tag": "10.8 Unit 10 Review",
+   "q": "Which statement about y = (1/2)^x is true?",
+   "choices": [
+    "It decreases because its base is between 0 and 1.",
+    "It increases because its base is positive.",
+    "It has a turning point at the origin.",
+    "It has no outputs when x is negative."
+   ],
+   "answer": "It decreases because its base is between 0 and 1.",
+   "hint": "Remember the rule for exponential bases greater than 1 and less than 1.",
+   "explain": "An exponential function increases when its base is greater than 1 and decreases when its base is between 0 and 1."
+  }
+ ]
+}
+</script>
+<script>
+/* Mighty B Practice Deck player - Format v1 */
+const MB_HOST_ORIGIN = "https://mb-practice.mightyblearning.workers.dev";
+const DECK = JSON.parse(document.getElementById('mb-deck').textContent);
+const MASTERY = typeof DECK.masteryThreshold === 'number' ? DECK.masteryThreshold : 0.85;
+const card = document.getElementById('card');
+const feedbackLive = document.getElementById('feedbackLive');
+const progressLabel = document.getElementById('progressLabel');
+const progressFill = document.getElementById('progressFill');
+const starsEl = document.getElementById('stars');
+let order = [], current = 0, streak = 0, bestStreak = 0, triedWrong = false;
+let tries = {}, firstTry = {}, attemptId = '', startedAt = '';
+
+function uuid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16); });
+}
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function tableHTML(t) {
+  if (!t) return '';
+  return '<table class="data"><thead><tr>' + t[0].map(h => `<th scope="col">${h}</th>`).join('') + '</tr></thead><tbody>' +
+    t.slice(1).map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody></table>';
+}
+function announce(html) { feedbackLive.innerHTML = html; }
+function startAttempt() {
+  order = shuffle(DECK.problems); current = 0; streak = 0; bestStreak = 0;
+  tries = {}; firstTry = {}; attemptId = uuid(); startedAt = new Date().toISOString();
+  DECK.problems.forEach(p => { tries[p.id] = 0; firstTry[p.id] = false; });
+  render();
+}
+function updateTop() {
+  progressLabel.textContent = `Question ${Math.min(current + 1, order.length)} of ${order.length}`;
+  progressFill.style.width = `${(current / order.length) * 100}%`;
+  starsEl.textContent = streak >= 2 ? `⭐ ${streak} in a row` : '';
+}
+function showNext() {
+  const actions = document.getElementById('actionsArea');
+  const btn = document.createElement('button');
+  btn.className = 'btn-primary'; btn.type = 'button';
+  btn.textContent = current === order.length - 1 ? 'See summary' : 'Next question';
+  btn.addEventListener('click', () => { if (current < order.length - 1) { current++; render(); } else { renderDone(); } });
+  actions.appendChild(btn); btn.focus();
+}
+function correctFeedback(p) {
+  tries[p.id]++;
+  if (!triedWrong) { firstTry[p.id] = true; streak++; bestStreak = Math.max(bestStreak, streak); }
+  updateTop();
+  const html = `<div class="feedback correct"><strong><span aria-hidden="true">✓ </span>${triedWrong ? 'Correct - you got it!' : 'Correct - nice work!'}</strong>${p.explain}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+  showNext();
+}
+function wrongFeedback(p, hint) {
+  tries[p.id]++;
+  if (!triedWrong) { streak = 0; updateTop(); }
+  triedWrong = true;
+  const html = `<div class="feedback incorrect"><strong><span aria-hidden="true">✗ </span>Not quite yet. Here's a hint:</strong>${hint}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+}
+function nudge(text) {
+  const html = `<div class="feedback incorrect"><strong>One step first:</strong>${text}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+}
+function render() {
+  triedWrong = false;
+  const p = order[current];
+  updateTop(); announce('');
+  card.innerHTML = `<span class="tag">${p.tag || DECK.title}</span>
+    <h2 class="question-text" tabindex="-1" id="qText">${p.q}</h2>${tableHTML(p.table)}
+    <div id="body"></div><div id="feedbackArea"></div><div class="actions" id="actionsArea"></div>`;
+  if (p.type === 'match') renderMatch(p); else renderMC(p);
+  if (current > 0) document.getElementById('qText').focus();
+}
+function renderMC(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = '<div class="choices" role="group" aria-label="Answer choices"></div>';
+  const wrap = body.firstChild;
+  shuffle(p.choices).forEach(val => {
+    const b = document.createElement('button');
+    b.className = 'choice'; b.type = 'button'; b.innerHTML = val;
+    b.addEventListener('click', () => {
+      if (val === p.answer) {
+        wrap.querySelectorAll('.choice').forEach(x => x.disabled = true);
+        b.classList.add('correct'); b.innerHTML = '<span aria-hidden="true">✓ </span>' + val; correctFeedback(p);
+      } else {
+        b.classList.add('incorrect'); b.disabled = true; b.innerHTML = '<span aria-hidden="true">✗ </span>' + val;
+        wrongFeedback(p, (p.hints && p.hints[val]) || p.hint);
+      }
+    });
+    wrap.appendChild(b);
+  });
+}
+function renderMatch(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = `<p class="match-help">Click a word on the left, then click what it matches on the right.</p>
+    <div class="match-grid"><div class="match-col" id="left" role="group" aria-label="Terms"></div><div class="match-col" id="right" role="group" aria-label="Matches"></div></div>`;
+  let picked = null, done = 0;
+  const left = document.getElementById('left'), right = document.getElementById('right');
+  const L = {};
+  shuffle(p.pairs).forEach(([a]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = a; b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      Object.values(L).forEach(x => { x.classList.remove('picked'); x.setAttribute('aria-pressed', 'false'); });
+      b.classList.add('picked'); b.setAttribute('aria-pressed', 'true'); picked = a;
+    });
+    L[a] = b; left.appendChild(b);
+  });
+  shuffle(p.pairs).forEach(([a, bText]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = bText;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (!picked) { nudge('First click a word on the left, then click its match here.'); return; }
+      const pair = p.pairs.find(x => x[0] === picked);
+      if (pair[1] === bText) {
+        L[picked].classList.remove('picked'); L[picked].classList.add('correct'); L[picked].disabled = true;
+        L[picked].innerHTML = '<span aria-hidden="true">✓ </span>' + picked;
+        b.classList.add('correct'); b.disabled = true; b.innerHTML = '<span aria-hidden="true">✓ </span>' + bText;
+        picked = null; done++;
+        if (done === p.pairs.length) correctFeedback(p);
+        else { document.getElementById('feedbackArea').innerHTML = ''; announce('Matched. Keep going.'); }
+      } else {
+        b.classList.add('incorrect'); setTimeout(() => b.classList.remove('incorrect'), 900);
+        wrongFeedback(p, (p.pairHints && p.pairHints[picked]) || p.hint);
+      }
+    });
+    right.appendChild(b);
+  });
+}
+function sendResult(result) {
+  window.dispatchEvent(new CustomEvent('mb-deck-complete', { detail: result }));
+  if (window.parent !== window) window.parent.postMessage({ type: 'mb-deck-complete', result }, MB_HOST_ORIGIN);
+}
+function renderDone() {
+  const n = DECK.problems.length;
+  const given = DECK.problems.filter(p => firstTry[p.id]).length;
+  const mastered = given / n >= MASTERY;
+  current = order.length;
+  progressLabel.textContent = `Question ${n} of ${n}`;
+  progressFill.style.width = '100%'; starsEl.textContent = '';
+  const missed = DECK.problems.filter(p => !firstTry[p.id]);
+  const missedHTML = missed.length ? `<div class="missed"><h3>Worth another look</h3><ul>${missed.map(p => `<li>${p.skill ? p.skill.replace(/-/g, ' ') + ': ' : ''}${p.q}</li>`).join('')}</ul></div>` : '';
+  card.innerHTML = `<div class="done-card"><h2 tabindex="-1" id="doneTitle">${mastered ? '<span aria-hidden="true">✓ </span>Mastered!' : 'Not yet - keep practicing'}</h2>
+    <p class="score-line">You got <strong>${given} of ${n}</strong> right on your first try (${Math.round(given / n * 100)}%). Mastery is ${Math.round(MASTERY * 100)}%.<br>Your best streak was ${bestStreak} in a row.</p>
+    <p>${DECK.wrapUp}</p>${missedHTML}
+    <div class="actions" style="justify-content:center; margin-top:20px;">
+    <button class="btn-primary" type="button" id="restartBtn">Try again</button></div></div>`;
+  announce(mastered ? 'Mastered.' : 'Not yet.');
+  document.getElementById('doneTitle').focus();
+  document.getElementById('restartBtn').addEventListener('click', startAttempt);
+  sendResult({
+    formatVersion: 1, deckId: DECK.deckId, attemptId, startedAt, completedAt: new Date().toISOString(),
+    scoreGiven: given, scoreMaximum: n, mastered,
+    items: DECK.problems.map(p => { const it = { id: p.id, firstTryCorrect: firstTry[p.id], tries: tries[p.id] }; if (p.skill) it.skill = p.skill; return it; })
+  });
+}
+document.getElementById('contrastToggle').addEventListener('click', function () {
+  const root = document.documentElement; const isHigh = root.getAttribute('data-contrast') === 'high';
+  root.setAttribute('data-contrast', isHigh ? 'normal' : 'high');
+  this.setAttribute('aria-pressed', String(!isHigh)); this.textContent = isHigh ? 'High contrast' : 'Normal contrast';
+});
+document.getElementById('fontToggle').addEventListener('click', function () {
+  const isLarge = document.getElementById('wrap').classList.toggle('font-lg');
+  this.setAttribute('aria-pressed', String(isLarge)); this.textContent = isLarge ? 'Smaller text' : 'Larger text';
+});
+startAttempt();
+</script>
+</body>
+</html>

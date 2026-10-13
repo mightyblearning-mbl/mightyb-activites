@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11.6 Unit 11 Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 11.6 Unit 11 Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "alg1-11-6-unit-11-review",
+ "title": "11.6 Unit 11 Review",
+ "course": "Algebra 1",
+ "unit": "11",
+ "lesson": "11.6",
+ "kind": "unit-review",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "You reviewed statistical questions, mean, median, IQR, standard deviation and its rules of thumb (67% and 95%), distribution shapes, and comparing samples.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Which of these is a statistical question?",
+   "choices": [
+    "How tall are the students in a ninth grade class?",
+    "How tall am I?",
+    "How many inches are in a foot?",
+    "What is 5 times 12?"
+   ],
+   "answer": "How tall are the students in a ninth grade class?",
+   "hint": "Look for the question whose answers vary.",
+   "explain": "Student heights vary, so that question involves variability."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "What is the mean of the data set 2, 5, 6, 7, 10?",
+   "choices": [
+    "6",
+    "5",
+    "30",
+    "8"
+   ],
+   "answer": "6",
+   "hint": "Add the values and divide by how many there are.",
+   "explain": "2 + 5 + 6 + 7 + 10 = 30, and 30 / 5 = 6."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "What does the interquartile range (IQR) measure?",
+   "choices": [
+    "the spread of the middle 50% of the data",
+    "the spread of all the data",
+    "the middle value of the data",
+    "the average of the data"
+   ],
+   "answer": "the spread of the middle 50% of the data",
+   "hint": "IQR = Q3 - Q1.",
+   "explain": "The IQR is the width of the box in a box plot: the spread of the middle half of the data.",
+   "hints": {
+    "the spread of all the data": "That is the range (max - min)."
+   }
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Which statement best describes the standard deviation?",
+   "choices": [
+    "It is roughly the average distance of the data from the mean.",
+    "It is the middle value of the data.",
+    "It is the maximum minus the minimum.",
+    "It is the most common value."
+   ],
+   "answer": "It is roughly the average distance of the data from the mean.",
+   "hint": "It is a measure of variation.",
+   "explain": "Standard deviation roughly measures how far, on average, data points are from the mean."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "A sample has a mean of 26 and a standard deviation of 9. What interval contains all values within one standard deviation of the mean?",
+   "choices": [
+    "17 to 35",
+    "8 to 44",
+    "17 to 26",
+    "22 to 30"
+   ],
+   "answer": "17 to 35",
+   "hint": "Subtract and add one standard deviation.",
+   "explain": "26 - 9 = 17 and 26 + 9 = 35."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Group 1 has a standard deviation of 3.2 and Group 2 has a standard deviation of 7.8. Which group has more variation?",
+   "choices": [
+    "Group 2",
+    "Group 1",
+    "They have the same variation.",
+    "You cannot tell from the standard deviation."
+   ],
+   "answer": "Group 2",
+   "hint": "A larger standard deviation means the data is more spread out.",
+   "explain": "Group 2 has the larger standard deviation, so its data is more spread out."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "For typical data, about what percent falls within two standard deviations of the mean?",
+   "choices": [
+    "about 95%",
+    "about 67%",
+    "about 50%",
+    "about 25%"
+   ],
+   "answer": "about 95%",
+   "hint": "Two standard deviations captures almost all the data.",
+   "explain": "About 95% of typical data falls within two standard deviations of the mean."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Test scores have a mean of 80 and a standard deviation of 5. What range includes almost all of the scores?",
+   "choices": [
+    "70 to 90",
+    "75 to 85",
+    "78 to 82",
+    "70 to 85"
+   ],
+   "answer": "70 to 90",
+   "hint": "\"Almost all\" means two standard deviations.",
+   "explain": "2 times 5 = 10, so 80 - 10 = 70 and 80 + 10 = 90.",
+   "hints": {
+    "75 to 85": "That is one standard deviation, about two-thirds of the data."
+   }
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Heights in a sample have a mean of 64 inches and a standard deviation of 3 inches. Which height is highly unusual?",
+   "choices": [
+    "72 inches",
+    "61 inches",
+    "66 inches",
+    "69 inches"
+   ],
+   "answer": "72 inches",
+   "hint": "Find the two standard deviation interval first.",
+   "explain": "The two standard deviation interval is 58 to 70 inches. Only 72 is outside it.",
+   "hints": {
+    "69 inches": "69 is inside the two standard deviation interval (58 to 70)."
+   }
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "A distribution has a long tail to the right. Which is most likely true?",
+   "choices": [
+    "The mean is greater than the median.",
+    "The mean is less than the median.",
+    "The mean and median are exactly equal.",
+    "The distribution is symmetric."
+   ],
+   "answer": "The mean is greater than the median.",
+   "hint": "The tail pulls the mean in its direction.",
+   "explain": "In a right-skewed distribution, the large values pull the mean above the median."
+  },
+  {
+   "id": "q11",
+   "type": "match",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Match each symbol or term to its meaning.",
+   "pairs": [
+    [
+     "x-bar",
+     "the sample mean"
+    ],
+    [
+     "s (sx)",
+     "the sample standard deviation"
+    ],
+    [
+     "IQR",
+     "Q3 minus Q1"
+    ],
+    [
+     "range",
+     "maximum minus minimum"
+    ]
+   ],
+   "hint": "Two of these measure spread with quartiles or extremes; the symbols come from the calculator output.",
+   "explain": "x-bar is the sample mean and s is the sample standard deviation. IQR = Q3 - Q1 and range = max - min."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "What is the median of the data set 1, 2, 2, 3, 17?",
+   "choices": [
+    "2",
+    "5",
+    "3",
+    "17"
+   ],
+   "answer": "2",
+   "hint": "The data is already in order. Find the middle value.",
+   "explain": "The middle (third) value is 2. The mean is 5, pulled up by the outlier 17.",
+   "hints": {
+    "5": "That is the mean, which the outlier 17 pulls up."
+   }
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "When comparing two samples where one has an outlier, which measures should you compare?",
+   "choices": [
+    "the medians and IQRs",
+    "the means and standard deviations",
+    "the maximums only",
+    "the means and ranges"
+   ],
+   "answer": "the medians and IQRs",
+   "hint": "Which statistics are not affected by an outlier?",
+   "explain": "Medians and IQRs are resistant to outliers, so they give a fairer comparison."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Two symmetric samples have typical value intervals of 40 to 52 and 42 to 54. What is the best conclusion?",
+   "choices": [
+    "The intervals overlap a lot, so there is not strong evidence of a difference.",
+    "The second sample is clearly much greater.",
+    "The first sample is clearly much greater.",
+    "The samples cannot be compared."
+   ],
+   "answer": "The intervals overlap a lot, so there is not strong evidence of a difference.",
+   "hint": "Check how much the typical ranges overlap.",
+   "explain": "Most of the typical values overlap (42 to 52), so the difference between the groups is small compared to their variation."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "tag": "11.6 Unit 11 Review",
+   "q": "Why does a larger sample help a researcher answer a statistical question?",
+   "choices": [
+    "It makes it more likely the sample reflects the population.",
+    "It removes all variability from the data.",
+    "It guarantees the mean equals the median.",
+    "It makes the standard deviation equal to zero."
+   ],
+   "answer": "It makes it more likely the sample reflects the population.",
+   "hint": "Think about what happens if you only ask 2 or 3 people.",
+   "explain": "A bigger sample is less likely to be thrown off by a few unusual values, so conclusions are more reliable."
+  }
+ ]
+}
+</script>
+<script>
+/* Mighty B Practice Deck player - Format v1 */
+const MB_HOST_ORIGIN = "https://mb-practice.mightyblearning.workers.dev";
+const DECK = JSON.parse(document.getElementById('mb-deck').textContent);
+const MASTERY = typeof DECK.masteryThreshold === 'number' ? DECK.masteryThreshold : 0.85;
+const card = document.getElementById('card');
+const feedbackLive = document.getElementById('feedbackLive');
+const progressLabel = document.getElementById('progressLabel');
+const progressFill = document.getElementById('progressFill');
+const starsEl = document.getElementById('stars');
+let order = [], current = 0, streak = 0, bestStreak = 0, triedWrong = false;
+let tries = {}, firstTry = {}, attemptId = '', startedAt = '';
+
+function uuid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16); });
+}
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function tableHTML(t) {
+  if (!t) return '';
+  return '<table class="data"><thead><tr>' + t[0].map(h => `<th scope="col">${h}</th>`).join('') + '</tr></thead><tbody>' +
+    t.slice(1).map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody></table>';
+}
+function announce(html) { feedbackLive.innerHTML = html; }
+function startAttempt() {
+  order = shuffle(DECK.problems); current = 0; streak = 0; bestStreak = 0;
+  tries = {}; firstTry = {}; attemptId = uuid(); startedAt = new Date().toISOString();
+  DECK.problems.forEach(p => { tries[p.id] = 0; firstTry[p.id] = false; });
+  render();
+}
+function updateTop() {
+  progressLabel.textContent = `Question ${Math.min(current + 1, order.length)} of ${order.length}`;
+  progressFill.style.width = `${(current / order.length) * 100}%`;
+  starsEl.textContent = streak >= 2 ? `⭐ ${streak} in a row` : '';
+}
+function showNext() {
+  const actions = document.getElementById('actionsArea');
+  const btn = document.createElement('button');
+  btn.className = 'btn-primary'; btn.type = 'button';
+  btn.textContent = current === order.length - 1 ? 'See summary' : 'Next question';
+  btn.addEventListener('click', () => { if (current < order.length - 1) { current++; render(); } else { renderDone(); } });
+  actions.appendChild(btn); btn.focus();
+}
+function correctFeedback(p) {
+  tries[p.id]++;
+  if (!triedWrong) { firstTry[p.id] = true; streak++; bestStreak = Math.max(bestStreak, streak); }
+  updateTop();
+  const html = `<div class="feedback correct"><strong><span aria-hidden="true">✓ </span>${triedWrong ? 'Correct - you got it!' : 'Correct - nice work!'}</strong>${p.explain}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+  showNext();
+}
+function wrongFeedback(p, hint) {
+  tries[p.id]++;
+  if (!triedWrong) { streak = 0; updateTop(); }
+  triedWrong = true;
+  const html = `<div class="feedback incorrect"><strong><span aria-hidden="true">✗ </span>Not quite yet. Here's a hint:</strong>${hint}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+}
+function nudge(text) {
+  const html = `<div class="feedback incorrect"><strong>One step first:</strong>${text}</div>`;
+  document.getElementById('feedbackArea').innerHTML = html; announce(html);
+}
+function render() {
+  triedWrong = false;
+  const p = order[current];
+  updateTop(); announce('');
+  card.innerHTML = `<span class="tag">${p.tag || DECK.title}</span>
+    <h2 class="question-text" tabindex="-1" id="qText">${p.q}</h2>${tableHTML(p.table)}
+    <div id="body"></div><div id="feedbackArea"></div><div class="actions" id="actionsArea"></div>`;
+  if (p.type === 'match') renderMatch(p); else renderMC(p);
+  if (current > 0) document.getElementById('qText').focus();
+}
+function renderMC(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = '<div class="choices" role="group" aria-label="Answer choices"></div>';
+  const wrap = body.firstChild;
+  shuffle(p.choices).forEach(val => {
+    const b = document.createElement('button');
+    b.className = 'choice'; b.type = 'button'; b.innerHTML = val;
+    b.addEventListener('click', () => {
+      if (val === p.answer) {
+        wrap.querySelectorAll('.choice').forEach(x => x.disabled = true);
+        b.classList.add('correct'); b.innerHTML = '<span aria-hidden="true">✓ </span>' + val; correctFeedback(p);
+      } else {
+        b.classList.add('incorrect'); b.disabled = true; b.innerHTML = '<span aria-hidden="true">✗ </span>' + val;
+        wrongFeedback(p, (p.hints && p.hints[val]) || p.hint);
+      }
+    });
+    wrap.appendChild(b);
+  });
+}
+function renderMatch(p) {
+  const body = document.getElementById('body');
+  body.innerHTML = `<p class="match-help">Click a word on the left, then click what it matches on the right.</p>
+    <div class="match-grid"><div class="match-col" id="left" role="group" aria-label="Terms"></div><div class="match-col" id="right" role="group" aria-label="Matches"></div></div>`;
+  let picked = null, done = 0;
+  const left = document.getElementById('left'), right = document.getElementById('right');
+  const L = {};
+  shuffle(p.pairs).forEach(([a]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = a; b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      Object.values(L).forEach(x => { x.classList.remove('picked'); x.setAttribute('aria-pressed', 'false'); });
+      b.classList.add('picked'); b.setAttribute('aria-pressed', 'true'); picked = a;
+    });
+    L[a] = b; left.appendChild(b);
+  });
+  shuffle(p.pairs).forEach(([a, bText]) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.type = 'button'; b.innerHTML = bText;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (!picked) { nudge('First click a word on the left, then click its match here.'); return; }
+      const pair = p.pairs.find(x => x[0] === picked);
+      if (pair[1] === bText) {
+        L[picked].classList.remove('picked'); L[picked].classList.add('correct'); L[picked].disabled = true;
+        L[picked].innerHTML = '<span aria-hidden="true">✓ </span>' + picked;
+        b.classList.add('correct'); b.disabled = true; b.innerHTML = '<span aria-hidden="true">✓ </span>' + bText;
+        picked = null; done++;
+        if (done === p.pairs.length) correctFeedback(p);
+        else { document.getElementById('feedbackArea').innerHTML = ''; announce('Matched. Keep going.'); }
+      } else {
+        b.classList.add('incorrect'); setTimeout(() => b.classList.remove('incorrect'), 900);
+        wrongFeedback(p, (p.pairHints && p.pairHints[picked]) || p.hint);
+      }
+    });
+    right.appendChild(b);
+  });
+}
+function sendResult(result) {
+  window.dispatchEvent(new CustomEvent('mb-deck-complete', { detail: result }));
+  if (window.parent !== window) window.parent.postMessage({ type: 'mb-deck-complete', result }, MB_HOST_ORIGIN);
+}
+function renderDone() {
+  const n = DECK.problems.length;
+  const given = DECK.problems.filter(p => firstTry[p.id]).length;
+  const mastered = given / n >= MASTERY;
+  current = order.length;
+  progressLabel.textContent = `Question ${n} of ${n}`;
+  progressFill.style.width = '100%'; starsEl.textContent = '';
+  const missed = DECK.problems.filter(p => !firstTry[p.id]);
+  const missedHTML = missed.length ? `<div class="missed"><h3>Worth another look</h3><ul>${missed.map(p => `<li>${p.skill ? p.skill.replace(/-/g, ' ') + ': ' : ''}${p.q}</li>`).join('')}</ul></div>` : '';
+  card.innerHTML = `<div class="done-card"><h2 tabindex="-1" id="doneTitle">${mastered ? '<span aria-hidden="true">✓ </span>Mastered!' : 'Not yet - keep practicing'}</h2>
+    <p class="score-line">You got <strong>${given} of ${n}</strong> right on your first try (${Math.round(given / n * 100)}%). Mastery is ${Math.round(MASTERY * 100)}%.<br>Your best streak was ${bestStreak} in a row.</p>
+    <p>${DECK.wrapUp}</p>${missedHTML}
+    <div class="actions" style="justify-content:center; margin-top:20px;">
+    <button class="btn-primary" type="button" id="restartBtn">Try again</button></div></div>`;
+  announce(mastered ? 'Mastered.' : 'Not yet.');
+  document.getElementById('doneTitle').focus();
+  document.getElementById('restartBtn').addEventListener('click', startAttempt);
+  sendResult({
+    formatVersion: 1, deckId: DECK.deckId, attemptId, startedAt, completedAt: new Date().toISOString(),
+    scoreGiven: given, scoreMaximum: n, mastered,
+    items: DECK.problems.map(p => { const it = { id: p.id, firstTryCorrect: firstTry[p.id], tries: tries[p.id] }; if (p.skill) it.skill = p.skill; return it; })
+  });
+}
+document.getElementById('contrastToggle').addEventListener('click', function () {
+  const root = document.documentElement; const isHigh = root.getAttribute('data-contrast') === 'high';
+  root.setAttribute('data-contrast', isHigh ? 'normal' : 'high');
+  this.setAttribute('aria-pressed', String(!isHigh)); this.textContent = isHigh ? 'High contrast' : 'Normal contrast';
+});
+document.getElementById('fontToggle').addEventListener('click', function () {
+  const isLarge = document.getElementById('wrap').classList.toggle('font-lg');
+  this.setAttribute('aria-pressed', String(isLarge)); this.textContent = isLarge ? 'Smaller text' : 'Larger text';
+});
+startAttempt();
+</script>
+</body>
+</html>
