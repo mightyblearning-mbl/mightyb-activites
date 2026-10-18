@@ -373,6 +373,8 @@ function parseAns(s){ s=String(s).replace(/−/g,"-").trim(); if(!s) return null
    mb-deck data; each level says which type it is: fill (notes sentence), sort (cards into boxes), mc (scenario
    question), order (put events/steps in order), boss (three questions in a row, no misses). */
 const PG=DECK.ui||{};
+const YOUNG=PG.noNotes||/^(Kindergarten|[1-5](st|nd|rd|th) Grade)/i.test(DECK.course||"");
+const NT=(older,young)=>YOUNG?young:older;
 const SHAPES=[
   {pts:[[25,90],[25,20],[85,20],[95,35],[95,90],[25,90]],stars:[[25,20],[85,20],[95,90],[25,90]]},
   {pts:[[20,90],[20,45],[60,15],[100,45],[100,90],[20,90]],stars:[[20,45],[60,15],[100,45]]},
@@ -402,16 +404,16 @@ const tj=a=>a.join(" ").replace(/ ([,.;:!?])/g,"$1");
 const fxW=it=>it.steps.some(t=>/[=0-9]/.test(t))?"step":"line";
 const TYPES={
 fill:{
-  init(it){ Q.it=it; mcFrom(it,PG.fillNudge||"Read the sentence again and think about what your notes say.");
+  init(it){ Q.it=it; mcFrom(it,PG.fillNudge||NT("Read the sentence again and think about what your notes say.","Read the sentence again. Try each choice in the blank."));
     Q.explain=()=>`${esc(it.s).replace("____",`<b>${esc(it.a)}</b>`)}${it.why?` ${esc(it.why)}`:""}`;
-    Q.hints=[`Read the sentence out loud with each choice. Which one matches your notes?`,...(it.hint?[esc(it.hint)]:[])];
+    Q.hints=[esc(it.hint1||PG.fillHint||"Put each choice in the blank and read the sentence out loud. Which one makes it true?"),...(it.hint?[esc(it.hint)]:[])];
     Q.together=()=>`<p>${esc(it.s).replace("____",`<b>${esc(it.a)}</b>`)}</p>${it.why?`<p>${esc(it.why)}</p>`:""}`; },
   view(){ const it=Q.it; return chrome(`<h2 class="prompt">Fill in the blank.</h2><p class="story">${esc(it.s).replace("____",`<span class="blank">${Q.solved||Q.locked?esc(it.a):"&nbsp;"}</span>`)}</p>%READ%
     ${W.choices("Word choices")}${fbBox()}${actionRow({})}`,it.s.replace("____","blank")); },
   check(){}
 },
 mc:{
-  init(it){ Q.it=it; mcFrom(it,PG.mcNudge||"Think about what your notes say about this.");
+  init(it){ Q.it=it; mcFrom(it,PG.mcNudge||NT("Think about what your notes say about this.","Look at each choice again."));
     Q.explain=()=>fmt(it.why||it.a);
     Q.hints=[esc(it.hint||PG.mcHint||"Cross out the choices you know are wrong first.")];
     Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
@@ -444,7 +446,7 @@ order:{
   init(steps){ const L=LEVELS[Q.li]; Q.steps=shuffle(steps.map((t,i)=>({id:"s"+i,label:esc(t)})));Q.order=steps.map((_,i)=>"s"+i);
     Q.whyStep=(k,s)=>s?`"${s.label}" comes later. Something else happens first.`:"";
     Q.explain=()=>steps.map((t,i)=>`${i+1}. ${esc(t)}`).join("<br>");
-    Q.hints=[esc(L.orderHint||"Think about what has to happen first."),()=>`Step 1 is: ${esc(steps[0])}.`];
+    Q.hints=[esc(L.orderHint||"Think about what has to happen first."),()=>`Step 1 is: ${esc(steps[0])}${endP(steps[0])}`];
     Q.together=()=>`<p>${steps.map((t,i)=>`${i+1}. <b>${esc(t)}</b>`).join("<br>")}</p>`; },
   view(){ const L=LEVELS[Q.li]; return chrome(`<h2 class="prompt">${esc(L.prompt||"Put these in order.")}</h2><p class="sub">Tap what comes first, then the next, and so on. Tap a placed card to take it back.</p>%READ%
     ${W.order()}${fbBox()}${actionRow({check:true,checkDisabled:Q.seq.length<Q.order.length})}`,L.prompt||"Put these in order."); },
@@ -454,9 +456,9 @@ num:{
   /* typed numeric answer: {s, a:"3/4"|"0.75"|"-12", keys:["/","-","."], form:"fraction"|"decimal"|"mixed"|null, unit, story, why, hint, hint2, nudge}. s/story may hold simple trusted HTML. */
   init(it){ Q.it=it; Q.usesPad=true; Q.padKeys=it.keys||[]; Q.answer=parseAns(it.a); Q.needSimplest=it.simplest!==false;
     const want=it.form;
-    Q.whyNot=v=>`<p>${rHTML(v)}${it.unit?" "+esc(it.unit):""} isn't it. ${it.nudge||"Work it out one step at a time, the way your notes show."}</p>`;
-    Q.explain=()=>it.why||`The answer is ${esc(it.a)}${it.unit?" "+esc(it.unit):""}.`;
-    Q.hints=[it.hint||"Look back at the example in your notes that matches this one.",...(it.hint2?[it.hint2]:[])];
+    Q.whyNot=v=>`<p>${rHTML(v)}${it.unit?" "+esc(it.unit):""} isn't it. ${it.nudge||NT("Work it out one step at a time, the way your notes show.","Work it out one step at a time.")}</p>`;
+    Q.explain=()=>it.why||`The answer is ${esc(it.a)}${it.unit?" "+esc(it.unit):""}${endP(it.unit||it.a)}`;
+    Q.hints=[it.hint||NT("Look back at the example in your notes that matches this one.","Read the question again slowly. What is it asking for?"),...(it.hint2?[it.hint2]:[])];
     Q.together=()=>`<p>The answer is <b>${esc(it.a.replace(/-/g,"−"))}${it.unit?" "+esc(it.unit):""}</b>.</p>${it.why?`<p>${it.why}</p>`:""}`;
     Q.onRight=()=>{ const e=Q.entry.replace(/−/g,"-");
       if(want==="fraction"&&!/\//.test(e)&&Q.answer.d!==1){ Q.fb={kind:"hint",html:"<p>That's the right value. This one asks for a fraction: use the ⁄ key.</p>"}; return; }
@@ -467,12 +469,12 @@ num:{
 },
 boss:{
   init(rounds){ Q.rounds=rounds;Q.round=0;this.setRound(); },
-  setRound(){ const it=Q.rounds[Q.round];Q.it=it;Q.stage=Q.round;Q.out=new Set();mcFrom(it,PG.bossNudge||"Think back to your notes.");
-    Q.hints=[esc(it.hint||PG.bossHint||"Think back to your notes.")];
+  setRound(){ const it=Q.rounds[Q.round];Q.it=it;Q.stage=Q.round;Q.out=new Set();mcFrom(it,PG.bossNudge||NT("Think back to your notes.","Think back to what you practiced."));
+    Q.hints=[esc(it.hint||PG.bossHint||NT("Think back to your notes.","Think back to what you practiced."))];
     Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
     Q.choose=i=>{ if(i!==Q.ans){Q.out.add(i);return miss(Q.whyNot(i));}
       if(Q.round<Q.rounds.length-1){const a=it.a;Q.round++;this.setRound();stepOK(`<p><strong>Yes: ${fmt(a)}${endP(a)}</strong> ${Q.rounds.length-Q.round===2?"Two":"One"} more to go.</p>`);}
-      else solved(`${fmt(it.a)}. ${esc(PG.bossWin||"You did it!")}`); }; },
+      else solved(`${fmt(it.a)}${endP(fmt(it.a))} ${esc(PG.bossWin||"You did it!")}`); }; },
   view(){ const it=Q.it; return chrome(`${it.story?`<p class="story">${esc(it.story)}</p>`:""}${it.fig?`<div class="tool fig" style="border-style:solid;text-align:center">${it.fig}</div>`:""}<h2 class="prompt">${fmt(it.s)}</h2><p class="sub">Question ${Q.round+1} of ${Q.rounds.length}. Answer all of them with no misses.</p>%READ%
     <div class="starrow" aria-label="Questions won: ${Q.round}">${Q.rounds.map((_,i)=>tokenSVG(i<Q.round)).join("")}</div>${W.choices("Choices")}${fbBox()}${actionRow({})}`,it.s); },
   check(){}
@@ -584,13 +586,13 @@ lock:{
      Each right answer reveals one digit; all 3 open the lock. Works as a boss (boss:true, need:1) or a regular level. */
   init(r){ const qs=Array.isArray(r)?r:r.qs, code=r&&r.code!=null?String(r.code):null;
     Q.rounds=qs; Q.round=0; Q.code=qs.map((q,i)=>String(code?code[i]:(q.digit!=null?q.digit:Math.floor(Math.random()*10)))); this.setRound(); },
-  setRound(){ const it=Q.rounds[Q.round]; Q.it=it; Q.stage=Q.round; Q.out=new Set(); mcFrom(it,PG.lockNudge||PG.bossNudge||"Think back to your notes.");
-    Q.hints=[esc(it.hint||PG.bossHint||"Think back to your notes.")];
+  setRound(){ const it=Q.rounds[Q.round]; Q.it=it; Q.stage=Q.round; Q.out=new Set(); mcFrom(it,PG.lockNudge||PG.bossNudge||NT("Think back to your notes.","Think back to what you practiced."));
+    Q.hints=[esc(it.hint||PG.bossHint||NT("Think back to your notes.","Think back to what you practiced."))];
     Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
     Q.choose=i=>{ if(i!==Q.ans){Q.out.add(i);return miss(Q.whyNot(i));}
       const d=Q.code[Q.round];
       if(Q.round<Q.rounds.length-1){const a=it.a;Q.round++;this.setRound();stepOK(`<p><strong>Yes: ${fmt(a)}${endP(a)}</strong> Digit ${Q.round} of the code is <b>${d}</b>. ${Q.rounds.length-Q.round===2?"Two":"One"} more to go.</p>`);}
-      else { Q.round++; solved(`${fmt(it.a)}. The code is <b>${Q.code.join(" ")}</b> and the lock opens! ${esc(PG.lockWin||PG.bossWin||"You did it!")}`); } }; },
+      else { Q.round++; solved(`${fmt(it.a)}${endP(fmt(it.a))} The code is <b>${Q.code.join(" ")}</b> and the lock opens! ${esc(PG.lockWin||PG.bossWin||"You did it!")}`); } }; },
   view(){ const it=Q.it, open=Q.solved&&Q.round>=Q.rounds.length, shown=Q.code.map((d,i)=>i<Q.round||open?d:null);
     const lk=`<svg class="padlock ${open?"open":""}" viewBox="0 0 48 56" aria-hidden="true"><path d="M13 ${open?14:24}V16a11 11 0 0 1 22 0${open?"":"v8"}" fill="none" stroke="${open?"var(--mint)":"var(--boss)"}" stroke-width="5" stroke-linecap="round"/><rect x="5" y="24" width="38" height="30" rx="6" fill="${open?"var(--mint)":"var(--boss)"}"/><circle cx="24" cy="37" r="4" fill="var(--sky-deep)"/><path d="M24 39v7" stroke="var(--sky-deep)" stroke-width="3"/></svg>`;
     const code=`<div class="lockcode" aria-label="Code so far: ${shown.map(d=>d==null?"unknown":d).join(", ")}">${lk}<div class="dials">${shown.map(d=>`<span class="dial ${d==null?"":"on"}" aria-hidden="true">${d==null?"?":d}</span>`).join("")}</div></div>`;
