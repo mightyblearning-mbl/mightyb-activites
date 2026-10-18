@@ -319,7 +319,7 @@ types:{
 },
 notes:{
   init(it){ Q.it=it; mc(it,"Read the sentence again and think about what your notes say."); Q.explain=()=>`${esc(it.s).replace("____",`<b>${esc(it.a)}</b>`)}`;
-    Q.hints=[`Read the sentence out loud with each choice. Which one matches your notes?`];
+    Q.hints=[esc(it.hint1||"Put each choice in the blank and read the sentence out loud. Which one makes it true?")];
     Q.together=()=>`<p>${esc(it.s).replace("____",`<b>${esc(it.a)}</b>`)}</p>`; },
   view(){ const it=Q.it; return chrome(`<h2 class="prompt">Fill in the blank.</h2><p class="story">${esc(it.s).replace("____",`<span class="blank">${Q.solved||Q.locked?esc(it.a):"&nbsp;"}</span>`)}</p>%READ%
     ${W.choices("Word choices")}${fbBox()}${actionRow({})}`,it.s.replace("____","blank")); },
