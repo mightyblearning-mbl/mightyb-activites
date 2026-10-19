@@ -5797,5 +5797,230 @@
   "course": "10th Grade English",
   "unit": "1",
   "engine": "quest"
+ },
+ "g1-letters-m-s-a": {
+  "file": "g1-letters-m-s-a.html",
+  "title": "Letter Recognition Review: M, S, A: Monkey Sea Adventure",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-counting-to-20": {
+  "file": "g1-counting-to-20.html",
+  "title": "Counting to 20: Fish Count Express",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-short-o-cvc": {
+  "file": "g1-short-o-cvc.html",
+  "title": "Short o CVC Words: Fox Box Escape",
+  "kind": "lesson",
+  "questions": 10,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-letter-sounds-a-d": {
+  "file": "g1-letter-sounds-a-d.html",
+  "title": "Letter Sounds a and d: Astro Dog",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-addition-to-10": {
+  "file": "g1-addition-to-10.html",
+  "title": "Addition to 10: Frog Hop Tower",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-phonics-c-k": {
+  "file": "g1-phonics-c-k.html",
+  "title": "Phonics: c and k: Kite and Cat",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-short-u-cvc": {
+  "file": "g1-short-u-cvc.html",
+  "title": "Short u CVC Word Building: Bug Bus Line",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-addition-to-10-practice": {
+  "file": "g1-addition-to-10-practice.html",
+  "title": "More Addition to 10: Story Room Escape",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-short-a-cvc": {
+  "file": "g1-short-a-cvc.html",
+  "title": "Short a CVC Word Building: Astro Cat",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-sight-words-down-up": {
+  "file": "g1-sight-words-down-up.html",
+  "title": "Sight Words: down and up: Hill Hop",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-sight-word-very": {
+  "file": "g1-sight-word-very.html",
+  "title": "Sight Word: very: Very Berry Trail",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-plurals-adding-s": {
+  "file": "g1-plurals-adding-s.html",
+  "title": "Plural Words: Adding -s: Plenty Tower",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-sight-word-out": {
+  "file": "g1-sight-word-out.html",
+  "title": "Sight Word: out: Pop Out Path",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-subtraction-within-10": {
+  "file": "g1-subtraction-within-10.html",
+  "title": "Subtraction within 10: Frog Jumps: Lily Pad Line",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-bar-graphs": {
+  "file": "g1-bar-graphs.html",
+  "title": "Interpreting Bar Graphs: Graph Breakout",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-maps": {
+  "file": "g1-maps.html",
+  "title": "Maps: Map Key, Symbols and Directions: Map Explorers",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-l-blends": {
+  "file": "g1-l-blends.html",
+  "title": "Beginning L Blends (bl, cl, fl, gl, pl, sl): Slide and Glide",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-odd-numbers-to-10": {
+  "file": "g1-odd-numbers-to-10.html",
+  "title": "Odd Numbers to 10: Pair-Up Express",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-meaning-of-equal-sign": {
+  "file": "g1-meaning-of-equal-sign.html",
+  "title": "Meaning of the Equal Sign: Balance Tower",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-addition-to-20": {
+  "file": "g1-addition-to-20.html",
+  "title": "Addition up to 20: Plus Escape",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-short-e-cvc": {
+  "file": "g1-short-e-cvc.html",
+  "title": "Short e CVC Word Building: Short E Sky",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-addition-to-20-ten-frames": {
+  "file": "g1-addition-to-20-ten-frames.html",
+  "title": "Addition to 20 with Ten Frames: Make Ten Dash",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-story-problems-to-20": {
+  "file": "g1-story-problems-to-20.html",
+  "title": "Addition Story Problems to 20: Story Train",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-ing-ending": {
+  "file": "g1-ing-ending.html",
+  "title": "Introduction to the -ing Ending: Action Sky",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g1-subtraction-to-20-number-line": {
+  "file": "g1-subtraction-to-20-number-line.html",
+  "title": "Subtraction to 20 with a Number Line: Frog Tower",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "1st Grade",
+  "unit": "",
+  "engine": "quest"
  }
 }
