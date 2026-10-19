@@ -5662,5 +5662,140 @@
   "course": "Kindergarten",
   "unit": "",
   "engine": "quest"
+ },
+ "g2-subtraction-to-20-counting-up": {
+  "file": "g2-subtraction-to-20-counting-up.html",
+  "title": "Subtraction to 20: Counting Up Strategy: Count-Up Express",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g2-fact-families-to-20": {
+  "file": "g2-fact-families-to-20.html",
+  "title": "Addition & Subtraction Fact Families up to 20: Fact Family Tower",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g2-triple-blends": {
+  "file": "g2-triple-blends.html",
+  "title": "Triple Blends: Blend Blast",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g2-compound-words": {
+  "file": "g2-compound-words.html",
+  "title": "Compound Words: Word Glue Escape",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g2-poetry": {
+  "file": "g2-poetry.html",
+  "title": "Poetry: Poem Stars",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g2-complete-the-simile": {
+  "file": "g2-complete-the-simile.html",
+  "title": "Complete the Simile: Simile Safari",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g2-2-digit-subtraction-garden": {
+  "file": "g2-2-digit-subtraction-garden.html",
+  "title": "2-Digit Subtraction: Garden Express",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g2-2-digit-subtraction-expanded-form": {
+  "file": "g2-2-digit-subtraction-expanded-form.html",
+  "title": "2-Digit Subtraction Using Expanded Form: Break-Apart Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "2nd Grade (HLA 200)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g3-3-digit-addition-subtraction-regrouping": {
+  "file": "g3-3-digit-addition-subtraction-regrouping.html",
+  "title": "3-Digit Addition and Subtraction, With and Without Regrouping: Regroup Escape",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "3rd Grade (HLA 300 / Math 301)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g3-similes": {
+  "file": "g3-similes.html",
+  "title": "Similes: Simile Sky",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "3rd Grade (HLA 300)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g3-inflectional-endings": {
+  "file": "g3-inflectional-endings.html",
+  "title": "Inflectional Endings: Ending Dash",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "3rd Grade (HLA 300)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g3-prefixes-re-un-dis": {
+  "file": "g3-prefixes-re-un-dis.html",
+  "title": "Prefixes re-, un-, dis-: Prefix Express",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "3rd Grade (HLA 300)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g4-multi-step-word-problems": {
+  "file": "g4-multi-step-word-problems.html",
+  "title": "Addition and Subtraction Multi-Step Word Problems: Step Tower",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "4th Grade Math (Math 401)",
+  "unit": "",
+  "engine": "quest"
+ },
+ "alg1-1-11-writing-algebraic-expressions": {
+  "file": "alg1-1-11-writing-algebraic-expressions.html",
+  "title": "1.11 Writing Algebraic Expressions: Cipher Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "1",
+  "engine": "quest"
+ },
+ "ela10-1-8-personification": {
+  "file": "ela10-1-8-personification.html",
+  "title": "1.8 Personification: Figurative Meanings: Living Skies",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "10th Grade English",
+  "unit": "1",
+  "engine": "quest"
  }
 }
