@@ -6022,5 +6022,464 @@
   "course": "1st Grade",
   "unit": "",
   "engine": "quest"
+ },
+ "geo-3-1-the-triangle-inequality": {
+  "file": "geo-3-1-the-triangle-inequality.html",
+  "title": "3.1 The Triangle Inequality: Triangle Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "geo-3-4-the-side-side-side-theorem": {
+  "file": "geo-3-4-the-side-side-side-theorem.html",
+  "title": "3.4 The Side-Side-Side Theorem: Triangle Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "geo-3-5-the-side-angle-side-theorem": {
+  "file": "geo-3-5-the-side-angle-side-theorem.html",
+  "title": "3.5 The Side-Angle-Side Theorem: SAS Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "geo-3-6-the-angle-side-angle-theorem": {
+  "file": "geo-3-6-the-angle-side-angle-theorem.html",
+  "title": "3.6 The Angle-Side-Angle Theorem: Triangle Sky",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "geo-3-9-parallel-lines-and-proof": {
+  "file": "geo-3-9-parallel-lines-and-proof.html",
+  "title": "3.9 Parallel Lines and Proof: Parallel Path",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "geo-3-10-exterior-angles": {
+  "file": "geo-3-10-exterior-angles.html",
+  "title": "3.10 Exterior Angles: Angle Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "geo-3-13-the-hypotenuse-leg-theorem": {
+  "file": "geo-3-13-the-hypotenuse-leg-theorem.html",
+  "title": "3.13 The Hypotenuse-Leg Theorem: Hypotenuse Heights",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Geometry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "geo-4-1-introduction-to-constructions": {
+  "file": "geo-4-1-introduction-to-constructions.html",
+  "title": "4.1 Introduction to Constructions: Compass Line",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "geo-4-2-copying-angles-and-creating-parallel": {
+  "file": "geo-4-2-copying-angles-and-creating-parallel.html",
+  "title": "4.2 Copying Angles and Creating Parallel Lines: Compass Constellations",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "geo-4-5-constructing-a-perpendicular-to-a": {
+  "file": "geo-4-5-constructing-a-perpendicular-to-a.html",
+  "title": "4.5 Constructing a Perpendicular to a Line: Perpendicular Path",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Geometry",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "geo-4-8-the-circumcircle-and-its-center": {
+  "file": "geo-4-8-the-circumcircle-and-its-center.html",
+  "title": "4.8 The Circumcircle and Its Center: Center Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "geo-4-9-the-inscribed-circle-and-its": {
+  "file": "geo-4-9-the-inscribed-circle-and-its.html",
+  "title": "4.9 The Inscribed Circle and Its Center: Incircle Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "geo-5-3-the-slope-intercept-form-of": {
+  "file": "geo-5-3-the-slope-intercept-form-of.html",
+  "title": "5.3 The Slope-Intercept Form of a Line: Slope Line",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "Geometry",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "geo-5-4-the-point-slope-form-of": {
+  "file": "geo-5-4-the-point-slope-form-of.html",
+  "title": "5.4 The Point-Slope Form of a Line: Slope Stars",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "geo-5-5-horizontal-and-vertical-lines": {
+  "file": "geo-5-5-horizontal-and-vertical-lines.html",
+  "title": "5.5 Horizontal and Vertical Lines: Grid Run",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "geo-5-6-the-pythagorean-theorem": {
+  "file": "geo-5-6-the-pythagorean-theorem.html",
+  "title": "5.6 The Pythagorean Theorem: Right Triangle Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "alg1-2-1-equations-and-their-solutions": {
+  "file": "alg1-2-1-equations-and-their-solutions.html",
+  "title": "2.1 Equations and Their Solutions: Truth Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "alg1-2-4-justifying-steps-in-solving-an": {
+  "file": "alg1-2-4-justifying-steps-in-solving-an.html",
+  "title": "2.4 Justifying Steps in Solving an Equation: Justify Express",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Algebra 1",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "alg1-2-6-modeling-with-linear-equations-involving": {
+  "file": "alg1-2-6-modeling-with-linear-equations-involving.html",
+  "title": "2.6 Modeling with Linear Equations Involving Integers: Integer Skies",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "alg1-2-7-solving-equations-with-unspecified-constants": {
+  "file": "alg1-2-7-solving-equations-with-unspecified-constants.html",
+  "title": "2.7 Solving Equations with Unspecified Constants: Constant Quest",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "alg1-3-1-sets-of-numbers": {
+  "file": "alg1-3-1-sets-of-numbers.html",
+  "title": "3.1 Sets of Numbers: Set Escape",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "Algebra 1",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg1-3-2-interval-notation": {
+  "file": "alg1-3-2-interval-notation.html",
+  "title": "3.2 Interval Notation: Interval Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg1-3-5-key-features-of-functions": {
+  "file": "alg1-3-5-key-features-of-functions.html",
+  "title": "3.5 Key Features of Functions: Function Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg1-3-6-working-with-functions-in-table": {
+  "file": "alg1-3-6-working-with-functions-in-table.html",
+  "title": "3.6 Working with Functions in Table Form: Table Telescope",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg1-3-8-average-rate-of-change-and": {
+  "file": "alg1-3-8-average-rate-of-change-and.html",
+  "title": "3.8 Average Rate of Change and Motion: Speed Rally",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 1",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg2-2-6-key-features-of-functions": {
+  "file": "alg2-2-6-key-features-of-functions.html",
+  "title": "2.6 Key Features of Functions: Feature Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "alg2-2-7-one-to-one-functions": {
+  "file": "alg2-2-7-one-to-one-functions.html",
+  "title": "2.7 One-to-One Functions: One-to-One Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "alg2-2-8-inverse-functions": {
+  "file": "alg2-2-8-inverse-functions.html",
+  "title": "2.8 Inverse Functions: Return Trip",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "alg2-3-1-linear-change": {
+  "file": "alg2-3-1-linear-change.html",
+  "title": "3.1 Linear Change: Rate Comet",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg2-3-3-linear-modeling": {
+  "file": "alg2-3-3-linear-modeling.html",
+  "title": "3.3 Linear Modeling: Model Path",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Algebra 2",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg2-3-6-linear-regression": {
+  "file": "alg2-3-6-linear-regression.html",
+  "title": "3.6 Linear Regression: Regression Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "alg2-4-2-rational-exponents": {
+  "file": "alg2-4-2-rational-exponents.html",
+  "title": "4.2 Rational Exponents: Radical Rooftop",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "alg2-4-4-finding-equations-of-exponential-functions": {
+  "file": "alg2-4-4-finding-equations-of-exponential-functions.html",
+  "title": "4.4 Finding Equations of Exponential Functions: Exponential Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "alg2-4-7-more-exponential-modeling": {
+  "file": "alg2-4-7-more-exponential-modeling.html",
+  "title": "4.7 More Exponential Modeling: Doubling Galaxy",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "4",
+  "engine": "quest"
+ },
+ "alg2-5-2-graphs-of-logarithmic-functions": {
+  "file": "alg2-5-2-graphs-of-logarithmic-functions.html",
+  "title": "5.2 Graphs of Logarithmic Functions: Log Rally",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "alg2-5-3-the-logarithm-laws": {
+  "file": "alg2-5-3-the-logarithm-laws.html",
+  "title": "5.3 The Logarithm Laws: Log Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "alg2-5-4-solving-exponential-equations-using-logarithms": {
+  "file": "alg2-5-4-solving-exponential-equations-using-logarithms.html",
+  "title": "5.4 Solving Exponential Equations Using Logarithms: Log Tower",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Algebra 2",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "chem-2-2-unit-conversion-and-significant-figures": {
+  "file": "chem-2-2-unit-conversion-and-significant-figures.html",
+  "title": "2.2 Unit Conversion and Significant Figures: Sig Fig Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Chemistry",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "chem-2-3-the-fundamental-laws-conservation-of": {
+  "file": "chem-2-3-the-fundamental-laws-conservation-of.html",
+  "title": "2.3 The Fundamental Laws (Conservation of Mass, Definite and Multiple Proportions): Law Constellations",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Chemistry",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "chem-2-6-the-electron": {
+  "file": "chem-2-6-the-electron.html",
+  "title": "2.6 The Electron: Electron Quest",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Chemistry",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "chem-2-7-periodic-trends": {
+  "file": "chem-2-7-periodic-trends.html",
+  "title": "2.7 Periodic Trends: Trend Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Chemistry",
+  "unit": "2",
+  "engine": "quest"
+ },
+ "chem-3-1-types-of-chemical-bonds": {
+  "file": "chem-3-1-types-of-chemical-bonds.html",
+  "title": "3.1 Types of Chemical Bonds: Bond Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Chemistry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "chem-3-2-polar-and-non-polar-molecules": {
+  "file": "chem-3-2-polar-and-non-polar-molecules.html",
+  "title": "3.2 Polar and Non-Polar Molecules: Polarity Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Chemistry",
+  "unit": "3",
+  "engine": "quest"
+ },
+ "g4-equivalent-fractions": {
+  "file": "g4-equivalent-fractions.html",
+  "title": "Equivalent Fractions: Twin Stars",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "4th Grade Math",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g4-simplifying-fractions": {
+  "file": "g4-simplifying-fractions.html",
+  "title": "Simplifying Fractions: Fraction Shrink Ray",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "4th Grade Math",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g4-comparing-fractions": {
+  "file": "g4-comparing-fractions.html",
+  "title": "Comparing Fractions: Fraction Vault",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "4th Grade Math",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g4-mixed-numbers-and-improper-fractions": {
+  "file": "g4-mixed-numbers-and-improper-fractions.html",
+  "title": "Mixed Numbers and Improper Fractions: Fraction Heights",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "4th Grade Math",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g5-multiplying-fractions-by-whole-numbers": {
+  "file": "g5-multiplying-fractions-by-whole-numbers.html",
+  "title": "Multiplying Fractions by Whole Numbers: Fraction Freight",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "5th Grade Math",
+  "unit": "Unit 6: Multiplying & Dividing Fractions",
+  "engine": "quest"
+ },
+ "g5-multiplying-fractions-and-mixed-numbers": {
+  "file": "g5-multiplying-fractions-and-mixed-numbers.html",
+  "title": "Multiplying Fractions and Mixed Numbers: Times Galaxy",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "5th Grade Math",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g5-dividing-with-whole-numbers-and": {
+  "file": "g5-dividing-with-whole-numbers-and.html",
+  "title": "Dividing with Whole Numbers and Unit Fractions: Slice Trail",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "5th Grade Math",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g5-fraction-multiplication-word-problems": {
+  "file": "g5-fraction-multiplication-word-problems.html",
+  "title": "Fraction Multiplication Word Problems: Fraction Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "5th Grade Math",
+  "unit": "",
+  "engine": "quest"
  }
 }
