@@ -416,7 +416,7 @@ mc:{
   init(it){ Q.it=it; mcFrom(it,PG.mcNudge||NT("Think about what your notes say about this.","Look at each choice again."));
     Q.explain=()=>fmt(it.why||it.a);
     Q.hints=[esc(it.hint||PG.mcHint||"Cross out the choices you know are wrong first.")];
-    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
+    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>${endP(fmt(it.a))}</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`; },
   view(){ const it=Q.it; return chrome(`${it.story?`<p class="story">${esc(it.story)}</p>`:""}${it.fig?`<div class="tool fig" style="border-style:solid;text-align:center">${it.fig}</div>`:""}<h2 class="prompt">${fmt(it.s)}</h2>%READ%${W.choices("Choices")}${fbBox()}${actionRow({})}`,(it.story?it.story+" ":"")+it.s); },
   check(){}
 },
@@ -471,7 +471,7 @@ boss:{
   init(rounds){ Q.rounds=rounds;Q.round=0;this.setRound(); },
   setRound(){ const it=Q.rounds[Q.round];Q.it=it;Q.stage=Q.round;Q.out=new Set();mcFrom(it,PG.bossNudge||NT("Think back to your notes.","Think back to what you practiced."));
     Q.hints=[esc(it.hint||PG.bossHint||NT("Think back to your notes.","Think back to what you practiced."))];
-    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
+    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>${endP(fmt(it.a))}</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
     Q.choose=i=>{ if(i!==Q.ans){Q.out.add(i);return miss(Q.whyNot(i));}
       if(Q.round<Q.rounds.length-1){const a=it.a;Q.round++;this.setRound();stepOK(`<p><strong>Yes: ${fmt(a)}${endP(a)}</strong> ${Q.rounds.length-Q.round===2?"Two":"One"} more to go.</p>`);}
       else solved(`${fmt(it.a)}${endP(fmt(it.a))} ${esc(PG.bossWin||"You did it!")}`); }; },
@@ -588,7 +588,7 @@ lock:{
     Q.rounds=qs; Q.round=0; Q.code=qs.map((q,i)=>String(code?code[i]:(q.digit!=null?q.digit:Math.floor(Math.random()*10)))); this.setRound(); },
   setRound(){ const it=Q.rounds[Q.round]; Q.it=it; Q.stage=Q.round; Q.out=new Set(); mcFrom(it,PG.lockNudge||PG.bossNudge||NT("Think back to your notes.","Think back to what you practiced."));
     Q.hints=[esc(it.hint||PG.bossHint||NT("Think back to your notes.","Think back to what you practiced."))];
-    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>.</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
+    Q.together=()=>`<p>The answer is <b>${fmt(it.a)}</b>${endP(fmt(it.a))}</p>${it.why?`<p>${fmt(it.why)}</p>`:""}`;
     Q.choose=i=>{ if(i!==Q.ans){Q.out.add(i);return miss(Q.whyNot(i));}
       const d=Q.code[Q.round];
       if(Q.round<Q.rounds.length-1){const a=it.a;Q.round++;this.setRound();stepOK(`<p><strong>Yes: ${fmt(a)}${endP(a)}</strong> Digit ${Q.round} of the code is <b>${d}</b>. ${Q.rounds.length-Q.round===2?"Two":"One"} more to go.</p>`);}
