@@ -6949,5 +6949,14 @@
   "course": "3rd Grade",
   "unit": "",
   "engine": "quest"
+ },
+ "alg1-1-3-distributive-property": {
+  "file": "alg1-1-3-distributive-property.html",
+  "title": "1.3 The Distributive Property: Delivery Dash",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "Algebra 1",
+  "unit": "1",
+  "engine": "quest"
  }
 }
