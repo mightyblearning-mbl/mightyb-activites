@@ -6895,5 +6895,59 @@
   "course": "5th Grade Language Arts",
   "unit": "Novel Study: The Wild Robot Protects",
   "engine": "quest"
+ },
+ "ela6-1-8-race-strategy-reading": {
+  "file": "ela6-1-8-race-strategy-reading.html",
+  "title": "1.8 RACE Strategy Reading: RACE Escape",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "6th Grade English",
+  "unit": "1",
+  "engine": "quest"
+ },
+ "math6-12-1-measuring-chance-with-ratios": {
+  "file": "math6-12-1-measuring-chance-with-ratios.html",
+  "title": "12.1 Measuring Chance with Ratios (Probability): Chance Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "6th Grade Math",
+  "unit": "12",
+  "engine": "quest"
+ },
+ "math6-12-3-probability-and-percent": {
+  "file": "math6-12-3-probability-and-percent.html",
+  "title": "12.3 Simple and Compound Probability: Probability Party",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "6th Grade Math",
+  "unit": "12",
+  "engine": "quest"
+ },
+ "chem-1-4-balancing-chemical-equations": {
+  "file": "chem-1-4-balancing-chemical-equations.html",
+  "title": "1.4 Balancing Chemical Equations: Balance Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Chemistry",
+  "unit": "1",
+  "engine": "quest"
+ },
+ "g3-which-words-are-the-simile": {
+  "file": "g3-which-words-are-the-simile.html",
+  "title": "Which Words Are the Simile?: Simile Spotlight",
+  "kind": "lesson",
+  "questions": 11,
+  "course": "3rd Grade",
+  "unit": "",
+  "engine": "quest"
+ },
+ "g3-prefix-practice": {
+  "file": "g3-prefix-practice.html",
+  "title": "Prefix Practice: Prefix Line",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "3rd Grade",
+  "unit": "",
+  "engine": "quest"
  }
 }
