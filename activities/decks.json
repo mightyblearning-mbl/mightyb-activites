@@ -6958,5 +6958,383 @@
   "course": "Algebra 1",
   "unit": "1",
   "engine": "quest"
+ },
+ "prealg-10-1-multiplying-by-powers-of-10": {
+  "file": "prealg-10-1-multiplying-by-powers-of-10.html",
+  "title": "10.1 Multiplying by Powers of 10: Power Ten Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Pre-Algebra",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "prealg-10-2-scientific-notation": {
+  "file": "prealg-10-2-scientific-notation.html",
+  "title": "10.2 Scientific Notation: Notation Observatory",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Pre-Algebra",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "prealg-10-3-operations-with-scientific-notation": {
+  "file": "prealg-10-3-operations-with-scientific-notation.html",
+  "title": "10.3 Operations with Numbers in Scientific Notation: Scientific Skyscraper",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Pre-Algebra",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "prealg-10-5-applications-of-scientific-notation": {
+  "file": "prealg-10-5-applications-of-scientific-notation.html",
+  "title": "10.5 Applications of Scientific Notation: Galaxy Watch Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Pre-Algebra",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "prealg-11-1-systems-of-equations": {
+  "file": "prealg-11-1-systems-of-equations.html",
+  "title": "11.1 Systems of Equations (Revisited): Crossing Junction",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Pre-Algebra",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "prealg-11-2-solving-systems-by-substitution": {
+  "file": "prealg-11-2-solving-systems-by-substitution.html",
+  "title": "11.2 Solving Systems by Substitution: Substitution Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Pre-Algebra",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "prealg-11-3-solving-systems-by-elimination": {
+  "file": "prealg-11-3-solving-systems-by-elimination.html",
+  "title": "11.3 Solving Systems by Elimination: Cancel Out Express",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Pre-Algebra",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-10-6-rational-functions": {
+  "file": "alg2-10-6-rational-functions.html",
+  "title": "10.6 Rational Functions: Domain Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "alg2-10-7-simplifying-rational-expressions": {
+  "file": "alg2-10-7-simplifying-rational-expressions.html",
+  "title": "10.7 Simplifying Rational Expressions: Cancel Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "alg2-10-8-polynomial-division": {
+  "file": "alg2-10-8-polynomial-division.html",
+  "title": "10.8 Polynomial Division: Quotient Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "alg2-10-10-adding-and-subtracting-rational-expressions": {
+  "file": "alg2-10-10-adding-and-subtracting-rational-expressions.html",
+  "title": "10.10 Adding and Subtracting Rational Expressions: LCD Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "alg2-10-11-solving-rational-equations": {
+  "file": "alg2-10-11-solving-rational-equations.html",
+  "title": "10.11 Solving Rational Equations: Root Tower",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "alg2-12-1-probability-basics": {
+  "file": "alg2-12-1-probability-basics.html",
+  "title": "12.1 Probability Basics: Chance Trail",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "12",
+  "engine": "quest"
+ },
+ "alg2-12-3-adding-probabilities": {
+  "file": "alg2-12-3-adding-probabilities.html",
+  "title": "12.3 Adding Probabilities: Venn Road",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "12",
+  "engine": "quest"
+ },
+ "alg2-12-4-conditional-probability": {
+  "file": "alg2-12-4-conditional-probability.html",
+  "title": "12.4 Conditional Probability: Given Grove",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "12",
+  "engine": "quest"
+ },
+ "alg2-12-5-independent-events": {
+  "file": "alg2-12-5-independent-events.html",
+  "title": "12.5 Independent Events: Fair Play Path",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "12",
+  "engine": "quest"
+ },
+ "alg2-11-1-rotations-and-angle-terminology": {
+  "file": "alg2-11-1-rotations-and-angle-terminology.html",
+  "title": "11.1 Rotations and Angle Terminology: Star Spinner",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-2-radian-angle-measurement": {
+  "file": "alg2-11-2-radian-angle-measurement.html",
+  "title": "11.2 Radian Angle Measurement: Radian Rings",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-3-the-unit-circle": {
+  "file": "alg2-11-3-the-unit-circle.html",
+  "title": "11.3 The Unit Circle: Star Circle",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-4-defining-sine-and-cosine": {
+  "file": "alg2-11-4-defining-sine-and-cosine.html",
+  "title": "11.4 Defining the Sine and Cosine Functions: Sine Signals",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-5-sine-and-cosine-using-radians": {
+  "file": "alg2-11-5-sine-and-cosine-using-radians.html",
+  "title": "11.5 Working with Sine and Cosine Using Radians: Radian Galaxy",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-6-graphs-of-sine-and-cosine": {
+  "file": "alg2-11-6-graphs-of-sine-and-cosine.html",
+  "title": "11.6 Basic Graphs of the Sine and Cosine Functions: Sine Sky",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-7-midline-of-a-trig-function": {
+  "file": "alg2-11-7-midline-of-a-trig-function.html",
+  "title": "11.7 The Midline of a Trigonometric Function: Midline Nebula",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-8-frequency-and-period": {
+  "file": "alg2-11-8-frequency-and-period.html",
+  "title": "11.8 The Frequency and Period of Trigonometric Graphs: Pulsar Period",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-9-horizontal-shifts-of-trig-functions": {
+  "file": "alg2-11-9-horizontal-shifts-of-trig-functions.html",
+  "title": "11.9 Horizontal Shifts of Trigonometric Functions: Comet Shift",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "alg2-11-10-equations-of-trig-functions": {
+  "file": "alg2-11-10-equations-of-trig-functions.html",
+  "title": "11.10 Determining Equations of Trigonometric Functions: Star Signal",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Algebra 2",
+  "unit": "11",
+  "engine": "quest"
+ },
+ "geo-10-1-perimeter": {
+  "file": "geo-10-1-perimeter.html",
+  "title": "10.1 Perimeter: Fence Line Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-2-circumference-of-a-circle": {
+  "file": "geo-10-2-circumference-of-a-circle.html",
+  "title": "10.2 The Circumference of a Circle: Pi Vault",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-3-areas-of-polygons": {
+  "file": "geo-10-3-areas-of-polygons.html",
+  "title": "10.3 The Areas of Polygons: Floor Plan Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-4-areas-of-similar-figures": {
+  "file": "geo-10-4-areas-of-similar-figures.html",
+  "title": "10.4 Areas of Similar Figures: Zoom Room",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-5-area-of-a-circle": {
+  "file": "geo-10-5-area-of-a-circle.html",
+  "title": "10.5 The Area of a Circle: Circle Cellar",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-6-exploring-the-circle-area-formula": {
+  "file": "geo-10-6-exploring-the-circle-area-formula.html",
+  "title": "10.6 Exploring the Circle Area Formula: Pizza Proof",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-7-sectors-of-circles": {
+  "file": "geo-10-7-sectors-of-circles.html",
+  "title": "10.7 Sectors of Circles: Sector Safe",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-8-solids-and-cross-sections": {
+  "file": "geo-10-8-solids-and-cross-sections.html",
+  "title": "10.8 Solids and Their Cross Sections: Slice Vault",
+  "kind": "lesson",
+  "questions": 12,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-9-volumes-of-prisms-and-cylinders": {
+  "file": "geo-10-9-volumes-of-prisms-and-cylinders.html",
+  "title": "10.9 Volumes of Right Prisms and Cylinders: Volume Vault",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-10-volumes-of-pyramids-and-cones": {
+  "file": "geo-10-10-volumes-of-pyramids-and-cones.html",
+  "title": "10.10 Volumes of Pyramids and Cones: Tomb Escape",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-11-spheres": {
+  "file": "geo-10-11-spheres.html",
+  "title": "10.11 Spheres: Orb Escape",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-12-density": {
+  "file": "geo-10-12-density.html",
+  "title": "10.12 Density: Sink or Float",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "geo-10-13-geometric-modeling": {
+  "file": "geo-10-13-geometric-modeling.html",
+  "title": "10.13 Geometric Modeling: Blueprint Escape",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "Geometry",
+  "unit": "10",
+  "engine": "quest"
+ },
+ "sci7-5-1-plate-tectonics": {
+  "file": "sci7-5-1-plate-tectonics.html",
+  "title": "5.1 Plate Tectonics: Rift Runner",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "7th Grade Science",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "sci7-5-2-earthquakes": {
+  "file": "sci7-5-2-earthquakes.html",
+  "title": "5.2 Earthquakes: Quake Quest",
+  "kind": "lesson",
+  "questions": 13,
+  "course": "7th Grade Science",
+  "unit": "5",
+  "engine": "quest"
+ },
+ "sci7-5-3-hurricanes": {
+  "file": "sci7-5-3-hurricanes.html",
+  "title": "5.3 Hurricanes: Storm Chaser",
+  "kind": "lesson",
+  "questions": 14,
+  "course": "7th Grade Science",
+  "unit": "5",
+  "engine": "quest"
  }
 }
