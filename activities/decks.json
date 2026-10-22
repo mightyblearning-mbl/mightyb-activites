@@ -4,7 +4,7 @@
   "title": "1.5 Factoring and Prime Numbers: Prime Constellations",
   "kind": "lesson",
   "questions": 12,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "1",
   "engine": "quest"
  },
@@ -13,7 +13,7 @@
   "title": "1.7 Greatest Common Factors: GCF Constellations",
   "kind": "lesson",
   "questions": 12,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "1",
   "engine": "quest"
  },
@@ -22,7 +22,7 @@
   "title": "1.4 Solving Two-Step Equations: Equation Vault",
   "kind": "lesson",
   "questions": 15,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "1",
   "engine": "quest"
  },
@@ -40,7 +40,7 @@
   "title": "1.4 Lab Safety: Lab Safety Quest",
   "kind": "lesson",
   "questions": 16,
-  "course": "Science 801",
+  "course": "8th Grade Science",
   "unit": "1",
   "engine": "quest"
  },
@@ -67,7 +67,7 @@
   "title": "1.5 More Work with Two-Step Equations: Deep Vault",
   "kind": "lesson",
   "questions": 12,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "1",
   "engine": "quest"
  },
@@ -76,7 +76,7 @@
   "title": "2.1 Fractions and Mixed Numbers: Fraction Bakery",
   "kind": "lesson",
   "questions": 12,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "2",
   "engine": "quest"
  },
@@ -1483,7 +1483,7 @@
   "title": "1.8 The Bill of Rights: Liberty Line",
   "kind": "lesson",
   "questions": 12,
-  "course": "7th Civics",
+  "course": "7th Grade Civics",
   "unit": "1",
   "engine": "quest"
  },
@@ -1627,7 +1627,7 @@
   "title": "1.7 Replacing Weak Verbs with Strong Verbs: Verb Quest",
   "kind": "lesson",
   "questions": 13,
-  "course": "7th English",
+  "course": "7th Grade English",
   "unit": "1",
   "engine": "quest"
  },
@@ -1690,7 +1690,7 @@
   "title": "1.4 Describing Pictures / Descriptive Language: Picture Painters",
   "kind": "lesson",
   "questions": 13,
-  "course": "Language Arts 801",
+  "course": "8th Grade English",
   "unit": "1",
   "engine": "quest"
  },
@@ -1699,7 +1699,7 @@
   "title": "2.1d Correct Sentences: Advanced Version: Grammar Gauntlet",
   "kind": "lesson",
   "questions": 13,
-  "course": "Language Arts 801",
+  "course": "8th Grade English",
   "unit": "2",
   "engine": "quest"
  },
@@ -1717,7 +1717,7 @@
   "title": "1.7 Editing and Revising Task Cards: Editing with COPS: Editing Patrol",
   "kind": "lesson",
   "questions": 14,
-  "course": "Language Arts 801",
+  "course": "8th Grade English",
   "unit": "1",
   "engine": "quest"
  },
@@ -1726,7 +1726,7 @@
   "title": "1.7 Editing and Revising Task Cards: Revising with ARMS: Revision Rally",
   "kind": "lesson",
   "questions": 14,
-  "course": "Language Arts 801",
+  "course": "8th Grade English",
   "unit": "1",
   "engine": "quest"
  },
@@ -1753,7 +1753,7 @@
   "title": "Classify by Attribute: Big, Small, Long, Short, Soft, Hard: Toy Box Trail",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 5",
   "engine": "quest"
  },
@@ -1762,7 +1762,7 @@
   "title": "Commutative Property of Addition to 20: Flip-Flop Train",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 23",
   "engine": "quest"
  },
@@ -1771,7 +1771,7 @@
   "title": "Comparing and Ordering Numbers Space Theme: Galaxy Compare",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 28",
   "engine": "quest"
  },
@@ -1780,7 +1780,7 @@
   "title": "CVC Short Vowels: Short A & Short I: Vowel Quest",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 15",
   "engine": "quest"
  },
@@ -1789,7 +1789,7 @@
   "title": "-ing Word Ending on Progressive Verb Forms: Ending Quest",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 16",
   "engine": "quest"
  },
@@ -1798,7 +1798,7 @@
   "title": "Level F/G Reading Passage & Questions: How Plants Grow: Garden Game",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 16",
   "engine": "quest"
  },
@@ -1807,7 +1807,7 @@
   "title": "Make a Ten to Add to 20: Ten Town Trail",
   "kind": "lesson",
   "questions": 13,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 29",
   "engine": "quest"
  },
@@ -1816,7 +1816,7 @@
   "title": "Map Skills: Treasure Map",
   "kind": "lesson",
   "questions": 13,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 9",
   "engine": "quest"
  },
@@ -1825,7 +1825,7 @@
   "title": "Parts of a Plant: Garden Path",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 22",
   "engine": "quest"
  },
@@ -1834,7 +1834,7 @@
   "title": "Place Value - Comparing Base Ten Blocks to 100: Dragon Hoard",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 2",
   "engine": "quest"
  },
@@ -1843,7 +1843,7 @@
   "title": "Plant and Flower Life Cycle: Seed to Bloom",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 29",
   "engine": "quest"
  },
@@ -1852,7 +1852,7 @@
   "title": "Plural Nouns (adding -s and -es): Plural Party",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 16",
   "engine": "quest"
  },
@@ -1861,7 +1861,7 @@
   "title": "Rounding - Rounding to the Nearest 10: Rounding Rally",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 30",
   "engine": "quest"
  },
@@ -1870,7 +1870,7 @@
   "title": "Rounding - Rounding to the Nearest 100: Hundred Summit",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 1",
   "engine": "quest"
  },
@@ -1879,7 +1879,7 @@
   "title": "Skip Counting by 100s: Hundred Highway",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 22",
   "engine": "quest"
  },
@@ -1888,7 +1888,7 @@
   "title": "Skip Counting by 5's and 10's to 100: Frog Hop Count",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Sept. 18",
   "engine": "quest"
  },
@@ -1897,7 +1897,7 @@
   "title": "Soft C and G Spelling: Soft Sound Castle",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 30",
   "engine": "quest"
  },
@@ -1906,7 +1906,7 @@
   "title": "Use Doubles: Double Dice Trail",
   "kind": "lesson",
   "questions": 13,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "Oct. 20",
   "engine": "quest"
  },
@@ -1915,7 +1915,7 @@
   "title": "4-Digit Compare Numbers: Fill in the Blank: Canyon Line",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Place Value",
   "engine": "quest"
  },
@@ -1924,7 +1924,7 @@
   "title": "Comparing & Ordering Numbers to Thousands: Canyon Railroad",
   "kind": "lesson",
   "questions": 12,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Oct. 7",
   "engine": "quest"
  },
@@ -1933,7 +1933,7 @@
   "title": "Estimating Sums and Differences - Rounding to 100: Market Train",
   "kind": "lesson",
   "questions": 12,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Sept. 29",
   "engine": "quest"
  },
@@ -1942,7 +1942,7 @@
   "title": "Natural and Man-made: Nature Line",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Oct. 1",
   "engine": "quest"
  },
@@ -1951,7 +1951,7 @@
   "title": "Number Order up to 1,000: Circus Train",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Place Value",
   "engine": "quest"
  },
@@ -1960,7 +1960,7 @@
   "title": "Place Value: Expanded Notation (4-Digit Numbers): Rocket Rail",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Place Value",
   "engine": "quest"
  },
@@ -1969,7 +1969,7 @@
   "title": "Place Value Number Forms: 3-Digit Numbers: Night Owl Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Place Value",
   "engine": "quest"
  },
@@ -1978,7 +1978,7 @@
   "title": "Plural Nouns: Change Y to I and Add -es: Plural Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Oct. 28",
   "engine": "quest"
  },
@@ -1987,7 +1987,7 @@
   "title": "Properties of Addition: Orchard Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Oct. 21",
   "engine": "quest"
  },
@@ -1996,7 +1996,7 @@
   "title": "Round to the Nearest 10 on a Number Line: Ten Hill Express",
   "kind": "lesson",
   "questions": 12,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Sept. 22",
   "engine": "quest"
  },
@@ -2005,7 +2005,7 @@
   "title": "Rounding to the Nearest 10 & 100: Hundred Moons Express",
   "kind": "lesson",
   "questions": 12,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Sept. 28",
   "engine": "quest"
  },
@@ -2014,7 +2014,7 @@
   "title": "Spelling Long A: Long A Line",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Oct. 8",
   "engine": "quest"
  },
@@ -2023,7 +2023,7 @@
   "title": "Standard, Word and Expanded Form through Thousands: Number Mail Train",
   "kind": "lesson",
   "questions": 12,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Oct. 5",
   "engine": "quest"
  },
@@ -2032,7 +2032,7 @@
   "title": "Synonyms and Antonyms: Word Twin Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Sept. 16",
   "engine": "quest"
  },
@@ -2041,7 +2041,7 @@
   "title": "Three-Digit Addition with Regrouping: Beach Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Oct. 21",
   "engine": "quest"
  },
@@ -2050,7 +2050,7 @@
   "title": "Compound Words: Coupling Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Sept. 30",
   "engine": "quest"
  },
@@ -2059,7 +2059,7 @@
   "title": "Value of a 3-Digit Number: Cargo Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "Place Value",
   "engine": "quest"
  },
@@ -2068,7 +2068,7 @@
   "title": "Four Types of Sentences: Sentence Escape",
   "kind": "lesson",
   "questions": 11,
-  "course": "4th Grade Language Arts (400)",
+  "course": "4th Grade Language Arts",
   "unit": "Section 2 Charlie and the Chocolate Factory",
   "engine": "quest"
  },
@@ -2077,7 +2077,7 @@
   "title": "Types of Sentences & Ending Punctuation: Punctuation Escape",
   "kind": "lesson",
   "questions": 13,
-  "course": "4th Grade Language Arts (400)",
+  "course": "4th Grade Language Arts",
   "unit": "",
   "engine": "quest"
  },
@@ -2086,7 +2086,7 @@
   "title": "Steps of the Scientific Method: Method Escape",
   "kind": "lesson",
   "questions": 10,
-  "course": "4th Grade Science (400)",
+  "course": "4th Grade Science",
   "unit": "1",
   "engine": "quest"
  },
@@ -2095,7 +2095,7 @@
   "title": "4-Digit by 2-Digit Long Division: Frost Tower",
   "kind": "lesson",
   "questions": 11,
-  "course": "5th Grade Math (Math 501)",
+  "course": "5th Grade Math",
   "unit": "2",
   "engine": "quest"
  },
@@ -2104,7 +2104,7 @@
   "title": "Area Model for Multiplication: Area Tower",
   "kind": "lesson",
   "questions": 13,
-  "course": "5th Grade Math (Math 501)",
+  "course": "5th Grade Math",
   "unit": "Unit 2 Multiplication and Division",
   "engine": "quest"
  },
@@ -2113,7 +2113,7 @@
   "title": "Decimal Place Value to the Thousandths: Decimal Tower",
   "kind": "lesson",
   "questions": 11,
-  "course": "5th Grade Math (Math 501)",
+  "course": "5th Grade Math",
   "unit": "Decimals",
   "engine": "quest"
  },
@@ -2122,7 +2122,7 @@
   "title": "Evaluating Expressions with Order of Operations: Order Tower",
   "kind": "lesson",
   "questions": 11,
-  "course": "5th Grade Math (Math 501)",
+  "course": "5th Grade Math",
   "unit": "Unit 1 Order of Operations",
   "engine": "quest"
  },
@@ -2131,7 +2131,7 @@
   "title": "Multiplication: 3 Digit by 1 Digit: Product Tower",
   "kind": "lesson",
   "questions": 11,
-  "course": "5th Grade Math (Math 501)",
+  "course": "5th Grade Math",
   "unit": "Unit 2 Multiplication and Division",
   "engine": "quest"
  },
@@ -2320,7 +2320,7 @@
   "title": "1.2 Vocabulary: Native American Societies: First Peoples Line",
   "kind": "lesson",
   "questions": 14,
-  "course": "History 801",
+  "course": "8th Grade History",
   "unit": "1",
   "engine": "quest"
  },
@@ -2329,7 +2329,7 @@
   "title": "1.3 The 3 G's of Exploration: Explorer Express",
   "kind": "lesson",
   "questions": 14,
-  "course": "History 801",
+  "course": "8th Grade History",
   "unit": "1",
   "engine": "quest"
  },
@@ -2338,7 +2338,7 @@
   "title": "1.3 Vocabulary: Exploration Terms: Word Voyage",
   "kind": "lesson",
   "questions": 14,
-  "course": "History 801",
+  "course": "8th Grade History",
   "unit": "1",
   "engine": "quest"
  },
@@ -2401,7 +2401,7 @@
   "title": "1.1 2-Digit by 2-Digit Multiplication: Product Escape",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 601",
+  "course": "6th Grade Math",
   "unit": "1",
   "engine": "quest"
  },
@@ -2410,7 +2410,7 @@
   "title": "1.1 Multi-Step Problems: Step Escape",
   "kind": "lesson",
   "questions": 13,
-  "course": "Math 601",
+  "course": "6th Grade Math",
   "unit": "1",
   "engine": "quest"
  },
@@ -2419,7 +2419,7 @@
   "title": "1.3 2-Digit by 1-Digit Long Division (No Remainders): Division Station",
   "kind": "lesson",
   "questions": 13,
-  "course": "Math 601",
+  "course": "6th Grade Math",
   "unit": "1",
   "engine": "quest"
  },
@@ -2428,7 +2428,7 @@
   "title": "1.3 Division Math Facts: Zoo Escape",
   "kind": "lesson",
   "questions": 13,
-  "course": "Math 601",
+  "course": "6th Grade Math",
   "unit": "1",
   "engine": "quest"
  },
@@ -2437,7 +2437,7 @@
   "title": "1.3 Multi-Step Word Problems: Multiplication and Division: Kitchen Escape",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 601",
+  "course": "6th Grade Math",
   "unit": "1",
   "engine": "quest"
  },
@@ -2446,7 +2446,7 @@
   "title": "2.2 Equivalent Fractions: Brownie Bakery",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "2",
   "engine": "quest"
  },
@@ -2464,7 +2464,7 @@
   "title": "2.7 Multiplying Fractions: Fraction Garden",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "2",
   "engine": "quest"
  },
@@ -2473,7 +2473,7 @@
   "title": "2.8 Dividing Fractions: Division Detectives",
   "kind": "lesson",
   "questions": 15,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "2",
   "engine": "quest"
  },
@@ -2482,7 +2482,7 @@
   "title": "3.2 Adding and Subtracting Decimals: Decimal Road Trip",
   "kind": "lesson",
   "questions": 15,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "3",
   "engine": "quest"
  },
@@ -2491,7 +2491,7 @@
   "title": "3.3 Multiplying Decimals: Decimal Food Truck",
   "kind": "lesson",
   "questions": 15,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "3",
   "engine": "quest"
  },
@@ -2500,7 +2500,7 @@
   "title": "3.5 Dividing Whole Numbers with Decimal Remainders: Treasure Split",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "3",
   "engine": "quest"
  },
@@ -2509,7 +2509,7 @@
   "title": "3.6 Dividing Decimals: Potion Shop",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "3",
   "engine": "quest"
  },
@@ -2608,7 +2608,7 @@
   "title": "6.5 Translating into Math Equations: Translation Tower",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 601 (6th Grade Math)",
+  "course": "6th Grade Math",
   "unit": "6",
   "engine": "quest"
  },
@@ -2725,7 +2725,7 @@
   "title": "4.10 Finding the Whole Using Algebra: Treasure Hunt",
   "kind": "lesson",
   "questions": 13,
-  "course": "Math 701 (7th Grade Math)",
+  "course": "7th Grade Math",
   "unit": "4",
   "engine": "quest"
  },
@@ -2743,7 +2743,7 @@
   "title": "4.6 The Percentage a Part Represents: Poll Patrol",
   "kind": "lesson",
   "questions": 14,
-  "course": "Math 701 (7th Grade Math)",
+  "course": "7th Grade Math",
   "unit": "4",
   "engine": "quest"
  },
@@ -2896,7 +2896,7 @@
   "title": "1.6 Solving Equations with Variables on Both Sides: Balance Quest",
   "kind": "lesson",
   "questions": 15,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "1",
   "engine": "quest"
  },
@@ -2905,7 +2905,7 @@
   "title": "2.2 Angles and Their Measures: Angle Lighthouse",
   "kind": "lesson",
   "questions": 15,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "2",
   "engine": "quest"
  },
@@ -2914,7 +2914,7 @@
   "title": "2.5 Parallel Lines: Rail Crossing",
   "kind": "lesson",
   "questions": 13,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "2",
   "engine": "quest"
  },
@@ -2923,7 +2923,7 @@
   "title": "2.7 Geometry with Coordinates: Coordinate Cove",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "2",
   "engine": "quest"
  },
@@ -2932,7 +2932,7 @@
   "title": "2.8 Congruent Figures: Clone Lab",
   "kind": "lesson",
   "questions": 13,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "2",
   "engine": "quest"
  },
@@ -2941,7 +2941,7 @@
   "title": "3.11 Angle Sums in a Triangle: Triangle Peaks",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "3",
   "engine": "quest"
  },
@@ -2950,7 +2950,7 @@
   "title": "3.2 Reflections: Mirror Lake",
   "kind": "lesson",
   "questions": 15,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "3",
   "engine": "quest"
  },
@@ -2959,7 +2959,7 @@
   "title": "3.9 Transformations and Congruent Figures: Docking Bay",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "3",
   "engine": "quest"
  },
@@ -2968,7 +2968,7 @@
   "title": "4.5 Similar Figures: Shrink Ray Lab",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Grade Math)",
+  "course": "Pre-Algebra",
   "unit": "4",
   "engine": "quest"
  },
@@ -2977,7 +2977,7 @@
   "title": "4.6 More Work with Similar Figures: Shrink Ray Lab",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "4",
   "engine": "quest"
  },
@@ -2986,7 +2986,7 @@
   "title": "5.3 Slope and Similarity: Slope Summit",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "5",
   "engine": "quest"
  },
@@ -2995,7 +2995,7 @@
   "title": "5.5 Slopes and Negative Numbers: Ski Patrol",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "5",
   "engine": "quest"
  },
@@ -3004,7 +3004,7 @@
   "title": "5.7 Finding the Slope of a Line: Slope Patrol",
   "kind": "lesson",
   "questions": 13,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "5",
   "engine": "quest"
  },
@@ -3013,7 +3013,7 @@
   "title": "5.8 Systems of Equations: Laser Vault",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "5",
   "engine": "quest"
  },
@@ -3022,7 +3022,7 @@
   "title": "5.9 Solving Systems of Equations Algebraically: Orbit Rendezvous",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "5",
   "engine": "quest"
  },
@@ -3031,7 +3031,7 @@
   "title": "6.2 Features of Functions: Coaster Park",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "6",
   "engine": "quest"
  },
@@ -3040,7 +3040,7 @@
   "title": "6.3 Average Rate of Change: Launch Control",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "6",
   "engine": "quest"
  },
@@ -3049,7 +3049,7 @@
   "title": "6.4 Linear Functions: Balloon Festival",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "6",
   "engine": "quest"
  },
@@ -3058,7 +3058,7 @@
   "title": "6.7 Scatter Plots and Lines of Best Fit: Firefly Field",
   "kind": "lesson",
   "questions": 14,
-  "course": "Pre-Algebra (8th Math)",
+  "course": "Pre-Algebra",
   "unit": "6",
   "engine": "quest"
  },
@@ -3067,7 +3067,7 @@
   "title": "1.2 Scientific Method & Nature of Science: Method Escape",
   "kind": "lesson",
   "questions": 14,
-  "course": "6th Science and Science 801",
+  "course": "6th Grade Science",
   "unit": "1",
   "engine": "quest"
  },
@@ -3076,7 +3076,7 @@
   "title": "1.4 Lab Tools: Tool Room Escape",
   "kind": "lesson",
   "questions": 13,
-  "course": "6th Science and Science 801",
+  "course": "6th Grade Science",
   "unit": "1",
   "engine": "quest"
  },
@@ -3085,7 +3085,7 @@
   "title": "2.2 Elements, Atoms, Molecules, and Compounds: Molecule Lab",
   "kind": "lesson",
   "questions": 16,
-  "course": "6th Grade Science and 8th Grade Science",
+  "course": "6th Grade Science",
   "unit": "2",
   "engine": "quest"
  },
@@ -3094,7 +3094,7 @@
   "title": "2.2b The Periodic Table: Overview: Periodic City",
   "kind": "lesson",
   "questions": 15,
-  "course": "6th Grade Science and 8th Grade Science",
+  "course": "6th Grade Science",
   "unit": "2",
   "engine": "quest"
  },
@@ -3103,7 +3103,7 @@
   "title": "2.2c Element Classes on the Periodic Table: Element Expedition",
   "kind": "lesson",
   "questions": 15,
-  "course": "6th Grade Science and 8th Grade Science",
+  "course": "6th Grade Science",
   "unit": "2",
   "engine": "quest"
  },
@@ -3112,7 +3112,7 @@
   "title": "1.6 / 1.8 The Engineering Design Process: Invention Lab",
   "kind": "lesson",
   "questions": 15,
-  "course": "6th Grade Science (1.6) and 8th Grade Science (1.8)",
+  "course": "6th Grade Science",
   "unit": "1",
   "engine": "quest"
  },
@@ -4588,7 +4588,7 @@
   "title": "2.1 Atomic Structure: Atom Escape",
   "kind": "lesson",
   "questions": 12,
-  "course": "6th Grade Science and 8th Grade Science",
+  "course": "6th Grade Science",
   "unit": "2",
   "engine": "quest"
  },
@@ -4615,7 +4615,7 @@
   "title": "3.3 / 4.3 Heat Transfer: Heat Express",
   "kind": "lesson",
   "questions": 14,
-  "course": "6th Grade Science and 8th Grade Science",
+  "course": "6th Grade Science",
   "unit": "",
   "engine": "quest"
  },
@@ -4624,7 +4624,7 @@
   "title": "3.6 / 4.4 Energy Transfer and Transformation: Energy Express",
   "kind": "lesson",
   "questions": 13,
-  "course": "6th Grade Science and 8th Grade Science",
+  "course": "6th Grade Science",
   "unit": "3 / 4",
   "engine": "quest"
  },
@@ -4642,7 +4642,7 @@
   "title": "4.2 / 5.1 Food Chains and Food Webs: Food Web Tower",
   "kind": "lesson",
   "questions": 12,
-  "course": "7th Grade Science and 8th Grade Science",
+  "course": "7th Grade Science",
   "unit": "",
   "engine": "quest"
  },
@@ -5074,7 +5074,7 @@
   "title": "Force and Motion: Force Field",
   "kind": "lesson",
   "questions": 11,
-  "course": "4th Grade Science and 5th Grade Science",
+  "course": "4th Grade Science",
   "unit": "",
   "engine": "quest"
  },
@@ -5668,7 +5668,7 @@
   "title": "Subtraction to 20: Counting Up Strategy: Count-Up Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5677,7 +5677,7 @@
   "title": "Addition & Subtraction Fact Families up to 20: Fact Family Tower",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5686,7 +5686,7 @@
   "title": "Triple Blends: Blend Blast",
   "kind": "lesson",
   "questions": 12,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5695,7 +5695,7 @@
   "title": "Compound Words: Word Glue Escape",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5704,7 +5704,7 @@
   "title": "Poetry: Poem Stars",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5713,7 +5713,7 @@
   "title": "Complete the Simile: Simile Safari",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5722,7 +5722,7 @@
   "title": "2-Digit Subtraction: Garden Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5731,7 +5731,7 @@
   "title": "2-Digit Subtraction Using Expanded Form: Break-Apart Tower",
   "kind": "lesson",
   "questions": 13,
-  "course": "2nd Grade (HLA 200)",
+  "course": "2nd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5740,7 +5740,7 @@
   "title": "3-Digit Addition and Subtraction, With and Without Regrouping: Regroup Escape",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300 / Math 301)",
+  "course": "3rd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5749,7 +5749,7 @@
   "title": "Similes: Simile Sky",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300)",
+  "course": "3rd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5758,7 +5758,7 @@
   "title": "Inflectional Endings: Ending Dash",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300)",
+  "course": "3rd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5767,7 +5767,7 @@
   "title": "Prefixes re-, un-, dis-: Prefix Express",
   "kind": "lesson",
   "questions": 11,
-  "course": "3rd Grade (HLA 300)",
+  "course": "3rd Grade",
   "unit": "",
   "engine": "quest"
  },
@@ -5776,7 +5776,7 @@
   "title": "Addition and Subtraction Multi-Step Word Problems: Step Tower",
   "kind": "lesson",
   "questions": 11,
-  "course": "4th Grade Math (Math 401)",
+  "course": "4th Grade Math",
   "unit": "",
   "engine": "quest"
  },
