@@ -100,14 +100,14 @@
  },
  "phys-3-2-review-momentum-impulse": {
   "file": "3-2-momentum-and-impulse.html",
-  "title": "Review: Momentum & Impulse (3.1–3.2)",
+  "title": "Review: Momentum & Impulse (3.1\u20133.2)",
   "kind": "mini-review",
   "questions": 13,
   "course": "Physics"
  },
  "phys-3-4-review-collisions": {
   "file": "3-4-collisions.html",
-  "title": "Review: Collisions (3.3–3.4)",
+  "title": "Review: Collisions (3.3\u20133.4)",
   "kind": "mini-review",
   "questions": 12,
   "course": "Physics"
@@ -498,58 +498,58 @@
   "course": "11th Grade English"
  },
  "ela10-2-2-tkam-chapter-4": {
-  "file": "english-10/ela10-2-2-tkam-chapter-4.html",
-  "title": "2.2 TKAM Chapter 4",
+  "file": "ela10-2-2-tkam-chapter-4.html",
+  "title": "2.2 TKAM Chapter 4: Knothole Express",
   "kind": "lesson",
-  "questions": 8,
+  "questions": 13,
   "course": "10th Grade English",
   "unit": "2",
-  "unitTitle": "To Kill a Mockingbird"
+  "engine": "quest"
  },
  "ela10-2-3-tkam-chapter-5": {
-  "file": "english-10/ela10-2-3-tkam-chapter-5.html",
-  "title": "2.3 TKAM Chapter 5",
+  "file": "ela10-2-3-tkam-chapter-5.html",
+  "title": "2.3 TKAM Chapter 5: Porch Light Express",
   "kind": "lesson",
-  "questions": 8,
+  "questions": 12,
   "course": "10th Grade English",
   "unit": "2",
-  "unitTitle": "To Kill a Mockingbird"
+  "engine": "quest"
  },
  "ela10-2-4-tkam-chapter-12": {
-  "file": "english-10/ela10-2-4-tkam-chapter-12.html",
-  "title": "2.4 TKAM Chapter 12",
+  "file": "ela10-2-4-tkam-chapter-12.html",
+  "title": "2.4 TKAM Chapter 12: Sunday Line",
   "kind": "lesson",
-  "questions": 8,
+  "questions": 12,
   "course": "10th Grade English",
   "unit": "2",
-  "unitTitle": "To Kill a Mockingbird"
+  "engine": "quest"
  },
  "ela10-2-5-tkam-chapter-15": {
-  "file": "english-10/ela10-2-5-tkam-chapter-15.html",
-  "title": "2.5 TKAM Chapter 15",
+  "file": "ela10-2-5-tkam-chapter-15.html",
+  "title": "2.5 TKAM Chapter 15: Night Watch Line",
   "kind": "lesson",
-  "questions": 8,
+  "questions": 13,
   "course": "10th Grade English",
   "unit": "2",
-  "unitTitle": "To Kill a Mockingbird"
+  "engine": "quest"
  },
  "ela10-2-6-tkam-chapter-20": {
-  "file": "english-10/ela10-2-6-tkam-chapter-20.html",
-  "title": "2.6 TKAM Chapter 20",
+  "file": "ela10-2-6-tkam-chapter-20.html",
+  "title": "2.6 TKAM Chapter 20: Closing Line",
   "kind": "lesson",
-  "questions": 8,
+  "questions": 14,
   "course": "10th Grade English",
   "unit": "2",
-  "unitTitle": "To Kill a Mockingbird"
+  "engine": "quest"
  },
  "ela10-2-7-tkam-chapter-31": {
-  "file": "english-10/ela10-2-7-tkam-chapter-31.html",
-  "title": "2.7 TKAM Chapter 31",
+  "file": "ela10-2-7-tkam-chapter-31.html",
+  "title": "2.7 TKAM Chapter 31: Last Stop",
   "kind": "lesson",
-  "questions": 8,
+  "questions": 13,
   "course": "10th Grade English",
   "unit": "2",
-  "unitTitle": "To Kill a Mockingbird"
+  "engine": "quest"
  },
  "ela10-2-8-tkam-review": {
   "file": "english-10/ela10-2-8-tkam-review.html",
@@ -6484,7 +6484,7 @@
  },
  "novel-charlie-ch-10-12": {
   "file": "novel-charlie-ch-10-12.html",
-  "title": "Charlie and the Chocolate Factory: Chapters 10–12: Lucky Star Sky",
+  "title": "Charlie and the Chocolate Factory: Chapters 10\u201312: Lucky Star Sky",
   "kind": "lesson",
   "questions": 12,
   "course": "4th Grade Language Arts",
@@ -6493,7 +6493,7 @@
  },
  "novel-charlie-ch-16-18": {
   "file": "novel-charlie-ch-16-18.html",
-  "title": "Charlie and the Chocolate Factory: Chapters 16–18: Chocolate River Escape",
+  "title": "Charlie and the Chocolate Factory: Chapters 16\u201318: Chocolate River Escape",
   "kind": "lesson",
   "questions": 12,
   "course": "4th Grade Language Arts",
@@ -6502,7 +6502,7 @@
  },
  "novel-charlie-ch-19-21": {
   "file": "novel-charlie-ch-19-21.html",
-  "title": "Charlie and the Chocolate Factory: Chapters 19–21: Inventing Room Express",
+  "title": "Charlie and the Chocolate Factory: Chapters 19\u201321: Inventing Room Express",
   "kind": "lesson",
   "questions": 12,
   "course": "4th Grade Language Arts",
@@ -6511,7 +6511,7 @@
  },
  "novel-charlie-ch-22-24": {
   "file": "novel-charlie-ch-22-24.html",
-  "title": "Charlie and the Chocolate Factory: Chapters 22–24: Nut Room Escape",
+  "title": "Charlie and the Chocolate Factory: Chapters 22\u201324: Nut Room Escape",
   "kind": "lesson",
   "questions": 12,
   "course": "4th Grade Language Arts",
@@ -6520,7 +6520,7 @@
  },
  "novel-charlie-ch-25-27": {
   "file": "novel-charlie-ch-25-27.html",
-  "title": "Charlie and the Chocolate Factory: Chapters 25–27: Glass Elevator Tower",
+  "title": "Charlie and the Chocolate Factory: Chapters 25\u201327: Glass Elevator Tower",
   "kind": "lesson",
   "questions": 12,
   "course": "4th Grade Language Arts",
@@ -6529,7 +6529,7 @@
  },
  "novel-charlie-ch-28-30": {
   "file": "novel-charlie-ch-28-30.html",
-  "title": "Charlie and the Chocolate Factory: Chapters 28–30: Factory Prize Path",
+  "title": "Charlie and the Chocolate Factory: Chapters 28\u201330: Factory Prize Path",
   "kind": "lesson",
   "questions": 12,
   "course": "4th Grade Language Arts",
@@ -6538,7 +6538,7 @@
  },
  "novel-charlie-ch-7-9": {
   "file": "novel-charlie-ch-7-9.html",
-  "title": "Charlie and the Chocolate Factory: Chapters 7–9: Golden Ticket Trail",
+  "title": "Charlie and the Chocolate Factory: Chapters 7\u20139: Golden Ticket Trail",
   "kind": "lesson",
   "questions": 12,
   "course": "4th Grade Language Arts",
@@ -6556,7 +6556,7 @@
  },
  "novel-hatchet-ch-1-2": {
   "file": "novel-hatchet-ch-1-2.html",
-  "title": "Hatchet: Chapters 1–2: North Woods Express",
+  "title": "Hatchet: Chapters 1\u20132: North Woods Express",
   "kind": "lesson",
   "questions": 12,
   "course": "6th Grade English",
@@ -6565,7 +6565,7 @@
  },
  "novel-hatchet-ch-11-12": {
   "file": "novel-hatchet-ch-11-12.html",
-  "title": "Hatchet: Chapters 11–12: Signal Fire Escape",
+  "title": "Hatchet: Chapters 11\u201312: Signal Fire Escape",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6574,7 +6574,7 @@
  },
  "novel-hatchet-ch-13-14": {
   "file": "novel-hatchet-ch-13-14.html",
-  "title": "Hatchet: Chapters 13–14: Tough Hope Tower",
+  "title": "Hatchet: Chapters 13\u201314: Tough Hope Tower",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6583,7 +6583,7 @@
  },
  "novel-hatchet-ch-15-16": {
   "file": "novel-hatchet-ch-15-16.html",
-  "title": "Hatchet: Chapters 15–16: Survival Trail",
+  "title": "Hatchet: Chapters 15\u201316: Survival Trail",
   "kind": "lesson",
   "questions": 14,
   "course": "6th Grade English",
@@ -6592,7 +6592,7 @@
  },
  "novel-hatchet-ch-17-18": {
   "file": "novel-hatchet-ch-17-18.html",
-  "title": "Hatchet: Chapters 17–18: Raft Run",
+  "title": "Hatchet: Chapters 17\u201318: Raft Run",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6601,7 +6601,7 @@
  },
  "novel-hatchet-ch-19-epilogue": {
   "file": "novel-hatchet-ch-19-epilogue.html",
-  "title": "Hatchet: Chapter 19–Epilogue: Rescue Tower",
+  "title": "Hatchet: Chapter 19\u2013Epilogue: Rescue Tower",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6610,7 +6610,7 @@
  },
  "novel-hatchet-ch-3-4": {
   "file": "novel-hatchet-ch-3-4.html",
-  "title": "Hatchet: Chapters 3–4: Lake Escape",
+  "title": "Hatchet: Chapters 3\u20134: Lake Escape",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6619,7 +6619,7 @@
  },
  "novel-hatchet-ch-5-6": {
   "file": "novel-hatchet-ch-5-6.html",
-  "title": "Hatchet: Chapters 5–6: Ridge Climb",
+  "title": "Hatchet: Chapters 5\u20136: Ridge Climb",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6628,7 +6628,7 @@
  },
  "novel-hatchet-ch-7-8": {
   "file": "novel-hatchet-ch-7-8.html",
-  "title": "Hatchet: Chapters 7–8: Spark Trail",
+  "title": "Hatchet: Chapters 7\u20138: Spark Trail",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6637,7 +6637,7 @@
  },
  "novel-hatchet-ch-9-10": {
   "file": "novel-hatchet-ch-9-10.html",
-  "title": "Hatchet: Chapters 9–10: Ember Express",
+  "title": "Hatchet: Chapters 9\u201310: Ember Express",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6664,7 +6664,7 @@
  },
  "novel-hatchet-vocab-set-1": {
   "file": "novel-hatchet-vocab-set-1.html",
-  "title": "Hatchet: Vocabulary Set 1 (Chapters 1–8): Northern Lights",
+  "title": "Hatchet: Vocabulary Set 1 (Chapters 1\u20138): Northern Lights",
   "kind": "lesson",
   "questions": 12,
   "course": "6th Grade English",
@@ -6673,7 +6673,7 @@
  },
  "novel-hatchet-vocab-set-2": {
   "file": "novel-hatchet-vocab-set-2.html",
-  "title": "Hatchet: Vocabulary Set 2 (Chapters 9–12): Campfire Sky",
+  "title": "Hatchet: Vocabulary Set 2 (Chapters 9\u201312): Campfire Sky",
   "kind": "lesson",
   "questions": 13,
   "course": "6th Grade English",
@@ -6682,7 +6682,7 @@
  },
  "novel-lemonade-war-ch-1-2": {
   "file": "novel-lemonade-war-ch-1-2.html",
-  "title": "The Lemonade War: Chapters 1–2: Summer Slump Stars",
+  "title": "The Lemonade War: Chapters 1\u20132: Summer Slump Stars",
   "kind": "lesson",
   "questions": 10,
   "course": "4th Grade Language Arts",
@@ -6691,7 +6691,7 @@
  },
  "novel-lemonade-war-ch-11-12": {
   "file": "novel-lemonade-war-ch-11-12.html",
-  "title": "The Lemonade War: Chapters 11–12: Lemon Drop Skies",
+  "title": "The Lemonade War: Chapters 11\u201312: Lemon Drop Skies",
   "kind": "lesson",
   "questions": 10,
   "course": "4th Grade Language Arts",
@@ -6700,7 +6700,7 @@
  },
  "novel-lemonade-war-ch-13-14": {
   "file": "novel-lemonade-war-ch-13-14.html",
-  "title": "The Lemonade War: Chapters 13–14: Peace Train",
+  "title": "The Lemonade War: Chapters 13\u201314: Peace Train",
   "kind": "lesson",
   "questions": 10,
   "course": "4th Grade Language Arts",
@@ -6709,7 +6709,7 @@
  },
  "novel-lemonade-war-ch-3-4": {
   "file": "novel-lemonade-war-ch-3-4.html",
-  "title": "The Lemonade War: Chapters 3–4: Lemonade Express",
+  "title": "The Lemonade War: Chapters 3\u20134: Lemonade Express",
   "kind": "lesson",
   "questions": 10,
   "course": "4th Grade Language Arts",
@@ -6718,7 +6718,7 @@
  },
  "novel-lemonade-war-ch-5-6": {
   "file": "novel-lemonade-war-ch-5-6.html",
-  "title": "The Lemonade War: Chapters 5–6: Lemon Lockdown",
+  "title": "The Lemonade War: Chapters 5\u20136: Lemon Lockdown",
   "kind": "lesson",
   "questions": 10,
   "course": "4th Grade Language Arts",
@@ -6727,7 +6727,7 @@
  },
  "novel-lemonade-war-ch-7-8": {
   "file": "novel-lemonade-war-ch-7-8.html",
-  "title": "The Lemonade War: Chapters 7–8: Lemonade Tower",
+  "title": "The Lemonade War: Chapters 7\u20138: Lemonade Tower",
   "kind": "lesson",
   "questions": 10,
   "course": "4th Grade Language Arts",
@@ -6736,7 +6736,7 @@
  },
  "novel-lemonade-war-ch-9-10": {
   "file": "novel-lemonade-war-ch-9-10.html",
-  "title": "The Lemonade War: Chapters 9–10: Mischief Board",
+  "title": "The Lemonade War: Chapters 9\u201310: Mischief Board",
   "kind": "lesson",
   "questions": 10,
   "course": "4th Grade Language Arts",
@@ -6754,7 +6754,7 @@
  },
  "novel-wild-robot-protects-ch-11-15": {
   "file": "novel-wild-robot-protects-ch-11-15.html",
-  "title": "The Wild Robot Protects: Chapters 11–15: Island Watch",
+  "title": "The Wild Robot Protects: Chapters 11\u201315: Island Watch",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6763,7 +6763,7 @@
  },
  "novel-wild-robot-protects-ch-16-20": {
   "file": "novel-wild-robot-protects-ch-16-20.html",
-  "title": "The Wild Robot Protects: Chapters 16–20: Splashdown Sky",
+  "title": "The Wild Robot Protects: Chapters 16\u201320: Splashdown Sky",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6772,7 +6772,7 @@
  },
  "novel-wild-robot-protects-ch-21-25": {
   "file": "novel-wild-robot-protects-ch-21-25.html",
-  "title": "The Wild Robot Protects: Chapters 21–25: Seafloor Express",
+  "title": "The Wild Robot Protects: Chapters 21\u201325: Seafloor Express",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6781,7 +6781,7 @@
  },
  "novel-wild-robot-protects-ch-26-30": {
   "file": "novel-wild-robot-protects-ch-26-30.html",
-  "title": "The Wild Robot Protects: Chapters 26–30: Sunken Town Escape",
+  "title": "The Wild Robot Protects: Chapters 26\u201330: Sunken Town Escape",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6790,7 +6790,7 @@
  },
  "novel-wild-robot-protects-ch-31-35": {
   "file": "novel-wild-robot-protects-ch-31-35.html",
-  "title": "The Wild Robot Protects: Chapters 31–35: Deep Glow Tower",
+  "title": "The Wild Robot Protects: Chapters 31\u201335: Deep Glow Tower",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6799,7 +6799,7 @@
  },
  "novel-wild-robot-protects-ch-36-40": {
   "file": "novel-wild-robot-protects-ch-36-40.html",
-  "title": "The Wild Robot Protects: Chapters 36–40: Ocean Helpers",
+  "title": "The Wild Robot Protects: Chapters 36\u201340: Ocean Helpers",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6808,7 +6808,7 @@
  },
  "novel-wild-robot-protects-ch-41-45": {
   "file": "novel-wild-robot-protects-ch-41-45.html",
-  "title": "The Wild Robot Protects: Chapters 41–45: Aurora Trail",
+  "title": "The Wild Robot Protects: Chapters 41\u201345: Aurora Trail",
   "kind": "lesson",
   "questions": 11,
   "course": "5th Grade Language Arts",
@@ -6817,7 +6817,7 @@
  },
  "novel-wild-robot-protects-ch-46-50": {
   "file": "novel-wild-robot-protects-ch-46-50.html",
-  "title": "The Wild Robot Protects: Chapters 46–50: Deep Sea Express",
+  "title": "The Wild Robot Protects: Chapters 46\u201350: Deep Sea Express",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6826,7 +6826,7 @@
  },
  "novel-wild-robot-protects-ch-51-55": {
   "file": "novel-wild-robot-protects-ch-51-55.html",
-  "title": "The Wild Robot Protects: Chapters 51–55: Station Escape",
+  "title": "The Wild Robot Protects: Chapters 51\u201355: Station Escape",
   "kind": "lesson",
   "questions": 12,
   "course": "5th Grade Language Arts",
@@ -6835,7 +6835,7 @@
  },
  "novel-wild-robot-protects-ch-56-60": {
   "file": "novel-wild-robot-protects-ch-56-60.html",
-  "title": "The Wild Robot Protects: Chapters 56–60: Battle Tower",
+  "title": "The Wild Robot Protects: Chapters 56\u201360: Battle Tower",
   "kind": "lesson",
   "questions": 12,
   "course": "5th Grade Language Arts",
@@ -6844,7 +6844,7 @@
  },
  "novel-wild-robot-protects-ch-61-65": {
   "file": "novel-wild-robot-protects-ch-61-65.html",
-  "title": "The Wild Robot Protects: Chapters 61–65: Rescue Run",
+  "title": "The Wild Robot Protects: Chapters 61\u201365: Rescue Run",
   "kind": "lesson",
   "questions": 12,
   "course": "5th Grade Language Arts",
@@ -6853,7 +6853,7 @@
  },
  "novel-wild-robot-protects-ch-66-70": {
   "file": "novel-wild-robot-protects-ch-66-70.html",
-  "title": "The Wild Robot Protects: Chapters 66–70: Deep Sea Stars",
+  "title": "The Wild Robot Protects: Chapters 66\u201370: Deep Sea Stars",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6862,7 +6862,7 @@
  },
  "novel-wild-robot-protects-ch-71-75": {
   "file": "novel-wild-robot-protects-ch-71-75.html",
-  "title": "The Wild Robot Protects: Chapters 71–75: Clean Tide Express",
+  "title": "The Wild Robot Protects: Chapters 71\u201375: Clean Tide Express",
   "kind": "lesson",
   "questions": 12,
   "course": "5th Grade Language Arts",
@@ -6871,7 +6871,7 @@
  },
  "novel-wild-robot-protects-ch-76-80": {
   "file": "novel-wild-robot-protects-ch-76-80.html",
-  "title": "The Wild Robot Protects: Chapters 76–80: Homecoming Escape",
+  "title": "The Wild Robot Protects: Chapters 76\u201380: Homecoming Escape",
   "kind": "lesson",
   "questions": 12,
   "course": "5th Grade Language Arts",
@@ -6880,7 +6880,7 @@
  },
  "novel-wild-robot-protects-ch-1-5": {
   "file": "novel-wild-robot-protects-ch-1-5.html",
-  "title": "The Wild Robot Protects: Chapters 1–5: Tide Warning",
+  "title": "The Wild Robot Protects: Chapters 1\u20135: Tide Warning",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
@@ -6889,7 +6889,7 @@
  },
  "novel-wild-robot-protects-ch-6-10": {
   "file": "novel-wild-robot-protects-ch-6-10.html",
-  "title": "The Wild Robot Protects: Chapters 6–10: Rescue Tower",
+  "title": "The Wild Robot Protects: Chapters 6\u201310: Rescue Tower",
   "kind": "lesson",
   "questions": 10,
   "course": "5th Grade Language Arts",
