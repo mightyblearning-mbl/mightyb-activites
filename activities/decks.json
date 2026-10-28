@@ -7579,5 +7579,23 @@
     "course": "4th Grade Science",
     "unit": "11",
     "engine": "quest"
+  },
+  "g4sci-9-5-sink-or-float-relative-density": {
+    "file": "g4sci-9-5-sink-or-float-relative-density.html",
+    "title": "9.5 Sink or Float? Relative Density: Splash Lighthouse",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "4th Grade Science",
+    "unit": "9",
+    "engine": "quest"
+  },
+  "g4sci-9-6-matter-is-conserved-in-mixtures": {
+    "file": "g4sci-9-6-matter-is-conserved-in-mixtures.html",
+    "title": "9.6 Matter Is Conserved in Mixtures: Balance Tower",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "4th Grade Science",
+    "unit": "9",
+    "engine": "quest"
   }
 }
