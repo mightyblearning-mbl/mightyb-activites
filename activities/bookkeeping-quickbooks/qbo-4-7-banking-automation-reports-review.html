@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 4 Review: Banking, Automation and Reports Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Unit 4 Review: Banking, Automation and Reports</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-4-7-banking-automation-reports-review",
+ "title": "Unit 4 Review: Banking, Automation and Reports",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "4",
+ "lesson": "4.7",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 4 lessons 4.1-4.6 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Add, match or exclude bank feed items; let trusted rules sort repeats; capture receipts; use recurring templates; balance every journal entry; weigh app risks; and read, customize and deliver reports.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "bank-feed",
+   "q": "A $48 Corner Gas charge is in the bank feed and isn't in Maya's books yet. What should she do?",
+   "choices": [
+    "Undo it",
+    "Add it",
+    "Exclude it",
+    "Match it"
+   ],
+   "answer": "Add it",
+   "hint": "Is it already recorded?",
+   "explain": "Add creates a new transaction for something not yet in the books."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "bank-feed",
+   "q": "Maya already recorded Ana Garcia's $50 cash payment and the $135 bank deposit it was part of. The $135 deposit downloads. What should she do?",
+   "choices": [
+    "Match it to the recorded $135 deposit",
+    "Add it as a new $135 sale",
+    "Add a separate $50 deposit for Ana",
+    "Exclude it from the books"
+   ],
+   "answer": "Match it to the recorded $135 deposit",
+   "hint": "It's already in the books.",
+   "explain": "Match links the download to the transaction already recorded so it isn't counted twice."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "bank-rules",
+   "q": "Which bank rule setup would categorize Maya's weekly gas purchases?",
+   "choices": [
+    "Money out, bank text contains Corner Gas, category Gas and Fuel",
+    "Money in, bank text contains Patel, category Lawn Care Supplies",
+    "Money out, amount equals $35, category Mowing",
+    "Money in, bank text contains Corner Gas, category Gas and Fuel"
+   ],
+   "answer": "Money out, bank text contains Corner Gas, category Gas and Fuel",
+   "hint": "Buying gas is money going out.",
+   "explain": "Gas purchases are money out; the condition finds Corner Gas and the rule assigns the Gas and Fuel category."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "bank-connections",
+   "q": "Which account type can QuickBooks Online connect to for a bank feed?",
+   "choices": [
+    "A credit card account",
+    "A recurring template",
+    "A customer list",
+    "A product list"
+   ],
+   "answer": "A credit card account",
+   "hint": "It's an account at a financial institution.",
+   "explain": "QuickBooks connects to checking, savings, credit card and many loan accounts."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "receipts",
+   "q": "Which is NOT a way to upload a receipt to QuickBooks?",
+   "choices": [
+    "Snap a photo with the mobile app",
+    "Upload a file from your computer",
+    "Add it as a bank rule condition",
+    "Email it to the receipt address"
+   ],
+   "answer": "Add it as a bank rule condition",
+   "hint": "Three ways were taught; this one wasn't.",
+   "explain": "Receipts upload through the mobile app, the receipt email address, or a file from your computer."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "receipts",
+   "q": "A receipt's charge is already in the books from the bank feed. What should Maya do with the uploaded receipt?",
+   "choices": [
+    "Match it to the existing transaction",
+    "Create a new expense from it",
+    "Record it as a journal entry",
+    "Exclude it from the receipts list"
+   ],
+   "answer": "Match it to the existing transaction",
+   "hint": "Avoid counting it twice.",
+   "explain": "Matching attaches the receipt to the existing transaction."
+  },
+  {
+   "id": "q07",
+   "type": "match",
+   "skill": "recurring",
+   "q": "Match each Sunny Day task to the best type of recurring transaction.",
+   "pairs": [
+    [
+     "Mr. Patel's $35 invoice every Monday",
+     "Scheduled"
+    ],
+    [
+     "Loan payment to her aunt that changes each month",
+     "Reminder"
+    ],
+    [
+     "Supply order used only when she runs low",
+     "Unscheduled"
+    ]
+   ],
+   "hint": "Same every time, changes each time, or no schedule?",
+   "explain": "Scheduled creates it automatically, Reminder lets you review and adjust, and Unscheduled waits until you use it."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "journal-entries",
+   "q": "Which journal entry balances?",
+   "choices": [
+    "Debit Lawn Care Supplies $20, credit Gas and Fuel $15",
+    "Debit Lawn Care Supplies $20, debit Gas and Fuel $20",
+    "Debit Lawn Care Supplies $20, credit Gas and Fuel $20",
+    "Credit Lawn Care Supplies $20, credit Gas and Fuel $20"
+   ],
+   "answer": "Debit Lawn Care Supplies $20, credit Gas and Fuel $20",
+   "hint": "Total debits must equal total credits.",
+   "explain": "Only $20 of debits and $20 of credits are equal."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "journal-entries",
+   "q": "Which is required on a journal entry line that uses accounts payable?",
+   "choices": [
+    "A class",
+    "A customer",
+    "A vendor",
+    "A receipt"
+   ],
+   "answer": "A vendor",
+   "hint": "Accounts payable is money you owe vendors.",
+   "explain": "An A/P line needs a vendor; an A/R line needs a customer."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "apps",
+   "q": "What is the main purpose of a QuickBooks app?",
+   "choices": [
+    "To replace the chart of accounts with a simpler list",
+    "To create a second company file for each new customer",
+    "To turn off the Audit Log so changes aren't tracked",
+    "To add features and share information with QuickBooks"
+   ],
+   "answer": "To add features and share information with QuickBooks",
+   "hint": "Think of Maya's scheduling app.",
+   "explain": "Apps connect to QuickBooks to add features and move information automatically."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "apps",
+   "q": "Which is a risk of connecting an app?",
+   "choices": [
+    "It locks your books so no one can edit",
+    "It always lowers your monthly costs",
+    "It makes the bank feed download faster",
+    "It can see, and often change, your books"
+   ],
+   "answer": "It can see, and often change, your books",
+   "hint": "What permission do you give when you connect?",
+   "explain": "Connecting gives the app access to your data, so you must trust the company that makes it."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "financial-reports",
+   "q": "Which report shows income minus expenses for a month?",
+   "choices": [
+    "Balance sheet",
+    "Profit and loss",
+    "Audit Log",
+    "A/R aging summary"
+   ],
+   "answer": "Profit and loss",
+   "hint": "It's also called the income statement.",
+   "explain": "The profit and loss shows income minus expenses over a period."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "financial-reports",
+   "q": "On the balance sheet, assets are $1,294.50 and equity is $1,044.50. What are liabilities?",
+   "choices": [
+    "$250",
+    "$2,339",
+    "$300",
+    "$744.50"
+   ],
+   "answer": "$250",
+   "hint": "Assets = liabilities + equity.",
+   "explain": "$1,294.50 - $1,044.50 = $250, the loan from Maya's aunt."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "money-in-reports",
+   "q": "Mr. Patel's invoice is 45 days past due. In which A/R aging column does it show?",
+   "choices": [
+    "31 - 60",
+    "61 - 90",
+    "1 - 30",
+    "Current"
+   ],
+   "answer": "31 - 60",
+   "hint": "Count the days past due.",
+   "explain": "45 days past due falls between 31 and 60."
+  },
+  {
+   "id": "q15",
+   "type": "match",
+   "skill": "report-tools",
+   "q": "Match each tool to what it does.",
+   "pairs": [
+    [
+     "Audit Log",
+     "Shows who changed what and when"
+    ],
+    [
+     "Dashboard",
+     "Shows key numbers in widgets"
+    ],
+    [
+     "Export to PDF",
+     "Makes a copy that's hard to change"
+    ],
+    [
+     "Save As (save customization)",
+     "Keeps report settings to reuse"
+    ]
+   ],
+   "hint": "Two are places to look, two are things you do to a report.",
+   "explain": "The Audit Log tracks changes, the dashboard shows widgets, PDF makes a fixed copy, and saving keeps your report settings."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "customize-reports",
+   "q": "Maya wants to compare this month's profit and loss to last month's. Which option helps?",
+   "choices": [
+    "Export to Excel",
+    "Compare to previous period",
+    "Header and footer",
+    "Filter by vendor"
+   ],
+   "answer": "Compare to previous period",
+   "hint": "It's one of the quick options at the top of a report.",
+   "explain": "Compare to the previous period adds last period's numbers next to this period's."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

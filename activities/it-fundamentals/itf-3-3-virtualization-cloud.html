@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3 Virtualization and Cloud Computing Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.3 Virtualization and Cloud Computing</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-3-3-virtualization-cloud",
+ "title": "3.3 Virtualization and Cloud Computing",
+ "course": "IT Fundamentals",
+ "unit": "3",
+ "lesson": "3.3",
+ "kind": "lesson",
+ "sourceVideo": "3.3 Virtualization and Cloud Computing (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "A hypervisor runs VMs, each with a guest OS. IaaS rents building blocks, PaaS gives a platform, SaaS is a finished app. On premises, cloud and hybrid describe where things run, and sync is not a backup.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "virtualization",
+   "q": "What is a virtual machine?",
+   "choices": [
+    "A website that stores your files",
+    "A complete computer made of software",
+    "A cable that connects two servers",
+    "A computer with no operating system"
+   ],
+   "answer": "A complete computer made of software",
+   "hint": "It runs inside a real computer.",
+   "explain": "A VM is a software computer running inside a physical host."
+  },
+  {
+   "id": "q02",
+   "type": "match",
+   "skill": "virtualization",
+   "q": "Match each term to its meaning.",
+   "pairs": [
+    [
+     "Host",
+     "The physical computer that runs the VMs"
+    ],
+    [
+     "Hypervisor",
+     "Software that creates and runs VMs"
+    ],
+    [
+     "Guest OS",
+     "The operating system inside a VM"
+    ]
+   ],
+   "hint": "Guest is inside; host is the real machine.",
+   "explain": "The host is physical hardware, the hypervisor manages VMs, and each VM runs a guest OS."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "virtualization",
+   "q": "Dev tests new software in a VM on his laptop. Why is that safer?",
+   "choices": [
+    "The VM is kept apart from his main system",
+    "VMs make his laptop's hardware faster",
+    "The VM deletes his main files first",
+    "VMs never need an operating system"
+   ],
+   "answer": "The VM is kept apart from his main system",
+   "hint": "Think separate box.",
+   "explain": "A VM runs separately from the main system, so problems stay inside it."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "cloud-basics",
+   "q": "Cloud computing means:",
+   "choices": [
+    "Using computing resources over the internet from a provider",
+    "Running every program on your own server closet",
+    "Connecting devices with Bluetooth",
+    "Storing files only on a USB drive"
+   ],
+   "answer": "Using computing resources over the internet from a provider",
+   "hint": "You don't own the equipment.",
+   "explain": "Cloud computing rents servers, storage and software over the internet instead of owning them."
+  },
+  {
+   "id": "q05",
+   "type": "match",
+   "skill": "service-models",
+   "q": "Match each cloud model to what you get.",
+   "pairs": [
+    [
+     "IaaS",
+     "Virtual servers, storage and networking you manage"
+    ],
+    [
+     "PaaS",
+     "A ready platform to build and run your own app"
+    ],
+    [
+     "SaaS",
+     "A finished app you use in a browser"
+    ]
+   ],
+   "hint": "S is for software you just use.",
+   "explain": "IaaS gives building blocks, PaaS gives a platform for your app, SaaS is a finished app."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "service-models",
+   "q": "Dev wants to build a volunteer sign-up app without managing servers or an operating system. Which model fits?",
+   "choices": [
+    "On premises",
+    "SaaS",
+    "IaaS",
+    "PaaS"
+   ],
+   "answer": "PaaS",
+   "hint": "He's building his own app on a ready platform.",
+   "explain": "PaaS provides the platform; the provider manages servers and the OS."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "service-models",
+   "q": "The pantry rents virtual servers and installs its own operating system on them. Which model is that?",
+   "choices": [
+    "SaaS",
+    "Hybrid",
+    "PaaS",
+    "IaaS"
+   ],
+   "answer": "IaaS",
+   "hint": "They rent the basic building blocks.",
+   "explain": "With IaaS you rent infrastructure and manage the OS and apps yourself."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "deployment",
+   "q": "A cloud used by only one organization is a:",
+   "choices": [
+    "Peer-to-peer cloud",
+    "Hybrid cloud",
+    "Private cloud",
+    "Public cloud"
+   ],
+   "answer": "Private cloud",
+   "hint": "Not shared with other customers.",
+   "explain": "A private cloud is dedicated to one organization; a public cloud is shared."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "deployment",
+   "q": "The pantry keeps its check-in computer on site and moves its files to the cloud. This is:",
+   "choices": [
+    "Public cloud only",
+    "SaaS only",
+    "Hybrid",
+    "On premises only"
+   ],
+   "answer": "Hybrid",
+   "hint": "It's a mix.",
+   "explain": "Hybrid mixes on-premises equipment with cloud services."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "storage-sync",
+   "q": "A volunteer deletes the schedule from a synced folder on her laptop. What happens?",
+   "choices": [
+    "The cloud makes a new copy automatically",
+    "It's deleted on every synced device",
+    "Only the laptop copy is deleted",
+    "The file moves to a USB drive"
+   ],
+   "answer": "It's deleted on every synced device",
+   "hint": "Sync copies mistakes, too.",
+   "explain": "Sync keeps devices the same, so deletions spread. Many services keep a trash folder for a while, but keep a separate backup."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "cloud-tradeoffs",
+   "q": "Which is a trade-off of moving to the cloud?",
+   "choices": [
+    "You must buy a new server",
+    "Files can only be opened in one place",
+    "You need a working internet connection",
+    "Nobody can share files anymore"
+   ],
+   "answer": "You need a working internet connection",
+   "hint": "What happens when the internet goes out?",
+   "explain": "Cloud services need internet, cost money monthly, and require trusting the provider."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

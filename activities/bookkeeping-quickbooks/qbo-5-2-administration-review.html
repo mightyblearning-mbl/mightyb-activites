@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain 1 Review: QuickBooks Online Administration Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Domain 1 Review: QuickBooks Online Administration</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-5-2-administration-review",
+ "title": "Domain 1 Review: QuickBooks Online Administration",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "5",
+ "lesson": "5.2",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 1 and Unit 4 lessons (Mighty B scripts); QBCU objectives 1.1-1.6",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Know the editions and user roles, cash vs. accrual, close the books, classes, locations and projects, automation, lists and the Chart of Accounts, recurring transactions, journal entries and apps.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "1.1.1",
+   "q": "Match each QuickBooks Online edition to what it adds.",
+   "pairs": [
+    [
+     "Simple Start",
+     "The basics for one user"
+    ],
+    [
+     "Essentials",
+     "Bill management and more users"
+    ],
+    [
+     "Plus",
+     "Projects, classes, locations and inventory"
+    ],
+    [
+     "Advanced",
+     "Custom user roles for larger companies"
+    ]
+   ],
+   "hint": "The exam is built on Plus.",
+   "explain": "Each edition adds features. Plus adds project, class, location and inventory tracking; Advanced adds custom roles and more users."
+  },
+  {
+   "id": "q02",
+   "type": "match",
+   "skill": "1.1.4",
+   "q": "Match each user role to what it can do.",
+   "pairs": [
+    [
+     "Primary admin",
+     "Full access, including the subscription"
+    ],
+    [
+     "Company admin",
+     "Almost everything, including adding users"
+    ],
+    [
+     "Reports only",
+     "Views reports but can't enter transactions"
+    ],
+    [
+     "Time tracking only",
+     "Enters only their own hours"
+    ]
+   ],
+   "hint": "Only one person can be the primary admin.",
+   "explain": "Give each person the least access they need for their job."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "1.1.4",
+   "q": "Maya's aunt lent Sunny Day $250 and wants to look at reports to see how the business is doing. She shouldn't change anything. Which role fits?",
+   "choices": [
+    "Time tracking only",
+    "Standard user with all access",
+    "Company admin",
+    "Reports only"
+   ],
+   "answer": "Reports only",
+   "hint": "She only needs to look.",
+   "explain": "A reports-only user can view reports but can't enter or change transactions."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "1.1.3",
+   "q": "Besides importing a QuickBooks Desktop file, how can a business bring its old customer list into QuickBooks Online?",
+   "choices": [
+    "Type it into the Audit Log",
+    "Import it from a spreadsheet file",
+    "Attach it to a bank rule",
+    "Copy it into a journal entry"
+   ],
+   "answer": "Import it from a spreadsheet file",
+   "hint": "Think of a file with rows and columns.",
+   "explain": "Customers, vendors, products and services, and accounts can be imported from a spreadsheet."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "1.2.2",
+   "q": "The books are closed through December 31. Someone tries to edit a transaction dated December 15. What can QuickBooks require first?",
+   "choices": [
+    "Written approval from Intuit support first",
+    "A warning, plus the closing password if one was set",
+    "A new subscription for the closed year",
+    "Nothing, because closed periods can never reopen"
+   ],
+   "answer": "A warning, plus the closing password if one was set",
+   "hint": "Closing the books protects old transactions but can be set to allow changes.",
+   "explain": "Close the books shows a warning and can require a password before changes on or before the closing date."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "1.2.3",
+   "q": "In May, Maya invoices Mr. Patel for Mowing ($35) and Leaf Cleanup ($60). He pays in June. On an accrual-basis Profit and Loss, where does the income show?",
+   "choices": [
+    "$95 in June",
+    "$0 until it is deposited",
+    "$95 in May",
+    "$35 in May and $60 in June"
+   ],
+   "answer": "$95 in May",
+   "hint": "Accrual counts income when it's earned.",
+   "explain": "$35 + $60 = $95, earned in May, so accrual shows $95 in May. Cash basis would show it in June."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "1.2.4",
+   "q": "Craig's Design and Landscaping opens a second office across town and wants a separate profit report for each office. Which feature fits best?",
+   "choices": [
+    "Sub-customers",
+    "Class tracking",
+    "Tags",
+    "Location tracking"
+   ],
+   "answer": "Location tracking",
+   "hint": "Each office is a physical place.",
+   "explain": "Locations track income and expenses by place, like an office, store or region."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "1.2.4",
+   "q": "Maya wants to know whether one big spring cleanup for Mr. Patel made money after she paid Jordan. Which feature fits best?",
+   "choices": [
+    "Payment methods",
+    "Recurring transactions",
+    "Locations",
+    "Projects"
+   ],
+   "answer": "Projects",
+   "hint": "She cares about one job's profit.",
+   "explain": "Projects collect a job's income and costs in one place so you can see its profit."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "1.2.6",
+   "q": "What does the automation setting \"Pre-fill forms with previously entered content\" do?",
+   "choices": [
+    "Copies every new invoice into a recurring template",
+    "Applies open credits to that customer's next invoice",
+    "Adds any unbilled time to that customer's next invoice",
+    "Fills in a new form with what you used last time for that name"
+   ],
+   "answer": "Fills in a new form with what you used last time for that name",
+   "hint": "Think about typing the same details again and again.",
+   "explain": "Pre-fill uses what you entered last time for that customer or vendor to fill a new form."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "1.3.3",
+   "q": "Maya wants to record whether each customer paid by cash, check or card. Which list holds these choices?",
+   "choices": [
+    "Payment methods",
+    "Classes",
+    "Product categories",
+    "Terms"
+   ],
+   "answer": "Payment methods",
+   "hint": "The list is named for how people pay.",
+   "explain": "The Payment methods list holds choices like cash, check and credit card."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "1.3.4",
+   "q": "Maya stops working for a customer who has old invoices. What happens when she deletes the customer?",
+   "choices": [
+    "The customer and all of the past invoices are erased",
+    "The customer is changed into a vendor with the same name",
+    "The customer's open balance moves into owner's equity",
+    "The customer is made inactive, and past transactions stay"
+   ],
+   "answer": "The customer is made inactive, and past transactions stay",
+   "hint": "QuickBooks protects your history.",
+   "explain": "Names with transactions are made inactive, not erased, so old reports stay correct."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "1.3.5",
+   "q": "Maya wants a sub-account called Mower Gas under her Gas and Fuel expense account. What must be true?",
+   "choices": [
+    "It must be created by an accountant user",
+    "It must have its own bank connection",
+    "It must be a fixed asset account",
+    "It must be the same account type as Gas and Fuel"
+   ],
+   "answer": "It must be the same account type as Gas and Fuel",
+   "hint": "Sub-accounts belong to the same family as the parent.",
+   "explain": "A sub-account has to be the same account type as its parent account."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "1.4.2",
+   "q": "Maya bills Ana Garcia for leaf cleanup only when leaves fall, with no set date. Which recurring type fits?",
+   "choices": [
+    "Daily",
+    "Reminder",
+    "Unscheduled",
+    "Scheduled"
+   ],
+   "answer": "Unscheduled",
+   "hint": "There's no schedule at all.",
+   "explain": "An unscheduled template is saved and used only when you need it. Scheduled creates it automatically; reminder nudges you on a schedule."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "1.5.2",
+   "q": "Maya's aunt's $250 loan was recorded as income by mistake. Which journal entry fixes it?",
+   "choices": [
+    "Debit the income account $250, credit Business Checking $250",
+    "Debit the loan account $250, credit the income account $250",
+    "Debit the income account $250, credit the loan account $250",
+    "Debit Business Checking $250, credit the loan account $250"
+   ],
+   "answer": "Debit the income account $250, credit the loan account $250",
+   "hint": "Take the $250 out of income and put it in the liability.",
+   "explain": "Debiting income lowers it, and crediting the loan account raises the liability. Business Checking was already right."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "1.5.1",
+   "q": "A journal entry has debits of $300 and credits of $250. What happens when you try to save it?",
+   "choices": [
+    "QuickBooks turns it into a bill",
+    "QuickBooks moves $50 to Business Checking",
+    "QuickBooks saves it and fixes the difference",
+    "QuickBooks won't save it until debits equal credits"
+   ],
+   "answer": "QuickBooks won't save it until debits equal credits",
+   "hint": "Every journal entry must balance.",
+   "explain": "Total debits must equal total credits for a journal entry to save."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "1.6.3",
+   "q": "Which is a benefit of connecting an app to QuickBooks Online?",
+   "choices": [
+    "The app can never see any of the company's data",
+    "Every app is always free to connect and use",
+    "The app replaces the Chart of Accounts for you",
+    "Data flows into QuickBooks, so there's less typing"
+   ],
+   "answer": "Data flows into QuickBooks, so there's less typing",
+   "hint": "Think about saving time.",
+   "explain": "Apps can sync data and add features. The trade-offs are cost and giving the app access to your data."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

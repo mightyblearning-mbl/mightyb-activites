@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.1 Bank Connections, Bank Feeds and Rules Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.1 Bank Connections, Bank Feeds and Rules</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-4-1-bank-feeds-and-rules",
+ "title": "4.1 Bank Connections, Bank Feeds and Rules",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "4",
+ "lesson": "4.1",
+ "kind": "lesson",
+ "sourceVideo": "4.1 Bank Connections, Bank Feeds and Rules (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Connect accounts to bring transactions into the bank feed, then add new ones, match recorded ones, exclude ones that don't belong, and let trusted bank rules do repeat sorting.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "bank-connections",
+   "q": "What does a bank connection do?",
+   "choices": [
+    "Moves money from Maya's bank to her customers",
+    "Prints a paper bank statement each month",
+    "Records every transaction in the books with no review",
+    "Downloads transactions from the bank into QuickBooks"
+   ],
+   "answer": "Downloads transactions from the bank into QuickBooks",
+   "hint": "Think about what shows up in the bank feed.",
+   "explain": "A bank connection is a secure link that downloads transactions so you can review them in the bank feed."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "bank-connections",
+   "q": "Which kind of account can QuickBooks Online connect to?",
+   "choices": [
+    "A customer's bank account",
+    "A credit card account",
+    "A vendor's bank account",
+    "A savings goal"
+   ],
+   "answer": "A credit card account",
+   "hint": "It has to be an account at a financial institution.",
+   "explain": "QuickBooks connects to checking, savings and credit card accounts, and many loans and lines of credit."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "bank-connections",
+   "q": "Maya's small credit union can't connect to QuickBooks. What can she do?",
+   "choices": [
+    "Turn on the Audit Log so transactions download",
+    "Make a bank rule that connects the account for her",
+    "Download a file of transactions from the bank's website and upload it",
+    "Exclude every transaction from that account each month"
+   ],
+   "answer": "Download a file of transactions from the bank's website and upload it",
+   "hint": "There's a way to bring transactions in without a live connection.",
+   "explain": "If a bank can't connect, you can upload a file of transactions you download from the bank's website."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "bank-connections",
+   "q": "Which is a benefit of connecting a bank account?",
+   "choices": [
+    "Fewer typos, because amounts come straight from the bank",
+    "Customers can see Maya's bank balance online",
+    "QuickBooks no longer needs anyone to review transactions",
+    "The bank pays Maya's bills for her automatically"
+   ],
+   "answer": "Fewer typos, because amounts come straight from the bank",
+   "hint": "Remember Maya typing eighteen dollars as eighty.",
+   "explain": "Connecting saves time, cuts typos, keeps books up to date and helps you spot strange charges."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "bank-feed",
+   "q": "Maya's $18.40 Corner Gas purchase is in the bank feed and is not in her books yet. What should she do?",
+   "choices": [
+    "Leave it on the Pending tab so it never posts to the books",
+    "Exclude it so it stays out of QuickBooks and off her reports",
+    "Match it to Mr. Patel's $70 invoice payment already in the books",
+    "Add it with the payee Corner Gas and her Gas and Fuel category"
+   ],
+   "answer": "Add it with the payee Corner Gas and her Gas and Fuel category",
+   "hint": "Is this purchase already recorded?",
+   "explain": "Add creates a new transaction for something that isn't in the books yet.",
+   "hints": {
+    "Exclude it so it stays out of QuickBooks and off her reports": "It's a real business expense, so it belongs in the books."
+   }
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "bank-feed",
+   "q": "The bank feed downloaded the same $35 deposit twice by mistake. Maya already matched the first one. What should she do with the second?",
+   "choices": [
+    "Make a rule for it",
+    "Match it again",
+    "Exclude it",
+    "Add it"
+   ],
+   "answer": "Exclude it",
+   "hint": "The second copy doesn't belong in the books.",
+   "explain": "Exclude is for transactions that don't belong in the books, like a duplicate download."
+  },
+  {
+   "id": "q07",
+   "type": "match",
+   "skill": "bank-feed",
+   "q": "Match each bank feed tab to what you find there.",
+   "pairs": [
+    [
+     "Pending (older: For review)",
+     "Downloaded transactions waiting for you"
+    ],
+    [
+     "Posted (older: Categorized)",
+     "Transactions you added or matched"
+    ],
+    [
+     "Excluded",
+     "Transactions you chose to leave out"
+    ]
+   ],
+   "hint": "Transactions start on one tab and move after you deal with them.",
+   "explain": "Transactions start on Pending (For review on older screens), move to Posted (Categorized on older screens) after you post or match them, and go to Excluded if you leave them out."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "bank-rules",
+   "q": "What does a bank rule do?",
+   "choices": [
+    "Deletes old transactions from the bank feed",
+    "Decides which bank Maya is allowed to use",
+    "Categorizes transactions that meet conditions you set",
+    "Stops customers from paying with a card"
+   ],
+   "answer": "Categorizes transactions that meet conditions you set",
+   "hint": "Think about Maya's weekly Corner Gas purchases.",
+   "explain": "A bank rule tells QuickBooks how to categorize transactions that fit its conditions, such as bank text or amount."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "bank-rules",
+   "q": "A transaction fits two of Maya's rules. Rule 1 says Lawn Care Supplies and Rule 3 says Gas and Fuel. What happens?",
+   "choices": [
+    "QuickBooks splits the amount between both rules",
+    "QuickBooks uses Rule 1 because it's higher on the list",
+    "QuickBooks uses Rule 3 because it's newer",
+    "QuickBooks deletes the transaction from the feed"
+   ],
+   "answer": "QuickBooks uses Rule 1 because it's higher on the list",
+   "hint": "Rules work in order.",
+   "explain": "When more than one rule fits, QuickBooks uses the one highest on the list. You can change a rule's priority number to change the order."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "bank-rules",
+   "q": "When should Maya turn on auto-post (automatically confirming transactions) for a rule?",
+   "choices": [
+    "For every rule, so she never has to look",
+    "Only for rules about customer deposits",
+    "Only for a rule she trusts to be right every time",
+    "Never, because rules can't confirm anything"
+   ],
+   "answer": "Only for a rule she trusts to be right every time",
+   "hint": "Auto-posted transactions skip the review step.",
+   "explain": "Auto-post adds transactions with no clicks, so use it only for rules you trust and check the Posted tab now and then."
+  },
+  {
+   "id": "q11",
+   "type": "match",
+   "skill": "bank-feed",
+   "q": "Match each bank feed transaction to the best action.",
+   "pairs": [
+    [
+     "A new gas purchase not yet in the books",
+     "Add"
+    ],
+    [
+     "A deposit for a payment already recorded",
+     "Match"
+    ],
+    [
+     "A second copy of the same download",
+     "Exclude"
+    ]
+   ],
+   "hint": "Ask: is it new, already recorded, or not supposed to be there?",
+   "explain": "New items are added, already-recorded items are matched, and duplicates are excluded."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 3 Review: Networks and the Cloud Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Unit 3 Review: Networks and the Cloud</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-3-4-networks-and-the-cloud-review",
+ "title": "Unit 3 Review: Networks and the Cloud",
+ "course": "IT Fundamentals",
+ "unit": "3",
+ "lesson": "3.4",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 3 lessons 3.1-3.3 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "You can explain how a home network reaches the internet, compare Wi-Fi bands and security, and describe VMs, cloud models and where things run. Next: the Unit 3 Test.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "lan-wan",
+   "q": "A school's network inside one building is a:",
+   "choices": [
+    "WAN",
+    "LAN",
+    "SSID",
+    "ISP"
+   ],
+   "answer": "LAN",
+   "hint": "Small area.",
+   "explain": "A LAN covers a small area like one building."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "network-devices",
+   "q": "Which device connects the home to the internet service provider?",
+   "choices": [
+    "Switch",
+    "Cable tester",
+    "Access point",
+    "Modem"
+   ],
+   "answer": "Modem",
+   "hint": "It turns the ISP's signal into data.",
+   "explain": "The modem connects to the ISP; the router then directs traffic."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "network-devices",
+   "q": "In most homes, which jobs does the single box called a router do?",
+   "choices": [
+    "Only connecting wired devices",
+    "Modem, satellite dish and hypervisor",
+    "Router, switch, access point and firewall",
+    "DNS server for the whole internet"
+   ],
+   "answer": "Router, switch, access point and firewall",
+   "hint": "It's an all-in-one box.",
+   "explain": "Home routers usually combine router, switch, access point and firewall."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "client-server",
+   "q": "Two phones share a photo directly with no central server. This is:",
+   "choices": [
+    "IaaS",
+    "A WAN",
+    "Client/server",
+    "Peer-to-peer"
+   ],
+   "answer": "Peer-to-peer",
+   "hint": "Equals sharing directly.",
+   "explain": "In peer-to-peer, devices share directly without a central server."
+  },
+  {
+   "id": "q05",
+   "type": "match",
+   "skill": "net-identifiers",
+   "q": "Match each service or ID to its job.",
+   "pairs": [
+    [
+     "DHCP",
+     "Hands out IP addresses"
+    ],
+    [
+     "DNS",
+     "Turns names into IP addresses"
+    ],
+    [
+     "MAC address",
+     "Hardware ID for a network adapter"
+    ],
+    [
+     "Port 443",
+     "Secure web browsing"
+    ]
+   ],
+   "hint": "DHCP and DNS both start with D; one hands out, one looks up.",
+   "explain": "DHCP assigns addresses, DNS looks up names, a MAC address identifies the adapter, port 443 is HTTPS."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "ipv6",
+   "q": "Which is true of IPv6?",
+   "choices": [
+    "It uses longer addresses written in hexadecimal",
+    "It only works over Bluetooth",
+    "It uses four numbers from 0 to 255",
+    "It has fewer addresses than IPv4"
+   ],
+   "answer": "It uses longer addresses written in hexadecimal",
+   "hint": "It was made to fix running out of addresses.",
+   "explain": "IPv6 addresses are much longer and use hexadecimal with colons."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "wired",
+   "q": "Fiber connections on business equipment often plug into a small module called:",
+   "choices": [
+    "A hotspot",
+    "An SFP",
+    "An RJ45",
+    "An SSID"
+   ],
+   "answer": "An SFP",
+   "hint": "Small form-factor pluggable.",
+   "explain": "SFP stands for small form-factor pluggable."
+  },
+  {
+   "id": "q08",
+   "type": "match",
+   "skill": "isp-types",
+   "q": "Match each internet type to its description.",
+   "pairs": [
+    [
+     "Fiber optic",
+     "Pulses of light through glass"
+    ],
+    [
+     "Cable",
+     "Coaxial TV line shared with neighbors"
+    ],
+    [
+     "DSL",
+     "Telephone lines, slower with distance"
+    ],
+    [
+     "Satellite",
+     "Works almost anywhere with a view of the sky"
+    ],
+    [
+     "Cellular",
+     "Uses 4G and 5G phone networks"
+    ]
+   ],
+   "hint": "Think about what each one travels over.",
+   "explain": "Fiber uses light, cable uses coax, DSL uses phone lines, satellite needs the sky, cellular uses phone networks."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "isp-types",
+   "q": "Fixed wireless internet, also called RF, works by:",
+   "choices": [
+    "Aiming an antenna on the house at a provider's tower",
+    "Sharing a phone's data over Bluetooth",
+    "Sending signals through telephone lines",
+    "Running fiber to every room"
+   ],
+   "answer": "Aiming an antenna on the house at a provider's tower",
+   "hint": "RF means radio frequency.",
+   "explain": "Fixed wireless uses an antenna aimed at a nearby provider tower."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "wifi-standards",
+   "q": "Which standard is Wi-Fi 5?",
+   "choices": [
+    "802.11ac",
+    "802.11g",
+    "802.11ax",
+    "802.11n"
+   ],
+   "answer": "802.11ac",
+   "hint": "n is 4, ax is 6.",
+   "explain": "802.11ac is Wi-Fi 5."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "bands",
+   "q": "Which statement about Wi-Fi bands is true?",
+   "choices": [
+    "5 GHz is faster than 2.4 GHz but has a shorter range",
+    "6 GHz works with every Wi-Fi device ever made",
+    "2.4 GHz is the fastest and least crowded band",
+    "All bands reach exactly the same distance"
+   ],
+   "answer": "5 GHz is faster than 2.4 GHz but has a shorter range",
+   "hint": "Think about speed and distance together.",
+   "explain": "Higher bands are faster with shorter range; 6 GHz needs Wi-Fi 6E or newer."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "weak-signal",
+   "q": "Wi-Fi gets weaker passing through a fish tank and two walls. This is called:",
+   "choices": [
+    "Attenuation",
+    "Latency",
+    "Virtualization",
+    "Interference"
+   ],
+   "answer": "Attenuation",
+   "hint": "The signal fades as it travels.",
+   "explain": "Attenuation is the weakening of a signal through distance and materials."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "wifi-security",
+   "q": "A café network shows no lock icon and needs no password. It is:",
+   "choices": [
+    "Using a pre-shared key",
+    "Open, and the Wi-Fi doesn't encrypt your data",
+    "Using WPA3, the strongest setting",
+    "A private cloud"
+   ],
+   "answer": "Open, and the Wi-Fi doesn't encrypt your data",
+   "hint": "No password means no Wi-Fi encryption.",
+   "explain": "An open network has no password and no Wi-Fi encryption."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "short-range",
+   "q": "Wireless earbuds usually connect to a phone with:",
+   "choices": [
+    "DSL",
+    "NFC",
+    "Bluetooth",
+    "Satellite"
+   ],
+   "answer": "Bluetooth",
+   "hint": "Short range, after pairing.",
+   "explain": "Bluetooth connects nearby devices like earbuds, usually up to about 30 feet."
+  },
+  {
+   "id": "q15",
+   "type": "match",
+   "skill": "virtualization",
+   "q": "Match each term to the right description.",
+   "pairs": [
+    [
+     "Hypervisor",
+     "Creates and runs VMs"
+    ],
+    [
+     "Guest OS",
+     "Runs inside a VM"
+    ],
+    [
+     "SaaS",
+     "A finished app in a browser"
+    ],
+    [
+     "Hybrid",
+     "A mix of on-premises and cloud"
+    ]
+   ],
+   "hint": "Two are virtualization terms, two are cloud terms.",
+   "explain": "The hypervisor runs VMs, the guest OS is inside a VM, SaaS is a finished app, hybrid mixes on-premises and cloud."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "deployment",
+   "q": "On premises means:",
+   "choices": [
+    "Files sync to every phone",
+    "The provider runs everything in its data center",
+    "Many customers share the same servers",
+    "The equipment is in your own building"
+   ],
+   "answer": "The equipment is in your own building",
+   "hint": "Premises means your property.",
+   "explain": "On premises means you own and maintain the equipment on site."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

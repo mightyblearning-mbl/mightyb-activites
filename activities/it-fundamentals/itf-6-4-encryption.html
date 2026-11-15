@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.4 Encryption Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 6.4 Encryption</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-6-4-encryption",
+ "title": "6.4 Encryption",
+ "course": "IT Fundamentals",
+ "unit": "6",
+ "lesson": "6.4",
+ "kind": "lesson",
+ "sourceVideo": "6.4 Encryption (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Encryption turns plaintext into ciphertext with a key. Protect data at rest with full-disk and phone encryption, data in transit with HTTPS, VPNs and encrypted apps, and home Wi-Fi with WPA3 or WPA2.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "encryption-terms",
+   "q": "Match each term to its meaning.",
+   "pairs": [
+    [
+     "Plaintext",
+     "Readable data"
+    ],
+    [
+     "Ciphertext",
+     "Scrambled data"
+    ],
+    [
+     "Key",
+     "Secret value that locks and unlocks data"
+    ],
+    [
+     "Certificate",
+     "Digital ID that proves a site's identity"
+    ]
+   ],
+   "hint": "Plain = readable; cipher = scrambled.",
+   "explain": "Plaintext is readable, ciphertext is scrambled, a key locks and unlocks, and a certificate proves identity."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "encryption-basics",
+   "q": "A thief steals an encrypted file but doesn't have the key. What does the thief see?",
+   "choices": [
+    "A copy of the key inside the file",
+    "Only the file's first page",
+    "Ciphertext that looks like nonsense",
+    "The original readable file"
+   ],
+   "answer": "Ciphertext that looks like nonsense",
+   "hint": "Without the key, the data stays scrambled.",
+   "explain": "Encrypted data is unreadable ciphertext without the right key."
+  },
+  {
+   "id": "q03",
+   "type": "match",
+   "skill": "rest-transit",
+   "q": "Match each example to how its data is protected.",
+   "pairs": [
+    [
+     "Full-disk encryption on a laptop",
+     "Encrypted at rest"
+    ],
+    [
+     "HTTPS while shopping online",
+     "Encrypted in transit"
+    ],
+    [
+     "A plain shared folder with no encryption",
+     "Not encrypted"
+    ]
+   ],
+   "hint": "Is the data sitting still or moving?",
+   "explain": "Full-disk encryption protects stored data; HTTPS protects moving data; a folder with no encryption isn't protected."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "data-at-rest",
+   "q": "Mom's laptop is stolen, but it has full-disk encryption. What does that mean?",
+   "choices": [
+    "The files are deleted the moment it is stolen",
+    "The laptop will call the police automatically",
+    "The thief can't read the files without the password or key",
+    "The thief can read the files but can't change them"
+   ],
+   "answer": "The thief can't read the files without the password or key",
+   "hint": "Full-disk encryption protects everything on the drive.",
+   "explain": "Without the key, the drive's data stays ciphertext."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "mobile-encryption",
+   "q": "What makes a phone's built-in storage encryption protect you?",
+   "choices": [
+    "Setting a screen lock",
+    "Joining public Wi-Fi",
+    "Turning on Bluetooth",
+    "Installing a new game"
+   ],
+   "answer": "Setting a screen lock",
+   "hint": "It's something you should always do anyway.",
+   "explain": "Most modern phones encrypt their storage automatically, and your screen lock is what protects the key."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "https",
+   "q": "A website shows HTTPS and a lock icon. What does that prove?",
+   "choices": [
+    "Your password is strong",
+    "The website has no malware",
+    "The website is honest",
+    "The connection is encrypted"
+   ],
+   "answer": "The connection is encrypted",
+   "hint": "Scam sites can use HTTPS too.",
+   "explain": "HTTPS means the connection is private. It doesn't prove the site is trustworthy."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "certificates",
+   "q": "Your browser shows a warning that a site's certificate is invalid. What should you do?",
+   "choices": [
+    "Turn off your firewall and reload it",
+    "Click past the warning to keep going",
+    "Enter your password to fix the warning",
+    "Close the page and don't click past it"
+   ],
+   "answer": "Close the page and don't click past it",
+   "hint": "The browser can't confirm who the site really is.",
+   "explain": "An invalid certificate may be expired or for a different site. Leave and ask a trusted adult if unsure."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "email-transit",
+   "q": "Why shouldn't you send a password by email?",
+   "choices": [
+    "Email deletes any message with numbers in it",
+    "Email is not always encrypted from end to end",
+    "Email turns plaintext into a security key",
+    "Email can only be read on public Wi-Fi"
+   ],
+   "answer": "Email is not always encrypted from end to end",
+   "hint": "Think about who might see it along the way.",
+   "explain": "Email is often encrypted as it travels, but not always end to end."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "wifi-security",
+   "q": "Which Wi-Fi setting should the Riveras choose if all their devices support it?",
+   "choices": [
+    "WPA2",
+    "WPA",
+    "Open",
+    "WPA3"
+   ],
+   "answer": "WPA3",
+   "hint": "Pick the newest standard.",
+   "explain": "WPA3 is the newest and strongest; WPA is outdated; open has no encryption."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "wifi-security",
+   "q": "Sofia renames the network so it doesn't show the family's name. What setting did she change?",
+   "choices": [
+    "The certificate",
+    "The product key",
+    "The firewall",
+    "The SSID"
+   ],
+   "answer": "The SSID",
+   "hint": "It's the network's name.",
+   "explain": "The SSID is the Wi-Fi network's name. A neutral name shares less about the family."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

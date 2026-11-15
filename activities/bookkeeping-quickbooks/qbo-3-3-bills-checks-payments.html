@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3 Bills, Checks and Bill Payments Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.3 Bills, Checks and Bill Payments</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-3-3-bills-checks-payments",
+ "title": "3.3 Bills, Checks and Bill Payments",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "3",
+ "lesson": "3.3",
+ "kind": "lesson",
+ "sourceVideo": "3.3 Bills, Checks and Bill Payments (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Pay later with a bill and a bill payment, or pay now with an expense or check. Never pay an entered bill with a regular check, and remember a purchase order is non-posting.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "workflow",
+   "q": "Maya gets a bill today and will pay it in 30 days. What should she enter first?",
+   "choices": [
+    "A bank deposit",
+    "An expense",
+    "A bill",
+    "A check"
+   ],
+   "answer": "A bill",
+   "hint": "This is the pay-later path.",
+   "explain": "Pay later: enter the bill now, then record a bill payment when you pay."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "effects-bill",
+   "q": "Maya enters a $60 bill for supplies. What happens?",
+   "choices": [
+    "Cash down $60, Lawn Care Supplies up $60",
+    "Cash down $60, accounts payable down $60",
+    "Lawn Care Supplies up $60, accounts payable up $60",
+    "Nothing changes until she pays"
+   ],
+   "answer": "Lawn Care Supplies up $60, accounts payable up $60",
+   "hint": "No cash moves when you enter a bill.",
+   "explain": "A bill raises the expense and raises accounts payable."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "effects-payment",
+   "q": "Maya pays the $60 bill with the pay bills form. What happens?",
+   "choices": [
+    "Lawn Care Supplies up $60 again",
+    "Cash down $60, Lawn Care Supplies up $60",
+    "Cash down $60, accounts payable down $60",
+    "Accounts payable up $60"
+   ],
+   "answer": "Cash down $60, accounts payable down $60",
+   "hint": "The expense was already recorded with the bill.",
+   "explain": "A bill payment lowers cash and lowers accounts payable. It doesn't touch the expense."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "check-vs-billpay",
+   "q": "Maya entered a $60 bill, then paid it with a regular check coded to Lawn Care Supplies. What went wrong?",
+   "choices": [
+    "Accounts payable is now negative $60 and the bill is closed",
+    "Nothing is wrong; a check is the right way to pay a bill",
+    "Lawn Care Supplies is $120 and the bill is still open",
+    "The bill was deleted and the check replaced it"
+   ],
+   "answer": "Lawn Care Supplies is $120 and the bill is still open",
+   "hint": "Count how many times the expense was recorded.",
+   "explain": "The check recorded the expense a second time and didn't pay off the bill."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "check",
+   "q": "Maya pays Jordan $120 with check 101. There is no bill. Which form does she use?",
+   "choices": [
+    "Vendor credit",
+    "Purchase order",
+    "Pay bills",
+    "Check"
+   ],
+   "answer": "Check",
+   "hint": "There's nothing to pay off, and she's writing a paper check.",
+   "explain": "With no bill, a check records the payment and the expense in one step."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "effects-check",
+   "q": "What does check 101 to Jordan for $120 do?",
+   "choices": [
+    "Cash down $120, accounts payable down $120",
+    "Contract Labor down $120, cash up $120",
+    "Accounts payable up $120, Contract Labor up $120",
+    "Cash down $120, Contract Labor up $120"
+   ],
+   "answer": "Cash down $120, Contract Labor up $120",
+   "hint": "A direct payment does both jobs at once.",
+   "explain": "A check for a direct payment lowers cash and raises the expense."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "types",
+   "q": "Which money-out form does NOT change any account balances?",
+   "choices": [
+    "Purchase order",
+    "Expense",
+    "Check",
+    "Bill"
+   ],
+   "answer": "Purchase order",
+   "hint": "It's an order sent before you buy.",
+   "explain": "A purchase order is non-posting. It doesn't change balances."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "cash-basis",
+   "q": "On a cash-basis report, when does the expense from a bill show up?",
+   "choices": [
+    "On the bill's due date",
+    "Never",
+    "When the bill is entered",
+    "When the bill is paid"
+   ],
+   "answer": "When the bill is paid",
+   "hint": "Cash basis follows the money.",
+   "explain": "Cash basis records expenses when money goes out, so the bill's expense appears when it's paid."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "check-vs-billpay",
+   "q": "Maya starts a check to a vendor that has an open bill. What does QuickBooks usually do?",
+   "choices": [
+    "Turns the open bill into a purchase order for later",
+    "Shows the open bill on the side so she can apply the check",
+    "Blocks the check until the open bill is deleted",
+    "Deletes the open bill and keeps only the check"
+   ],
+   "answer": "Shows the open bill on the side so she can apply the check",
+   "hint": "QuickBooks tries to help you avoid the double-expense mistake.",
+   "explain": "QuickBooks shows open bills for that vendor so the check can pay the bill."
+  },
+  {
+   "id": "q10",
+   "type": "match",
+   "skill": "effects",
+   "q": "Match each transaction to its effect.",
+   "pairs": [
+    [
+     "Bill",
+     "Expense up, accounts payable up"
+    ],
+    [
+     "Bill payment",
+     "Cash down, accounts payable down"
+    ],
+    [
+     "Check for a direct purchase",
+     "Cash down, expense up"
+    ],
+    [
+     "Purchase order",
+     "No account balances change"
+    ]
+   ],
+   "hint": "Ask: does cash move? Does accounts payable move?",
+   "explain": "Bills raise A/P, bill payments lower it, direct checks skip A/P, and purchase orders don't post."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

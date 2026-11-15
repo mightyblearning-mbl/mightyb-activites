@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.4 Card Expenses and Vendor Credits Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.4 Card Expenses and Vendor Credits</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-3-4-card-expenses-credits",
+ "title": "3.4 Card Expenses and Vendor Credits",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "3",
+ "lesson": "3.4",
+ "kind": "lesson",
+ "sourceVideo": "3.4 Card Expenses and Vendor Credits (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "The payment account decides what changes. Match bank feed items you already entered, apply vendor credits to the next bill, and record refunds so the expense goes back down.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "debit-card",
+   "q": "Maya pays $18 for gas with her business debit card. What payment account does she choose on the expense?",
+   "choices": [
+    "Gas and Fuel",
+    "Credit card",
+    "Accounts payable",
+    "Business Checking"
+   ],
+   "answer": "Business Checking",
+   "hint": "A debit card takes money straight from the bank.",
+   "explain": "Debit card purchases come out of the bank account, so the payment account is Business Checking."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "debit-card",
+   "q": "What does the $18 debit card expense do?",
+   "choices": [
+    "Credit card balance up $18",
+    "Cash up $18, Gas and Fuel down $18",
+    "Cash down $18, Gas and Fuel up $18",
+    "Accounts payable up $18"
+   ],
+   "answer": "Cash down $18, Gas and Fuel up $18",
+   "hint": "Money left the bank to pay for gas.",
+   "explain": "The bank goes down and the Gas and Fuel expense goes up."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "credit-card",
+   "q": "A credit card account in QuickBooks is a:",
+   "choices": [
+    "Liability",
+    "Bank asset",
+    "Equity account",
+    "Income account"
+   ],
+   "answer": "Liability",
+   "hint": "Who is lending the money?",
+   "explain": "The card company lends you money until you pay, so the card account is a liability."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "credit-card",
+   "q": "Maya buys a $45 rake with a business credit card. What happens?",
+   "choices": [
+    "Card balance down $45",
+    "Cash down $45, Lawn Care Supplies up $45",
+    "Lawn Care Supplies up $45, card balance up $45",
+    "Accounts payable up $45"
+   ],
+   "answer": "Lawn Care Supplies up $45, card balance up $45",
+   "hint": "The bank isn't touched until she pays the card.",
+   "explain": "The expense goes up and so does what she owes on the card."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "bank-feed",
+   "q": "Which is true about a transaction waiting in the bank feed review list?",
+   "choices": [
+    "It is deleted after 30 days",
+    "It isn't in your books until you act on it",
+    "It is already on all your reports",
+    "It is a vendor credit"
+   ],
+   "answer": "It isn't in your books until you act on it",
+   "hint": "It's waiting for review.",
+   "explain": "Downloaded transactions don't post until you match, add or categorize them."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "bank-feed",
+   "q": "Maya never entered a $12 Corner Gas purchase. It appears in the bank feed. What should she do?",
+   "choices": [
+    "Categorize it and add it",
+    "Record a vendor credit",
+    "Match it to the $18 expense",
+    "Ignore it; it's already in the books"
+   ],
+   "answer": "Categorize it and add it",
+   "hint": "There's nothing to match.",
+   "explain": "If it was never entered, categorize the download and add it."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "vendor-credit",
+   "q": "A vendor credit:",
+   "choices": [
+    "Puts cash back in the bank right away",
+    "Raises accounts payable and the expense",
+    "Changes nothing until the vendor sends cash",
+    "Lowers accounts payable and the expense"
+   ],
+   "answer": "Lowers accounts payable and the expense",
+   "hint": "It's a bill in reverse.",
+   "explain": "A vendor credit lowers what you owe the vendor and lowers the expense."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "vendor-credit",
+   "q": "Maya has a $15 vendor credit from Hometown Hardware and a new $40 bill from them. How much does she pay?",
+   "choices": [
+    "$25",
+    "$55",
+    "$15",
+    "$40"
+   ],
+   "answer": "$25",
+   "hint": "Apply the credit to the bill.",
+   "explain": "$40 − $15 = $25."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "refunds",
+   "q": "Hometown Hardware gives Maya a refund check for leaf bags she already paid for. What does she record?",
+   "choices": [
+    "A purchase order to Hometown Hardware for the leaf bags",
+    "A check to Hometown Hardware using the same category",
+    "A new bill from Hometown Hardware with a negative amount",
+    "A bank deposit using the vendor's name and the same category"
+   ],
+   "answer": "A bank deposit using the vendor's name and the same category",
+   "hint": "Money is coming into the bank, and the expense should go back down.",
+   "explain": "A refund check is deposited with the vendor and the original expense category, which lowers that expense."
+  },
+  {
+   "id": "q10",
+   "type": "match",
+   "skill": "forms",
+   "q": "Match each situation to the form you use.",
+   "pairs": [
+    [
+     "Gas paid with a debit card",
+     "Expense"
+    ],
+    [
+     "Paper check to Jordan, no bill",
+     "Check"
+    ],
+    [
+     "Store promises $15 off the next bill",
+     "Vendor credit"
+    ],
+    [
+     "Refund put back on the credit card",
+     "Credit card credit"
+    ]
+   ],
+   "hint": "Look for clues: card, paper check, promise, refund to a card.",
+   "explain": "Card purchases use Expense, paper checks use Check, a promise of money off is a vendor credit, and a card refund is a credit card credit."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

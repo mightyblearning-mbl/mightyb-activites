@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 5 Review: Programming and Data Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Unit 5 Review: Programming and Data</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-5-6-programming-and-data-review",
+ "title": "Unit 5 Review: Programming and Data",
+ "course": "IT Fundamentals",
+ "unit": "5",
+ "lesson": "5.6",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 5 videos 5.1-5.5 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "You can sort languages, name data types and programming building blocks, plan with flowcharts and pseudocode, explain why data matters, design relational tables, and plan 3-2-1 backups.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "compiled-interpreted",
+   "q": "The club's motor code must react as fast as possible, and it rarely changes. Which kind of language fits best?",
+   "choices": [
+    "A compiled language like C",
+    "A markup language like HTML",
+    "A query language like SQL",
+    "A pseudocode outline"
+   ],
+   "answer": "A compiled language like C",
+   "hint": "Which kind usually runs fastest?",
+   "explain": "Compiled programs are translated ahead of time, so they usually run fast. Recompiling is fine when the code rarely changes."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "query",
+   "q": "Which kind of language is SQL?",
+   "choices": [
+    "Query",
+    "Markup",
+    "Assembly",
+    "Compiled"
+   ],
+   "answer": "Query",
+   "hint": "The Q in SQL is a clue.",
+   "explain": "SQL stands for Structured Query Language. It asks databases for data."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "data-types",
+   "q": "What does this code print?",
+   "choices": [
+    "&lt;class &#x27;float&#x27;&gt;",
+    "&lt;class &#x27;int&#x27;&gt;",
+    "&lt;class &#x27;str&#x27;&gt;",
+    "&lt;class &#x27;bool&#x27;&gt;"
+   ],
+   "answer": "&lt;class &#x27;float&#x27;&gt;",
+   "hint": "Look for a decimal point.",
+   "explain": "2.5 has a decimal point, so it is a float.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "print(type(2.5))"
+    ]
+   ]
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "array",
+   "q": "What does this code print?",
+   "choices": [
+    "gear",
+    "motor",
+    "wheel",
+    "An error"
+   ],
+   "answer": "gear",
+   "hint": "Which index is first?",
+   "explain": "Counting starts at zero, so parts[0] is gear.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "parts = [&quot;gear&quot;, &quot;motor&quot;, &quot;wheel&quot;]"
+    ],
+    [
+     "print(parts[0])"
+    ]
+   ]
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "constant",
+   "q": "The largest team allowed at a competition is 6 and should never change while the program runs. How should it be stored?",
+   "choices": [
+    "As a constant",
+    "As a Boolean",
+    "As an array",
+    "As a comment"
+   ],
+   "answer": "As a constant",
+   "hint": "It's set once and left alone.",
+   "explain": "A constant is a named value that is set once and is not supposed to change."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "object",
+   "q": "A Robot object can drive forward and charge. What are those actions called?",
+   "choices": [
+    "Methods",
+    "Properties",
+    "Constants",
+    "Indexes"
+   ],
+   "answer": "Methods",
+   "hint": "Properties describe; these do something.",
+   "explain": "Methods are the actions an object can do. A method is a function that belongs to an object."
+  },
+  {
+   "id": "q07",
+   "type": "match",
+   "skill": "logic",
+   "q": "Match each idea to its description.",
+   "pairs": [
+    [
+     "Sequence",
+     "Steps run in the order they're written"
+    ],
+    [
+     "Branching",
+     "Choose a path with if and else"
+    ],
+    [
+     "Looping",
+     "Repeat steps until it's time to stop"
+    ],
+    [
+     "Pseudocode",
+     "A plain-word plan no computer runs"
+    ],
+    [
+     "Comment",
+     "A note in code the computer ignores"
+    ]
+   ],
+   "hint": "Branching chooses; looping repeats.",
+   "explain": "These are the planning and logic ideas from Lesson 5.3."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "looping",
+   "q": "What does this code print?",
+   "choices": [
+    "100",
+    "70",
+    "110",
+    "90"
+   ],
+   "answer": "100",
+   "hint": "The loop stops as soon as battery is no longer under 100.",
+   "explain": "70 becomes 80, 90, then 100. Now the condition is false, so the loop stops and prints 100.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "battery = 70"
+    ],
+    [
+     "while battery &lt; 100:"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;battery = battery + 10"
+    ],
+    [
+     "print(battery)"
+    ]
+   ]
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "data-information",
+   "q": "Which is raw data with no context?",
+   "choices": [
+    "40, 38, 51",
+    "Bolt scored 43 points on average",
+    "Scores drop when the battery is low",
+    "Bolt's best match was match 3"
+   ],
+   "answer": "40, 38, 51",
+   "hint": "Which one has no meaning attached?",
+   "explain": "Raw numbers with no labels are data. The others add meaning, so they are information."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "critical-data",
+   "q": "Which data should the club protect and back up first?",
+   "choices": [
+    "The robot's code before a competition",
+    "Last season's snack sign-up list",
+    "An old flyer for a bake sale",
+    "A list of favorite team songs"
+   ],
+   "answer": "The robot's code before a competition",
+   "hint": "Which one would cause real harm if lost?",
+   "explain": "Critical data is data you can't work without. Losing the robot's code before a competition would be a disaster."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "data-structure",
+   "q": "A folder of match photos is which kind of data?",
+   "choices": [
+    "Unstructured",
+    "Structured",
+    "Semistructured",
+    "Relational"
+   ],
+   "answer": "Unstructured",
+   "hint": "Do photos fit into rows and columns?",
+   "explain": "Photos, videos and audio have no set format, so they are unstructured."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "keys",
+   "q": "Every member has a member_id that no one else shares. In the members table, member_id is the:",
+   "choices": [
+    "Primary key",
+    "Foreign key",
+    "Schema",
+    "Report"
+   ],
+   "answer": "Primary key",
+   "hint": "It is unique for every record.",
+   "explain": "A primary key holds a unique value for every record in its table."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "sql-select",
+   "q": "The parts table has four records (part_id, part_name, quantity): (1, Gear, 12), (2, Motor, 3), (3, Wheel, 4), (4, Battery, 6). What does this query return?",
+   "choices": [
+    "Motor and Wheel",
+    "Gear and Battery",
+    "Only Motor",
+    "All four parts"
+   ],
+   "answer": "Motor and Wheel",
+   "hint": "Which quantities are under 5?",
+   "explain": "Motor (3) and Wheel (4) have quantities under 5. Gear (12) and Battery (6) do not.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "SELECT part_name FROM parts WHERE quantity &lt; 5;"
+    ]
+   ]
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "backup-scope",
+   "q": "Which backup lets you rebuild a whole computer, including the operating system, settings and apps?",
+   "choices": [
+    "A system backup",
+    "A file backup",
+    "A report",
+    "A foreign key"
+   ],
+   "answer": "A system backup",
+   "hint": "It copies the whole system.",
+   "explain": "A system backup copies the entire computer. A file backup copies only chosen files and folders."
+  },
+  {
+   "id": "q15",
+   "type": "match",
+   "skill": "backup-types",
+   "q": "Match each backup type to what it copies.",
+   "pairs": [
+    [
+     "Full",
+     "Everything, every time"
+    ],
+    [
+     "Incremental",
+     "Changes since the last backup of any kind"
+    ],
+    [
+     "Differential",
+     "Changes since the last full backup"
+    ]
+   ],
+   "hint": "Incremental and differential differ in what they count back to.",
+   "explain": "Full copies everything. Incremental counts back to the last backup of any kind. Differential counts back to the last full."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "offline",
+   "q": "Why keep one backup copy offline?",
+   "choices": [
+    "Attacks that spread over a network can't reach it",
+    "Offline copies always restore faster than others",
+    "It is what makes database data persistent",
+    "It lets more members edit the data at once"
+   ],
+   "answer": "Attacks that spread over a network can't reach it",
+   "hint": "Offline means unplugged.",
+   "explain": "An offline copy is disconnected, so attacks that spread across a network can't reach it."
+  },
+  {
+   "id": "q17",
+   "type": "mc",
+   "skill": "restore",
+   "q": "Why should the club test restoring from its backups every month?",
+   "choices": [
+    "To make sure the backups actually work",
+    "To make the backup files smaller",
+    "To delete files it no longer needs",
+    "To speed up the club laptop"
+   ],
+   "answer": "To make sure the backups actually work",
+   "hint": "What if a backup is broken and no one knows?",
+   "explain": "A backup you've never tested might not work when you need it."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.3 Company Setup, QBO Plus and User Roles Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 1.3 Company Setup, QBO Plus and User Roles</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-1-3-company-setup-and-user-roles",
+ "title": "1.3 Company Setup, QBO Plus and User Roles",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "1",
+ "lesson": "1.3",
+ "kind": "lesson",
+ "sourceVideo": "1.3 Company Setup, QBO Plus and User Roles (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Plus adds projects, classes, locations, inventory and budgets. One subscription covers one company. Desktop files can be migrated, and each user gets the least access they need.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "editions",
+   "q": "Which edition covers the basics (invoices, expenses, bank connections and reports) for one user?",
+   "choices": [
+    "Essentials",
+    "Simple Start",
+    "Plus",
+    "Advanced"
+   ],
+   "answer": "Simple Start",
+   "hint": "It's the first step on the ladder.",
+   "explain": "Simple Start covers the basics for one user."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "editions",
+   "q": "A business wants to enter bills now and pay them later. What is the lowest edition with bill management?",
+   "choices": [
+    "Plus",
+    "Advanced",
+    "Simple Start",
+    "Essentials"
+   ],
+   "answer": "Essentials",
+   "hint": "It's one step up from the basics.",
+   "explain": "Essentials adds bill management, time tracking and more users."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "plus",
+   "q": "Which feature does Plus add that Essentials doesn't have?",
+   "choices": [
+    "Sending invoices",
+    "Bank connections",
+    "Basic reports",
+    "Class tracking"
+   ],
+   "answer": "Class tracking",
+   "hint": "Three of these are in every edition.",
+   "explain": "Plus adds project tracking, class and location tracking, inventory tracking and budgets."
+  },
+  {
+   "id": "q04",
+   "type": "match",
+   "skill": "editions",
+   "q": "Match each edition to what it adds.",
+   "pairs": [
+    [
+     "Simple Start",
+     "The basics, for one user"
+    ],
+    [
+     "Essentials",
+     "Bill management and time tracking"
+    ],
+    [
+     "Plus",
+     "Projects, classes, inventory and budgets"
+    ],
+    [
+     "Advanced",
+     "Custom user roles for big companies"
+    ]
+   ],
+   "hint": "Each step up adds features.",
+   "explain": "Simple Start is the basics; Essentials adds bills and time; Plus adds projects, classes, inventory and budgets; Advanced adds custom roles and more."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "plus",
+   "q": "Why does this course use QuickBooks Online Plus?",
+   "choices": [
+    "Plus is the only edition with reports",
+    "Plus is the only edition for one user",
+    "The certification exam is built on Plus",
+    "Plus is the only edition with invoices"
+   ],
+   "answer": "The certification exam is built on Plus",
+   "hint": "Think about the exam you're preparing for.",
+   "explain": "Plus is the edition the QuickBooks certification exam is built on."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "licensing",
+   "q": "Maya's older brother starts a car-washing business with its own tax ID number. What does it need?",
+   "choices": [
+    "A new location inside Sunny Day's company",
+    "A new class inside Sunny Day's company",
+    "Its own company and its own subscription",
+    "A second primary admin for Sunny Day"
+   ],
+   "answer": "Its own company and its own subscription",
+   "hint": "One subscription covers how many companies?",
+   "explain": "One subscription covers one company. A separate business keeps separate books, reports and taxes.",
+   "hints": {
+    "A new class inside Sunny Day's company": "Classes split up parts of one business, not separate businesses."
+   }
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "migration",
+   "q": "A bookkeeper imports a QuickBooks Desktop file into a QBO company that already has some data. What happens to that data?",
+   "choices": [
+    "The import replaces it",
+    "It moves to a new company",
+    "The import adds to it",
+    "The import is blocked"
+   ],
+   "answer": "The import replaces it",
+   "hint": "Timing and what's already there both matter.",
+   "explain": "The Desktop import replaces whatever is already in the QuickBooks Online company, so do it soon after the company is created."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "migration",
+   "q": "A company just moved from QuickBooks Desktop to QuickBooks Online. What should the bookkeeper do next?",
+   "choices": [
+    "Nothing, because everything always converts exactly",
+    "Delete the Desktop file right away to save space",
+    "Retype every transaction to be extra sure it's right",
+    "Check the reports, since a few things may not convert"
+   ],
+   "answer": "Check the reports, since a few things may not convert",
+   "hint": "Lists and transactions come along, but...",
+   "explain": "A few things may not convert exactly, so a bookkeeper always checks the reports afterward."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "roles",
+   "q": "Which statement about the primary admin is true?",
+   "choices": [
+    "There's one, with full access including the subscription",
+    "The primary admin can only view the reports",
+    "A company can have up to five primary admins",
+    "It must be the company's outside accountant"
+   ],
+   "answer": "There's one, with full access including the subscription",
+   "hint": "That's Maya.",
+   "explain": "There is only one primary admin, usually the owner, who can do everything, including managing the subscription."
+  },
+  {
+   "id": "q10",
+   "type": "match",
+   "skill": "roles",
+   "q": "Match each user role to what it allows.",
+   "pairs": [
+    [
+     "Primary admin",
+     "Only one; manages the subscription"
+    ],
+    [
+     "Standard, limited access",
+     "Only customers and sales, or only vendors and purchases"
+    ],
+    [
+     "Reports only",
+     "Looks at reports but can't enter anything"
+    ],
+    [
+     "Time tracking only",
+     "Enters their own hours, and that's it"
+    ],
+    [
+     "Accountant user",
+     "An outside accountant the owner invites"
+    ]
+   ],
+   "hint": "Read each role's name closely.",
+   "explain": "Each role opens different doors. Give each person the least access they need."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "roles",
+   "q": "Maya's aunt lent her $250 and wants to see how Sunny Day is doing each month, without changing anything. Which role fits?",
+   "choices": [
+    "Company admin",
+    "Reports only",
+    "Standard, all access",
+    "Primary admin"
+   ],
+   "answer": "Reports only",
+   "hint": "She only wants to look.",
+   "explain": "A reports-only user can look at reports but can't enter anything."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "roles",
+   "q": "Jordan creates invoices for his leaf jobs but shouldn't see Sunny Day's bank balance. Which role follows the least-access rule?",
+   "choices": [
+    "Standard, all access to the books",
+    "Standard, limited to customers and sales",
+    "Time tracking only, for his hours",
+    "Company admin, so he can add users"
+   ],
+   "answer": "Standard, limited to customers and sales",
+   "hint": "He needs sales, but nothing else.",
+   "explain": "Limited access to customers and sales lets him invoice without seeing banking. Time tracking only wouldn't let him invoice."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

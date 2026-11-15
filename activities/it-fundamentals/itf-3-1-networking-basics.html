@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.1 Networking Basics Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.1 Networking Basics</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-3-1-networking-basics",
+ "title": "3.1 Networking Basics",
+ "course": "IT Fundamentals",
+ "unit": "3",
+ "lesson": "3.1",
+ "kind": "lesson",
+ "sourceVideo": "3.1 Networking Basics (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "A LAN is your home network and the internet is a giant WAN. The modem reaches the ISP, the router directs traffic, IP addresses identify devices, DHCP hands them out and DNS turns names into addresses.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "lan-wan",
+   "q": "Which describes a LAN?",
+   "choices": [
+    "A network covering a small area, like one home",
+    "A network connecting cities and countries",
+    "A company that sells internet access",
+    "A single cable between two computers"
+   ],
+   "answer": "A network covering a small area, like one home",
+   "hint": "The L stands for local.",
+   "explain": "A local area network covers a small area such as a home, school or office."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "lan-wan",
+   "q": "The internet is best described as:",
+   "choices": [
+    "The biggest WAN, a network of networks",
+    "One giant server in one building",
+    "A LAN inside each home",
+    "A type of Ethernet cable"
+   ],
+   "answer": "The biggest WAN, a network of networks",
+   "hint": "Think wide, not local.",
+   "explain": "The internet is a worldwide wide area network made of many connected networks."
+  },
+  {
+   "id": "q03",
+   "type": "match",
+   "skill": "network-devices",
+   "q": "Match each device to its job.",
+   "pairs": [
+    [
+     "Modem",
+     "Connects the home to the ISP"
+    ],
+    [
+     "Router",
+     "Directs traffic between the LAN and the internet"
+    ],
+    [
+     "Switch",
+     "Connects wired devices inside the LAN"
+    ],
+    [
+     "Access point",
+     "Lets wireless devices join the LAN"
+    ],
+    [
+     "Firewall",
+     "Blocks traffic that breaks its rules"
+    ]
+   ],
+   "hint": "Start with the box that talks to the internet provider.",
+   "explain": "Modem to ISP, router directs traffic, switch for wired devices, access point for wireless, firewall filters."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "client-server",
+   "q": "Sofia's laptop asks a website for a page, and a computer at the website sends it back. Sofia's laptop is the:",
+   "choices": [
+    "Server",
+    "Switch",
+    "Peer",
+    "Client"
+   ],
+   "answer": "Client",
+   "hint": "Which side is asking?",
+   "explain": "The client asks for something; the server provides the service."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "ip-address",
+   "q": "Which is a valid IPv4 address?",
+   "choices": [
+    "192:168:1:20",
+    "192.168.1",
+    "192.168.1.20",
+    "192.168.1.300"
+   ],
+   "answer": "192.168.1.20",
+   "hint": "IPv4 is four numbers, each 0 to 255, with dots.",
+   "explain": "192.168.1.20 has four numbers from 0 to 255 separated by dots. 300 is too big, three numbers is too few, and colons are used in IPv6."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "ipv6",
+   "q": "Why was IPv6 created?",
+   "choices": [
+    "IPv4 has only about 4.3 billion addresses",
+    "IPv4 addresses are too long to type",
+    "IPv4 cannot be used at home",
+    "IPv4 only works on wired networks"
+   ],
+   "answer": "IPv4 has only about 4.3 billion addresses",
+   "hint": "Think about how many devices exist.",
+   "explain": "IPv4 doesn't have enough addresses for every device, so IPv6 uses much longer addresses."
+  },
+  {
+   "id": "q07",
+   "type": "match",
+   "skill": "net-identifiers",
+   "q": "Match each term to what it does.",
+   "pairs": [
+    [
+     "IP address",
+     "Identifies a device on a network"
+    ],
+    [
+     "MAC address",
+     "Hardware ID for a network adapter"
+    ],
+    [
+     "Port",
+     "Tells a device which service the data is for"
+    ],
+    [
+     "DHCP",
+     "Hands out IP addresses automatically"
+    ],
+    [
+     "DNS",
+     "Turns a website name into an IP address"
+    ]
+   ],
+   "hint": "DNS is the phone book.",
+   "explain": "IP identifies a device, MAC is the adapter's hardware ID, a port picks the service, DHCP hands out addresses, DNS looks up names."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "ports-services",
+   "q": "Secure web browsing (HTTPS) usually uses which port?",
+   "choices": [
+    "80",
+    "21",
+    "443",
+    "25"
+   ],
+   "answer": "443",
+   "hint": "It was named in the lesson.",
+   "explain": "HTTPS usually uses port 443. It encrypts data between you and the website."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "wired",
+   "q": "The Riveras want the steadiest connection for their TV. What should they use?",
+   "choices": [
+    "The 6 GHz band from the yard",
+    "A peer-to-peer phone share",
+    "Bluetooth from a phone",
+    "An Ethernet cable to the router"
+   ],
+   "answer": "An Ethernet cable to the router",
+   "hint": "Wired is usually faster and steadier.",
+   "explain": "Ethernet is usually faster and more reliable than wireless."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "cable-tools",
+   "q": "A technician needs to attach an RJ45 connector to the end of a cable. Which tool does that?",
+   "choices": [
+    "A modem",
+    "A crimper",
+    "An SFP module",
+    "A cable tester"
+   ],
+   "answer": "A crimper",
+   "hint": "One tool attaches, the other checks.",
+   "explain": "A crimper attaches RJ45 connectors; a cable tester checks the wires."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "isp-types",
+   "q": "Which internet service uses telephone lines and gets slower the farther you live from the provider's equipment?",
+   "choices": [
+    "DSL",
+    "Cable",
+    "Ethernet",
+    "Fiber optic"
+   ],
+   "answer": "DSL",
+   "hint": "Digital subscriber line.",
+   "explain": "DSL runs over phone lines, and its speed drops with distance."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "isp-types",
+   "q": "Which internet service sends data as pulses of light and is usually the fastest?",
+   "choices": [
+    "Satellite",
+    "Cable",
+    "Fiber optic",
+    "DSL"
+   ],
+   "answer": "Fiber optic",
+   "hint": "Thin strands of glass.",
+   "explain": "Fiber optic carries light through glass and is usually the fastest."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

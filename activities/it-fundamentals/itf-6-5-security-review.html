@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 6 Review: Security Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Unit 6 Review: Security</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-6-5-security-review",
+ "title": "Unit 6 Review: Security",
+ "course": "IT Fundamentals",
+ "unit": "6",
+ "lesson": "6.5",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 6 lessons 6.1-6.4 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "You can explain the CIA triad and the three A's, spot phishing, secure a device, build strong logins with MFA, and tell where encryption protects data.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "cia-triad",
+   "q": "Someone secretly changes a student's grade in a school system. Which goal is broken?",
+   "choices": [
+    "Integrity",
+    "Availability",
+    "Confidentiality",
+    "Accounting"
+   ],
+   "answer": "Integrity",
+   "hint": "The information is no longer accurate.",
+   "explain": "Integrity means information stays accurate and unchanged without permission."
+  },
+  {
+   "id": "q02",
+   "type": "match",
+   "skill": "aaa",
+   "q": "Match each term to its example.",
+   "pairs": [
+    [
+     "Authentication",
+     "Logging in with a password"
+    ],
+    [
+     "Authorization",
+     "Only the teacher can change grades"
+    ],
+    [
+     "Accounting",
+     "A log of who logged in and when"
+    ]
+   ],
+   "hint": "Who are you, what can you do, what happened?",
+   "explain": "Logging in proves identity, permissions limit actions, and logs keep records."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "privacy",
+   "q": "Which is the safest thing to share in an AI chat or public post?",
+   "choices": [
+    "Your full birthday",
+    "Your opinion about a book",
+    "Your home address",
+    "Your phone number"
+   ],
+   "answer": "Your opinion about a book",
+   "hint": "Keep PII out.",
+   "explain": "Address, birthday and phone number are PII; an opinion about a book doesn't identify you."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "phishing",
+   "q": "Phishing by text message is sometimes called:",
+   "choices": [
+    "Single sign-on",
+    "Vishing",
+    "Smishing",
+    "Spyware"
+   ],
+   "answer": "Smishing",
+   "hint": "SMS is another name for texting.",
+   "explain": "Smishing is text-message phishing; vishing is by phone call."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "phishing",
+   "q": "Leo gets a game chat message: \"Click here for free coins, just log in with your password.\" What should he do?",
+   "choices": [
+    "Log in to check if it's real",
+    "Not click, and tell a trusted adult",
+    "Send the message to his friends",
+    "Click quickly before the offer ends"
+   ],
+   "answer": "Not click, and tell a trusted adult",
+   "hint": "If it feels wrong, stop.",
+   "explain": "Free stuff that asks for a password is a phishing trick. Stop and tell a trusted adult."
+  },
+  {
+   "id": "q06",
+   "type": "match",
+   "skill": "malware",
+   "q": "Match each malware type to its description.",
+   "pairs": [
+    [
+     "Worm",
+     "Spreads by itself across a network"
+    ],
+    [
+     "Trojan",
+     "Disguised as something useful"
+    ],
+    [
+     "Spyware",
+     "Secretly watches and collects information"
+    ],
+    [
+     "Ransomware",
+     "Locks files and demands payment"
+    ]
+   ],
+   "hint": "Focus on what makes each one different.",
+   "explain": "Worms spread alone, trojans disguise, spyware watches, ransomware holds files for payment."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "malware",
+   "q": "What is the best protection against losing files to ransomware?",
+   "choices": [
+    "Turning off updates",
+    "A recent backup",
+    "A new network name",
+    "A longer screen timeout"
+   ],
+   "answer": "A recent backup",
+   "hint": "If files get locked, how could you get them back?",
+   "explain": "With a recent backup, you can restore your files instead of paying."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "device-security",
+   "q": "Which keeps a device's security holes fixed?",
+   "choices": [
+    "Choosing a new SSID",
+    "Using a cable lock",
+    "Installing updates and patches",
+    "Clearing browser history"
+   ],
+   "answer": "Installing updates and patches",
+   "hint": "The maker sends fixes.",
+   "explain": "Patches close security holes, so turn on automatic updates."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "software-sources",
+   "q": "Which is legitimate software?",
+   "choices": [
+    "A game offered free on a random website",
+    "A paid program copied from a friend's computer",
+    "A free download that asks you to turn off antivirus",
+    "An app from the device's official app store"
+   ],
+   "answer": "An app from the device's official app store",
+   "hint": "Look for an official source and a real license.",
+   "explain": "Official app stores are legitimate sources; copying paid software is piracy."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "disposal",
+   "q": "Before giving away an old phone, you should:",
+   "choices": [
+    "Turn off the screen lock",
+    "Back up, then factory reset it",
+    "Delete your text messages only",
+    "Remove only the phone case"
+   ],
+   "answer": "Back up, then factory reset it",
+   "hint": "The next owner shouldn't see your data.",
+   "explain": "A factory reset erases the device after you back up what you need."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "passwords",
+   "q": "Which is the best password habit?",
+   "choices": [
+    "One strong password for every account",
+    "Your pet's name with numbers added",
+    "Short passwords you change every day",
+    "A different long passphrase for each account"
+   ],
+   "answer": "A different long passphrase for each account",
+   "hint": "Length matters, and reuse is risky.",
+   "explain": "Long and unique for every account, kept in a password manager."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "mfa",
+   "q": "Which pair is NOT multifactor authentication?",
+   "choices": [
+    "A password and a PIN",
+    "A password and a fingerprint",
+    "A password and a security key",
+    "A PIN and an app code on your phone"
+   ],
+   "answer": "A password and a PIN",
+   "hint": "Look for two of the SAME factor type.",
+   "explain": "A password and a PIN are both something you know, so that's still single-factor."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "default-credentials",
+   "q": "Why change a new router's default admin password?",
+   "choices": [
+    "Default passwords are often easy to find out",
+    "The router stops working after one week",
+    "It makes the Wi-Fi signal much stronger",
+    "It is needed before you can use HTTPS"
+   ],
+   "answer": "Default passwords are often easy to find out",
+   "hint": "Who else might know the password it came with?",
+   "explain": "Default usernames and passwords are often easy to look up, so always change them."
+  },
+  {
+   "id": "q14",
+   "type": "match",
+   "skill": "encryption",
+   "q": "Match each example to how its data is protected.",
+   "pairs": [
+    [
+     "Shopping on a site with HTTPS",
+     "Encrypted between browser and website"
+    ],
+    [
+     "A stolen laptop with full-disk encryption",
+     "Files unreadable without the key"
+    ],
+    [
+     "An open Wi-Fi network",
+     "No encryption at all"
+    ]
+   ],
+   "hint": "One is moving, one is stored, one is not protected.",
+   "explain": "HTTPS protects data in transit, full-disk encryption protects data at rest, and open Wi-Fi isn't encrypted."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "https-certificates",
+   "q": "A site has HTTPS, but the browser says its certificate is for a different website. What should you do?",
+   "choices": [
+    "Enter your password to verify it",
+    "Leave the site without entering anything",
+    "Reload until the warning goes away",
+    "Trust it because it has HTTPS"
+   ],
+   "answer": "Leave the site without entering anything",
+   "hint": "An invalid certificate means the browser can't confirm who the site is.",
+   "explain": "Don't click past certificate warnings."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "wifi-security",
+   "q": "A coffee shop's Wi-Fi is \"Open.\" What does that mean?",
+   "choices": [
+    "It has no encryption",
+    "It has a valid certificate",
+    "It uses WPA3",
+    "It needs a pre-shared key"
+   ],
+   "answer": "It has no encryption",
+   "hint": "Open means anyone can join without a password.",
+   "explain": "An open network has no encryption, so use a VPN or your phone's data for anything sensitive."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

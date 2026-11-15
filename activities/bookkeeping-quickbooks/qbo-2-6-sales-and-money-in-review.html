@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 2 Review: Sales and Money In Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Unit 2 Review: Sales and Money In</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-2-6-sales-and-money-in-review",
+ "title": "Unit 2 Review: Sales and Money In",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "2",
+ "lesson": "2.6",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 2 lessons 2.1-2.5 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Set up customers and items once, set up your sales forms, choose invoice or sales receipt, then receive payment, deposit, and use credit memos or refund receipts when needed.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "display-name",
+   "q": "Which customer field must be filled in and unique?",
+   "choices": [
+    "Email address",
+    "Shipping address",
+    "Display name",
+    "Phone number"
+   ],
+   "answer": "Display name",
+   "hint": "It's how the customer appears in lists.",
+   "explain": "The display name is required and must be unique."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "addresses",
+   "q": "Maya mows a lawn on Elm Street, but the owner wants bills mailed to an office on Main Street. Which is the billing address?",
+   "choices": [
+    "Elm Street",
+    "Neither address",
+    "Main Street",
+    "Both addresses"
+   ],
+   "answer": "Main Street",
+   "hint": "Billing is where the bill goes.",
+   "explain": "The billing address is the office on Main Street. Elm Street is the shipping (work) address."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "terms",
+   "q": "An invoice dated October 10 has Net 15 terms. When is it due?",
+   "choices": [
+    "October 15",
+    "October 25",
+    "November 10",
+    "October 10"
+   ],
+   "answer": "October 25",
+   "hint": "Add 15 days.",
+   "explain": "October 10 + 15 days = October 25."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "sub-customers",
+   "q": "A customer owns three rental houses and wants to see Maya's sales for each one. What should Maya set up?",
+   "choices": [
+    "Three separate vendors",
+    "Three tax-exempt customers",
+    "A sub-customer for each house",
+    "Three income accounts"
+   ],
+   "answer": "A sub-customer for each house",
+   "hint": "Records can sit under a parent.",
+   "explain": "Sub-customers track each property separately under one parent customer."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "sales-tax",
+   "q": "Which customer might be marked tax exempt?",
+   "choices": [
+    "A customer with two lawns",
+    "A nonprofit group with exemption paperwork",
+    "A customer with Net 30 terms",
+    "A neighbor who pays in cash"
+   ],
+   "answer": "A nonprofit group with exemption paperwork",
+   "hint": "Exempt means they don't pay sales tax.",
+   "explain": "Many nonprofit groups and resellers can be exempt. Keep their paperwork."
+  },
+  {
+   "id": "q06",
+   "type": "match",
+   "skill": "item-types",
+   "q": "Match each Sunny Day item to its type.",
+   "pairs": [
+    [
+     "Mowing",
+     "Service"
+    ],
+    [
+     "20 bags of fertilizer kept in the garage to sell",
+     "Inventory"
+    ],
+    [
+     "One bag bought for a customer and used that day",
+     "Non-inventory"
+    ]
+   ],
+   "hint": "Is it work, or a thing? Is it counted?",
+   "explain": "Mowing is work. Stocked bags are counted inventory. A bag bought for one job isn't counted."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "why-items",
+   "q": "Which is NOT a reason to set up products and services?",
+   "choices": [
+    "To make customers tax exempt",
+    "To send sales to the right income account",
+    "To report sales by item",
+    "To fill in prices faster"
+   ],
+   "answer": "To make customers tax exempt",
+   "hint": "Tax exemption lives on the customer record.",
+   "explain": "Items give speed, accuracy and reports. Tax exemption is set on the customer."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "form-styles",
+   "q": "Which controls the logo and colors on Maya's invoices?",
+   "choices": [
+    "A form style",
+    "A sub-customer",
+    "Payment terms",
+    "The chart of accounts"
+   ],
+   "answer": "A form style",
+   "hint": "Think about the look of the form.",
+   "explain": "Form styles control logo, colors, font, what shows and the footer."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "discounts",
+   "q": "Five mows at $35 with 20% off. What does the customer pay?",
+   "choices": [
+    "$35",
+    "$155",
+    "$140",
+    "$175"
+   ],
+   "answer": "$140",
+   "hint": "Subtotal, then take off 20%.",
+   "explain": "5 x $35 = $175. 20% of $175 = $35. $175 - $35 = $140."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "payments",
+   "q": "Which is a benefit of QuickBooks Payments?",
+   "choices": [
+    "Online payments are recorded for you",
+    "It has no fees at all",
+    "Customers never need an invoice",
+    "It deposits cash for you"
+   ],
+   "answer": "Online payments are recorded for you",
+   "hint": "What does QuickBooks do automatically?",
+   "explain": "QuickBooks Payments records the payment and marks the invoice paid, for a fee."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "choose-form",
+   "q": "A new customer pays Maya $60 by check right after a leaf cleanup. Which form?",
+   "choices": [
+    "Sales receipt",
+    "Invoice",
+    "Receive payment",
+    "Credit memo"
+   ],
+   "answer": "Sales receipt",
+   "hint": "Did they pay at the time of the sale?",
+   "explain": "Paid on the spot means a sales receipt."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "invoice",
+   "q": "Which form raises accounts receivable?",
+   "choices": [
+    "Invoice",
+    "Bank deposit",
+    "Sales receipt",
+    "Refund receipt"
+   ],
+   "answer": "Invoice",
+   "hint": "Which form means the customer owes money?",
+   "explain": "An invoice raises A/R until the customer pays."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "receive-payment",
+   "q": "What does receiving a payment on an invoice do to accounts receivable?",
+   "choices": [
+    "Leaves it the same",
+    "Lowers it",
+    "Doubles it",
+    "Raises it"
+   ],
+   "answer": "Lowers it",
+   "hint": "The customer owes less now.",
+   "explain": "Receive payment lowers A/R by the amount paid."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "deposits",
+   "q": "Undeposited Funds holds a $35 cash payment and a $85 check. Maya deposits both. What is the deposit total?",
+   "choices": [
+    "$110",
+    "$130",
+    "$85",
+    "$120"
+   ],
+   "answer": "$120",
+   "hint": "Add them.",
+   "explain": "$35 + $85 = $120."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "undeposited-funds",
+   "q": "Undeposited Funds and Payments to deposit are:",
+   "choices": [
+    "Two different bank accounts",
+    "An asset and a liability",
+    "A report and a form",
+    "Two names for the same holding account"
+   ],
+   "answer": "Two names for the same holding account",
+   "hint": "Newer QuickBooks renamed it.",
+   "explain": "Payments to deposit is the newer label for Undeposited Funds."
+  },
+  {
+   "id": "q16",
+   "type": "match",
+   "skill": "credit-refund",
+   "q": "Match each situation to the right form.",
+   "pairs": [
+    [
+     "Customer hasn't paid and should owe $15 less",
+     "Credit memo"
+    ],
+    [
+     "Customer already paid and gets $15 back",
+     "Refund receipt"
+    ],
+    [
+     "Two checks go to the bank together",
+     "Bank deposit"
+    ]
+   ],
+   "hint": "Did money already change hands?",
+   "explain": "Credit memos lower what's owed, refund receipts give money back, and deposits group payments for the bank."
+  },
+  {
+   "id": "q17",
+   "type": "mc",
+   "skill": "workflow",
+   "q": "What is the correct order for a customer who pays later?",
+   "choices": [
+    "Bank deposit, invoice, receive payment",
+    "Sales receipt, invoice, bank deposit",
+    "Invoice, receive payment, bank deposit",
+    "Receive payment, invoice, bank deposit"
+   ],
+   "answer": "Invoice, receive payment, bank deposit",
+   "hint": "Start with what the customer owes.",
+   "explain": "Invoice first, then receive payment into Undeposited Funds, then deposit."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

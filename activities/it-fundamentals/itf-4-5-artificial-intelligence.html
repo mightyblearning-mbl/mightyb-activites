@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.5 Artificial Intelligence Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.5 Artificial Intelligence</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-4-5-artificial-intelligence",
+ "title": "4.5 Artificial Intelligence",
+ "course": "IT Fundamentals",
+ "unit": "4",
+ "lesson": "4.5",
+ "kind": "lesson",
+ "sourceVideo": "4.5 Artificial Intelligence (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "AI finds patterns to chat, assist, predict and generate content or code. Check its facts, watch for bias, protect privacy, and follow your school's honesty rules.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "ai-basics",
+   "q": "What is artificial intelligence?",
+   "choices": [
+    "A browser setting that blocks pop-ups",
+    "A file system for storing photos and videos",
+    "A type of cable that connects devices",
+    "Computers doing tasks that need human thinking"
+   ],
+   "answer": "Computers doing tasks that need human thinking",
+   "hint": "Think language, pictures and predictions.",
+   "explain": "AI does tasks like understanding language, recognizing pictures and predicting."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "ai-basics",
+   "q": "How does most AI today learn?",
+   "choices": [
+    "It copies one person's brain",
+    "It reads the user's mind",
+    "It learns patterns from huge amounts of data",
+    "It is programmed one rule at a time"
+   ],
+   "answer": "It learns patterns from huge amounts of data",
+   "hint": "It has seen millions of examples.",
+   "explain": "Most AI learns patterns from huge amounts of data."
+  },
+  {
+   "id": "q03",
+   "type": "match",
+   "skill": "ai-uses",
+   "q": "Match each example to its kind of AI use.",
+   "pairs": [
+    [
+     "A help bot you text on a store's site",
+     "AI chatbot"
+    ],
+    [
+     "Setting a reminder by voice",
+     "AI assistant"
+    ],
+    [
+     "A tool that writes a welcome message",
+     "Generative AI"
+    ],
+    [
+     "Your email's spam filter",
+     "Predictions and suggestions"
+    ]
+   ],
+   "hint": "Which one creates something new?",
+   "explain": "Chatbots chat, assistants get things done, generative AI creates, and predictions sort or suggest."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "ai-uses",
+   "q": "Your bank texts a fraud alert about an odd purchase. What kind of AI use is this?",
+   "choices": [
+    "Generative AI",
+    "AI-generated code",
+    "Predictions and suggestions",
+    "An AI chatbot"
+   ],
+   "answer": "Predictions and suggestions",
+   "hint": "It spots a pattern that looks unusual.",
+   "explain": "Fraud alerts are AI predictions based on patterns."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "generative",
+   "q": "What is a prompt?",
+   "choices": [
+    "The request you type into an AI tool",
+    "The answer an AI tool gives back",
+    "A setting that turns AI off",
+    "A file the AI saves on your device"
+   ],
+   "answer": "The request you type into an AI tool",
+   "hint": "It's what you ask for.",
+   "explain": "A prompt is the request you give generative AI."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "ai-code",
+   "q": "The club gets AI-generated code for the robot. What should they do before trusting it?",
+   "choices": [
+    "Ask the AI if the code is right",
+    "Test it on the real robot",
+    "Paste it in and enter the contest",
+    "Delete their own code to make room"
+   ],
+   "answer": "Test it on the real robot",
+   "hint": "Code can look right and still fail.",
+   "explain": "Always test AI-generated code before using it."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "ai-limits",
+   "q": "An AI tool lists a book as a source, but the book doesn't exist. What is this called?",
+   "choices": [
+    "A patch",
+    "A hallucination",
+    "A cookie",
+    "A bias filter"
+   ],
+   "answer": "A hallucination",
+   "hint": "AI made it up.",
+   "explain": "When AI makes up facts or sources, it's called a hallucination."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "ai-bias",
+   "q": "Why can AI be biased?",
+   "choices": [
+    "It is made by a single person",
+    "It can't store any data",
+    "It only works in English",
+    "It learns from data made by people"
+   ],
+   "answer": "It learns from data made by people",
+   "hint": "Where do the patterns come from?",
+   "explain": "AI learns from human-made data, so it can repeat unfair patterns."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "ai-privacy",
+   "q": "Which is safe to type into an AI chatbot?",
+   "choices": [
+    "A friend's private photo",
+    "A question about how Wi-Fi works",
+    "Your bank account login",
+    "Your home address and phone"
+   ],
+   "answer": "A question about how Wi-Fi works",
+   "hint": "Avoid anything private.",
+   "explain": "Don't share passwords, addresses, bank details or others' private info."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "ai-honesty",
+   "q": "Your teacher allows AI for brainstorming. What else should you do?",
+   "choices": [
+    "Say how you used it",
+    "Let AI write the final essay",
+    "Skip checking its facts",
+    "Hide that you used it"
+   ],
+   "answer": "Say how you used it",
+   "hint": "Honesty rules.",
+   "explain": "When AI is allowed, say how you used it and check its work."
+  },
+  {
+   "id": "q11",
+   "type": "match",
+   "skill": "ai-check",
+   "q": "Match each AI problem to a good way to handle it.",
+   "pairs": [
+    [
+     "A fact you're not sure is true",
+     "Compare it with trusted sources"
+    ],
+    [
+     "Code the AI wrote",
+     "Test it before using it"
+    ],
+    [
+     "Health advice from an AI chatbot",
+     "Check with a doctor or nurse"
+    ]
+   ],
+   "hint": "Different outputs need different checks.",
+   "explain": "Check facts with trusted sources, test code, and check health advice with a doctor or nurse."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

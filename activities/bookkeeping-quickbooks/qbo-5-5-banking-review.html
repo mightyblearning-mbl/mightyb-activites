@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain 4 Review: Bank Accounts, Transaction Rules and Receipts Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Domain 4 Review: Bank Accounts, Transaction Rules and Receipts</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-5-5-banking-review",
+ "title": "Domain 4 Review: Bank Accounts, Transaction Rules and Receipts",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "5",
+ "lesson": "5.5",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 4 lessons 4.1-4.2 (Mighty B scripts); QBCU objectives 4.1-4.3",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Know which accounts connect and why, how to add, match, transfer and exclude bank feed transactions, how bank rules work and run in order, and the three ways to bring in receipts.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "4.2.1",
+   "q": "Match each bank feed action to what it does.",
+   "pairs": [
+    [
+     "Add",
+     "Record a new transaction from the feed"
+    ],
+    [
+     "Match",
+     "Link to a transaction already entered"
+    ],
+    [
+     "Exclude",
+     "Leave out a duplicate download"
+    ],
+    [
+     "Transfer",
+     "Record money moved between your own accounts"
+    ]
+   ],
+   "hint": "Match is for things you already typed in.",
+   "explain": "Add creates a new record, match links to an existing one, exclude leaves it out, and transfer moves money between your own accounts."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "4.1.1",
+   "q": "Which of these can be connected to QuickBooks to bring in transactions?",
+   "choices": [
+    "The Undeposited Funds account",
+    "The Opening Balance Equity account",
+    "The Accounts Payable account",
+    "A PayPal business account"
+   ],
+   "answer": "A PayPal business account",
+   "hint": "It has to be an account at an outside company.",
+   "explain": "Bank, credit card and some payment accounts like PayPal can connect. Accounts that live only in QuickBooks can't."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "4.1.1",
+   "q": "Which of these is NOT a financial account you can connect to a bank feed?",
+   "choices": [
+    "Business credit card",
+    "Savings",
+    "Accounts receivable",
+    "Checking"
+   ],
+   "answer": "Accounts receivable",
+   "hint": "One of these exists only inside QuickBooks.",
+   "explain": "Accounts receivable tracks what customers owe; there's no bank to connect it to."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "4.1.2",
+   "q": "Why does connecting accounts make reconciling easier?",
+   "choices": [
+    "The bank does the whole reconciliation for the business",
+    "QuickBooks already has the bank's transactions to compare",
+    "Connected accounts no longer need to be reconciled",
+    "QuickBooks hides any transactions that don't match"
+   ],
+   "answer": "QuickBooks already has the bank's transactions to compare",
+   "hint": "Think about what comes in from the bank.",
+   "explain": "Downloaded transactions save typing and reduce errors, so your books are easier to compare with the statement."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "4.2.1",
+   "q": "Where do newly downloaded bank transactions wait until you deal with them?",
+   "choices": [
+    "In the Audit Log",
+    "In the Recurring transactions list",
+    "In the Chart of Accounts",
+    "In the Pending tab (For review on older screens)"
+   ],
+   "answer": "In the Pending tab (For review on older screens)",
+   "hint": "They're waiting for you to look at them.",
+   "explain": "New downloads sit on the Pending tab (For review on older screens) until you post, match or exclude them."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "4.2.1",
+   "q": "Maya added a bank feed charge to the wrong category. What's one way to fix it?",
+   "choices": [
+    "Delete the bank connection and connect the account again",
+    "Undo it on the Posted tab, then add it the right way",
+    "Make the wrong category inactive so the charge disappears",
+    "Exclude the original receipt so the charge is skipped"
+   ],
+   "answer": "Undo it on the Posted tab, then add it the right way",
+   "hint": "Added transactions can be sent back to review.",
+   "explain": "Undo on the Posted tab (Categorized on older screens) returns the transaction to Pending so it can be added correctly. You can also edit the saved transaction."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "4.2.1",
+   "q": "Maya moves $100 from Sunny Day's Business Checking to its savings. The withdrawal shows in the Business Checking feed. How should she record it?",
+   "choices": [
+    "As $100 of income",
+    "As a vendor credit",
+    "As a $100 expense",
+    "As a transfer to savings"
+   ],
+   "answer": "As a transfer to savings",
+   "hint": "The money stayed in the business.",
+   "explain": "A transfer moves money between the business's own accounts. It isn't income or an expense."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "4.2.2",
+   "q": "Which of these can be a condition in a bank rule?",
+   "choices": [
+    "The invoice has a discount",
+    "The bank text contains \"CORNER GAS\"",
+    "The customer has Net 30 terms",
+    "The user is a reports-only user"
+   ],
+   "answer": "The bank text contains \"CORNER GAS\"",
+   "hint": "Rules look at what the bank sends.",
+   "explain": "Rule conditions check things like the description or bank text and the amount."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "4.2.2",
+   "q": "A bank rule has auto-post (automatically confirm) turned on. What happens?",
+   "choices": [
+    "Matching transactions are deleted from the bank feed",
+    "Matching transactions are added without your review",
+    "The rule emails the bank about each matching charge",
+    "Matching transactions are moved to the Excluded tab"
+   ],
+   "answer": "Matching transactions are added without your review",
+   "hint": "\"Automatically\" is the key word.",
+   "explain": "Auto-post records transactions that fit the rule without you confirming each one, so turn it on only for rules you trust."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "4.2.2",
+   "q": "A rule is set for Money out only. Will it apply to a deposit from Mr. Patel?",
+   "choices": [
+    "Yes, but only on weekends",
+    "Yes, rules apply to everything",
+    "No, a deposit is money in",
+    "Only if the deposit is over $100"
+   ],
+   "answer": "No, a deposit is money in",
+   "hint": "Which way is the money moving?",
+   "explain": "Rules are set for money in or money out. A money-out rule skips deposits."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "4.2.2",
+   "q": "Two of Craig's rules both match a Hicks Hardware charge. How can the bookkeeper make sure a certain rule wins?",
+   "choices": [
+    "Delete the bank connection",
+    "Make the other rule recurring",
+    "Move that rule higher in the rules list",
+    "Rename the vendor"
+   ],
+   "answer": "Move that rule higher in the rules list",
+   "hint": "Rules run in order.",
+   "explain": "QuickBooks applies the first rule that matches, in list order, so move the one you want higher."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "4.3.1",
+   "q": "Which is a way to get receipts into QuickBooks?",
+   "choices": [
+    "Type each one into the Audit Log with its amount",
+    "Attach them to a user role in the Manage users area",
+    "Forward them to the receipt email address QuickBooks gives you",
+    "Add them to the Products and Services list as new items"
+   ],
+   "answer": "Forward them to the receipt email address QuickBooks gives you",
+   "hint": "There are three ways: upload, email and the mobile app.",
+   "explain": "You can upload a file, email it to your QuickBooks receipt address, or snap a photo in the mobile app."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "4.3.1",
+   "q": "Maya has a PDF receipt saved on her laptop. How can she add it?",
+   "choices": [
+    "Paste it into a journal entry",
+    "Import it as a customer list",
+    "Add it as a bank rule",
+    "Upload it in the receipts area"
+   ],
+   "answer": "Upload it in the receipts area",
+   "hint": "It's a file on her computer.",
+   "explain": "Receipts can be uploaded from a computer, in addition to email and the mobile app."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "4.3.2",
+   "q": "After Maya uploads a Corner Gas receipt, what does QuickBooks read from it for her to review?",
+   "choices": [
+    "Her user role and password",
+    "The customer's payment terms",
+    "The Chart of Accounts numbers",
+    "The date, vendor and amount"
+   ],
+   "answer": "The date, vendor and amount",
+   "hint": "Think about what's printed on a receipt.",
+   "explain": "QuickBooks pulls the date, vendor and amount. You check them, pick a category and save."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "4.3.2",
+   "q": "A $22 Corner Gas receipt matches a $22 charge already in the bank feed. What's the best action?",
+   "choices": [
+    "Add both as two separate expenses",
+    "Exclude the bank transaction from the feed",
+    "Match the receipt to the bank transaction",
+    "Delete the receipt and keep the charge"
+   ],
+   "answer": "Match the receipt to the bank transaction",
+   "hint": "Adding both would double-count.",
+   "explain": "Matching links the receipt to the bank transaction, so the purchase is recorded once with the receipt attached."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

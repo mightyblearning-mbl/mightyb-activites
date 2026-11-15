@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.4 Apps Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.4 Apps</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-4-4-apps",
+ "title": "4.4 Apps",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "4",
+ "lesson": "4.4",
+ "kind": "lesson",
+ "sourceVideo": "4.4 Apps (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Apps connect to QuickBooks to add features and share information. Find them in the QuickBooks App Store, weigh time saved against cost and data access, test small, and disconnect apps you stop using.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "apps-purpose",
+   "q": "What is a QuickBooks app?",
+   "choices": [
+    "A built-in report that lists every customer's balance and due date",
+    "A company setting that turns on class and location tracking",
+    "A separate program that connects to QuickBooks and shares information",
+    "A bank rule that categorizes deposits as they download"
+   ],
+   "answer": "A separate program that connects to QuickBooks and shares information",
+   "hint": "The key word is connects.",
+   "explain": "Apps are separate software programs that connect to QuickBooks to add features and share information."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "apps-purpose",
+   "q": "Maya wants customers to book mowing times online and have each booking create an invoice in QuickBooks. What could help?",
+   "choices": [
+    "A journal entry for each booking",
+    "A scheduling app connected to QuickBooks",
+    "An Audit Log filter",
+    "A bank rule for each customer"
+   ],
+   "answer": "A scheduling app connected to QuickBooks",
+   "hint": "Which tool adds a feature QuickBooks doesn't have?",
+   "explain": "A connected scheduling app can create customers and invoices in QuickBooks automatically."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "apps-where",
+   "q": "Where do you find apps that work with QuickBooks Online?",
+   "choices": [
+    "The Recurring transactions list",
+    "The bank's website only",
+    "The Reviewed tab on the receipts page",
+    "The QuickBooks App Store"
+   ],
+   "answer": "The QuickBooks App Store",
+   "hint": "It's reachable from inside QuickBooks or on Intuit's website.",
+   "explain": "Apps are listed in the QuickBooks App Store, inside QuickBooks or on Intuit's website."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "apps-where",
+   "q": "What does an app's page in the App Store show to help you decide?",
+   "choices": [
+    "Your customers' payment history",
+    "The Audit Log for your company",
+    "What it does, what it costs, and reviews",
+    "Your bank balance and open invoices"
+   ],
+   "answer": "What it does, what it costs, and reviews",
+   "hint": "Think about shopping for anything online.",
+   "explain": "Each app's page shows what it does, the price, and reviews from other businesses."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "apps-where",
+   "q": "Who can connect an app to a QuickBooks company?",
+   "choices": [
+    "A user with reports-only access",
+    "A user who can only track time",
+    "A standard user limited to sales",
+    "A user with admin rights"
+   ],
+   "answer": "A user with admin rights",
+   "hint": "Connecting an app gives it access to the books.",
+   "explain": "Only a user with admin rights can connect apps, because connecting gives the app access to company data."
+  },
+  {
+   "id": "q06",
+   "type": "match",
+   "skill": "apps-risks-benefits",
+   "q": "Match each item to the benefit or risk it describes.",
+   "pairs": [
+    [
+     "No more typing bookings in twice",
+     "Benefit: saves time"
+    ],
+    [
+     "A $20 monthly charge",
+     "Risk: cost"
+    ],
+    [
+     "Permission to see and change your books",
+     "Risk: access to your data"
+    ],
+    [
+     "The same invoice created three times",
+     "Risk: mistakes"
+    ]
+   ],
+   "hint": "One is good news and three are warnings.",
+   "explain": "Not retyping saves time; a monthly charge is cost; permission is data access; duplicate invoices are mistakes."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "apps-risks-benefits",
+   "q": "An app was set up wrong and created the same invoice three times. Which risk is this?",
+   "choices": [
+    "Cost: the monthly fee went up",
+    "Privacy: the bank saw the invoice",
+    "Mistakes: wrong or duplicate transactions",
+    "Support: the company stopped the app"
+   ],
+   "answer": "Mistakes: wrong or duplicate transactions",
+   "hint": "The problem is in the books themselves.",
+   "explain": "An app that's set up wrong can create duplicate or incorrect transactions, so test it and check the results."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "apps-risks-benefits",
+   "q": "Which is the BEST first test after Maya connects a new scheduling app?",
+   "choices": [
+    "Try a few bookings and check the invoices in QuickBooks",
+    "Turn off the Audit Log so it runs faster",
+    "Book a whole month of jobs before checking anything",
+    "Delete her old customers so the app adds new ones"
+   ],
+   "answer": "Try a few bookings and check the invoices in QuickBooks",
+   "hint": "Start small.",
+   "explain": "Test with a few bookings and check that the customers and invoices in QuickBooks look right."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "apps-risks-benefits",
+   "q": "Maya disconnects an app she no longer uses. What happens to the invoices it already sent to QuickBooks?",
+   "choices": [
+    "They become journal entries",
+    "They move to the bank feed",
+    "They stay in QuickBooks",
+    "They are deleted right away"
+   ],
+   "answer": "They stay in QuickBooks",
+   "hint": "Disconnecting stops new sharing.",
+   "explain": "Disconnecting stops the app from reaching your data. Information it already sent stays in QuickBooks."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

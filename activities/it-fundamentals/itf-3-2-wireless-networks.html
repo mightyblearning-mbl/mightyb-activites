@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.2 Wireless Networks Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.2 Wireless Networks</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-3-2-wireless-networks",
+ "title": "3.2 Wireless Networks",
+ "course": "IT Fundamentals",
+ "unit": "3",
+ "lesson": "3.2",
+ "kind": "lesson",
+ "sourceVideo": "3.2 Wireless Networks (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "802.11n, ac and ax are Wi-Fi 4, 5 and 6. 2.4 GHz reaches farther; 5 and 6 GHz are faster at shorter range. Interference and attenuation weaken Wi-Fi. Protect it with WPA3 or WPA2 and a strong password.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "wifi-standards",
+   "q": "Match each standard to its Wi-Fi name.",
+   "pairs": [
+    [
+     "802.11n",
+     "Wi-Fi 4"
+    ],
+    [
+     "802.11ac",
+     "Wi-Fi 5"
+    ],
+    [
+     "802.11ax",
+     "Wi-Fi 6"
+    ]
+   ],
+   "hint": "The letters go n, ac, ax as the numbers go up.",
+   "explain": "802.11n is Wi-Fi 4, 802.11ac is Wi-Fi 5, 802.11ax is Wi-Fi 6."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "wifi-standards",
+   "q": "An old Wi-Fi 4 tablet joins the Riveras' new Wi-Fi 6 router. What happens?",
+   "choices": [
+    "It gets full Wi-Fi 6 speed",
+    "It turns the router into Wi-Fi 4 for everyone",
+    "It cannot connect at all",
+    "It connects, but at its own older speed"
+   ],
+   "answer": "It connects, but at its own older speed",
+   "hint": "Newer standards work with older devices.",
+   "explain": "Wi-Fi is backward compatible, but an older device connects at its own older speed."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "speed",
+   "q": "The router box says it reaches very high speeds. Why will real speed be lower?",
+   "choices": [
+    "Routers slow down after the first week",
+    "Speeds are only real on the 2.4 GHz band",
+    "The box speed is for Bluetooth, not Wi-Fi",
+    "The box shows a best-case maximum that is shared"
+   ],
+   "answer": "The box shows a best-case maximum that is shared",
+   "hint": "Think ideal conditions and many users.",
+   "explain": "The rated speed is a best-case maximum. Real speed is lower, shared by connected devices, and limited by the internet plan for websites."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "bands",
+   "q": "Which band reaches the farthest and passes through walls best?",
+   "choices": [
+    "NFC",
+    "2.4 GHz",
+    "6 GHz",
+    "5 GHz"
+   ],
+   "answer": "2.4 GHz",
+   "hint": "Lower frequency travels farther.",
+   "explain": "2.4 GHz has the longest range but is slower and often crowded."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "bands",
+   "q": "Sofia's laptop and a new router both support Wi-Fi 6E, and she sits next to the router. Which band is likely fastest for her?",
+   "choices": [
+    "2.4 GHz",
+    "5 GHz",
+    "6 GHz",
+    "All bands are equal up close"
+   ],
+   "answer": "6 GHz",
+   "hint": "She is close, and her laptop supports the newest band.",
+   "explain": "6 GHz is fastest and least crowded but has the shortest range; she is close, so it works well."
+  },
+  {
+   "id": "q06",
+   "type": "match",
+   "skill": "weak-signal",
+   "q": "Match each cause to the right term.",
+   "pairs": [
+    [
+     "A neighbor's Wi-Fi on the same frequencies",
+     "Interference"
+    ],
+    [
+     "Signal fading through two walls and a floor",
+     "Attenuation"
+    ],
+    [
+     "Speed limited by the home's internet plan",
+     "Internet plan limit"
+    ]
+   ],
+   "hint": "Attenuation is weakening as the signal travels.",
+   "explain": "Other signals cause interference; distance and walls cause attenuation; and Wi-Fi can't go faster than the internet plan allows."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "weak-signal",
+   "q": "Which change would most help Mateo's weak signal upstairs?",
+   "choices": [
+    "Put the router inside a metal cabinet",
+    "Switch his console to the 6 GHz band",
+    "Move the router high and central, out in the open",
+    "Set the router next to the microwave"
+   ],
+   "answer": "Move the router high and central, out in the open",
+   "hint": "Remove things that block or weaken the signal.",
+   "explain": "Placing the router high and central reduces attenuation. Metal and microwaves make it worse, and 6 GHz has the shortest range."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "ssid",
+   "q": "What is an SSID?",
+   "choices": [
+    "A Wi-Fi password",
+    "The router's IP address",
+    "A type of encryption",
+    "A wireless network's name"
+   ],
+   "answer": "A wireless network's name",
+   "hint": "It's what shows up in your Wi-Fi list.",
+   "explain": "The SSID (service set identifier) is the network name you see when you look for Wi-Fi."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "wifi-security",
+   "q": "Which setting gives the Riveras' home Wi-Fi the strongest protection?",
+   "choices": [
+    "An open network with no password",
+    "WPA3 with a strong password",
+    "WPA2 with the default password",
+    "An open network with a hidden name"
+   ],
+   "answer": "WPA3 with a strong password",
+   "hint": "Newest encryption plus a good password.",
+   "explain": "WPA3 is newer and stronger than WPA2; open networks have no password."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "wireless-isp",
+   "q": "The Riveras' cousins live far out in the country, with no cables and no cell signal. Which internet type works almost anywhere with a clear view of the sky?",
+   "choices": [
+    "Satellite",
+    "Cable",
+    "Fiber optic",
+    "DSL"
+   ],
+   "answer": "Satellite",
+   "hint": "Look up.",
+   "explain": "Satellite works almost anywhere with a clear sky view, though storms can interrupt it and distance can add latency."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "hotspot",
+   "q": "On a road trip, Sofia shares her phone's cellular data with her laptop over Wi-Fi. This is a:",
+   "choices": [
+    "Switch",
+    "Hotspot",
+    "Fixed wireless antenna",
+    "Peer-to-peer server"
+   ],
+   "answer": "Hotspot",
+   "hint": "It uses the phone's data plan.",
+   "explain": "A hotspot shares a phone's cellular data with other devices over Wi-Fi."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "short-range",
+   "q": "Which pair lists the technologies from longer range to shorter range?",
+   "choices": [
+    "NFC, then Wi-Fi",
+    "Bluetooth, then NFC",
+    "NFC, then Bluetooth",
+    "Bluetooth, then Wi-Fi"
+   ],
+   "answer": "Bluetooth, then NFC",
+   "hint": "Tap to pay is very close.",
+   "explain": "Bluetooth works up to about 30 feet; NFC works only a few centimeters away. Wi-Fi reaches farther than both."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

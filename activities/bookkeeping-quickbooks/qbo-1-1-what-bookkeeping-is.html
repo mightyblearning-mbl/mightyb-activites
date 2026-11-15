@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.1 What Bookkeeping Is Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 1.1 What Bookkeeping Is</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-1-1-what-bookkeeping-is",
+ "title": "1.1 What Bookkeeping Is",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "1",
+ "lesson": "1.1",
+ "kind": "lesson",
+ "sourceVideo": "1.1 What Bookkeeping Is (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Bookkeeping records every dollar in and out. Assets = Liabilities + Equity, every transaction changes at least two things, and the two sides must always balance.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "bookkeeping",
+   "q": "Maya writes down every sale, bill and payment for Sunny Day Lawn Care. What is she doing?",
+   "choices": [
+    "Budgeting",
+    "Investing",
+    "Advertising",
+    "Bookkeeping"
+   ],
+   "answer": "Bookkeeping",
+   "hint": "It's keeping an accurate record of every dollar in and out.",
+   "explain": "Bookkeeping is keeping an accurate record of every dollar that comes into and goes out of a business."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "bookkeeping",
+   "q": "Good books let an owner always know three things. Which is one of them?",
+   "choices": [
+    "How many followers the business has",
+    "What competitors charge for mowing",
+    "Which customers live closest",
+    "Whether the business is making money"
+   ],
+   "answer": "Whether the business is making money",
+   "hint": "Think: what it owns, what it owes, and one more.",
+   "explain": "Good books show what the business owns, what it owes and whether it's making money."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "equation",
+   "q": "Which is the accounting equation?",
+   "choices": [
+    "Assets = Liabilities − Equity",
+    "Liabilities = Assets + Equity",
+    "Equity = Assets + Liabilities",
+    "Assets = Liabilities + Equity"
+   ],
+   "answer": "Assets = Liabilities + Equity",
+   "hint": "What the business owns is on one side by itself.",
+   "explain": "Assets equal liabilities plus equity. Everything the business owns was either lent to it or belongs to the owner."
+  },
+  {
+   "id": "q04",
+   "type": "match",
+   "skill": "equation-parts",
+   "q": "Match each Sunny Day item to its part of the accounting equation.",
+   "pairs": [
+    [
+     "Cash in Sunny Day's bank account",
+     "Asset"
+    ],
+    [
+     "The $250 Maya owes her aunt",
+     "Liability"
+    ],
+    [
+     "The $300 Maya put in from her savings",
+     "Equity"
+    ]
+   ],
+   "hint": "Owns, owes, or the owner's share?",
+   "explain": "Cash is something the business owns (asset). The loan is owed to someone else (liability). Maya's own money is her share (equity)."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "equation-parts",
+   "q": "Mr. Patel has promised to pay Maya $35 for a lawn she already mowed. For Sunny Day, that promise is:",
+   "choices": [
+    "A liability",
+    "Nothing yet",
+    "An asset",
+    "Equity"
+   ],
+   "answer": "An asset",
+   "hint": "Is it something the business owns, or something it owes?",
+   "explain": "Money customers have promised to pay is an asset. It has value to the business.",
+   "hints": {
+    "A liability": "A liability is money Sunny Day owes. Here, someone owes Sunny Day."
+   }
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "transactions",
+   "q": "Monday: Maya puts $300 of her own savings into the business bank account. Which two things go up?",
+   "choices": [
+    "Liabilities and equity",
+    "Cash and liabilities",
+    "Cash and equity",
+    "Equipment and equity"
+   ],
+   "answer": "Cash and equity",
+   "hint": "Whose money is it?",
+   "explain": "Cash (an asset) goes up $300, and so does equity, because the money belongs to Maya."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "transactions",
+   "q": "After Monday ($300 of Maya's savings) and Tuesday (a $250 loan from her aunt), how much cash does Sunny Day have?",
+   "choices": [
+    "$50",
+    "$550",
+    "$300",
+    "$250"
+   ],
+   "answer": "$550",
+   "hint": "Both days added cash.",
+   "explain": "$300 + $250 = $550. Assets $550 = liabilities $250 + equity $300."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "transactions",
+   "q": "Sunny Day has $550 cash. On Wednesday Maya pays $400 cash for a used mower. What are total assets now?",
+   "choices": [
+    "$550",
+    "$150",
+    "$400",
+    "$950"
+   ],
+   "answer": "$550",
+   "hint": "Cash went down, but something else went up.",
+   "explain": "Cash is now $150 and the mower is $400. $150 + $400 = $550. One asset turned into another, so the total didn't change.",
+   "hints": {
+    "$150": "That's only the cash. The mower is an asset too."
+   }
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "skill": "transactions",
+   "q": "Match each day of Maya's first week to what it did to the books.",
+   "pairs": [
+    [
+     "Mon: $300 of savings put in",
+     "Cash up, equity up"
+    ],
+    [
+     "Tue: $250 loan from her aunt",
+     "Cash up, liability up"
+    ],
+    [
+     "Wed: $400 mower paid in cash",
+     "Cash down, equipment up"
+    ]
+   ],
+   "hint": "Every transaction changes at least two things.",
+   "explain": "Owner money raises equity, a loan raises a liability, and buying equipment with cash swaps one asset for another."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "equity",
+   "q": "Equity is the owner's share. Which of these makes equity go DOWN?",
+   "choices": [
+    "The business borrows from a bank",
+    "The owner puts in more of her savings",
+    "The business earns a profit",
+    "The owner takes money out for herself"
+   ],
+   "answer": "The owner takes money out for herself",
+   "hint": "Equity is money put in, plus profit, minus...",
+   "explain": "Equity is the money the owner put in, plus profit earned, minus any money the owner takes out for themselves."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "balance",
+   "q": "Maya's assets don't equal her liabilities plus equity. What does that tell a bookkeeper?",
+   "choices": [
+    "The business made a profit",
+    "Maya owes more taxes",
+    "The business is out of cash",
+    "Something was recorded wrong"
+   ],
+   "answer": "Something was recorded wrong",
+   "hint": "The two sides must always be equal.",
+   "explain": "When the equation doesn't balance, a bookkeeper knows something was recorded wrong."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "why",
+   "q": "QuickBooks does the equation math for you. Why learn it anyway?",
+   "choices": [
+    "So you can understand QuickBooks and catch mistakes",
+    "Because QuickBooks needs you to enter both sides",
+    "So you can skip checking QuickBooks reports",
+    "So you can type the totals into QuickBooks yourself"
+   ],
+   "answer": "So you can understand QuickBooks and catch mistakes",
+   "hint": "What does a bookkeeper need to spot?",
+   "explain": "Knowing what QuickBooks does behind the scenes lets you catch mistakes, on the exam and in real life."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

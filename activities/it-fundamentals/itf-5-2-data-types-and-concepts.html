@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.2 Data Types and Programming Concepts Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 5.2 Data Types and Programming Concepts</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-5-2-data-types-and-concepts",
+ "title": "5.2 Data Types and Programming Concepts",
+ "course": "IT Fundamentals",
+ "unit": "5",
+ "lesson": "5.2",
+ "kind": "lesson",
+ "sourceVideo": "5.2 Data Types and Programming Concepts (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Char, string, integer, float and Boolean are the basic data types. Variables change, constants don't, arrays use indexes from zero, functions are reusable, and objects pair properties with methods.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "char",
+   "q": "Which data type holds a single letter, digit or symbol?",
+   "choices": [
+    "Char",
+    "String",
+    "Float",
+    "Boolean"
+   ],
+   "answer": "Char",
+   "hint": "Its name is short for character.",
+   "explain": "A char is one character. A string is a sequence of characters."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "float",
+   "q": "Which value is a float?",
+   "choices": [
+    "87.5",
+    "14",
+    "true",
+    "\"Gear-12\""
+   ],
+   "answer": "87.5",
+   "hint": "Look for a decimal point.",
+   "explain": "A float has a decimal point. 14 is an integer, true is a Boolean, and \"Gear-12\" is a string."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "string",
+   "q": "The club's ZIP code is 02134. Which data type should store it?",
+   "choices": [
+    "String, because you never do math with it",
+    "Integer, because it is made of digits",
+    "Float, because it is a long number",
+    "Boolean, because it is a code"
+   ],
+   "answer": "String, because you never do math with it",
+   "hint": "Would you ever add two ZIP codes together?",
+   "explain": "ZIP codes and phone numbers are stored as strings because you don't do math with them. A string also keeps the leading 0, which an integer would drop."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "boolean",
+   "q": "What does this code print?",
+   "choices": [
+    "&lt;class &#x27;bool&#x27;&gt;",
+    "&lt;class &#x27;str&#x27;&gt;",
+    "&lt;class &#x27;int&#x27;&gt;",
+    "&lt;class &#x27;float&#x27;&gt;"
+   ],
+   "answer": "&lt;class &#x27;bool&#x27;&gt;",
+   "hint": "True has no quotation marks, so it is not text.",
+   "explain": "True is a Boolean value. Python's name for the Boolean type is bool.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "dues_paid = True"
+    ],
+    [
+     "print(type(dues_paid))"
+    ]
+   ]
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "array",
+   "q": "What does this code print?",
+   "choices": [
+    "90",
+    "84",
+    "72",
+    "An error"
+   ],
+   "answer": "90",
+   "hint": "Counting starts at zero.",
+   "explain": "Index 0 is 72, index 1 is 84 and index 2 is 90.",
+   "hints": {
+    "84": "84 is at index 1. Counting starts at 0."
+   },
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "scores = [72, 84, 90]"
+    ],
+    [
+     "print(scores[2])"
+    ]
+   ]
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "variable",
+   "q": "What does this code print?",
+   "choices": [
+    "15",
+    "14",
+    "1",
+    "member_count + 1"
+   ],
+   "answer": "15",
+   "hint": "A variable's value can change.",
+   "explain": "member_count starts at 14, then gets 14 + 1, so it prints 15.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "member_count = 14"
+    ],
+    [
+     "member_count = member_count + 1"
+    ],
+    [
+     "print(member_count)"
+    ]
+   ]
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "function",
+   "q": "What does this code print?",
+   "choices": [
+    "82.0",
+    "246",
+    "84",
+    "3"
+   ],
+   "answer": "82.0",
+   "hint": "Add the scores, then divide by how many there are.",
+   "explain": "72 + 84 + 90 = 246, and 246 / 3 = 82. In Python, dividing with / gives a float, so it prints 82.0.",
+   "hints": {
+    "246": "246 is the sum. The function also divides by the number of scores."
+   },
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "def average(scores):"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;return sum(scores) / len(scores)"
+    ],
+    [
+     "&nbsp;"
+    ],
+    [
+     "print(average([72, 84, 90]))"
+    ]
+   ]
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "constant",
+   "q": "Which name follows the common style for a constant?",
+   "choices": [
+    "MAX_TEAM_SIZE",
+    "maxTeamSize",
+    "max_team_size",
+    "Max_team_size"
+   ],
+   "answer": "MAX_TEAM_SIZE",
+   "hint": "Constants are often written a special way so people leave them alone.",
+   "explain": "Many programmers write constant names in all capital letters."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "object",
+   "q": "What does this code print?",
+   "choices": [
+    "100",
+    "45",
+    "Bolt",
+    "145"
+   ],
+   "answer": "100",
+   "hint": "Bolt starts at 45, then a method runs.",
+   "explain": "Bolt is created with a battery of 45. The charge method sets battery to 100, so it prints 100.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "class Robot:"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name, battery):"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.battery = battery"
+    ],
+    [
+     "&nbsp;"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;def charge(self):"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.battery = 100"
+    ],
+    [
+     "&nbsp;"
+    ],
+    [
+     "bolt = Robot(&quot;Bolt&quot;, 45)"
+    ],
+    [
+     "bolt.charge()"
+    ],
+    [
+     "print(bolt.battery)"
+    ]
+   ]
+  },
+  {
+   "id": "q10",
+   "type": "match",
+   "skill": "concepts",
+   "q": "Match each concept to its description.",
+   "pairs": [
+    [
+     "Variable",
+     "A named value that can change"
+    ],
+    [
+     "Constant",
+     "A named value that should not change"
+    ],
+    [
+     "Array",
+     "Many values in numbered positions"
+    ],
+    [
+     "Function",
+     "A named, reusable block of code"
+    ],
+    [
+     "Method",
+     "An action that belongs to an object"
+    ]
+   ],
+   "hint": "Two of these are named values. One changes and one doesn't.",
+   "explain": "Variables change, constants don't, arrays hold many values by index, functions do one reusable job, and methods are functions that belong to objects."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "object",
+   "q": "In the Robot object, which statement is correct?",
+   "choices": [
+    "Battery level is a property; charge is a method",
+    "Battery level is a method; charge is a property",
+    "Battery level is a constant; charge is an array",
+    "Battery level is an array; charge is a constant"
+   ],
+   "answer": "Battery level is a property; charge is a method",
+   "hint": "Properties describe; methods do.",
+   "explain": "Properties and attributes are the data that describe an object. Methods are the actions it can do."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "identifier",
+   "q": "What is an identifier?",
+   "choices": [
+    "The name you give something in your code",
+    "A value that is never allowed to change",
+    "A numbered position inside an array",
+    "An action that an object is able to do"
+   ],
+   "answer": "The name you give something in your code",
+   "hint": "It's how you refer to something later.",
+   "explain": "An identifier is a name, like member_count or average, that you use to refer to a variable, constant or function."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

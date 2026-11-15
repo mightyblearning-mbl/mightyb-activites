@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain 5 Review: Basic Reports and Views Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Domain 5 Review: Basic Reports and Views</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-5-6-reports-review",
+ "title": "Domain 5 Review: Basic Reports and Views",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "5",
+ "lesson": "5.6",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 4 lessons 4.5-4.6 (Mighty B scripts); QBCU objectives 5.1-5.3",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Know what financial, money-in and money-out reports show, how to customize, save, export and schedule reports, what the Audit Log records, and what the dashboards show.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "5.1.1",
+   "q": "Match each report to the question it answers.",
+   "pairs": [
+    [
+     "Profit and Loss",
+     "Did we make money this month?"
+    ],
+    [
+     "Balance Sheet",
+     "What do we own and owe today?"
+    ],
+    [
+     "A/R aging summary",
+     "Which customers are late paying us?"
+    ],
+    [
+     "A/P aging summary",
+     "Which bills are we late paying?"
+    ],
+    [
+     "Statement of Cash Flows",
+     "Where did our cash come from and go?"
+    ]
+   ],
+   "hint": "Receivable is money coming to you; payable is money you owe.",
+   "explain": "P&L shows profit over time; the Balance Sheet is a snapshot; aging reports show late balances; the cash flow statement tracks cash."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "5.1.2",
+   "q": "Which report shows total sales for each customer?",
+   "choices": [
+    "Expenses by Vendor Summary",
+    "Sales by Customer Summary",
+    "Balance Sheet",
+    "Unpaid Bills"
+   ],
+   "answer": "Sales by Customer Summary",
+   "hint": "Sales plus customer.",
+   "explain": "Sales by Customer Summary totals sales for each customer over a period."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "5.1.3",
+   "q": "Which report shows how much Sunny Day spent with Corner Gas and with Hometown Hardware?",
+   "choices": [
+    "Sales by Product/Service Summary",
+    "Sales by Customer Summary",
+    "A/R aging summary",
+    "Expenses by Vendor Summary"
+   ],
+   "answer": "Expenses by Vendor Summary",
+   "hint": "Corner Gas and Hometown Hardware are vendors.",
+   "explain": "Expenses by Vendor Summary totals spending by vendor."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "5.1.3",
+   "q": "Which report lists the bills Sunny Day hasn't paid yet?",
+   "choices": [
+    "Unpaid Bills",
+    "Deposit Detail",
+    "Open Invoices",
+    "Sales by Customer Summary"
+   ],
+   "answer": "Unpaid Bills",
+   "hint": "Bills are what you owe.",
+   "explain": "Unpaid Bills is a money-out report of open bills. Open Invoices is the money-in version."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "5.1.2",
+   "q": "Which report shows how much Sunny Day earned from Mowing, Edging and Leaf Cleanup?",
+   "choices": [
+    "Sales by Product/Service Summary",
+    "Balance Sheet",
+    "Expenses by Vendor Summary",
+    "Audit Log"
+   ],
+   "answer": "Sales by Product/Service Summary",
+   "hint": "Mowing, Edging and Leaf Cleanup are her services.",
+   "explain": "Sales by Product/Service Summary totals sales for each item."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "5.2.1",
+   "q": "Maya needs her Profit and Loss for June 1 through August 31. What should she change?",
+   "choices": [
+    "The accounts in the Chart of Accounts",
+    "The report's accounting method to cash",
+    "The company's fiscal year in settings",
+    "The report period, to a custom date range"
+   ],
+   "answer": "The report period, to a custom date range",
+   "hint": "It's about the dates covered.",
+   "explain": "Every standard report lets you pick a date range, including a custom one."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "5.2.1",
+   "q": "Maya's accountant wants to see a cash-basis Profit and Loss, but the company uses accrual. What should Maya do?",
+   "choices": [
+    "Change the accounting method in the report's settings",
+    "Change the whole company to cash basis forever",
+    "Delete all unpaid invoices",
+    "Export the report and edit it"
+   ],
+   "answer": "Change the accounting method in the report's settings",
+   "hint": "Reports can be switched one at a time.",
+   "explain": "A report's settings let you run it on cash or accrual without changing the company default."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "5.2.1",
+   "q": "Maya wants a sales report that shows only Mr. Patel's transactions. What should she use?",
+   "choices": [
+    "A bank rule",
+    "A filter for that customer",
+    "A new user role",
+    "A recurring transaction"
+   ],
+   "answer": "A filter for that customer",
+   "hint": "Narrow the report down.",
+   "explain": "Filters limit a report to certain customers, vendors, accounts or other details."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "5.2.1",
+   "q": "Maya customized a report and wants to use the same setup every month. What should she do?",
+   "choices": [
+    "Save the customization",
+    "Make it a journal entry",
+    "Close the books",
+    "Print it and keep the copy"
+   ],
+   "answer": "Save the customization",
+   "hint": "Saving keeps your settings.",
+   "explain": "Saved customizations appear with your custom reports, ready to run again."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "5.2.2",
+   "q": "Maya wants to send her aunt a report as a file that is hard to change. Which format fits best?",
+   "choices": [
+    "Excel",
+    "A bank rule",
+    "PDF",
+    "A recurring template"
+   ],
+   "answer": "PDF",
+   "hint": "One format is easy to edit; one isn't.",
+   "explain": "A PDF keeps the report's layout and isn't meant for editing. Excel is best when someone needs to work with the numbers."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "5.2.2",
+   "q": "Maya wants a saved report emailed to her aunt automatically on the first of each month. What should she do?",
+   "choices": [
+    "Set an email schedule on the saved report",
+    "Add her aunt as a time-tracking user",
+    "Make the report a recurring invoice",
+    "Turn on Close the books"
+   ],
+   "answer": "Set an email schedule on the saved report",
+   "hint": "Saved custom reports can be sent on a schedule.",
+   "explain": "Saved custom reports can be set to email on a schedule."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "5.3.1",
+   "q": "What does the Audit Log record?",
+   "choices": [
+    "Only the company's current bank balances",
+    "Who made each change, what changed and when",
+    "Only the invoices that are past due",
+    "Only the list of apps that are connected"
+   ],
+   "answer": "Who made each change, what changed and when",
+   "hint": "It's QuickBooks' history book.",
+   "explain": "The Audit Log tracks sign-ins and changes to transactions and settings, with the user, date and time."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "5.3.1",
+   "q": "Can a user turn off the Audit Log?",
+   "choices": [
+    "No, it always records activity",
+    "Only reports-only users can",
+    "Yes, but only on weekends",
+    "Yes, any admin can turn it off"
+   ],
+   "answer": "No, it always records activity",
+   "hint": "It's there to protect the books.",
+   "explain": "The Audit Log can't be turned off, which helps catch mistakes and misuse."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "5.3.2",
+   "q": "Maya clicks an Invoices tile on the business overview dashboard. What happens?",
+   "choices": [
+    "The invoices are emailed to customers",
+    "She sees more detail about those invoices",
+    "The invoices are deleted",
+    "The dashboard turns off"
+   ],
+   "answer": "She sees more detail about those invoices",
+   "hint": "Dashboard tiles are shortcuts.",
+   "explain": "Dashboard tiles summarize things like invoices, expenses and bank balances, and you can click them for detail."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "5.1.1",
+   "q": "In June, Sunny Day had $700 of income and $180 of expenses. What net income does the Profit and Loss show?",
+   "choices": [
+    "$700",
+    "$880",
+    "$520",
+    "$180"
+   ],
+   "answer": "$520",
+   "hint": "Income minus expenses.",
+   "explain": "$700 - $180 = $520."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.5 Software Development Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 7.5 Software Development Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-7-5-software-development-review",
+ "title": "7.5 Software Development Review",
+ "course": "IT Fundamentals",
+ "unit": "7",
+ "lesson": "7.5",
+ "kind": "unit-review",
+ "sourceVideo": "Domain 4 review: Unit 5 lessons 5.1-5.3 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Know the language categories, the basic data types, variables, constants, arrays, functions and objects, and how pseudocode, flowcharts, sequence, branching and looping organize a program.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "language-categories",
+   "q": "Match each example to its language category.",
+   "pairs": [
+    [
+     "Python commands run line by line",
+     "Scripting language"
+    ],
+    [
+     "C++ code turned into a program file before it runs",
+     "Compiled language"
+    ],
+    [
+     "A SQL SELECT statement",
+     "Query language"
+    ],
+    [
+     "HTML tags that structure a web page",
+     "Markup language"
+    ],
+    [
+     "Low-level code like MOV and ADD",
+     "Assembly language"
+    ]
+   ],
+   "hint": "Ask: is it run as it goes, built first, asking a database, describing a page, or close to the hardware?",
+   "explain": "Scripting is interpreted as it runs, compiled code is translated first, SQL queries databases, HTML marks up pages, and assembly is close to machine code."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "language-categories",
+   "q": "Why do compiled programs usually run fast?",
+   "choices": [
+    "They're translated to machine code first",
+    "They skip the CPU and run on their own",
+    "They run only inside a web browser",
+    "They don't use any variables at all"
+   ],
+   "answer": "They're translated to machine code first",
+   "hint": "The translation work is already done.",
+   "explain": "A compiler translates the whole program ahead of time, so it runs directly on the hardware."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "language-categories",
+   "q": "Which language category is closest to a computer's machine code?",
+   "choices": [
+    "Markup",
+    "Query",
+    "Assembly",
+    "Scripting"
+   ],
+   "answer": "Assembly",
+   "hint": "It's the lowest level of these.",
+   "explain": "Assembly uses short instructions that map closely to machine code."
+  },
+  {
+   "id": "q04",
+   "type": "match",
+   "skill": "data-types",
+   "q": "Match each value to its data type.",
+   "pairs": [
+    [
+     "'A'",
+     "Char"
+    ],
+    [
+     "\"Hello\"",
+     "String"
+    ],
+    [
+     "42",
+     "Integer"
+    ],
+    [
+     "3.14",
+     "Float"
+    ],
+    [
+     "true",
+     "Boolean"
+    ]
+   ],
+   "hint": "Look for one letter, text, whole numbers, decimals, and true/false.",
+   "explain": "Char is one character, string is text, integer is a whole number, float has a decimal, and Boolean is true or false."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "data-types",
+   "q": "Which data type is best for the number of students in a class?",
+   "choices": [
+    "Integer",
+    "Float",
+    "Boolean",
+    "Char"
+   ],
+   "answer": "Integer",
+   "hint": "You can't have half a student.",
+   "explain": "A count of people is a whole number, so integer fits."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "data-types",
+   "q": "A phone number with a dash, like 555-0123, is best stored as a:",
+   "choices": [
+    "String",
+    "Integer",
+    "Float",
+    "Boolean"
+   ],
+   "answer": "String",
+   "hint": "You won't do math with it, and it has a dash.",
+   "explain": "Phone numbers include symbols and aren't used for math, so store them as text (a string)."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "programming-concepts",
+   "q": "A game score goes up each time the player earns a point. Where should the score be stored?",
+   "choices": [
+    "In a variable",
+    "In a constant",
+    "In a comment",
+    "In a flowchart"
+   ],
+   "answer": "In a variable",
+   "hint": "The value changes.",
+   "explain": "A variable holds a value that can change while the program runs."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "programming-concepts",
+   "q": "Why use an array instead of 30 separate variables for 30 student names?",
+   "choices": [
+    "It keeps related values under one name",
+    "It makes every name a constant value",
+    "It turns all the names into numbers",
+    "It hides the names from the program"
+   ],
+   "answer": "It keeps related values under one name",
+   "hint": "Think of a numbered list.",
+   "explain": "An array holds many related values in order, so you can work with them using one name."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "programming-concepts",
+   "q": "Why do programmers write functions?",
+   "choices": [
+    "To reuse a block of code without rewriting it",
+    "To make code run only once",
+    "To store a single true or false value",
+    "To add notes the computer ignores"
+   ],
+   "answer": "To reuse a block of code without rewriting it",
+   "hint": "You can call it again and again.",
+   "explain": "A function is a named block of code you can call whenever you need it."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "programming-concepts",
+   "q": "A Car object has color = \"red\". In object-oriented terms, color is a:",
+   "choices": [
+    "Property",
+    "Method",
+    "Loop",
+    "Function call"
+   ],
+   "answer": "Property",
+   "hint": "It describes the object; it doesn't do anything.",
+   "explain": "Properties (attributes) describe an object. Methods are actions it can do."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "organizing-code",
+   "q": "Why do programmers add comments to code?",
+   "choices": [
+    "To explain the code to people",
+    "To make the program run faster",
+    "To store user passwords",
+    "To create new variables"
+   ],
+   "answer": "To explain the code to people",
+   "hint": "The computer skips them.",
+   "explain": "Comments are notes for humans. The computer ignores them when it runs the code."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "organizing-code",
+   "q": "What is pseudocode?",
+   "choices": [
+    "Plain-language steps for a program's logic",
+    "A secret code that encrypts a program",
+    "A program with a bug that won't run",
+    "Machine code the CPU runs directly"
+   ],
+   "answer": "Plain-language steps for a program's logic",
+   "hint": "Pseudo means \"fake\" or \"like.\"",
+   "explain": "Pseudocode outlines logic in plain words before you write real code."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "organizing-code",
+   "q": "In a flowchart, which shape usually shows a decision?",
+   "choices": [
+    "Rectangle",
+    "Oval",
+    "Diamond",
+    "Arrow"
+   ],
+   "answer": "Diamond",
+   "hint": "It has a yes path and a no path.",
+   "explain": "Diamonds show decisions. Rectangles show steps, ovals show start and end, and arrows show the flow."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "logic",
+   "q": "Steps that run one after another, in order, with no decisions or repeats, show which concept?",
+   "choices": [
+    "Sequence",
+    "Branching",
+    "Looping",
+    "Object"
+   ],
+   "answer": "Sequence",
+   "hint": "Think of following a recipe from top to bottom.",
+   "explain": "Sequence means running steps in order."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "logic",
+   "q": "IF age >= 16 THEN show \"You can apply\" ELSE show \"Not yet\". Which concept is this?",
+   "choices": [
+    "Branching",
+    "Looping",
+    "Sequence",
+    "Commenting"
+   ],
+   "answer": "Branching",
+   "hint": "The program picks one of two paths.",
+   "explain": "IF/ELSE is branching: the program chooses a path based on a condition."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "logic",
+   "q": "How many times does this loop print a number?",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "It never stops"
+   ],
+   "answer": "3",
+   "hint": "Try it: count is 1, then 2, then 3. What happens at 4?",
+   "explain": "It prints 1, 2 and 3. When count becomes 4, the condition count <= 3 is false, so the loop stops.",
+   "table": [
+    [
+     "Code"
+    ],
+    [
+     "count = 1"
+    ],
+    [
+     "WHILE count &lt;= 3"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;PRINT count"
+    ],
+    [
+     "&nbsp;&nbsp;&nbsp;&nbsp;count = count + 1"
+    ]
+   ]
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

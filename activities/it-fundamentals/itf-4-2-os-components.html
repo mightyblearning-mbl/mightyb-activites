@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.2 OS Components Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.2 OS Components</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-4-2-os-components",
+ "title": "4.2 OS Components",
+ "course": "IT Fundamentals",
+ "unit": "4",
+ "lesson": "4.2",
+ "kind": "lesson",
+ "sourceVideo": "4.2 OS Components (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Use the GUI or command line, find files by path and extension, know processes, services and drivers, and use a standard account with updates on.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "interfaces",
+   "q": "Which interface uses windows, icons, menus and a pointer?",
+   "choices": [
+    "Graphical user interface (GUI)",
+    "Device driver",
+    "File system",
+    "Command line"
+   ],
+   "answer": "Graphical user interface (GUI)",
+   "hint": "You click instead of typing commands.",
+   "explain": "A GUI uses windows, icons, menus and a pointer."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "interfaces",
+   "q": "Why do IT pros often use the command line?",
+   "choices": [
+    "It is the only way to open any program at all",
+    "It never needs a keyboard to use it",
+    "It's fast and can repeat a job on many computers",
+    "It shows bigger icons than a GUI does"
+   ],
+   "answer": "It's fast and can repeat a job on many computers",
+   "hint": "Typing commands can be repeated.",
+   "explain": "The command line is fast and lets pros repeat jobs across many computers."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "paths",
+   "q": "Look at the path C:\\Users\\Luis\\Pictures\\beach.jpg. Which folder holds the file?",
+   "choices": [
+    "C:",
+    "Pictures",
+    "Users",
+    "Luis"
+   ],
+   "answer": "Pictures",
+   "hint": "The file name comes right after its folder.",
+   "explain": "beach.jpg sits directly inside the Pictures folder."
+  },
+  {
+   "id": "q04",
+   "type": "match",
+   "skill": "extensions",
+   "q": "Match each file extension to its type.",
+   "pairs": [
+    [
+     ".jpg",
+     "Photo"
+    ],
+    [
+     ".docx",
+     "Document"
+    ],
+    [
+     ".exe",
+     "Windows program"
+    ],
+    [
+     ".zip",
+     "Compressed file"
+    ]
+   ],
+   "hint": "Which one would you run?",
+   "explain": "jpg is a photo, docx a document, exe a Windows program, zip a compressed file."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "file-system",
+   "q": "What is a file system?",
+   "choices": [
+    "A program that blocks pop-up windows",
+    "The cable that connects a hard drive",
+    "A folder that holds only photos and videos",
+    "The method the OS uses to organize and track files"
+   ],
+   "answer": "The method the OS uses to organize and track files",
+   "hint": "NTFS, APFS and ext4 are examples.",
+   "explain": "A file system organizes and tracks files on a drive."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "file-features",
+   "q": "Grandpa wants a file that only someone with the password can read. Which feature does that?",
+   "choices": [
+    "Read-only attribute",
+    "Hidden attribute",
+    "Compression",
+    "Encryption"
+   ],
+   "answer": "Encryption",
+   "hint": "It scrambles the file.",
+   "explain": "Encryption scrambles a file so only someone with the key or password can read it."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "permissions",
+   "q": "Which permission lets a person change a file?",
+   "choices": [
+    "Execute",
+    "Hidden",
+    "Read",
+    "Write"
+   ],
+   "answer": "Write",
+   "hint": "Read means view. Execute means run.",
+   "explain": "Write permission means you can change the file."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "naming",
+   "q": "Which file name would Windows NOT allow?",
+   "choices": [
+    "Trip notes.docx",
+    "Trip?.docx",
+    "Trip_2026.docx",
+    "Trip-photos.docx"
+   ],
+   "answer": "Trip?.docx",
+   "hint": "Look for a restricted character.",
+   "explain": "Windows won't allow characters like the question mark, colon or asterisk in file names."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "skill": "processes",
+   "q": "Match each term to its meaning.",
+   "pairs": [
+    [
+     "Process",
+     "A program that is running right now"
+    ],
+    [
+     "Service",
+     "Runs in the background without a window"
+    ],
+    [
+     "Driver",
+     "Lets the OS talk to one piece of hardware"
+    ],
+    [
+     "Utility",
+     "A system program for maintenance"
+    ]
+   ],
+   "hint": "Which one has no window?",
+   "explain": "Processes run, services run in the background, drivers talk to hardware, utilities maintain."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "drivers",
+   "q": "The OS didn't install a driver for Grandpa's webcam. Where should Sam get one?",
+   "choices": [
+    "A file a stranger sent by email",
+    "The device maker's official website",
+    "Any site that offers free downloads",
+    "A link in a pop-up advertisement"
+   ],
+   "answer": "The device maker's official website",
+   "hint": "Choose the trusted source.",
+   "explain": "Get drivers only from the device maker's official website."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "accounts",
+   "q": "Which account should Grandpa use for everyday work?",
+   "choices": [
+    "A guest account with no password",
+    "A standard user account",
+    "An administrator account",
+    "A shared account for everyone"
+   ],
+   "answer": "A standard user account",
+   "hint": "Which one limits big changes?",
+   "explain": "A standard account limits the changes a bad click can make."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "updates",
+   "q": "What are updates, also called patches, for?",
+   "choices": [
+    "Changing which folder files go in",
+    "Making files take up less space",
+    "Fixing bugs and closing security holes",
+    "Adding extra storage to the drive"
+   ],
+   "answer": "Fixing bugs and closing security holes",
+   "hint": "Why keep automatic updates on?",
+   "explain": "Patches fix bugs and close security holes."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

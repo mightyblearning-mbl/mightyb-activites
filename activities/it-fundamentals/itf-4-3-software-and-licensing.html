@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.3 Types of Software and Licensing Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.3 Types of Software and Licensing</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-4-3-software-and-licensing",
+ "title": "4.3 Types of Software and Licensing",
+ "course": "IT Fundamentals",
+ "unit": "4",
+ "lesson": "4.3",
+ "kind": "lesson",
+ "sourceVideo": "4.3 Types of Software and Licensing (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Match the software type to the job, know installed vs. web apps, and read the license: proprietary or open source, one-time or subscription, single-use or site.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "productivity",
+   "q": "The club needs slides for a sponsor pitch. Which software fits best?",
+   "choices": [
+    "Spreadsheet",
+    "Email client",
+    "Word processing",
+    "Presentation"
+   ],
+   "answer": "Presentation",
+   "hint": "Slides!",
+   "explain": "Presentation software makes slides."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "productivity",
+   "q": "Which software would the club use to draw the robot's wiring diagram?",
+   "choices": [
+    "Instant messaging",
+    "Spreadsheet",
+    "Conferencing",
+    "Visual diagramming"
+   ],
+   "answer": "Visual diagramming",
+   "hint": "It draws flowcharts and floor plans too.",
+   "explain": "Visual diagramming software draws flowcharts, wiring diagrams and floor plans."
+  },
+  {
+   "id": "q03",
+   "type": "match",
+   "skill": "collaboration",
+   "q": "Match each collaboration tool to what it does.",
+   "pairs": [
+    [
+     "Email client",
+     "Sends, receives and organizes email"
+    ],
+    [
+     "Conferencing",
+     "Runs video meetings"
+    ],
+    [
+     "Document sharing",
+     "Lets several people edit one file"
+    ],
+    [
+     "Instant messaging",
+     "Sends quick text chats"
+    ]
+   ],
+   "hint": "Which one runs meetings with video?",
+   "explain": "Each tool's name hints at its job."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "remote-support",
+   "q": "A caller says he's from tech support and asks Grandpa to install remote support software. What should Grandpa do?",
+   "choices": [
+    "Hang up; only trusted people get access",
+    "Install it so the caller can help him",
+    "Give the caller his password instead",
+    "Install it, then turn off the laptop"
+   ],
+   "answer": "Hang up; only trusted people get access",
+   "hint": "Scammers pretend to be tech support.",
+   "explain": "Only let someone you know and trust connect with remote support software."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "software-types",
+   "q": "Antivirus and backup tools are examples of which type of software?",
+   "choices": [
+    "Collaboration",
+    "Business",
+    "Utility",
+    "Productivity"
+   ],
+   "answer": "Utility",
+   "hint": "They maintain the computer.",
+   "explain": "Utility software maintains a computer."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "installed-web",
+   "q": "Which is true of an installed app?",
+   "choices": [
+    "It only runs inside a web browser window",
+    "It stores every file online by default",
+    "It runs from your device and often works offline",
+    "It always needs an internet connection"
+   ],
+   "answer": "It runs from your device and often works offline",
+   "hint": "Where does it run from?",
+   "explain": "Installed apps run from device storage and often work offline."
+  },
+  {
+   "id": "q07",
+   "type": "match",
+   "skill": "licensing",
+   "q": "Match each license type to its description.",
+   "pairs": [
+    [
+     "Proprietary",
+     "Company keeps the code private"
+    ],
+    [
+     "Open source",
+     "Code is shared for anyone to view and change"
+    ],
+    [
+     "Freeware",
+     "Free to use, but the code is not shared"
+    ],
+    [
+     "Site license",
+     "Covers many users at one organization"
+    ]
+   ],
+   "hint": "Which one is free but still keeps its code private?",
+   "explain": "Proprietary keeps code private; open source shares it; freeware is free but closed; a site license covers many users."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "licensing",
+   "q": "What does a software license give you?",
+   "choices": [
+    "A promise the software will never change",
+    "Full ownership of the software's code",
+    "The right to sell copies to friends",
+    "Permission to use the software, plus rules"
+   ],
+   "answer": "Permission to use the software, plus rules",
+   "hint": "You usually don't own the software itself.",
+   "explain": "A license is legal permission plus rules."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "subscription-math",
+   "q": "An app costs $8 a month. How much does a 6-month season cost?",
+   "choices": [
+    "$96",
+    "$14",
+    "$60",
+    "$48"
+   ],
+   "answer": "$48",
+   "hint": "Multiply the monthly price by the months.",
+   "explain": "$8 × 6 = $48.",
+   "hints": {
+    "$96": "That's 12 months."
+   }
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "subscription-math",
+   "q": "An app is $60 one time or $8 a month. The club needs it for a full year. Which costs less?",
+   "choices": [
+    "The $60 one-time purchase",
+    "They cost exactly the same",
+    "It depends on the club's size",
+    "The $8 monthly subscription"
+   ],
+   "answer": "The $60 one-time purchase",
+   "hint": "Find 12 × $8.",
+   "explain": "12 × $8 = $96, which is more than $60."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "licensing",
+   "q": "Which license covers just one user or one device?",
+   "choices": [
+    "Open source license",
+    "Single-use license",
+    "Site license",
+    "Subscription"
+   ],
+   "answer": "Single-use license",
+   "hint": "The opposite of a site license.",
+   "explain": "A single-use license covers one user or one device."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "proper-use",
+   "q": "Why should the club never use a pirated copy of software?",
+   "choices": [
+    "It's illegal and often hides malware",
+    "It always runs too slowly to use",
+    "It can only be used for one day",
+    "It will only open on a server"
+   ],
+   "answer": "It's illegal and often hides malware",
+   "hint": "Two big problems.",
+   "explain": "Pirated copies are illegal and often hide malware."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

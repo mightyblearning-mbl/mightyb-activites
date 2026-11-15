@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.1 Vendors and 1099 Contractors Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 3.1 Vendors and 1099 Contractors</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-3-1-vendors-and-1099",
+ "title": "3.1 Vendors and 1099 Contractors",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "3",
+ "lesson": "3.1",
+ "kind": "lesson",
+ "sourceVideo": "3.1 Vendors and 1099 Contractors (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "A vendor is anyone you pay. Save payment terms on the vendor record, keep display names unique, merge duplicates carefully, and track 1099 payments for contractors after collecting a W-9.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "vendor-basics",
+   "q": "Which of these is a vendor for Sunny Day Lawn Care?",
+   "choices": [
+    "Mr. Raj Patel",
+    "Ana Garcia, as a mowing customer",
+    "The Mowing service item",
+    "Corner Gas"
+   ],
+   "answer": "Corner Gas",
+   "hint": "A vendor is someone Maya pays.",
+   "explain": "Maya pays Corner Gas for gas, so it is a vendor. Mr. Patel and Ana pay Maya, so they are customers."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "payment-terms",
+   "q": "Hometown Hardware gives Maya Net 30 terms. A bill is dated October 5. When is it due?",
+   "choices": [
+    "November 5",
+    "October 30",
+    "November 4",
+    "October 5"
+   ],
+   "answer": "November 4",
+   "hint": "Count 30 days after the bill date. October has 31 days.",
+   "explain": "October 5 plus 30 days is November 4 (26 days left in October, then 4 more)."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "payment-terms",
+   "q": "Why save payment terms on a vendor record?",
+   "choices": [
+    "It turns the vendor into a 1099 contractor",
+    "QuickBooks pays that vendor's bills automatically",
+    "QuickBooks fills in the due date on that vendor's bills",
+    "It hides the vendor from the vendor list"
+   ],
+   "answer": "QuickBooks fills in the due date on that vendor's bills",
+   "hint": "Think about what terms tell you: how long you have to pay.",
+   "explain": "Terms saved on the vendor record set the due date on each new bill from that vendor."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "customer-as-vendor",
+   "q": "Ana Garcia is a customer. Maya now needs to pay Ana for a used leaf blower. What should Maya do?",
+   "choices": [
+    "Pick Ana from the customer list on the expense",
+    "Add a vendor with a slightly different name, like Ana Garcia (V)",
+    "Change Ana's customer record into a vendor record",
+    "Delete Ana as a customer and add her as a vendor"
+   ],
+   "answer": "Add a vendor with a slightly different name, like Ana Garcia (V)",
+   "hint": "Display names must be unique across customers, vendors and employees.",
+   "explain": "A customer and a vendor can't share the exact same display name, so Maya adds a second record with a small change in the name."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "merge-vendors",
+   "q": "How do you merge two vendor records in QuickBooks Online?",
+   "choices": [
+    "Delete the older vendor record",
+    "Change one display name to exactly match the other",
+    "Run a report of both vendors",
+    "Make both vendors inactive"
+   ],
+   "answer": "Change one display name to exactly match the other",
+   "hint": "It's the same trick you used for customers in Unit 1.",
+   "explain": "Renaming one record to exactly match the other makes QuickBooks ask whether to merge. The merge can't be undone."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "merge-vendors",
+   "q": "Maya merges \"Corner Gas Station\" into \"Corner Gas.\" Then she wishes she hadn't. What can she do?",
+   "choices": [
+    "Make Corner Gas inactive to split them",
+    "Click Undo merge on the vendor page",
+    "Restore it from the audit log",
+    "Nothing in QuickBooks; a merge can't be undone"
+   ],
+   "answer": "Nothing in QuickBooks; a merge can't be undone",
+   "hint": "What did the lesson say to do before you merge?",
+   "explain": "Merges are permanent, which is why you check the spelling first."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "1099",
+   "q": "Jordan picks which Saturdays to work, brings a rake and is paid by the job. In QuickBooks, Jordan is best set up as:",
+   "choices": [
+    "A vendor tracked for 1099",
+    "A sub-customer of Maya",
+    "A customer with Net 30 terms",
+    "An employee on payroll"
+   ],
+   "answer": "A vendor tracked for 1099",
+   "hint": "Jordan is paid for work but isn't an employee.",
+   "explain": "Jordan is an independent contractor, so Maya adds Jordan as a vendor and turns on 1099 tracking."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "1099",
+   "q": "When does a business file Form 1099-NEC for a contractor?",
+   "choices": [
+    "When the contractor works more than 40 hours a week for the business",
+    "Every time it pays the contractor any amount, even a few dollars",
+    "Only when the contractor asks for one at the end of the year",
+    "When it pays the contractor at least the IRS reporting amount in a year"
+   ],
+   "answer": "When it pays the contractor at least the IRS reporting amount in a year",
+   "hint": "The form has a yearly reporting amount set by the IRS.",
+   "explain": "Businesses file 1099-NEC for contractors paid at least the IRS reporting amount in a year. That amount can change, so check the current one."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "1099",
+   "q": "Which form does Maya ask Jordan to fill out before Jordan starts work?",
+   "choices": [
+    "Form 1099-NEC",
+    "Form W-9",
+    "Form 1040",
+    "Form W-2"
+   ],
+   "answer": "Form W-9",
+   "hint": "This form collects the contractor's name, address and taxpayer ID.",
+   "explain": "A W-9 gives Maya the details she will need later to prepare Jordan's 1099."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "1099",
+   "q": "Maya paid Jordan once with a credit card. How does QuickBooks treat that payment for the 1099?",
+   "choices": [
+    "It turns the card payment into a vendor credit for Jordan",
+    "It reports the payment on a W-2 instead of the 1099",
+    "It leaves it out, because card payment companies report it",
+    "It counts it twice, once for the card and once for the bank"
+   ],
+   "answer": "It leaves it out, because card payment companies report it",
+   "hint": "Who else reports card payments?",
+   "explain": "QuickBooks leaves card payments out of the 1099 because card payment companies report those separately."
+  },
+  {
+   "id": "q11",
+   "type": "match",
+   "skill": "vocab",
+   "q": "Match each term to its meaning.",
+   "pairs": [
+    [
+     "Vendor",
+     "Anyone the business pays"
+    ],
+    [
+     "Payee",
+     "Whoever receives the money"
+    ],
+    [
+     "Payment terms",
+     "How long you have to pay"
+    ],
+    [
+     "Form W-9",
+     "Collects a contractor's taxpayer ID"
+    ],
+    [
+     "Form 1099-NEC",
+     "Reports pay to a nonemployee"
+    ]
+   ],
+   "hint": "Read each meaning and ask: who, how long, or which form?",
+   "explain": "Vendors are who you pay; the payee receives the money; terms set the time to pay; W-9 collects info; 1099-NEC reports contractor pay."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

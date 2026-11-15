@@ -7597,5 +7597,626 @@
     "course": "4th Grade Science",
     "unit": "9",
     "engine": "quest"
+  },
+  "qbo-1-1-what-bookkeeping-is": {
+    "file": "bookkeeping-quickbooks/qbo-1-1-what-bookkeeping-is.html",
+    "title": "1.1 What Bookkeeping Is",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "1",
+    "unitTitle": "Bookkeeping and QuickBooks Basics"
+  },
+  "qbo-1-2-cash-vs-accrual": {
+    "file": "bookkeeping-quickbooks/qbo-1-2-cash-vs-accrual.html",
+    "title": "1.2 Cash vs. Accrual, Company Info and Closing the Books",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "1",
+    "unitTitle": "Bookkeeping and QuickBooks Basics"
+  },
+  "qbo-1-3-company-setup-and-user-roles": {
+    "file": "bookkeeping-quickbooks/qbo-1-3-company-setup-and-user-roles.html",
+    "title": "1.3 Company Setup, QBO Plus and User Roles",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "1",
+    "unitTitle": "Bookkeeping and QuickBooks Basics"
+  },
+  "qbo-1-4-projects-classes-locations": {
+    "file": "bookkeeping-quickbooks/qbo-1-4-projects-classes-locations.html",
+    "title": "1.4 Projects, Classes, Locations and Automation",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "1",
+    "unitTitle": "Bookkeeping and QuickBooks Basics"
+  },
+  "qbo-1-5-lists-and-chart-of-accounts": {
+    "file": "bookkeeping-quickbooks/qbo-1-5-lists-and-chart-of-accounts.html",
+    "title": "1.5 Lists and the Chart of Accounts",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "1",
+    "unitTitle": "Bookkeeping and QuickBooks Basics"
+  },
+  "qbo-1-6-bookkeeping-and-quickbooks-basics-review": {
+    "file": "bookkeeping-quickbooks/qbo-1-6-bookkeeping-and-quickbooks-basics-review.html",
+    "title": "Unit 1 Review: Bookkeeping and QuickBooks Basics",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "1",
+    "unitTitle": "Bookkeeping and QuickBooks Basics"
+  },
+  "qbo-2-1-customers": {
+    "file": "bookkeeping-quickbooks/qbo-2-1-customers.html",
+    "title": "2.1 Customers and Sub-Customers",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "2",
+    "unitTitle": "Sales and Money In"
+  },
+  "qbo-2-2-products-services": {
+    "file": "bookkeeping-quickbooks/qbo-2-2-products-services.html",
+    "title": "2.2 Products and Services",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "2",
+    "unitTitle": "Sales and Money In"
+  },
+  "qbo-2-3-sales-settings": {
+    "file": "bookkeeping-quickbooks/qbo-2-3-sales-settings.html",
+    "title": "2.3 Sales Forms and Settings",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "2",
+    "unitTitle": "Sales and Money In"
+  },
+  "qbo-2-4-invoices-sales-receipts": {
+    "file": "bookkeeping-quickbooks/qbo-2-4-invoices-sales-receipts.html",
+    "title": "2.4 Invoices and Sales Receipts",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "2",
+    "unitTitle": "Sales and Money In"
+  },
+  "qbo-2-5-payments-deposits": {
+    "file": "bookkeeping-quickbooks/qbo-2-5-payments-deposits.html",
+    "title": "2.5 Payments, Deposits, Credit Memos and Refunds",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "2",
+    "unitTitle": "Sales and Money In"
+  },
+  "qbo-2-6-sales-and-money-in-review": {
+    "file": "bookkeeping-quickbooks/qbo-2-6-sales-and-money-in-review.html",
+    "title": "Unit 2 Review: Sales and Money In",
+    "kind": "unit-review",
+    "questions": 17,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "2",
+    "unitTitle": "Sales and Money In"
+  },
+  "qbo-3-1-vendors-and-1099": {
+    "file": "bookkeeping-quickbooks/qbo-3-1-vendors-and-1099.html",
+    "title": "3.1 Vendors and 1099 Contractors",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "3",
+    "unitTitle": "Vendors and Money Out"
+  },
+  "qbo-3-2-billable-expenses": {
+    "file": "bookkeeping-quickbooks/qbo-3-2-billable-expenses.html",
+    "title": "3.2 Billable Expenses",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "3",
+    "unitTitle": "Vendors and Money Out"
+  },
+  "qbo-3-3-bills-checks-payments": {
+    "file": "bookkeeping-quickbooks/qbo-3-3-bills-checks-payments.html",
+    "title": "3.3 Bills, Checks and Bill Payments",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "3",
+    "unitTitle": "Vendors and Money Out"
+  },
+  "qbo-3-4-card-expenses-credits": {
+    "file": "bookkeeping-quickbooks/qbo-3-4-card-expenses-credits.html",
+    "title": "3.4 Card Expenses and Vendor Credits",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "3",
+    "unitTitle": "Vendors and Money Out"
+  },
+  "qbo-3-5-void-delete-edit": {
+    "file": "bookkeeping-quickbooks/qbo-3-5-void-delete-edit.html",
+    "title": "3.5 Fixing Mistakes: Void, Delete, Edit",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "3",
+    "unitTitle": "Vendors and Money Out"
+  },
+  "qbo-3-6-vendors-and-money-out-review": {
+    "file": "bookkeeping-quickbooks/qbo-3-6-vendors-and-money-out-review.html",
+    "title": "Unit 3 Review: Vendors and Money Out",
+    "kind": "unit-review",
+    "questions": 17,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "3",
+    "unitTitle": "Vendors and Money Out"
+  },
+  "qbo-4-1-bank-feeds-and-rules": {
+    "file": "bookkeeping-quickbooks/qbo-4-1-bank-feeds-and-rules.html",
+    "title": "4.1 Bank Connections, Bank Feeds and Rules",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "4",
+    "unitTitle": "Banking, Automation and Reports"
+  },
+  "qbo-4-2-receipts": {
+    "file": "bookkeeping-quickbooks/qbo-4-2-receipts.html",
+    "title": "4.2 Receipts",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "4",
+    "unitTitle": "Banking, Automation and Reports"
+  },
+  "qbo-4-3-recurring-and-journal-entries": {
+    "file": "bookkeeping-quickbooks/qbo-4-3-recurring-and-journal-entries.html",
+    "title": "4.3 Recurring Transactions and Journal Entries",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "4",
+    "unitTitle": "Banking, Automation and Reports"
+  },
+  "qbo-4-4-apps": {
+    "file": "bookkeeping-quickbooks/qbo-4-4-apps.html",
+    "title": "4.4 Apps",
+    "kind": "lesson",
+    "questions": 9,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "4",
+    "unitTitle": "Banking, Automation and Reports"
+  },
+  "qbo-4-5-reports": {
+    "file": "bookkeeping-quickbooks/qbo-4-5-reports.html",
+    "title": "4.5 Financial, Money-In and Money-Out Reports",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "4",
+    "unitTitle": "Banking, Automation and Reports"
+  },
+  "qbo-4-6-customizing-reports": {
+    "file": "bookkeeping-quickbooks/qbo-4-6-customizing-reports.html",
+    "title": "4.6 Customizing Reports, Audit Log and Dashboards",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "4",
+    "unitTitle": "Banking, Automation and Reports"
+  },
+  "qbo-4-7-banking-automation-reports-review": {
+    "file": "bookkeeping-quickbooks/qbo-4-7-banking-automation-reports-review.html",
+    "title": "Unit 4 Review: Banking, Automation and Reports",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "4",
+    "unitTitle": "Banking, Automation and Reports"
+  },
+  "qbo-5-1-how-the-exam-works": {
+    "file": "bookkeeping-quickbooks/qbo-5-1-how-the-exam-works.html",
+    "title": "5.1 How the Certification Exam Works",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "5",
+    "unitTitle": "Exam Prep"
+  },
+  "qbo-5-2-administration-review": {
+    "file": "bookkeeping-quickbooks/qbo-5-2-administration-review.html",
+    "title": "Domain 1 Review: QuickBooks Online Administration",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "5",
+    "unitTitle": "Exam Prep"
+  },
+  "qbo-5-3-sales-review": {
+    "file": "bookkeeping-quickbooks/qbo-5-3-sales-review.html",
+    "title": "Domain 2 Review: Sales and Money-In",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "5",
+    "unitTitle": "Exam Prep"
+  },
+  "qbo-5-4-vendors-review": {
+    "file": "bookkeeping-quickbooks/qbo-5-4-vendors-review.html",
+    "title": "Domain 3 Review: Vendors and Money-Out",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "5",
+    "unitTitle": "Exam Prep"
+  },
+  "qbo-5-5-banking-review": {
+    "file": "bookkeeping-quickbooks/qbo-5-5-banking-review.html",
+    "title": "Domain 4 Review: Bank Accounts, Transaction Rules and Receipts",
+    "kind": "unit-review",
+    "questions": 15,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "5",
+    "unitTitle": "Exam Prep"
+  },
+  "qbo-5-6-reports-review": {
+    "file": "bookkeeping-quickbooks/qbo-5-6-reports-review.html",
+    "title": "Domain 5 Review: Basic Reports and Views",
+    "kind": "unit-review",
+    "questions": 15,
+    "course": "Bookkeeping with QuickBooks Online",
+    "unit": "5",
+    "unitTitle": "Exam Prep"
+  },
+  "itf-1-1-how-computers-process-data": {
+    "file": "it-fundamentals/itf-1-1-how-computers-process-data.html",
+    "title": "1.1 How Computers Process Data",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "1",
+    "unitTitle": "Tech Concepts"
+  },
+  "itf-1-2-binary-decimal-and-hexadecimal": {
+    "file": "it-fundamentals/itf-1-2-binary-decimal-and-hexadecimal.html",
+    "title": "1.2 Binary, Decimal and Hexadecimal",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "1",
+    "unitTitle": "Tech Concepts"
+  },
+  "itf-1-3-units-of-measure": {
+    "file": "it-fundamentals/itf-1-3-units-of-measure.html",
+    "title": "1.3 Units of Measure",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "1",
+    "unitTitle": "Tech Concepts"
+  },
+  "itf-1-4-the-troubleshooting-method": {
+    "file": "it-fundamentals/itf-1-4-the-troubleshooting-method.html",
+    "title": "1.4 The Troubleshooting Method",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "1",
+    "unitTitle": "Tech Concepts"
+  },
+  "itf-1-5-tech-concepts-review": {
+    "file": "it-fundamentals/itf-1-5-tech-concepts-review.html",
+    "title": "Unit 1 Review: Tech Concepts",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "IT Fundamentals",
+    "unit": "1",
+    "unitTitle": "Tech Concepts"
+  },
+  "itf-2-1-computing-devices": {
+    "file": "it-fundamentals/itf-2-1-computing-devices.html",
+    "title": "2.1 Computing Devices",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "IT Fundamentals",
+    "unit": "2",
+    "unitTitle": "Hardware and Devices"
+  },
+  "itf-2-2-inside-the-computer": {
+    "file": "it-fundamentals/itf-2-2-inside-the-computer.html",
+    "title": "2.2 Inside the Computer",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "2",
+    "unitTitle": "Hardware and Devices"
+  },
+  "itf-2-3-storage-types": {
+    "file": "it-fundamentals/itf-2-3-storage-types.html",
+    "title": "2.3 Storage Types",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "2",
+    "unitTitle": "Hardware and Devices"
+  },
+  "itf-2-4-peripherals-and-ports": {
+    "file": "it-fundamentals/itf-2-4-peripherals-and-ports.html",
+    "title": "2.4 Peripherals and Ports",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "2",
+    "unitTitle": "Hardware and Devices"
+  },
+  "itf-2-5-hardware-and-devices-review": {
+    "file": "it-fundamentals/itf-2-5-hardware-and-devices-review.html",
+    "title": "Unit 2 Review: Hardware and Devices",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "IT Fundamentals",
+    "unit": "2",
+    "unitTitle": "Hardware and Devices"
+  },
+  "itf-3-1-networking-basics": {
+    "file": "it-fundamentals/itf-3-1-networking-basics.html",
+    "title": "3.1 Networking Basics",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "3",
+    "unitTitle": "Networks and the Cloud"
+  },
+  "itf-3-2-wireless-networks": {
+    "file": "it-fundamentals/itf-3-2-wireless-networks.html",
+    "title": "3.2 Wireless Networks",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "3",
+    "unitTitle": "Networks and the Cloud"
+  },
+  "itf-3-3-virtualization-cloud": {
+    "file": "it-fundamentals/itf-3-3-virtualization-cloud.html",
+    "title": "3.3 Virtualization and Cloud Computing",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "3",
+    "unitTitle": "Networks and the Cloud"
+  },
+  "itf-3-4-networks-and-the-cloud-review": {
+    "file": "it-fundamentals/itf-3-4-networks-and-the-cloud-review.html",
+    "title": "Unit 3 Review: Networks and the Cloud",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "IT Fundamentals",
+    "unit": "3",
+    "unitTitle": "Networks and the Cloud"
+  },
+  "itf-4-1-operating-systems": {
+    "file": "it-fundamentals/itf-4-1-operating-systems.html",
+    "title": "4.1 Operating Systems",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "4",
+    "unitTitle": "Software"
+  },
+  "itf-4-2-os-components": {
+    "file": "it-fundamentals/itf-4-2-os-components.html",
+    "title": "4.2 OS Components",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "4",
+    "unitTitle": "Software"
+  },
+  "itf-4-3-software-and-licensing": {
+    "file": "it-fundamentals/itf-4-3-software-and-licensing.html",
+    "title": "4.3 Types of Software and Licensing",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "4",
+    "unitTitle": "Software"
+  },
+  "itf-4-4-web-browsers": {
+    "file": "it-fundamentals/itf-4-4-web-browsers.html",
+    "title": "4.4 Web Browsers",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "4",
+    "unitTitle": "Software"
+  },
+  "itf-4-5-artificial-intelligence": {
+    "file": "it-fundamentals/itf-4-5-artificial-intelligence.html",
+    "title": "4.5 Artificial Intelligence",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "4",
+    "unitTitle": "Software"
+  },
+  "itf-4-6-software-review": {
+    "file": "it-fundamentals/itf-4-6-software-review.html",
+    "title": "Unit 4 Review: Software",
+    "kind": "unit-review",
+    "questions": 18,
+    "course": "IT Fundamentals",
+    "unit": "4",
+    "unitTitle": "Software"
+  },
+  "itf-5-1-programming-languages": {
+    "file": "it-fundamentals/itf-5-1-programming-languages.html",
+    "title": "5.1 Programming Languages",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "5",
+    "unitTitle": "Programming and Data"
+  },
+  "itf-5-2-data-types-and-concepts": {
+    "file": "it-fundamentals/itf-5-2-data-types-and-concepts.html",
+    "title": "5.2 Data Types and Programming Concepts",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "5",
+    "unitTitle": "Programming and Data"
+  },
+  "itf-5-3-flowcharts-and-pseudocode": {
+    "file": "it-fundamentals/itf-5-3-flowcharts-and-pseudocode.html",
+    "title": "5.3 Flowcharts and Pseudocode",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "5",
+    "unitTitle": "Programming and Data"
+  },
+  "itf-5-4-why-data-matters": {
+    "file": "it-fundamentals/itf-5-4-why-data-matters.html",
+    "title": "5.4 Why Data Matters",
+    "kind": "lesson",
+    "questions": 11,
+    "course": "IT Fundamentals",
+    "unit": "5",
+    "unitTitle": "Programming and Data"
+  },
+  "itf-5-5-databases-and-backups": {
+    "file": "it-fundamentals/itf-5-5-databases-and-backups.html",
+    "title": "5.5 Databases and Backups",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "IT Fundamentals",
+    "unit": "5",
+    "unitTitle": "Programming and Data"
+  },
+  "itf-5-6-programming-and-data-review": {
+    "file": "it-fundamentals/itf-5-6-programming-and-data-review.html",
+    "title": "Unit 5 Review: Programming and Data",
+    "kind": "unit-review",
+    "questions": 17,
+    "course": "IT Fundamentals",
+    "unit": "5",
+    "unitTitle": "Programming and Data"
+  },
+  "itf-6-1-security-concepts": {
+    "file": "it-fundamentals/itf-6-1-security-concepts.html",
+    "title": "6.1 Security Concepts",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "IT Fundamentals",
+    "unit": "6",
+    "unitTitle": "Security"
+  },
+  "itf-6-2-device-security": {
+    "file": "it-fundamentals/itf-6-2-device-security.html",
+    "title": "6.2 Device Security",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "IT Fundamentals",
+    "unit": "6",
+    "unitTitle": "Security"
+  },
+  "itf-6-3-passwords-and-authentication": {
+    "file": "it-fundamentals/itf-6-3-passwords-and-authentication.html",
+    "title": "6.3 Passwords and Authentication",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "IT Fundamentals",
+    "unit": "6",
+    "unitTitle": "Security"
+  },
+  "itf-6-4-encryption": {
+    "file": "it-fundamentals/itf-6-4-encryption.html",
+    "title": "6.4 Encryption",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "IT Fundamentals",
+    "unit": "6",
+    "unitTitle": "Security"
+  },
+  "itf-6-5-security-review": {
+    "file": "it-fundamentals/itf-6-5-security-review.html",
+    "title": "Unit 6 Review: Security",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "IT Fundamentals",
+    "unit": "6",
+    "unitTitle": "Security"
+  },
+  "itf-7-1-how-the-exam-works": {
+    "file": "it-fundamentals/itf-7-1-how-the-exam-works.html",
+    "title": "7.1 How the Tech+ Exam Works",
+    "kind": "lesson",
+    "questions": 10,
+    "course": "IT Fundamentals",
+    "unit": "7",
+    "unitTitle": "Exam Prep"
+  },
+  "itf-7-2-tech-concepts-review": {
+    "file": "it-fundamentals/itf-7-2-tech-concepts-review.html",
+    "title": "7.2 Tech Concepts Review",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "IT Fundamentals",
+    "unit": "7",
+    "unitTitle": "Exam Prep"
+  },
+  "itf-7-3-infrastructure-review": {
+    "file": "it-fundamentals/itf-7-3-infrastructure-review.html",
+    "title": "7.3 Infrastructure Review",
+    "kind": "unit-review",
+    "questions": 18,
+    "course": "IT Fundamentals",
+    "unit": "7",
+    "unitTitle": "Exam Prep"
+  },
+  "itf-7-4-applications-software-review": {
+    "file": "it-fundamentals/itf-7-4-applications-software-review.html",
+    "title": "7.4 Applications and Software Review",
+    "kind": "unit-review",
+    "questions": 17,
+    "course": "IT Fundamentals",
+    "unit": "7",
+    "unitTitle": "Exam Prep"
+  },
+  "itf-7-5-software-development-review": {
+    "file": "it-fundamentals/itf-7-5-software-development-review.html",
+    "title": "7.5 Software Development Review",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "IT Fundamentals",
+    "unit": "7",
+    "unitTitle": "Exam Prep"
+  },
+  "itf-7-6-data-databases-review": {
+    "file": "it-fundamentals/itf-7-6-data-databases-review.html",
+    "title": "7.6 Data and Databases Review",
+    "kind": "unit-review",
+    "questions": 16,
+    "course": "IT Fundamentals",
+    "unit": "7",
+    "unitTitle": "Exam Prep"
+  },
+  "itf-7-7-security-review": {
+    "file": "it-fundamentals/itf-7-7-security-review.html",
+    "title": "7.7 Security Review",
+    "kind": "unit-review",
+    "questions": 19,
+    "course": "IT Fundamentals",
+    "unit": "7",
+    "unitTitle": "Exam Prep"
   }
 }

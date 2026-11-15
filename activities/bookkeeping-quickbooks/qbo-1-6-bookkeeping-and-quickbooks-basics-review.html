@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 1 Review: Bookkeeping and QuickBooks Basics Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Unit 1 Review: Bookkeeping and QuickBooks Basics</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-1-6-bookkeeping-and-quickbooks-basics-review",
+ "title": "Unit 1 Review: Bookkeeping and QuickBooks Basics",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "1",
+ "lesson": "1.6",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 1 lessons 1.1-1.5 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Keep assets equal to liabilities plus equity, know when cash and accrual count income, pick Plus and the right user roles, sort money with projects, classes and locations, and keep lists and the chart of accounts clean.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "equation-parts",
+   "q": "Match each Sunny Day item to where it belongs.",
+   "pairs": [
+    [
+     "Money Mr. Patel owes Maya",
+     "Asset"
+    ],
+    [
+     "A Hometown Hardware bill Maya hasn't paid",
+     "Liability"
+    ],
+    [
+     "The $300 Maya put in",
+     "Equity"
+    ],
+    [
+     "$60 earned for a leaf cleanup",
+     "Income"
+    ],
+    [
+     "$18 of gas from Corner Gas",
+     "Expense"
+    ]
+   ],
+   "hint": "Owns, owes, owner's share, earned, or spent?",
+   "explain": "Customer IOUs are assets, unpaid bills are liabilities, Maya's money is equity, sales are income and gas is an expense."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "equation",
+   "q": "By Thursday, Sunny Day has $255 in cash and a $400 mower, and owes her aunt $250. What is Maya's equity?",
+   "choices": [
+    "$405",
+    "$255",
+    "$655",
+    "$150"
+   ],
+   "answer": "$405",
+   "hint": "Equity = Assets − Liabilities.",
+   "explain": "Assets $255 + $400 = $655. $655 − $250 = $405 equity."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "cash-accrual",
+   "q": "Maya mows Mr. Patel's lawn on Friday, and he pays next Tuesday. On the accrual basis, when does the $35 count?",
+   "choices": [
+    "End of month",
+    "Next Tuesday",
+    "Never",
+    "Friday"
+   ],
+   "answer": "Friday",
+   "hint": "Accrual counts income when it's earned.",
+   "explain": "Accrual records income when you earn it. Until he pays, the $35 sits in accounts receivable."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "cash-accrual",
+   "q": "Week 1: accrual income was $140 and Maya spent $18 on gas. What was her accrual-basis profit?",
+   "choices": [
+    "$87",
+    "$158",
+    "$140",
+    "$122"
+   ],
+   "answer": "$122",
+   "hint": "Profit = income − expenses.",
+   "explain": "$140 − $18 = $122. On the cash basis it would be $105 − $18 = $87.",
+   "hints": {
+    "$87": "That's the cash-basis profit."
+   }
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "company-info",
+   "q": "Which company information can Maya change any time?",
+   "choices": [
+    "Turning multicurrency off",
+    "The country",
+    "The home currency after multicurrency",
+    "The legal name"
+   ],
+   "answer": "The legal name",
+   "hint": "Only a few settings are locked.",
+   "explain": "Name, legal name, address, phone, customer email and logo are editable. Country and multicurrency are locked once set."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "close-books",
+   "q": "Maya sets a closing date of September 30. Someone tries to edit a September 12 sale. What can QuickBooks do?",
+   "choices": [
+    "Delete the sale with no record",
+    "Switch reports to the cash basis",
+    "Move the sale into October",
+    "Show a warning or ask for a password"
+   ],
+   "answer": "Show a warning or ask for a password",
+   "hint": "The date is on or before the closing date.",
+   "explain": "For transactions dated on or before the closing date, QuickBooks can warn the user or require a password."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "plus",
+   "q": "Which of these comes with Plus but not with Simple Start or Essentials?",
+   "choices": [
+    "Inventory tracking",
+    "Bank connections",
+    "Recording expenses",
+    "Sending invoices"
+   ],
+   "answer": "Inventory tracking",
+   "hint": "Think about tools for a growing business.",
+   "explain": "Plus adds project tracking, class and location tracking, inventory tracking and budgets."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "licensing",
+   "q": "How many companies does one QuickBooks Online subscription cover?",
+   "choices": [
+    "Two",
+    "One",
+    "Unlimited",
+    "Five"
+   ],
+   "answer": "One",
+   "hint": "Separate businesses keep separate books.",
+   "explain": "One subscription covers one company. A separate business with its own tax ID needs its own company and subscription."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "skill": "roles",
+   "q": "Match each person to the best user role.",
+   "pairs": [
+    [
+     "Maya, the owner",
+     "Primary admin"
+    ],
+    [
+     "An outside accountant Maya invites",
+     "Accountant user"
+    ],
+    [
+     "Her aunt, who only looks at monthly reports",
+     "Reports only"
+    ],
+    [
+     "A helper who only logs his hours",
+     "Time tracking only"
+    ]
+   ],
+   "hint": "Give each person the least access they need.",
+   "explain": "The owner is the primary admin, an invited accountant is an accountant user, a viewer is reports only, and an hours-only helper is time tracking only."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "migration",
+   "q": "When should a company import its QuickBooks Desktop file into a new QuickBooks Online company?",
+   "choices": [
+    "Only after entering all transactions by hand",
+    "Only after a full year of using QuickBooks Online",
+    "Any time, since timing doesn't matter at all",
+    "Fairly soon after the QBO company is created"
+   ],
+   "answer": "Fairly soon after the QBO company is created",
+   "hint": "The import also replaces what's there.",
+   "explain": "The import has to happen fairly soon after the new company is created, and it replaces whatever is already in that company."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "choose-feature",
+   "q": "Maya wants to compare a North side crew with a South side crew, one neighborhood per sale. Which feature fits best?",
+   "choices": [
+    "Projects",
+    "Sub-accounts",
+    "Merging",
+    "Locations"
+   ],
+   "answer": "Locations",
+   "hint": "It's about places.",
+   "explain": "Locations are meant for places, like stores, offices, sales regions or neighborhoods, and usually apply to the whole transaction."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "turn-on",
+   "q": "Maya wants to turn on project tracking. Where does she go?",
+   "choices": [
+    "The products and services list",
+    "Manage users",
+    "Company settings, Advanced section",
+    "The chart of accounts"
+   ],
+   "answer": "Company settings, Advanced section",
+   "hint": "None of these features are on when you start.",
+   "explain": "Projects have their own setting in Settings (gear icon) > Account and settings > Advanced. Classes and locations are under Categories in the same section."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "automation",
+   "q": "Maya starts a new expense for Corner Gas, and QuickBooks fills in the gas category she used last time. Which setting is doing that?",
+   "choices": [
+    "Pre-fill forms",
+    "Automatically apply bill payments",
+    "Close the books",
+    "Automatically apply credits"
+   ],
+   "answer": "Pre-fill forms",
+   "hint": "It remembers what you entered before.",
+   "explain": "Pre-fill forms fills in what you entered last time for that customer or vendor."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "right-list",
+   "q": "Where should Maya save Hometown Hardware's address so it fills in on her purchases?",
+   "choices": [
+    "Chart of accounts",
+    "Products and services list",
+    "Vendors list",
+    "Customers list"
+   ],
+   "answer": "Vendors list",
+   "hint": "Maya pays Hometown Hardware.",
+   "explain": "The vendor list holds the people and businesses you pay."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "merge",
+   "q": "Before merging two customer records, why should Maya double-check they're the same person?",
+   "choices": [
+    "A merge needs a new subscription",
+    "A merge can't be undone",
+    "A merge locks the company",
+    "A merge deletes all sales"
+   ],
+   "answer": "A merge can't be undone",
+   "hint": "What happens if she merges the wrong two?",
+   "explain": "All transactions move to one record, and a merge can't be undone."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "sub-accounts",
+   "q": "Leaf Bags is a sub-account under Lawn Care Supplies. Which statement is true?",
+   "choices": [
+    "Both accounts have the same account type",
+    "Lawn Care Supplies must be a Bank account",
+    "Leaf Bags can be any type, like Bank",
+    "Leaf Bags won't appear on any report"
+   ],
+   "answer": "Both accounts have the same account type",
+   "hint": "There's one rule for sub-accounts.",
+   "explain": "A sub-account must be the same account type as its parent account."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

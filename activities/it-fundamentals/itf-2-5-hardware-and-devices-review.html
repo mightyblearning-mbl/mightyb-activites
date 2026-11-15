@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 2 Review: Hardware and Devices Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Unit 2 Review: Hardware and Devices</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-2-5-hardware-and-devices-review",
+ "title": "Unit 2 Review: Hardware and Devices",
+ "course": "IT Fundamentals",
+ "unit": "2",
+ "lesson": "2.5",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 2 lessons 2.1-2.4 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Match devices to jobs, know what each internal part does, pick storage by speed, space and sharing, and connect peripherals with the right port and driver.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "device-purposes",
+   "q": "The club needs one computer for long video-editing projects with effects. Which type fits best?",
+   "choices": [
+    "A tablet",
+    "An e-reader",
+    "A workstation",
+    "A smartwatch"
+   ],
+   "answer": "A workstation",
+   "hint": "Heavy work needs a high-powered computer.",
+   "explain": "Workstations have strong CPUs, lots of RAM and powerful GPUs for heavy jobs."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "servers",
+   "q": "In a network, the computers that use a server's services are called:",
+   "choices": [
+    "Clients",
+    "Consoles",
+    "Peripherals",
+    "Wearables"
+   ],
+   "answer": "Clients",
+   "hint": "Servers serve them.",
+   "explain": "A server provides services, like shared files, to client computers."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "vr-ar",
+   "q": "Glasses show directions floating over the real street in front of you. This is:",
+   "choices": [
+    "Virtual reality",
+    "Augmented reality",
+    "Casting",
+    "Mirroring"
+   ],
+   "answer": "Augmented reality",
+   "hint": "You can still see the real street.",
+   "explain": "AR adds digital images to the real world; VR replaces your view."
+  },
+  {
+   "id": "q04",
+   "type": "match",
+   "skill": "device-purposes",
+   "q": "Match each device to what it does.",
+   "pairs": [
+    [
+     "Smart thermostat",
+     "Controls home heating from an app"
+    ],
+    [
+     "Fitness tracker",
+     "Worn on the wrist to count steps"
+    ],
+    [
+     "Gaming console",
+     "Plays games on a TV"
+    ],
+    [
+     "File server",
+     "Shares files with client computers"
+    ]
+   ],
+   "hint": "Which one do you wear?",
+   "explain": "IoT devices connect everyday objects to an app, wearables are worn, and servers serve clients."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "firmware",
+   "q": "BIOS and UEFI are examples of:",
+   "choices": [
+    "Firmware",
+    "Peripherals",
+    "Storage drives",
+    "Display ports"
+   ],
+   "answer": "Firmware",
+   "hint": "Software stored on the hardware that starts the device.",
+   "explain": "The BIOS or UEFI is firmware that checks hardware and starts the operating system."
+  },
+  {
+   "id": "q06",
+   "type": "match",
+   "skill": "components",
+   "q": "Match each internal part to its job.",
+   "pairs": [
+    [
+     "Motherboard",
+     "Main board every part connects to"
+    ],
+    [
+     "CPU",
+     "Follows program instructions"
+    ],
+    [
+     "RAM",
+     "Volatile short-term workspace"
+    ],
+    [
+     "GPU",
+     "Creates images and speeds up video effects"
+    ],
+    [
+     "Heat sink",
+     "Pulls heat away from a chip"
+    ]
+   ],
+   "hint": "RAM is the volatile one.",
+   "explain": "Each internal part has one main job."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "ram",
+   "q": "A computer loses the unsaved video edit when the power goes out. Which part held that unsaved work?",
+   "choices": [
+    "The SSD",
+    "ROM",
+    "RAM",
+    "The NAS"
+   ],
+   "answer": "RAM",
+   "hint": "Which one is volatile?",
+   "explain": "Unsaved work is in RAM, which is volatile and loses data without power."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "nic",
+   "q": "A wireless NIC that came built into the motherboard is:",
+   "choices": [
+    "Wired and onboard",
+    "Wireless and onboard",
+    "Wired and an expansion card",
+    "Wireless and an expansion card"
+   ],
+   "answer": "Wireless and onboard",
+   "hint": "Answer two questions: is there a cable, and is it a separate card?",
+   "explain": "Wi-Fi makes it wireless; built into the motherboard makes it onboard."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "power",
+   "q": "Which part turns AC power from the wall into DC power for the computer's parts?",
+   "choices": [
+    "The GPU",
+    "The NIC",
+    "The PSU",
+    "The UPS"
+   ],
+   "answer": "The PSU",
+   "hint": "It's inside the computer's case.",
+   "explain": "The power supply unit converts AC to DC; a UPS is a battery backup outside the computer."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "storage-types",
+   "q": "Which storage type is fastest for the club's editing computers?",
+   "choices": [
+    "An HDD",
+    "An NVMe SSD",
+    "An optical disc",
+    "A USB thumb drive"
+   ],
+   "answer": "An NVMe SSD",
+   "hint": "It's a type of SSD.",
+   "explain": "NVMe SSDs use a high-speed connection and are the fastest drives in this unit."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "volatile",
+   "q": "Which of these is non-volatile?",
+   "choices": [
+    "RAM",
+    "ROM",
+    "Unsaved work in memory",
+    "A program's short-term workspace"
+   ],
+   "answer": "ROM",
+   "hint": "Which one keeps its data with no power?",
+   "explain": "ROM keeps its data with no power; RAM is volatile."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "network-storage",
+   "q": "Four editors need to share the same project files in the club's room. Which is the simplest fit?",
+   "choices": [
+    "A NAS on the club's network",
+    "One USB thumb drive",
+    "A stack of DVDs",
+    "Each editor's RAM"
+   ],
+   "answer": "A NAS on the club's network",
+   "hint": "Which choice lives on the network so everyone can reach it at once?",
+   "explain": "A NAS is a box of drives on the network that every computer can share."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "cloud",
+   "q": "Why do many teams also keep a copy of their files in cloud storage?",
+   "choices": [
+    "It works with no internet connection",
+    "It gives them an off-site backup",
+    "It is volatile and fast",
+    "It is read by a laser"
+   ],
+   "answer": "It gives them an off-site backup",
+   "hint": "Where is the cloud copy kept?",
+   "explain": "Cloud storage is off-site, so it can survive a problem in the building."
+  },
+  {
+   "id": "q14",
+   "type": "match",
+   "skill": "ports",
+   "q": "Match each connection to what it's known for.",
+   "pairs": [
+    [
+     "USB-C",
+     "Small, oval and reversible"
+    ],
+    [
+     "HDMI",
+     "Standard video and sound connection for TVs"
+    ],
+    [
+     "NFC",
+     "Works over a few centimeters for tap-to-pay"
+    ],
+    [
+     "RJ45",
+     "Connector on Ethernet cables"
+    ],
+    [
+     "Bluetooth",
+     "Short-range wireless you pair once"
+    ]
+   ],
+   "hint": "NFC is the shortest-range one.",
+   "explain": "Each port or wireless connection has its own shape or job."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "drivers",
+   "q": "A new printer isn't plug and play. What should Marcus do first?",
+   "choices": [
+    "Install the driver from the maker's site",
+    "Replace the computer's power supply",
+    "Add more RAM to the computer",
+    "Plug the printer into a VGA port"
+   ],
+   "answer": "Install the driver from the maker's site",
+   "hint": "The OS needs software to talk to the device.",
+   "explain": "When plug and play doesn't set up a device, install its driver from the maker's official website."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "ip-peripherals",
+   "q": "A network printer has its own IP address. Marcus types it into a browser to change settings. What should he also do?",
+   "choices": [
+    "Change the default password",
+    "Unplug the network cable",
+    "Turn off the NIC",
+    "Switch the printer to VGA"
+   ],
+   "answer": "Change the default password",
+   "hint": "Think security.",
+   "explain": "Web-based configuration pages should never keep their default password."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

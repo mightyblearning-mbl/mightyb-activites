@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.5 Lists and the Chart of Accounts Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 1.5 Lists and the Chart of Accounts</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-1-5-lists-and-chart-of-accounts",
+ "title": "1.5 Lists and the Chart of Accounts",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "1",
+ "lesson": "1.5",
+ "kind": "lesson",
+ "sourceVideo": "1.5 Lists and the Chart of Accounts (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Lists save information you use over and over. Customers, vendors, products and services, and the chart of accounts can be imported. Merge duplicates carefully, make old items inactive, and give every account the right type.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "lists",
+   "q": "What is a list in QuickBooks?",
+   "choices": [
+    "A saved set of information you use over and over",
+    "A setting that locks old transactions",
+    "A report of every sale made this month",
+    "A reminder to send overdue invoices"
+   ],
+   "answer": "A saved set of information you use over and over",
+   "hint": "Fill it in once, then pick from it every time.",
+   "explain": "A list is a saved set of information, like customers or services, that you pick from on forms."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "import",
+   "q": "Which of these is NOT one of the four lists you can import from a spreadsheet?",
+   "choices": [
+    "Customers",
+    "Vendors",
+    "Chart of accounts",
+    "User roles"
+   ],
+   "answer": "User roles",
+   "hint": "The four are customers, vendors, products and services, and one more.",
+   "explain": "You can import customers, vendors, products and services, and the chart of accounts. Users are added in Manage users."
+  },
+  {
+   "id": "q03",
+   "type": "match",
+   "skill": "right-list",
+   "q": "Match each piece of Sunny Day information to the list it belongs on.",
+   "pairs": [
+    [
+     "Mr. Patel's billing address",
+     "Customers"
+    ],
+    [
+     "Corner Gas, where Maya buys gas",
+     "Vendors"
+    ],
+    [
+     "Mowing, $35",
+     "Products and services"
+    ],
+    [
+     "Business Checking",
+     "Chart of accounts"
+    ]
+   ],
+   "hint": "Who pays you, who you pay, what you sell, where money is recorded.",
+   "explain": "Customers pay you, vendors are paid by you, products and services are what you sell, and the chart of accounts lists every account."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "import",
+   "q": "Maya imports her customer spreadsheet. What does QuickBooks ask her to do with the columns?",
+   "choices": [
+    "Type each column in again by hand",
+    "Match each column to the right field",
+    "Sort the columns from A to Z first",
+    "Delete any column with an email in it"
+   ],
+   "answer": "Match each column to the right field",
+   "hint": "\"Name\" in the spreadsheet should go to Name in QuickBooks.",
+   "explain": "During import, you map (match) each spreadsheet column, like Name or Email, to the right QuickBooks field."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "merge",
+   "q": "Maya added Mr. Patel twice, as \"Patel\" and \"Raj Patel.\" She renames \"Patel\" to exactly \"Raj Patel.\" What happens?",
+   "choices": [
+    "Nothing; two customers can have the same name",
+    "QuickBooks makes a third record named Patel 2",
+    "QuickBooks deletes both records and their sales",
+    "QuickBooks offers to merge them, and it can't be undone"
+   ],
+   "answer": "QuickBooks offers to merge them, and it can't be undone",
+   "hint": "Changing a name to exactly match another starts something.",
+   "explain": "QuickBooks asks if you want to merge, and all the transactions move to one record. A merge can't be undone, so double-check first."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "inactive",
+   "q": "Maya makes a customer who moved away inactive. What happens to that customer's past sales?",
+   "choices": [
+    "They turn into credits",
+    "They are deleted",
+    "They move to Maya",
+    "They stay in the books"
+   ],
+   "answer": "They stay in the books",
+   "hint": "Why doesn't QuickBooks truly delete?",
+   "explain": "An inactive item disappears from drop-down menus but keeps its history. It can be made active again."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "coa",
+   "q": "What does an account's account type decide?",
+   "choices": [
+    "Which customers are allowed to use the account",
+    "Where it shows up on the balance sheet or profit and loss",
+    "Which users can see the account in QuickBooks",
+    "How often QuickBooks backs up the account"
+   ],
+   "answer": "Where it shows up on the balance sheet or profit and loss",
+   "hint": "Bank, Fixed assets and Expenses are examples.",
+   "explain": "The account type decides where the account appears on the balance sheet or profit and loss. The detail type narrows it down."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "coa",
+   "q": "Maya adds her used mower to the chart of accounts. Which account type fits?",
+   "choices": [
+    "Bank",
+    "Fixed assets",
+    "Income",
+    "Expenses"
+   ],
+   "answer": "Fixed assets",
+   "hint": "It's equipment she owns and will use for years.",
+   "explain": "The mower is account type Fixed assets, with a detail type for machinery and equipment.",
+   "hints": {
+    "Expenses": "Gas is an expense. The mower is something she owns."
+   }
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "coa",
+   "q": "A Bank account can have the detail type Checking or Savings. What does a detail type do?",
+   "choices": [
+    "Narrows down the account type",
+    "Turns the account into a list",
+    "Decides who can see the account",
+    "Sets the account's opening balance"
+   ],
+   "answer": "Narrows down the account type",
+   "hint": "First the type, then a more specific choice.",
+   "explain": "Each account has an account type, and a detail type narrows it down."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "sub-accounts",
+   "q": "Lawn Care Supplies is an Expenses account. Maya wants Trimmer Line as a sub-account under it. What account type must Trimmer Line be?",
+   "choices": [
+    "Fixed assets",
+    "Bank",
+    "Any type she likes",
+    "Expenses"
+   ],
+   "answer": "Expenses",
+   "hint": "Sub-accounts follow one rule about type.",
+   "explain": "A sub-account must be the same account type as its parent."
+  },
+  {
+   "id": "q11",
+   "type": "match",
+   "skill": "coa",
+   "q": "Match each Sunny Day account to its part of the accounting equation.",
+   "pairs": [
+    [
+     "Business Checking",
+     "Asset"
+    ],
+    [
+     "Loan from Aunt",
+     "Liability"
+    ],
+    [
+     "Owner Investment",
+     "Equity"
+    ],
+    [
+     "Lawn Care Income",
+     "Income"
+    ],
+    [
+     "Gas and Fuel",
+     "Expense"
+    ]
+   ],
+   "hint": "Every account fits one part: assets, liabilities, equity, income or expenses.",
+   "explain": "Business Checking is an asset, the loan is a liability, Maya's investment is equity, mowing sales are income and gas is an expense."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "right-list",
+   "q": "Maya accidentally added Corner Gas, where she buys gas, as a customer. Which list should it be on?",
+   "choices": [
+    "Customers",
+    "Vendors",
+    "Chart of accounts",
+    "Products and services"
+   ],
+   "answer": "Vendors",
+   "hint": "Does Corner Gas pay Maya, or does Maya pay Corner Gas?",
+   "explain": "The vendor list holds the people and businesses you pay. Add Corner Gas as a vendor and make the customer record inactive."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

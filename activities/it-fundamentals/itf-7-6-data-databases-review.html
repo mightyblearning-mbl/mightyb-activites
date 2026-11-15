@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.6 Data and Databases Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 7.6 Data and Databases Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-7-6-data-databases-review",
+ "title": "7.6 Data and Databases Review",
+ "course": "IT Fundamentals",
+ "unit": "7",
+ "lesson": "7.6",
+ "kind": "unit-review",
+ "sourceVideo": "Domain 5 review: Unit 5 lessons 5.4-5.5 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Know why data has value, how data drives decisions, what databases do better than flat files, structured vs semistructured vs unstructured data, keys and constraints, and how to back up and restore.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "value-of-data",
+   "q": "Why is a small business's customer list considered an asset?",
+   "choices": [
+    "It helps the business make money",
+    "It is printed on paper in the office",
+    "It never needs to be protected",
+    "It is the same for every business"
+   ],
+   "answer": "It helps the business make money",
+   "hint": "Assets are things of value.",
+   "explain": "Data is an asset because it helps a business make decisions and money."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "value-of-data",
+   "q": "A free app earns money by selling anonymous usage trends to advertisers. This is:",
+   "choices": [
+    "Data monetization",
+    "Data compression",
+    "A system backup",
+    "A primary key"
+   ],
+   "answer": "Data monetization",
+   "hint": "Monetize means to turn into money.",
+   "explain": "Monetization means earning money from data."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "value-of-data",
+   "q": "The art club notices sign-ups go up every week they post a video. Finding that link is:",
+   "choices": [
+    "Correlation",
+    "Encryption",
+    "Restoring data",
+    "Compression"
+   ],
+   "answer": "Correlation",
+   "hint": "Two things are related.",
+   "explain": "Correlation means finding a relationship between two sets of data."
+  },
+  {
+   "id": "q04",
+   "type": "match",
+   "skill": "value-of-data",
+   "q": "Match each data step to what it means.",
+   "pairs": [
+    [
+     "Capture",
+     "Collecting data as it happens"
+    ],
+    [
+     "Correlation",
+     "Finding relationships in the data"
+    ],
+    [
+     "Reporting",
+     "Presenting results, like charts"
+    ],
+    [
+     "Monetization",
+     "Earning money from data"
+    ]
+   ],
+   "hint": "Collect, connect, show, earn.",
+   "explain": "Data-driven decisions start with capturing data, finding correlations, and reporting what you learn."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "value-of-data",
+   "q": "Which is non-critical data for a school?",
+   "choices": [
+    "Student transcripts",
+    "Attendance records",
+    "Parent contact info",
+    "Old screenshots of a lunch menu"
+   ],
+   "answer": "Old screenshots of a lunch menu",
+   "hint": "Which one could be lost without real harm?",
+   "explain": "Critical data is hard or costly to lose. An old screenshot isn't critical."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "database-concepts",
+   "q": "Pulling data from a CSV spreadsheet file into a database is called:",
+   "choices": [
+    "Importing",
+    "Querying",
+    "Reporting",
+    "Encrypting"
+   ],
+   "answer": "Importing",
+   "hint": "Data is coming in.",
+   "explain": "Importing brings data from a file into the database."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "database-concepts",
+   "q": "A database keeps data saved so it is still there after the app closes or the computer restarts. This is called:",
+   "choices": [
+    "Persistence",
+    "Correlation",
+    "Monetization",
+    "Compression"
+   ],
+   "answer": "Persistence",
+   "hint": "The data persists, or lasts.",
+   "explain": "Persistence means data is stored and lasts beyond the program that created it."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "database-concepts",
+   "q": "A field-trip team needs to look up student info on a bus with no internet. Which setup works best?",
+   "choices": [
+    "A local copy that works offline",
+    "A cloud-only database on the web",
+    "A database stored in RAM only",
+    "A website that needs a login"
+   ],
+   "answer": "A local copy that works offline",
+   "hint": "No internet means no cloud.",
+   "explain": "Local, offline access keeps data available without an internet connection."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "skill": "database-structures",
+   "q": "Match each example to its data structure.",
+   "pairs": [
+    [
+     "A table with fixed rows and columns",
+     "Structured"
+    ],
+    [
+     "A JSON file with labeled fields that can vary",
+     "Semistructured"
+    ],
+    [
+     "A folder of voice recordings",
+     "Unstructured"
+    ]
+   ],
+   "hint": "How organized is each one?",
+   "explain": "Structured data fits tables, semistructured has labels but flexible shape, and unstructured has no set format."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "database-structures",
+   "q": "In a relational table, what does a column hold?",
+   "choices": [
+    "One kind of information for every record",
+    "All the information about one record",
+    "A backup of the table",
+    "A list of users and passwords"
+   ],
+   "answer": "One kind of information for every record",
+   "hint": "A row is one record; a column is one ___.",
+   "explain": "A column holds one field, like Email, for every record. A row holds one whole record."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "database-structures",
+   "q": "What must be true of a primary key?",
+   "choices": [
+    "It is unique for every record",
+    "It is the person's last name",
+    "It can be blank for new records",
+    "It is the same for every row"
+   ],
+   "answer": "It is unique for every record",
+   "hint": "It must point to exactly one row.",
+   "explain": "A primary key uniquely identifies each record, so no two rows can share it."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "database-structures",
+   "q": "A rule won't let anyone save a member record without an email address. This rule is a:",
+   "choices": [
+    "Constraint",
+    "Foreign key",
+    "Record",
+    "Report"
+   ],
+   "answer": "Constraint",
+   "hint": "It limits what can be entered.",
+   "explain": "Constraints are rules the database enforces, like \"this field can't be empty.\""
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "database-structures",
+   "q": "A database stores each customer as a self-contained document, and different customers can have different fields. What kind of database is this?",
+   "choices": [
+    "Document (non-relational)",
+    "Relational (table-based)",
+    "Flat file (single table)",
+    "Spreadsheet (rows and columns)"
+   ],
+   "answer": "Document (non-relational)",
+   "hint": "It doesn't use fixed tables.",
+   "explain": "Document databases are non-relational and let each record have its own shape."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "backups",
+   "q": "Which backup lets you rebuild the whole computer, including the operating system, settings and apps?",
+   "choices": [
+    "A system backup",
+    "A file backup of the Documents folder",
+    "A copy of one photo",
+    "Emptying the recycle bin"
+   ],
+   "answer": "A system backup",
+   "hint": "Think bigger than just files.",
+   "explain": "A system backup captures the whole system. A file backup only saves chosen files."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "backups",
+   "q": "Kai's phone backs up photos to its SD card. Why should Kai also back up to the cloud?",
+   "choices": [
+    "The cloud copy survives if both are lost",
+    "SD cards can only hold a few photos",
+    "Cloud backups make the phone run faster",
+    "It removes the need for a phone passcode"
+   ],
+   "answer": "The cloud copy survives if both are lost",
+   "hint": "What if both copies are in the same place?",
+   "explain": "Keeping a copy in a different place, like the cloud, protects you if the device and card are lost or damaged."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "backups",
+   "q": "Why should you test restoring files from a backup now and then?",
+   "choices": [
+    "To make sure the backup actually works",
+    "To delete the old backup",
+    "To make the files smaller",
+    "To change the file extensions"
+   ],
+   "answer": "To make sure the backup actually works",
+   "hint": "A backup you can't restore doesn't help.",
+   "explain": "Testing a restore proves you can really get your data back when you need it."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4.2 Receipts Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 4.2 Receipts</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-4-2-receipts",
+ "title": "4.2 Receipts",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "4",
+ "lesson": "4.2",
+ "kind": "lesson",
+ "sourceVideo": "4.2 Receipts (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Upload receipts with the mobile app, by email or from your computer; check what QuickBooks read; then save a new expense or bill, or match to a transaction already in your books.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "receipts-why",
+   "q": "Why keep receipts if the bank feed already shows the charge?",
+   "choices": [
+    "The receipt shows what was bought and proves the expense",
+    "QuickBooks deletes bank transactions without receipts",
+    "The bank feed can't show the amount of a purchase",
+    "Receipts are needed to connect a bank account"
+   ],
+   "answer": "The receipt shows what was bought and proves the expense",
+   "hint": "The bank shows how much and where. What's missing?",
+   "explain": "The bank feed shows how much and where; the receipt shows what you bought and is proof of the expense."
+  },
+  {
+   "id": "q02",
+   "type": "match",
+   "skill": "receipts-upload",
+   "q": "Match each way of uploading a receipt to how it works.",
+   "pairs": [
+    [
+     "Mobile app",
+     "Snap a photo with your phone"
+    ],
+    [
+     "Email",
+     "Send it to your company's receipt address"
+    ],
+    [
+     "Upload from computer",
+     "Drag and drop a file on the receipts page"
+    ]
+   ],
+   "hint": "Think phone camera, envelope, computer.",
+   "explain": "The three main ways are the QuickBooks mobile app, the receipt email address, and uploading a file from your computer."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "receipts-upload",
+   "q": "Maya gets an emailed receipt from Hometown Hardware for an online order. What's the quickest way to get it into QuickBooks?",
+   "choices": [
+    "Add it to the Excluded tab of the bank feed",
+    "Forward it to her company's receipt email address",
+    "Type it into a bank rule as a condition",
+    "Print it and mail it to Corner Gas"
+   ],
+   "answer": "Forward it to her company's receipt email address",
+   "hint": "It's already an email.",
+   "explain": "QuickBooks can give your company a special email address for receipts; you forward receipts from approved addresses."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "receipts-upload",
+   "q": "Which file types can you upload from your computer as receipts?",
+   "choices": [
+    "Only spreadsheet files",
+    "Photos and PDF files",
+    "Only bank statement files",
+    "Only paper copies"
+   ],
+   "answer": "Photos and PDF files",
+   "hint": "The lesson named two kinds.",
+   "explain": "Photos and PDF files both work when you upload receipts from your computer."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "receipts-record",
+   "q": "After a receipt uploads, what does QuickBooks pull out of it?",
+   "choices": [
+    "The customer who will pay for it",
+    "The vendor's bank account number",
+    "The date, the vendor and the total amount",
+    "The bank rule that should apply"
+   ],
+   "answer": "The date, the vendor and the total amount",
+   "hint": "Think about what's printed on a receipt.",
+   "explain": "QuickBooks reads details it can find, like the date, vendor and total, and may suggest a category."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "receipts-record",
+   "q": "Why should Maya check every field before saving a receipt?",
+   "choices": [
+    "Receipts can't be changed after upload",
+    "Every receipt is sent to the bank",
+    "QuickBooks can misread a faded number",
+    "Checking turns on the mobile app"
+   ],
+   "answer": "QuickBooks can misread a faded number",
+   "hint": "Remember the faded eight.",
+   "explain": "Nothing goes into the books until you review it, because the reading can be wrong, like a faded 8 read as a 3."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "receipts-record",
+   "q": "Maya uploads a receipt for supplies she bought on credit from Hometown Hardware and will pay for next month. Which document type should she pick?",
+   "choices": [
+    "Receipt",
+    "Bill",
+    "Deposit",
+    "Invoice"
+   ],
+   "answer": "Bill",
+   "hint": "She hasn't paid yet.",
+   "explain": "Choose receipt when you already paid and bill when you'll pay later.",
+   "hints": {
+    "Receipt": "Receipt is for something already paid. She'll pay this one later."
+   }
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "receipts-record",
+   "q": "Maya paid $27.50 at Hometown Hardware with her business debit card. What payment account should the receipt use?",
+   "choices": [
+    "Her Business Checking account",
+    "Accounts receivable",
+    "Lawn Care Income",
+    "Her Gas and Fuel expense account"
+   ],
+   "answer": "Her Business Checking account",
+   "hint": "Where did the money come from?",
+   "explain": "A debit card takes money from Business Checking, so that's the payment account. Lawn Care Supplies is the category."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "receipts-match",
+   "q": "The $27.50 charge already came in through the bank feed. Maya uploads the receipt and QuickBooks says it found a match. What should she do?",
+   "choices": [
+    "Exclude the bank feed charge and keep only the receipt",
+    "Accept the match so the receipt attaches to that transaction",
+    "Create a new expense so both are in the books",
+    "Delete the uploaded receipt and keep only the paper copy"
+   ],
+   "answer": "Accept the match so the receipt attaches to that transaction",
+   "hint": "Creating a new one would count it twice.",
+   "explain": "Matching attaches the receipt to the existing transaction instead of making a duplicate."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "receipts-match",
+   "q": "Where does a receipt go after it's recorded or matched?",
+   "choices": [
+    "The Excluded tab",
+    "The Audit Log only",
+    "The Reviewed list",
+    "The Recycle bin"
+   ],
+   "answer": "The Reviewed list",
+   "hint": "It started on For review.",
+   "explain": "Receipts start in For review and move to Reviewed once recorded or matched."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

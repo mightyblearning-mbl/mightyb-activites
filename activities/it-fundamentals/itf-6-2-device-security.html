@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6.2 Device Security Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 6.2 Device Security</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-6-2-device-security",
+ "title": "6.2 Device Security",
+ "course": "IT Fundamentals",
+ "unit": "6",
+ "lesson": "6.2",
+ "kind": "lesson",
+ "sourceVideo": "6.2 Device Security (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Get software from official sources, keep updates, anti-malware and the firewall on, lock your screens, and factory reset devices before you give them away.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "malware",
+   "q": "Match each type of malware to what it does.",
+   "pairs": [
+    [
+     "Virus",
+     "Spreads when an infected file is run"
+    ],
+    [
+     "Worm",
+     "Spreads by itself across a network"
+    ],
+    [
+     "Trojan",
+     "Hides inside something that looks useful"
+    ],
+    [
+     "Ransomware",
+     "Locks files and demands payment"
+    ],
+    [
+     "Keylogger",
+     "Records every key you type"
+    ]
+   ],
+   "hint": "Think about how each one gets in or what it takes.",
+   "explain": "Virus = file is run; worm = spreads alone; trojan = disguise; ransomware = locks files; keylogger = keystrokes."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "malware",
+   "q": "A family's photos are suddenly locked, and a message demands payment to unlock them. What is this?",
+   "choices": [
+    "Adware",
+    "A worm",
+    "Ransomware",
+    "Spyware"
+   ],
+   "answer": "Ransomware",
+   "hint": "The files are being held for a price.",
+   "explain": "Ransomware encrypts files and demands payment. A recent backup is the best protection."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "software-sources",
+   "q": "Leo wants a new game. Which is the safest place to get it?",
+   "choices": [
+    "A site offering paid games for free",
+    "A download that asks to turn off antivirus",
+    "The official app store on his device",
+    "A link in a message from a stranger"
+   ],
+   "answer": "The official app store on his device",
+   "hint": "Look for a legitimate source.",
+   "explain": "Official app stores and the maker's own website are legitimate sources."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "licensing",
+   "q": "Which describes open-source software?",
+   "choices": [
+    "Only one company can ever use it",
+    "Anyone can see and change its code",
+    "It must be paid for every month",
+    "It only runs on administrator accounts"
+   ],
+   "answer": "Anyone can see and change its code",
+   "hint": "Open means the code is open to everyone.",
+   "explain": "Open-source code is public and often free; proprietary software is owned by a company."
+  },
+  {
+   "id": "q05",
+   "type": "match",
+   "skill": "licensing",
+   "q": "Match each license term to its meaning.",
+   "pairs": [
+    [
+     "Subscription",
+     "Pay every month or year"
+    ],
+    [
+     "Perpetual license",
+     "Keep using that version forever"
+    ],
+    [
+     "Product key",
+     "Code that proves you bought it"
+    ],
+    [
+     "Software piracy",
+     "Using software without the required license"
+    ]
+   ],
+   "hint": "Which one is about ongoing payments? Which is about breaking the rules?",
+   "explain": "Subscriptions renew; perpetual licenses don't expire; product keys prove purchase; piracy skips the license."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "updates",
+   "q": "Why should the Riveras turn on automatic updates?",
+   "choices": [
+    "Updates replace the need for any passwords",
+    "Updates include patches that close security holes",
+    "Updates turn off the firewall to save power",
+    "Updates erase old files to free up space"
+   ],
+   "answer": "Updates include patches that close security holes",
+   "hint": "What does a patch fix?",
+   "explain": "Patches fix security holes the maker found, so staying updated closes doors to attackers."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "firewall",
+   "q": "What does a firewall do?",
+   "choices": [
+    "Filters network traffic using rules",
+    "Scans files and removes viruses",
+    "Stores backup copies of photos",
+    "Creates long, random passwords"
+   ],
+   "answer": "Filters network traffic using rules",
+   "hint": "It decides which connections are allowed.",
+   "explain": "A firewall allows or blocks network connections based on rules; anti-malware is what scans files."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "physical-security",
+   "q": "Which tool blocks an unused USB port so no one can plug something in?",
+   "choices": [
+    "A cable lock",
+    "A firewall",
+    "A screen lock",
+    "A USB lock"
+   ],
+   "answer": "A USB lock",
+   "hint": "It's named after the port it protects.",
+   "explain": "A USB lock blocks the port; a cable lock ties the laptop down."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "safe-browsing",
+   "q": "A pop-up says, \"Your device is infected! Download this cleaner now!\" What should you do?",
+   "choices": [
+    "Turn off your antivirus and try again",
+    "Call the phone number on the pop-up",
+    "Download the cleaner to remove the virus",
+    "Close the page and tell a trusted adult"
+   ],
+   "answer": "Close the page and tell a trusted adult",
+   "hint": "This is a common trick.",
+   "explain": "Fake infection pop-ups push harmful downloads. Close the page and ask for help."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "public-wifi",
+   "q": "Dad is at an airport using free Wi-Fi. What is the safer choice for checking his bank account?",
+   "choices": [
+    "Pick the network with the strongest signal",
+    "Use his phone's data or a VPN",
+    "Turn off the screen lock first",
+    "Use a standard account on the laptop"
+   ],
+   "answer": "Use his phone's data or a VPN",
+   "hint": "Public Wi-Fi is shared with strangers.",
+   "explain": "A phone's own data or a VPN protects his data better than open public Wi-Fi."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

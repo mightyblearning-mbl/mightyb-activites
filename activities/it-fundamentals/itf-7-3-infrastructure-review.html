@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.3 Infrastructure Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 7.3 Infrastructure Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-7-3-infrastructure-review",
+ "title": "7.3 Infrastructure Review",
+ "course": "IT Fundamentals",
+ "unit": "7",
+ "lesson": "7.3",
+ "kind": "unit-review",
+ "sourceVideo": "Domain 2 review: Units 2-3 lessons 2.1-2.4 and 3.1-3.3 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Know devices and their uses, internal parts, storage types, peripherals and ports, cloud models, internet service types, network devices and identifiers, and Wi-Fi bands.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "devices",
+   "q": "Which device is made mostly for reading books, with a paper-like screen and long battery life?",
+   "choices": [
+    "Workstation",
+    "E-reader",
+    "Server",
+    "Gaming console"
+   ],
+   "answer": "E-reader",
+   "hint": "Its main job is reading.",
+   "explain": "An e-reader is built for reading, with a screen that's easy on the eyes."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "devices",
+   "q": "Which of these is an Internet of Things (IoT) device?",
+   "choices": [
+    "A wired keyboard",
+    "A USB flash drive",
+    "A video doorbell that streams to a phone",
+    "A desktop monitor"
+   ],
+   "answer": "A video doorbell that streams to a phone",
+   "hint": "IoT devices are everyday things that connect to the internet.",
+   "explain": "A video doorbell is an IP camera that connects to the internet, so it's IoT."
+  },
+  {
+   "id": "q03",
+   "type": "match",
+   "skill": "internal-components",
+   "q": "Match each internal component to its job.",
+   "pairs": [
+    [
+     "CPU",
+     "Runs program instructions"
+    ],
+    [
+     "RAM",
+     "Short-term working memory"
+    ],
+    [
+     "GPU",
+     "Draws graphics and video"
+    ],
+    [
+     "NIC",
+     "Connects the computer to a network"
+    ],
+    [
+     "Motherboard",
+     "Main board that connects all the parts"
+    ]
+   ],
+   "hint": "Think about what each letter stands for.",
+   "explain": "CPU = central processing unit, RAM = random access memory, GPU = graphics processing unit, NIC = network interface card."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "storage",
+   "q": "Which storage keeps its data when the power is off?",
+   "choices": [
+    "RAM",
+    "SSD",
+    "Both RAM and SSD",
+    "Neither RAM nor SSD"
+   ],
+   "answer": "SSD",
+   "hint": "Volatile storage forgets; non-volatile storage remembers.",
+   "explain": "An SSD is non-volatile, so it keeps data without power. RAM is volatile and loses its contents."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "storage",
+   "q": "What is an NVMe drive?",
+   "choices": [
+    "A spinning hard disk",
+    "A very fast type of SSD",
+    "A kind of optical disc",
+    "A type of RAM chip"
+   ],
+   "answer": "A very fast type of SSD",
+   "hint": "It has no moving parts.",
+   "explain": "NVMe drives are solid-state drives that connect through a very fast interface."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "storage",
+   "q": "Which storage uses a laser to read data from a disc?",
+   "choices": [
+    "Optical drive",
+    "Flash drive",
+    "Solid-state drive",
+    "Network-attached storage"
+   ],
+   "answer": "Optical drive",
+   "hint": "Think of DVDs and Blu-ray discs.",
+   "explain": "Optical drives use a laser to read discs like CDs, DVDs and Blu-ray."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "peripherals",
+   "q": "A classroom projector connected to a laptop shows exactly what is on the laptop screen. This is called:",
+   "choices": [
+    "Casting",
+    "Mirroring",
+    "Plug-and-play",
+    "Compression"
+   ],
+   "answer": "Mirroring",
+   "hint": "Both screens show the same image.",
+   "explain": "Mirroring shows the same picture on both displays."
+  },
+  {
+   "id": "q08",
+   "type": "match",
+   "skill": "ports",
+   "q": "Match each connector to what it is mainly used for.",
+   "pairs": [
+    [
+     "RJ45",
+     "Wired network cable"
+    ],
+    [
+     "HDMI",
+     "Video and audio to a TV or monitor"
+    ],
+    [
+     "USB-C",
+     "Reversible plug for data, charging and display"
+    ],
+    [
+     "VGA",
+     "Older analog video to a monitor"
+    ]
+   ],
+   "hint": "One of these is for networking, the others connect to screens or devices.",
+   "explain": "RJ45 is for Ethernet, HDMI carries video and audio, USB-C is a reversible all-purpose plug, and VGA is an older video-only connector."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "networking-tools",
+   "q": "Which tool attaches an RJ45 connector to the end of a network cable?",
+   "choices": [
+    "Cable tester",
+    "Crimper",
+    "Screwdriver",
+    "Label maker"
+   ],
+   "answer": "Crimper",
+   "hint": "It squeezes the connector onto the wires.",
+   "explain": "A crimper presses the connector onto the cable. A cable tester checks it afterward.",
+   "hints": {
+    "Cable tester": "A cable tester checks a finished cable. Which tool builds it?"
+   }
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "cloud",
+   "q": "A teen startup rents virtual servers from a cloud provider and installs its own operating system and apps on them. Which cloud model is this?",
+   "choices": [
+    "SaaS",
+    "PaaS",
+    "IaaS",
+    "On-premises"
+   ],
+   "answer": "IaaS",
+   "hint": "They rent the basic building blocks and manage the rest.",
+   "explain": "Infrastructure as a Service (IaaS) rents servers, storage and networking. You manage the OS and apps."
+  },
+  {
+   "id": "q11",
+   "type": "match",
+   "skill": "cloud",
+   "q": "Match each cloud service model to what you get.",
+   "pairs": [
+    [
+     "SaaS",
+     "A finished app you use in a browser"
+    ],
+    [
+     "PaaS",
+     "A platform to build and run your own apps"
+    ],
+    [
+     "IaaS",
+     "Virtual servers, storage and networks"
+    ]
+   ],
+   "hint": "Software, platform, infrastructure.",
+   "explain": "SaaS gives you software, PaaS gives you a place to build apps, and IaaS gives you the raw computing pieces."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "internet-service",
+   "q": "Which internet service type uses existing telephone lines?",
+   "choices": [
+    "Fiber",
+    "Cable",
+    "DSL",
+    "Satellite"
+   ],
+   "answer": "DSL",
+   "hint": "The letters stand for digital subscriber line.",
+   "explain": "DSL sends internet data over copper telephone lines."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "internet-service",
+   "q": "A farmhouse far from town can't get cable or fiber. Which service can work almost anywhere with a clear view of the sky?",
+   "choices": [
+    "Satellite",
+    "DSL",
+    "Fiber",
+    "Cable"
+   ],
+   "answer": "Satellite",
+   "hint": "Look up.",
+   "explain": "Satellite internet works in remote places, though it can have more delay than wired service."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "network-devices",
+   "q": "Which device connects several wired devices together inside the same local network?",
+   "choices": [
+    "Modem",
+    "Switch",
+    "Firewall",
+    "Access point"
+   ],
+   "answer": "Switch",
+   "hint": "It has many Ethernet ports.",
+   "explain": "A switch connects wired devices on a LAN. A modem connects to the internet provider."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "network-identifiers",
+   "q": "Secure websites (HTTPS) use which port number by default?",
+   "choices": [
+    "21",
+    "25",
+    "80",
+    "443"
+   ],
+   "answer": "443",
+   "hint": "Plain HTTP uses 80; the secure version uses a different one.",
+   "explain": "HTTPS uses port 443 by default. HTTP uses port 80."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "network-models",
+   "q": "Two laptops share files directly with each other, with no central server. Which network model is this?",
+   "choices": [
+    "Client/server",
+    "Peer-to-peer",
+    "Hybrid cloud",
+    "Wide area network"
+   ],
+   "answer": "Peer-to-peer",
+   "hint": "Both computers are equals.",
+   "explain": "In peer-to-peer, devices share directly. In client/server, a central server answers requests."
+  },
+  {
+   "id": "q17",
+   "type": "mc",
+   "skill": "wireless",
+   "q": "The Wi-Fi signal gets weaker the farther it travels and the more walls it passes through. This is called:",
+   "choices": [
+    "Attenuation",
+    "Encryption",
+    "Casting",
+    "Compression"
+   ],
+   "answer": "Attenuation",
+   "hint": "It's about the signal fading.",
+   "explain": "Attenuation is a signal getting weaker over distance or through objects."
+  },
+  {
+   "id": "q18",
+   "type": "mc",
+   "skill": "wireless",
+   "q": "Which of these Wi-Fi standards is the newest?",
+   "choices": [
+    "802.11g",
+    "802.11n",
+    "802.11ac",
+    "802.11ax"
+   ],
+   "answer": "802.11ax",
+   "hint": "It's also called Wi-Fi 6.",
+   "explain": "802.11ax (Wi-Fi 6) is newer than 802.11ac (Wi-Fi 5) and 802.11n (Wi-Fi 4)."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

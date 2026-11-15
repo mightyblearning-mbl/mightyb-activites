@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain 3 Review: Vendors and Money-Out Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; Domain 3 Review: Vendors and Money-Out</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-5-4-vendors-review",
+ "title": "Domain 3 Review: Vendors and Money-Out",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "5",
+ "lesson": "5.4",
+ "kind": "unit-review",
+ "sourceVideo": "Unit 3 lessons 3.1-3.5 (Mighty B scripts); QBCU objectives 3.1-3.3",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Manage vendors (display names, merging, terms, 1099s), billable expenses, and money out: bills and bill payments, checks, card expenses, vendor credits and refunds, and void vs. delete.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "3.3.2",
+   "q": "Match each money-out form to its use.",
+   "pairs": [
+    [
+     "Bill",
+     "Record what you owe to pay later"
+    ],
+    [
+     "Check",
+     "Pay right now with a paper check"
+    ],
+    [
+     "Expense",
+     "Record a card or cash purchase paid now"
+    ],
+    [
+     "Vendor credit",
+     "Lower what you owe a vendor"
+    ],
+    [
+     "Purchase order",
+     "Order goods before a bill arrives"
+    ]
+   ],
+   "hint": "Ask: is it paid now, later, or not owed yet?",
+   "explain": "Bills are paid later; checks and expenses are paid now; vendor credits lower what you owe; purchase orders don't change the books."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "3.1.1",
+   "q": "Ana Garcia is a customer, and now she sells Maya used rakes. How can Maya add her as a vendor?",
+   "choices": [
+    "Change Ana's customer record into a vendor record",
+    "Merge Ana's customer record with Hometown Hardware",
+    "Add Ana as a sub-customer under Hometown Hardware",
+    "Use a slightly different display name, like Ana Garcia (V)"
+   ],
+   "answer": "Use a slightly different display name, like Ana Garcia (V)",
+   "hint": "Display names must be unique.",
+   "explain": "The same display name can't be used twice, so add a small difference to the vendor's display name."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "3.1.2",
+   "q": "When you merge two vendors by renaming one to match the other, which record goes away?",
+   "choices": [
+    "The one you didn't rename",
+    "Neither, they become linked",
+    "Both, and a new one is created",
+    "The one you renamed"
+   ],
+   "answer": "The one you renamed",
+   "hint": "You edit the duplicate.",
+   "explain": "The renamed record's transactions move to the other vendor, and the renamed record goes away. Merges can't be undone."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "3.1.4",
+   "q": "Jordan rakes leaves for Sunny Day as an independent contractor. What should Maya check on his vendor record?",
+   "choices": [
+    "Track payments for 1099",
+    "This customer is tax exempt",
+    "Bill parent customer",
+    "Make expenses billable"
+   ],
+   "answer": "Track payments for 1099",
+   "hint": "Contractors may get a 1099 form.",
+   "explain": "Checking the 1099 box makes QuickBooks track payments to Jordan for 1099 reporting."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "3.1.3",
+   "q": "Corner Gas starts giving Sunny Day Net 15 terms. Maya enters a bill dated May 1. When is it due?",
+   "choices": [
+    "May 16",
+    "May 15",
+    "May 31",
+    "May 1"
+   ],
+   "answer": "May 16",
+   "hint": "Add 15 days to the bill date.",
+   "explain": "Net 15 means due 15 days after the bill date: May 1 + 15 days = May 16."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "3.2.2",
+   "q": "Craig's buys $80 of plants for Kate Whelan's job and bills them with a 10% markup. How much is added to her invoice?",
+   "choices": [
+    "$90",
+    "$8",
+    "$88",
+    "$80"
+   ],
+   "answer": "$88",
+   "hint": "Find 10% of $80 and add it.",
+   "explain": "10% of $80 is $8, and $80 + $8 = $88."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "3.2.1",
+   "q": "Where are the settings to track expenses by customer and make them billable?",
+   "choices": [
+    "In the Chart of Accounts",
+    "In the Recurring transactions list",
+    "In the Expenses section of Account and settings",
+    "In the Sales section of Account and settings"
+   ],
+   "answer": "In the Expenses section of Account and settings",
+   "hint": "These settings are about money going out.",
+   "explain": "The Expenses settings include tracking expenses and items by customer and making them billable."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "3.3.3",
+   "q": "Maya pays Corner Gas $30 on the spot with a paper check. She never entered a bill. Which form should she use?",
+   "choices": [
+    "Pay bills",
+    "Purchase order",
+    "Vendor credit",
+    "Check"
+   ],
+   "answer": "Check",
+   "hint": "There's no bill to pay.",
+   "explain": "With no bill entered, a check records the payment and the expense in one step."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "3.3.4",
+   "q": "Maya buys $40 of supplies on her business credit card. What is the effect?",
+   "choices": [
+    "Business Checking goes down and an expense goes up",
+    "The credit card balance and an expense both go up",
+    "The credit card balance goes down",
+    "Accounts payable goes up and income goes up"
+   ],
+   "answer": "The credit card balance and an expense both go up",
+   "hint": "A credit card balance is money you owe.",
+   "explain": "A credit card purchase raises the card liability and the expense. Cash doesn't move until the card is paid."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "3.3.5",
+   "q": "A charge shows up in the bank feed but hasn't been added or matched yet. Is it in the books?",
+   "choices": [
+    "Yes, the moment it downloads",
+    "No, not until it is added or matched",
+    "Only if a rule exists for it",
+    "Yes, but only on the Balance Sheet"
+   ],
+   "answer": "No, not until it is added or matched",
+   "hint": "The bank feed is a waiting area.",
+   "explain": "Downloaded transactions stay on the Pending tab (For review on older screens) until you add or match them."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "3.3.6",
+   "q": "On an expense form, which field tells QuickBooks the purchase was paid with the business credit card?",
+   "choices": [
+    "Payment account",
+    "Memo",
+    "Category",
+    "Payee"
+   ],
+   "answer": "Payment account",
+   "hint": "It's the account the money came from.",
+   "explain": "The payment account is where the money came from, such as checking or a credit card."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "3.3.7",
+   "q": "Maya has a $75 bill from Hometown Hardware and a $20 vendor credit from them. She applies the credit when paying. How much does she pay?",
+   "choices": [
+    "$20",
+    "$95",
+    "$55",
+    "$75"
+   ],
+   "answer": "$55",
+   "hint": "The credit lowers what she owes.",
+   "explain": "$75 - $20 = $55."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "3.3.8",
+   "q": "What is the difference between voiding and deleting a check?",
+   "choices": [
+    "Voiding keeps the check at $0; deleting removes it",
+    "Both keep the check at its full amount",
+    "Deleting keeps the check at $0; voiding removes it",
+    "Both remove the check completely"
+   ],
+   "answer": "Voiding keeps the check at $0; deleting removes it",
+   "hint": "Which one leaves a record behind?",
+   "explain": "Voiding keeps the check and its number with a $0 amount. Deleting removes it from the books."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "3.3.8",
+   "q": "Where can Maya see that a check was voided, and by whom?",
+   "choices": [
+    "The Products and Services list",
+    "The bank rules list",
+    "The Audit Log",
+    "The Payment methods list"
+   ],
+   "answer": "The Audit Log",
+   "hint": "It's the record of who did what.",
+   "explain": "The Audit Log records changes, voids and deletes, with the user and the time."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "3.3.1",
+   "q": "Craig's uses purchase orders. What is the usual order of forms?",
+   "choices": [
+    "Bill payment, then bill, then purchase order",
+    "Purchase order, then vendor credit, then bill",
+    "Bill, then purchase order, then bill payment",
+    "Purchase order, then bill, then bill payment"
+   ],
+   "answer": "Purchase order, then bill, then bill payment",
+   "hint": "You order first and pay last.",
+   "explain": "The purchase order orders the goods, the bill records what's owed, and the bill payment pays it."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "3.2.3",
+   "q": "Craig's recorded a billable expense for Kate Whelan last week. What happens when it starts a new invoice for her?",
+   "choices": [
+    "QuickBooks deletes the expense once the invoice is made",
+    "QuickBooks emails Kate a separate bill for the expense",
+    "Nothing, because billable expenses can't be invoiced",
+    "QuickBooks shows the billable expense so it can be added"
+   ],
+   "answer": "QuickBooks shows the billable expense so it can be added",
+   "hint": "Billable means ready to charge the customer.",
+   "explain": "Unbilled billable expenses appear when you create an invoice for that customer, so you can add them."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

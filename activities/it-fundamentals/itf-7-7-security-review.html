@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.7 Security Review Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 7.7 Security Review</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-7-7-security-review",
+ "title": "7.7 Security Review",
+ "course": "IT Fundamentals",
+ "unit": "7",
+ "lesson": "7.7",
+ "kind": "unit-review",
+ "sourceVideo": "Domain 6 review: Unit 6 lessons 6.1-6.4 (Mighty B scripts)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Know the CIA triad and AAA, privacy and PII, how to spot social engineering, how to secure devices and software, password best practices, encryption at rest and in transit, and Wi-Fi security settings.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "match",
+   "skill": "security-concepts",
+   "q": "Match each part of the CIA triad to its meaning.",
+   "pairs": [
+    [
+     "Confidentiality",
+     "Only authorized people can see the data"
+    ],
+    [
+     "Integrity",
+     "Data stays accurate and unchanged"
+    ],
+    [
+     "Availability",
+     "Data and systems are there when needed"
+    ]
+   ],
+   "hint": "Secret, correct, reachable.",
+   "explain": "Confidentiality keeps data private, integrity keeps it correct, and availability keeps it reachable."
+  },
+  {
+   "id": "q02",
+   "type": "match",
+   "skill": "security-concepts",
+   "q": "Match each part of AAA to its meaning.",
+   "pairs": [
+    [
+     "Authentication",
+     "Proving who you are"
+    ],
+    [
+     "Authorization",
+     "What you're allowed to do"
+    ],
+    [
+     "Accounting",
+     "Tracking what you did"
+    ]
+   ],
+   "hint": "Who are you, what can you do, what did you do?",
+   "explain": "Authentication checks identity, authorization grants permissions, and accounting keeps logs."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "authentication",
+   "q": "Logging in with only a password is:",
+   "choices": [
+    "Single-factor authentication",
+    "Multifactor authentication",
+    "Single sign-on",
+    "Least privilege"
+   ],
+   "answer": "Single-factor authentication",
+   "hint": "Count the factors.",
+   "explain": "One factor (something you know) is single-factor authentication."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "authentication",
+   "q": "Unlocking a phone with a fingerprint uses which kind of factor?",
+   "choices": [
+    "Something you know",
+    "Something you have",
+    "Something you are",
+    "Something you share"
+   ],
+   "answer": "Something you are",
+   "hint": "It's part of your body.",
+   "explain": "Fingerprints and faces are biometrics, which are \"something you are.\""
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "privacy",
+   "q": "GDPR is a data privacy law from:",
+   "choices": [
+    "The European Union",
+    "Each U.S. school district",
+    "A video game company",
+    "The United Nations"
+   ],
+   "answer": "The European Union",
+   "hint": "The G stands for General, and it covers people in Europe.",
+   "explain": "The General Data Protection Regulation (GDPR) is a European Union privacy law."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "privacy",
+   "q": "A website shows a banner asking you to accept or reject cookies. What is this about?",
+   "choices": [
+    "Cookie consent and privacy",
+    "A software license",
+    "A virus warning",
+    "A certificate error"
+   ],
+   "answer": "Cookie consent and privacy",
+   "hint": "Cookies can track you.",
+   "explain": "Cookie banners ask your permission to store and track data, which is a privacy choice."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "privacy",
+   "q": "Which is safest to post publicly on social media?",
+   "choices": [
+    "Your art project photo with no personal details",
+    "Your school schedule and the bus stop you use",
+    "Your home address and phone number",
+    "The dates your family will be away on vacation"
+   ],
+   "answer": "Your art project photo with no personal details",
+   "hint": "Which one doesn't tell a stranger where or when to find you?",
+   "explain": "Avoid posting PII or location and schedule details that could put you at risk."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "social-engineering",
+   "q": "Which is a common sign of a phishing email?",
+   "choices": [
+    "Urgent pressure to click and enter your password",
+    "A newsletter you signed up for last month",
+    "An email from a teacher about tonight's homework",
+    "A receipt for something you bought online"
+   ],
+   "answer": "Urgent pressure to click and enter your password",
+   "hint": "Phishers try to rush you.",
+   "explain": "Phishing often uses urgency and fake links to steal passwords."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "device-security",
+   "q": "A pop-up says, \"Your computer is infected! Call this number now.\" What is the best response?",
+   "choices": [
+    "Close it and run your own anti-malware scan",
+    "Call the number right away to get help",
+    "Give them remote access so they can fix it",
+    "Pay for the cleanup software it offers"
+   ],
+   "answer": "Close it and run your own anti-malware scan",
+   "hint": "Real security software doesn't ask you to call a stranger.",
+   "explain": "Fake virus warnings are a scam. Close it and use trusted anti-malware you already have."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "device-security",
+   "q": "What is a firewall's job?",
+   "choices": [
+    "To allow or block traffic using rules",
+    "To back up your files each night",
+    "To speed up your internet connection",
+    "To store your passwords in a vault"
+   ],
+   "answer": "To allow or block traffic using rules",
+   "hint": "Think of a gatekeeper.",
+   "explain": "A firewall checks traffic and allows or blocks it according to rules."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "licensing",
+   "q": "You pay once and can use this version of the software for as long as you want. This is a:",
+   "choices": [
+    "Perpetual license",
+    "Subscription license",
+    "Open-source license",
+    "Free trial"
+   ],
+   "answer": "Perpetual license",
+   "hint": "Perpetual means lasting forever.",
+   "explain": "A perpetual license is a one-time purchase. A subscription is paid over time."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "licensing",
+   "q": "Downloading a paid game from a site that removed its copy protection is:",
+   "choices": [
+    "Software piracy",
+    "Open-source sharing",
+    "A perpetual license",
+    "Profile sync"
+   ],
+   "answer": "Software piracy",
+   "hint": "Is the game being used legally?",
+   "explain": "Using paid software without paying is piracy. It's illegal, and pirated files often carry malware."
+  },
+  {
+   "id": "q13",
+   "type": "mc",
+   "skill": "device-security",
+   "q": "A family no longer uses an old app on the laptop. What is the best practice?",
+   "choices": [
+    "Uninstall it so it can't become a risk",
+    "Keep it in case it's needed someday",
+    "Turn off its updates to save space",
+    "Rename its folder so no one finds it"
+   ],
+   "answer": "Uninstall it so it can't become a risk",
+   "hint": "Unused software stops getting attention.",
+   "explain": "Removing unused software means fewer programs that could have unpatched holes."
+  },
+  {
+   "id": "q14",
+   "type": "mc",
+   "skill": "safe-browsing",
+   "q": "Your browser warns that a site's security certificate isn't valid. What should you do?",
+   "choices": [
+    "Don't enter anything, and leave the site",
+    "Enter your password quickly and move on",
+    "Turn off the warning so it never shows again",
+    "Download the site's app and log in there"
+   ],
+   "answer": "Don't enter anything, and leave the site",
+   "hint": "The warning is there to protect you.",
+   "explain": "A bad certificate means the connection may not be safe or the site may be fake."
+  },
+  {
+   "id": "q15",
+   "type": "mc",
+   "skill": "passwords",
+   "q": "Which change makes a password hardest to crack?",
+   "choices": [
+    "Making it much longer",
+    "Adding your birth year",
+    "Using your pet's name",
+    "Capitalizing the first letter"
+   ],
+   "answer": "Making it much longer",
+   "hint": "Length matters most.",
+   "explain": "Each extra character makes a password far harder to guess. Personal details are easy to guess."
+  },
+  {
+   "id": "q16",
+   "type": "mc",
+   "skill": "passwords",
+   "q": "Why is reusing the same password on many sites risky?",
+   "choices": [
+    "One breach lets attackers into your other accounts",
+    "Websites don't allow repeated passwords at all",
+    "It makes the password expire sooner than normal",
+    "It automatically turns off multifactor authentication"
+   ],
+   "answer": "One breach lets attackers into your other accounts",
+   "hint": "Think about one leak spreading.",
+   "explain": "Reused passwords let one breach unlock many accounts. Use a unique password for each."
+  },
+  {
+   "id": "q17",
+   "type": "mc",
+   "skill": "encryption",
+   "q": "What is ciphertext?",
+   "choices": [
+    "Scrambled data produced by encryption",
+    "Readable data before encryption",
+    "A type of password manager",
+    "The name of a Wi-Fi network"
+   ],
+   "answer": "Scrambled data produced by encryption",
+   "hint": "Plain text is the readable version.",
+   "explain": "Encryption turns plain text into ciphertext, which can't be read without the key."
+  },
+  {
+   "id": "q18",
+   "type": "mc",
+   "skill": "encryption",
+   "q": "What does a VPN mainly do on public Wi-Fi?",
+   "choices": [
+    "Encrypts your traffic to the VPN server",
+    "Makes your device immune to malware",
+    "Speeds up the café's Wi-Fi connection",
+    "Backs up your files to the cloud"
+   ],
+   "answer": "Encrypts your traffic to the VPN server",
+   "hint": "It creates a protected tunnel.",
+   "explain": "A VPN encrypts data in transit, so others on the same Wi-Fi can't read it."
+  },
+  {
+   "id": "q19",
+   "type": "mc",
+   "skill": "wireless-security",
+   "q": "Why change a home router's Wi-Fi name (SSID) from the default?",
+   "choices": [
+    "A default name can reveal the router model",
+    "It makes the Wi-Fi signal stronger",
+    "It turns on WPA3 encryption automatically",
+    "It stops the router from needing updates"
+   ],
+   "answer": "A default name can reveal the router model",
+   "hint": "What could a stranger learn from the default name?",
+   "explain": "Default SSIDs often show the brand or model, which can point attackers to default passwords. Change the SSID and the admin password."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

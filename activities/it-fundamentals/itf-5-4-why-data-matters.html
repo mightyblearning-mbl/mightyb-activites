@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.4 Why Data Matters Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 5.4 Why Data Matters</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "itf-5-4-why-data-matters",
+ "title": "5.4 Why Data Matters",
+ "course": "IT Fundamentals",
+ "unit": "5",
+ "lesson": "5.4",
+ "kind": "lesson",
+ "sourceVideo": "5.4 Why Data Matters (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Information is data with meaning. Protect critical data, decide with capture, correlation and reporting, and know structured, semistructured and unstructured data, monetization and intellectual property.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "data-information",
+   "q": "Which of these is information, not just data?",
+   "choices": [
+    "Bolt averaged 43 points over its last 3 matches",
+    "40, 38, 51",
+    "Amara, Jalen, Lena",
+    "80, 75, 92, 60"
+   ],
+   "answer": "Bolt averaged 43 points over its last 3 matches",
+   "hint": "Which one has context and meaning?",
+   "explain": "Information is data that has been organized and given meaning. The others are raw facts."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "critical-data",
+   "q": "Which club data is non-critical?",
+   "choices": [
+    "Last season's snack sign-up list",
+    "Members' emergency contacts",
+    "The robot's code before a competition",
+    "Members' medical forms"
+   ],
+   "answer": "Last season's snack sign-up list",
+   "hint": "Which would cause no real harm if lost?",
+   "explain": "Non-critical data is easy to replace or low impact. The others are critical."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "data-capture",
+   "q": "The robot logs its battery level at the start of every match. Which step of a data-driven decision is this?",
+   "choices": [
+    "Data capture and collection",
+    "Meaningful reporting",
+    "Data monetization",
+    "Correlation"
+   ],
+   "answer": "Data capture and collection",
+   "hint": "It's the gathering step.",
+   "explain": "Gathering data from sensors, forms, surveys or logs is data capture and collection."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "correlation",
+   "q": "Scores are lower when the battery starts below 80%. What can the club say for sure?",
+   "choices": [
+    "The two are related, but that alone doesn't prove cause",
+    "A low battery is proven to cause every low score",
+    "Battery level has nothing to do with the scores",
+    "The motors must be the real cause of low scores"
+   ],
+   "answer": "The two are related, but that alone doesn't prove cause",
+   "hint": "Correlation is a strong clue, not proof.",
+   "explain": "A correlation shows two things change together. It doesn't prove one causes the other."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "reporting",
+   "q": "Amara shows one clear chart of battery level and points scored at the budget meeting. What is this?",
+   "choices": [
+    "Meaningful reporting",
+    "Data capture",
+    "Big data",
+    "Data monetization"
+   ],
+   "answer": "Meaningful reporting",
+   "hint": "She is presenting results to the people deciding.",
+   "explain": "Meaningful reporting presents results clearly to decision makers."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "big-data",
+   "q": "Which is the best example of big data?",
+   "choices": [
+    "Taps from millions of app users every second",
+    "The club's 14-member contact list",
+    "One robot's battery log for a season",
+    "A spreadsheet of three match scores"
+   ],
+   "answer": "Taps from millions of app users every second",
+   "hint": "Big data is too large or fast for ordinary tools.",
+   "explain": "Big data sets are so large, fast-growing or varied that a spreadsheet can't handle them."
+  },
+  {
+   "id": "q07",
+   "type": "match",
+   "skill": "data-structure",
+   "q": "Match each example to its kind of data.",
+   "pairs": [
+    [
+     "A member spreadsheet with fixed columns",
+     "Structured"
+    ],
+    [
+     "An email with To, From and Subject plus a message",
+     "Semistructured"
+    ],
+    [
+     "A video of a match",
+     "Unstructured"
+    ]
+   ],
+   "hint": "Rows and columns, some labels, or no set format?",
+   "explain": "Spreadsheets with fixed fields are structured, email has labels plus free text so it's semistructured, and video has no set format so it's unstructured."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "monetization",
+   "q": "A free app earns money by using its users' data to show targeted ads. What is this called?",
+   "choices": [
+    "Data monetization",
+    "Data capture",
+    "Data correlation",
+    "Data backup"
+   ],
+   "answer": "Data monetization",
+   "hint": "It's about earning money.",
+   "explain": "Earning money or value from data, by selling it or using it for ads, is data monetization."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "skill": "intellectual-property",
+   "q": "Match each kind of protection to what it covers.",
+   "pairs": [
+    [
+     "Copyright",
+     "Original work like code, photos and writing"
+    ],
+    [
+     "Trademark",
+     "A brand name or logo"
+    ],
+    [
+     "Patent",
+     "An invention"
+    ],
+    [
+     "Software license",
+     "How you may use someone else's software"
+    ]
+   ],
+   "hint": "A logo is part of a brand.",
+   "explain": "Copyright covers original work, trademarks cover brands, patents cover inventions, and licenses set the rules for using software."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "analytics",
+   "q": "What is data analytics?",
+   "choices": [
+    "Examining data to find patterns, trends and answers",
+    "Selling data to other companies for a profit",
+    "Copying data so it can be restored later",
+    "Typing data into rows and columns by hand"
+   ],
+   "answer": "Examining data to find patterns, trends and answers",
+   "hint": "Think of what Amara did with the battery data.",
+   "explain": "Data analytics means examining data to find patterns, trends and answers."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "asset",
+   "q": "Why is data called an asset?",
+   "choices": [
+    "It has value, like money or equipment",
+    "It never needs to be protected",
+    "It is always unstructured",
+    "It can only be stored on paper"
+   ],
+   "answer": "It has value, like money or equipment",
+   "hint": "What does asset mean?",
+   "explain": "An asset is something of value. Data helps make decisions and can even earn money."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.4 Projects, Classes, Locations and Automation Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 1.4 Projects, Classes, Locations and Automation</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-1-4-projects-classes-locations",
+ "title": "1.4 Projects, Classes, Locations and Automation",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "1",
+ "lesson": "1.4",
+ "kind": "lesson",
+ "sourceVideo": "1.4 Projects, Classes, Locations and Automation (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Projects track one job, classes track parts of the business (even line by line), and locations track places. Turn them on in the Advanced settings, and let automation save time while you check the results.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "projects",
+   "q": "Mr. Patel hires Maya for a backyard cleanup that takes three weekends. She wants to know if that job made money. What should she use?",
+   "choices": [
+    "A location",
+    "A project",
+    "A class",
+    "A sub-account"
+   ],
+   "answer": "A project",
+   "hint": "One job, one customer, start to finish.",
+   "explain": "A project tracks one job for one customer and shows whether that job made money."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "classes",
+   "q": "What is a class in QuickBooks?",
+   "choices": [
+    "A list of every account in the books",
+    "A label that groups transactions by a part of the business",
+    "A user role for an outside accountant",
+    "A place, like a store, office or sales region"
+   ],
+   "answer": "A label that groups transactions by a part of the business",
+   "hint": "Think departments or types of service.",
+   "explain": "A class is a label you put on transactions to group them by a part of your business, like a department or a type of service.",
+   "hints": {
+    "A place, like a store, office or sales region": "That describes locations."
+   }
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "locations",
+   "q": "Maya expands to a second neighborhood with its own crew. Which feature fits tracking each neighborhood?",
+   "choices": [
+    "Sub-accounts",
+    "Locations",
+    "Projects",
+    "Reports only"
+   ],
+   "answer": "Locations",
+   "hint": "Which feature is meant for places?",
+   "explain": "Locations work like classes but are meant for places, like stores, offices, sales regions or neighborhoods."
+  },
+  {
+   "id": "q04",
+   "type": "match",
+   "skill": "choose-feature",
+   "q": "Match each feature to the question it answers.",
+   "pairs": [
+    [
+     "Project",
+     "How profitable was this job?"
+    ],
+    [
+     "Class",
+     "How is each part of my business doing?"
+    ],
+    [
+     "Location",
+     "How is each place doing?"
+    ]
+   ],
+   "hint": "Job, part of the business, or place?",
+   "explain": "Projects answer job profit, classes compare parts of the business, and locations compare places."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "classes",
+   "q": "Maya's invoice to Mr. Patel has a $35 mowing line and a $60 leaf cleanup line. What class setting lets each line go to the right class?",
+   "choices": [
+    "One class for the whole transaction",
+    "Each line on a transaction gets its own class",
+    "Use a location for each line instead",
+    "Turn on project tracking for the invoice"
+   ],
+   "answer": "Each line on a transaction gets its own class",
+   "hint": "The invoice mixes two services.",
+   "explain": "You can set classes so that each line (row) on a transaction gets its own class."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "locations",
+   "q": "How is a location usually assigned on a transaction?",
+   "choices": [
+    "To the customer's address",
+    "To the chart of accounts",
+    "To the whole transaction",
+    "To each line separately"
+   ],
+   "answer": "To the whole transaction",
+   "hint": "Classes can go line by line. Locations usually don't.",
+   "explain": "A location usually applies to the whole transaction, not each line."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "locations",
+   "q": "A company would rather call its locations something else. Which is one of the labels QuickBooks lets it use?",
+   "choices": [
+    "Sub-class",
+    "Division",
+    "Detail type",
+    "Account type"
+   ],
+   "answer": "Division",
+   "hint": "The lesson named three examples.",
+   "explain": "You can rename the location label to something like Division, Territory or Store."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "turn-on",
+   "q": "Where are class tracking and location tracking turned on?",
+   "choices": [
+    "Nowhere; they're always on in every company",
+    "The chart of accounts, under Account type",
+    "Company settings, Advanced section, Categories",
+    "The customer list, on each customer's record"
+   ],
+   "answer": "Company settings, Advanced section, Categories",
+   "hint": "None of these features are on when you start.",
+   "explain": "Turn them on in Settings (gear icon) > Account and settings > Advanced > Categories. Projects have their own setting in the Advanced section."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "skill": "automation",
+   "q": "Match each automation setting to what it does.",
+   "pairs": [
+    [
+     "Pre-fill forms",
+     "Fills in what you entered last time"
+    ],
+    [
+     "Automatically apply credits",
+     "Uses a customer's credit on the next invoice"
+    ],
+    [
+     "Automatically invoice unbilled activity",
+     "Creates invoices for hours or costs not yet billed"
+    ],
+    [
+     "Automatically apply bill payments",
+     "Applies a vendor payment to open bills"
+    ]
+   ],
+   "hint": "Read each setting's name word by word.",
+   "explain": "These four settings are in the Advanced section, under Automation. Each one can be turned on or off."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "automation",
+   "q": "Mr. Patel has a $10 credit from a job that went short. Which setting puts it on his next invoice without Maya doing it by hand?",
+   "choices": [
+    "Pre-fill forms",
+    "Automatically apply credits",
+    "Automatically invoice unbilled activity",
+    "Automatically apply bill payments"
+   ],
+   "answer": "Automatically apply credits",
+   "hint": "A credit the customer has...",
+   "explain": "Automatically apply credits applies a customer's open credits to their next invoice.",
+   "hints": {
+    "Automatically apply bill payments": "That's for paying vendors' bills, not customer credits."
+   }
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "choose-feature",
+   "q": "This winter Maya adds snow shoveling. She wants to compare it with mowing. What should she use?",
+   "choices": [
+    "Separate companies",
+    "Locations",
+    "Projects",
+    "Classes"
+   ],
+   "answer": "Classes",
+   "hint": "Snow shoveling is a type of service.",
+   "explain": "Classes group transactions by part of the business, like a type of service. Then run profit and loss by class."
+  },
+  {
+   "id": "q12",
+   "type": "mc",
+   "skill": "automation",
+   "q": "Maya turned on several automation settings. What should she still do?",
+   "choices": [
+    "Close the books daily",
+    "Check the results",
+    "Turn off all reports",
+    "Delete old invoices"
+   ],
+   "answer": "Check the results",
+   "hint": "Automation is great, but...",
+   "explain": "Automation saves time, but a bookkeeper still checks the results."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

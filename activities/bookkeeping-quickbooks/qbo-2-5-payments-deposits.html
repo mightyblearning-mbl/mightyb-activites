@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.5 Payments, Deposits, Credit Memos and Refunds Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 2.5 Payments, Deposits, Credit Memos and Refunds</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-2-5-payments-deposits",
+ "title": "2.5 Payments, Deposits, Credit Memos and Refunds",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "2",
+ "lesson": "2.5",
+ "kind": "lesson",
+ "sourceVideo": "2.5 Payments, Deposits, Credit Memos and Refunds (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "Receive payment against the invoice, let money wait in Undeposited Funds (Payments to deposit), group it in a bank deposit, use a credit memo to lower what's owed and a refund receipt to give money back.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "receive-payment",
+   "q": "Mr. Patel mails a check for his open $85 invoice. Which form does Maya use?",
+   "choices": [
+    "Receive payment",
+    "Refund receipt",
+    "New invoice",
+    "Sales receipt"
+   ],
+   "answer": "Receive payment",
+   "hint": "The invoice is already there.",
+   "explain": "Receive payment records the money against the open invoice."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "receive-payment",
+   "q": "After Maya receives Mr. Patel's $85 payment, what happens to income?",
+   "choices": [
+    "It goes down $85",
+    "It goes up $85",
+    "It doesn't change",
+    "It doubles"
+   ],
+   "answer": "It doesn't change",
+   "hint": "When did the income count?",
+   "explain": "Income counted when she sent the invoice. The payment lowers A/R instead."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "undeposited-funds",
+   "q": "What is Undeposited Funds?",
+   "choices": [
+    "An expense account for bank fees and charges",
+    "A liability for money Maya owes to customers",
+    "A holding account for money not yet deposited",
+    "A list of customers who still owe you money"
+   ],
+   "answer": "A holding account for money not yet deposited",
+   "hint": "Money waits here before the bank.",
+   "explain": "Undeposited Funds is a current asset that holds payments until you deposit them."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "undeposited-funds",
+   "q": "In newer versions of QuickBooks, what may Undeposited Funds be called?",
+   "choices": [
+    "Pending income",
+    "Money in transit",
+    "Unapplied cash",
+    "Payments to deposit"
+   ],
+   "answer": "Payments to deposit",
+   "hint": "The new name describes what's waiting.",
+   "explain": "Newer versions may label it Payments to deposit. It does the same job."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "undeposited-funds",
+   "q": "Why do payments wait in Undeposited Funds instead of going straight to the bank account?",
+   "choices": [
+    "So the invoice stays open until the bank pays",
+    "So grouped deposits match the bank statement",
+    "So the customer can cancel them for a few days",
+    "So sales tax is added to them before deposit"
+   ],
+   "answer": "So grouped deposits match the bank statement",
+   "hint": "The bank shows one total for one trip.",
+   "explain": "Grouping payments into one deposit makes QuickBooks match the bank."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "deposits",
+   "q": "Maya deposits an $85 check, $50 cash and a $60 check together. What should the deposit total be?",
+   "choices": [
+    "$195",
+    "$135",
+    "$185",
+    "$145"
+   ],
+   "answer": "$195",
+   "hint": "Add all three.",
+   "explain": "$85 + $50 + $60 = $195."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "deposits",
+   "q": "Maya receives payments into Undeposited Funds but never makes bank deposits. What happens?",
+   "choices": [
+    "Money piles up and the bank account looks short",
+    "QuickBooks deposits them for her after 30 days",
+    "Accounts receivable goes up by the same amount",
+    "Her income is counted twice on the profit and loss"
+   ],
+   "answer": "Money piles up and the bank account looks short",
+   "hint": "Which step moves money into Business Checking?",
+   "explain": "Without the deposit, money stays in Undeposited Funds and Business Checking looks short."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "credit-memo",
+   "q": "Rain stopped Maya from edging, but Mr. Patel's unpaid $50 invoice includes $15 Edging. What should she use?",
+   "choices": [
+    "A credit memo for $15",
+    "A refund receipt for $15",
+    "A bank deposit for $35",
+    "A new invoice for $35"
+   ],
+   "answer": "A credit memo for $15",
+   "hint": "He hasn't paid yet, so no money goes back.",
+   "explain": "A credit memo lowers what he owes: $50 - $15 = $35."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "refund-receipt",
+   "q": "Ana paid $50 on a sales receipt, but Maya couldn't edge. Maya gives back $15. Which form?",
+   "choices": [
+    "Refund receipt",
+    "Receive payment",
+    "Invoice",
+    "Credit memo"
+   ],
+   "answer": "Refund receipt",
+   "hint": "Ana already paid.",
+   "explain": "A refund receipt records money given back to a customer."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "refund-receipt",
+   "q": "On a refund receipt, what must Maya choose besides the customer and item?",
+   "choices": [
+    "The customer's payment terms",
+    "A new display name",
+    "The account the money comes out of",
+    "The deposit slip number"
+   ],
+   "answer": "The account the money comes out of",
+   "hint": "Where does the refund money come from?",
+   "explain": "She picks the account the refund is paid from, like Business Checking."
+  },
+  {
+   "id": "q11",
+   "type": "match",
+   "skill": "money-in-forms",
+   "q": "Match each form to its job.",
+   "pairs": [
+    [
+     "Receive payment",
+     "Records money against an open invoice"
+    ],
+    [
+     "Bank deposit",
+     "Moves grouped payments into the bank account"
+    ],
+    [
+     "Credit memo",
+     "Lowers what a customer owes"
+    ],
+    [
+     "Refund receipt",
+     "Gives money back to a customer"
+    ]
+   ],
+   "hint": "Look for the verbs: records, moves, lowers, gives back.",
+   "explain": "Each money-in form has one job in the workflow."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

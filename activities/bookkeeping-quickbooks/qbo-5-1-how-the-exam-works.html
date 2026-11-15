@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5.1 How the Certification Exam Works Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 5.1 How the Certification Exam Works</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-5-1-how-the-exam-works",
+ "title": "5.1 How the Certification Exam Works",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "5",
+ "lesson": "5.1",
+ "kind": "lesson",
+ "sourceVideo": "5.1 How the Certification Exam Works (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "About 40 questions in 50 minutes across five domains. Take Practice Exam 1, review your weakest domains, take Practice Exam 2, and register at 80% or higher on both. On test day: read carefully, mark and move on, answer everything.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "format",
+   "q": "According to Certiport, how much time do you get for the QuickBooks Online Certified User exam?",
+   "choices": [
+    "2 hours",
+    "90 minutes",
+    "50 minutes",
+    "30 minutes"
+   ],
+   "answer": "50 minutes",
+   "hint": "It's a little over a minute per question for about 40 questions.",
+   "explain": "Certiport lists about 40 questions in 50 minutes."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "format",
+   "q": "About how many questions does Certiport list for the exam?",
+   "choices": [
+    "About 40",
+    "About 75",
+    "About 120",
+    "About 15"
+   ],
+   "answer": "About 40",
+   "hint": "Think one question for a little over each minute of a 50-minute exam.",
+   "explain": "Certiport lists about 40 questions. The sample in Certiport's exam tutorial shows 37."
+  },
+  {
+   "id": "q03",
+   "type": "match",
+   "skill": "domains",
+   "q": "Match each exam domain to its topic.",
+   "pairs": [
+    [
+     "Domain 1",
+     "QuickBooks Online administration"
+    ],
+    [
+     "Domain 2",
+     "Sales and money-in"
+    ],
+    [
+     "Domain 3",
+     "Vendors and money-out"
+    ],
+    [
+     "Domain 4",
+     "Bank accounts, rules and receipts"
+    ],
+    [
+     "Domain 5",
+     "Basic reports and views"
+    ]
+   ],
+   "hint": "The domains follow the order of the course units: setup first, reports last.",
+   "explain": "1 administration, 2 sales and money-in, 3 vendors and money-out, 4 bank accounts, rules and receipts, 5 reports and views."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "domains",
+   "q": "Which domain has the most objectives, so it deserves the most review time?",
+   "choices": [
+    "Domain 4: bank accounts, rules and receipts",
+    "Domain 1: QuickBooks Online administration",
+    "Domain 5: basic reports and views",
+    "Domain 3: vendors and money-out"
+   ],
+   "answer": "Domain 1: QuickBooks Online administration",
+   "hint": "It covers setup, user roles, settings, lists, recurring transactions, journal entries and apps.",
+   "explain": "Domain 1 has 23 objectives, the most of any domain."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "domains",
+   "q": "A question asks how to make QuickBooks categorize every Corner Gas charge as Gas and Fuel automatically. Which domain is it from?",
+   "choices": [
+    "Domain 4: bank accounts, rules and receipts",
+    "Domain 1: QuickBooks Online administration",
+    "Domain 5: basic reports and views",
+    "Domain 2: sales and money-in"
+   ],
+   "answer": "Domain 4: bank accounts, rules and receipts",
+   "hint": "Automatic categorizing of downloaded charges is done with a bank rule.",
+   "explain": "Bank rules are part of Domain 4."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "study-plan",
+   "q": "On Practice Exam 1 you scored 90% on every domain except Domain 3, where you scored 60%. What should you do next?",
+   "choices": [
+    "Start with the reports review deck",
+    "Register for the real exam right away",
+    "Play the vendors and money-out review deck first",
+    "Retake Practice Exam 1 until it's 100%"
+   ],
+   "answer": "Play the vendors and money-out review deck first",
+   "hint": "Start with your weakest domain.",
+   "explain": "The plan is to review your weakest domains first, then take Practice Exam 2."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "study-plan",
+   "q": "When are you ready to register for the real exam, in this course?",
+   "choices": [
+    "When you score 80% on one review deck",
+    "When you pass Practice Exam 1 at any score",
+    "When you finish the 5.1 video",
+    "When you score 80% or higher on both practice exams"
+   ],
+   "answer": "When you score 80% or higher on both practice exams",
+   "hint": "There are two practice exams.",
+   "explain": "The course target is 80% or higher on both practice exams before you register."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "test-day",
+   "q": "You've spent two minutes on one hard question. What's the best move?",
+   "choices": [
+    "Finish the exam early so you don't run out of time",
+    "Leave it blank and never come back to it later",
+    "Keep working on it until you're completely sure",
+    "Pick your best answer, mark it for review and move on"
+   ],
+   "answer": "Pick your best answer, mark it for review and move on",
+   "hint": "Don't let one question eat your time.",
+   "explain": "Answer it, mark it for review, and come back from the summary screen if there's time."
+  },
+  {
+   "id": "q09",
+   "type": "mc",
+   "skill": "test-day",
+   "q": "Why should you answer every question, even when you're unsure?",
+   "choices": [
+    "A blank answer can't earn points",
+    "Unanswered questions are graded by hand",
+    "Blank answers lower your other scores",
+    "The exam won't let you finish otherwise"
+   ],
+   "answer": "A blank answer can't earn points",
+   "hint": "Think about what a blank is worth.",
+   "explain": "A blank can't earn points, so always pick your best answer."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "after",
+   "q": "Under the current retake rules, how long must you wait after a second failed try?",
+   "choices": [
+    "At least 30 days",
+    "At least five days",
+    "At least 24 hours",
+    "At least one year"
+   ],
+   "answer": "At least five days",
+   "hint": "The wait gets longer after the first retake.",
+   "explain": "Wait at least 24 hours after a first failed try and at least five days after a second."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.1 Customers and Sub-Customers Practice - Mighty B Learning</title>
+<style>
+  :root {
+    --bg: #0f2540; --card: #16345c; --card-alt: #1c3f6e; --text: #eef4fb; --text-soft: #b9cde3;
+    --accent: #5fb3a3; --accent-strong: #3f9686; --wrong: #e0a45c; --wrong-bg: #3a2d1c;
+    --correct-bg: #1c3a2f; --focus: #ffd166; --picked: #ffd166; --radius: 16px;
+  }
+  [data-contrast="high"] {
+    --bg: #000000; --card: #101010; --card-alt: #1a1a1a; --text: #ffffff; --text-soft: #e6e6e6;
+    --accent: #ffd166; --accent-strong: #ffca3a; --wrong: #ff8c42; --wrong-bg: #3a1f00;
+    --correct-bg: #063d1f; --focus: #ffffff; --picked: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+  body { display: flex; justify-content: center; padding: 24px 16px 60px; }
+  .wrap { width: 100%; max-width: 680px; }
+  header.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .brand { font-weight: bold; font-size: 1.05rem; color: var(--text-soft); }
+  .controls { display: flex; gap: 8px; }
+  .controls button { background: var(--card-alt); color: var(--text); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; cursor: pointer; }
+  .controls button:hover { background: var(--accent-strong); }
+  .controls button:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-label { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .progress-track { flex: 1; height: 10px; background: var(--card-alt); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
+  .stars { font-size: 0.9rem; color: var(--text-soft); white-space: nowrap; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 30px 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  .tag { display: inline-block; font-size: 0.8rem; color: var(--text-soft); background: var(--card-alt); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+  .question-text { font-size: 1.3rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+  .data { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 1rem; }
+  .data th, .data td { border: 1px solid rgba(255,255,255,0.2); padding: 8px 10px; text-align: center; }
+  .data th { background: var(--card-alt); }
+  .choices { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .choice { display: block; width: 100%; text-align: center; background: var(--card-alt); color: var(--text); border: 2px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 18px 14px; font-size: 1.05rem; font-weight: bold; font-family: inherit; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease; line-height: 1.35; }
+  .choice:hover:not(:disabled) { transform: translateY(-1px); background: var(--accent-strong); }
+  .choice:disabled { cursor: default; }
+  .choice.correct { background: var(--correct-bg); border-color: var(--accent); }
+  .choice.incorrect { background: var(--wrong-bg); border-color: var(--wrong); }
+  .choice.picked { border-color: var(--picked); border-width: 3px; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .match-col { display: grid; gap: 10px; align-content: start; }
+  .match-col .choice { padding: 14px 10px; font-size: 0.98rem; }
+  .match-help { color: var(--text-soft); font-size: 0.92rem; margin: -6px 0 14px; }
+  .feedback { margin-top: 18px; padding: 16px 18px; border-radius: 12px; line-height: 1.55; font-size: 1rem; }
+  .feedback.correct { background: var(--correct-bg); }
+  .feedback.incorrect { background: var(--wrong-bg); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 1.05rem; }
+  .actions { margin-top: 22px; display: flex; justify-content: flex-end; gap: 10px; }
+  .btn-primary { background: var(--accent); color: #06231d; border: none; border-radius: 10px; padding: 12px 22px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent-strong); color: #fff; }
+  .done-card { text-align: center; }
+  .done-card h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  .done-card p { color: var(--text-soft); line-height: 1.6; }
+  .font-lg { font-size: 1.15em; }
+  footer.note { text-align: center; color: var(--text-soft); font-size: 0.8rem; margin-top: 22px; opacity: 0.8; }
+  @media (max-width: 520px) {
+    .question-text { font-size: 1.15rem; }
+    .card { padding: 22px 16px; }
+    .choices { grid-template-columns: 1fr; }
+    .match-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+  h2.question-text { margin: 0 0 18px; }
+  .score-line { font-size: 1.1rem; color: var(--text) !important; }
+  .missed { text-align: left; background: var(--card-alt); border-radius: 12px; padding: 14px 18px; margin-top: 16px; }
+  .missed h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .missed ul { margin: 0; padding-left: 20px; line-height: 1.5; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="brand">Mighty B Learning &middot; 2.1 Customers and Sub-Customers</div>
+    <div class="controls">
+      <button id="contrastToggle" type="button" aria-pressed="false">High contrast</button>
+      <button id="fontToggle" type="button" aria-pressed="false">Larger text</button>
+    </div>
+  </header>
+  <div class="progress-row">
+    <span class="progress-label" id="progressLabel"></span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="stars" id="stars"></span>
+  </div>
+  <main class="card" id="card"></main>
+  <div class="sr-only" id="feedbackLive" aria-live="polite"></div>
+  <footer class="note">Take your time. There's no timer, and you can try again as many times as you like.</footer>
+</div>
+<script type="application/json" id="mb-deck">
+{
+ "formatVersion": 1,
+ "deckId": "qbo-2-1-customers",
+ "title": "2.1 Customers and Sub-Customers",
+ "course": "Bookkeeping with QuickBooks Online",
+ "unit": "2",
+ "lesson": "2.1",
+ "kind": "lesson",
+ "sourceVideo": "2.1 Customers and Sub-Customers (Mighty B script)",
+ "masteryThreshold": 0.85,
+ "accuracyReview": {
+  "status": "pending",
+  "by": "",
+  "date": ""
+ },
+ "wrapUp": "The display name is required and unique; billing is where the bill goes; terms set the due date; mark exempt customers; use sub-customers for a second property or job.",
+ "problems": [
+  {
+   "id": "q01",
+   "type": "mc",
+   "skill": "display-name",
+   "q": "Which customer field is the one QuickBooks requires?",
+   "choices": [
+    "Billing address",
+    "Payment terms",
+    "Display name",
+    "Email address"
+   ],
+   "answer": "Display name",
+   "hint": "It's how the customer shows up in lists and on forms.",
+   "explain": "The display name is the one required field. Everything else is optional."
+  },
+  {
+   "id": "q02",
+   "type": "mc",
+   "skill": "display-name",
+   "q": "Maya already has a vendor named \"Corner Gas.\" She tries to add a customer with the same display name. What happens?",
+   "choices": [
+    "QuickBooks merges the vendor into the customer",
+    "QuickBooks won't allow the exact same name",
+    "The customer is saved as inactive",
+    "QuickBooks adds a number to the end for her"
+   ],
+   "answer": "QuickBooks won't allow the exact same name",
+   "hint": "Display names must be unique across your lists.",
+   "explain": "No two names in QuickBooks can match exactly, even a customer and a vendor. Maya would add something to tell them apart."
+  },
+  {
+   "id": "q03",
+   "type": "mc",
+   "skill": "addresses",
+   "q": "Which address prints on the invoice as the place the bill goes?",
+   "choices": [
+    "Shipping address",
+    "Billing address",
+    "Work address",
+    "Company address"
+   ],
+   "answer": "Billing address",
+   "hint": "Think about who pays.",
+   "explain": "The billing address is where the bill goes. The shipping address is where products go or the work happens."
+  },
+  {
+   "id": "q04",
+   "type": "mc",
+   "skill": "addresses",
+   "q": "Ana Garcia gets her bills at the same house Maya mows. What should Maya do with the shipping address?",
+   "choices": [
+    "Leave the billing address blank",
+    "Type the address in the display name",
+    "Check the box that it matches billing",
+    "Make Ana a sub-customer"
+   ],
+   "answer": "Check the box that it matches billing",
+   "hint": "There's a shortcut when both addresses are the same.",
+   "explain": "When the work and the bill go to the same place, check the box so shipping matches billing."
+  },
+  {
+   "id": "q05",
+   "type": "mc",
+   "skill": "terms",
+   "q": "An invoice dated October 3 has Net 15 terms. When is it due?",
+   "choices": [
+    "November 3",
+    "October 3",
+    "October 18",
+    "October 15"
+   ],
+   "answer": "October 18",
+   "hint": "Net 15 means 15 days after the invoice date.",
+   "explain": "October 3 + 15 days = October 18."
+  },
+  {
+   "id": "q06",
+   "type": "mc",
+   "skill": "terms",
+   "q": "What do Due on receipt terms mean?",
+   "choices": [
+    "Pay at the end of the month",
+    "Pay within 30 days",
+    "Pay right away",
+    "Pay within 15 days"
+   ],
+   "answer": "Pay right away",
+   "hint": "Receipt means when the customer gets the invoice.",
+   "explain": "Due on receipt means the customer should pay as soon as they get the invoice."
+  },
+  {
+   "id": "q07",
+   "type": "mc",
+   "skill": "terms",
+   "q": "Why save payment terms on the customer record instead of typing them on each invoice?",
+   "choices": [
+    "QuickBooks then charges a late fee by itself",
+    "Terms are required to save a customer",
+    "QuickBooks fills them in and works out the due date",
+    "Terms make the customer tax exempt"
+   ],
+   "answer": "QuickBooks fills them in and works out the due date",
+   "hint": "Lists save you from typing the same thing again.",
+   "explain": "Saved terms fill in on each new invoice, and QuickBooks calculates the due date."
+  },
+  {
+   "id": "q08",
+   "type": "mc",
+   "skill": "sales-tax",
+   "q": "A nonprofit youth league hires Maya and gives her its sales tax exemption paperwork. What should she do in QuickBooks?",
+   "choices": [
+    "Mark the customer tax exempt and save the reason",
+    "Make the league a sub-customer of Ana",
+    "Delete the sales tax account",
+    "Give the customer Net 30 terms"
+   ],
+   "answer": "Mark the customer tax exempt and save the reason",
+   "hint": "The customer record has a tax section.",
+   "explain": "Marking the customer tax exempt keeps QuickBooks from adding sales tax. She keeps the paperwork as proof."
+  },
+  {
+   "id": "q09",
+   "type": "match",
+   "skill": "customer-fields",
+   "q": "Match each customer field to what it does.",
+   "pairs": [
+    [
+     "Display name",
+     "How the customer appears in lists and forms"
+    ],
+    [
+     "Billing address",
+     "Where the bill goes"
+    ],
+    [
+     "Shipping address",
+     "Where the work is done or products go"
+    ],
+    [
+     "Terms",
+     "When the money is due"
+    ],
+    [
+     "Tax exempt",
+     "Keeps sales tax off this customer's sales"
+    ]
+   ],
+   "hint": "Read each description for the key word: appears, bill, work, due, tax.",
+   "explain": "Each field has one job on the customer record."
+  },
+  {
+   "id": "q10",
+   "type": "mc",
+   "skill": "sub-customers",
+   "q": "Mr. Patel owns his home and a rental house. Maya wants to see sales for each lawn and for Mr. Patel as a whole. What should she set up?",
+   "choices": [
+    "A sub-customer for the rental house",
+    "A second customer named Raj Patel",
+    "A tax exemption for the rental",
+    "A new vendor for the rental house"
+   ],
+   "answer": "A sub-customer for the rental house",
+   "hint": "One record can sit under another.",
+   "explain": "A sub-customer under Raj Patel lets her see the rental on its own and roll it up under Mr. Patel."
+  },
+  {
+   "id": "q11",
+   "type": "mc",
+   "skill": "sub-customers",
+   "q": "Mr. Patel wants one bill for both lawns sent to his home. Which billing choice fits the sub-customer?",
+   "choices": [
+    "Bill the parent customer",
+    "Bill each lawn on its own",
+    "Bill the sub-customer itself",
+    "Bill a new customer"
+   ],
+   "answer": "Bill the parent customer",
+   "hint": "Who should receive the bill?",
+   "explain": "Billing the parent customer sends the sub-customer's invoices to Mr. Patel."
+  }
+ ]
+}
+</script>
+<script src="../shared/mb-player.js?v=2"></script>
+<script src="../shared/mb-enhance.js?v=2"></script>
+</body>
+</html>
