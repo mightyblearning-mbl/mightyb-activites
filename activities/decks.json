@@ -7597,5 +7597,14 @@
     "course": "4th Grade Science",
     "unit": "9",
     "engine": "quest"
+  },
+  "g6-u4-l01-precise-word-choice": {
+    "file": "g6-u4-l01-precise-word-choice.html",
+    "title": "G6-U4-L01 Precise Word Choice",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "4",
+    "engine": "quest"
   }
 }
