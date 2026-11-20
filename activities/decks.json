@@ -7599,12 +7599,426 @@
     "engine": "quest"
   },
   "g6-u4-l01-precise-word-choice": {
-    "file": "g6-u4-l01-precise-word-choice.html",
-    "title": "G6-U4-L01 Precise Word Choice",
+    "file": "english-6/G6-U4-L01_precise-word-choice_deck.html",
+    "title": "G6-U4-L01 Precise Word Choice: Word Workshop",
     "kind": "lesson",
     "questions": 12,
     "course": "6th Grade English",
-    "unit": "4",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u3-l01-comparing-hatchet-and-ember": {
+    "file": "english-6/G6-U3-L01_comparing-hatchet-and-ember_deck.html",
+    "title": "G6-U3-L01 Comparing Hatchet and The City of Ember: Novel Constellation",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 3: The City of Ember",
+    "engine": "quest"
+  },
+  "g6-hat-v3-hatchet-vocabulary-set-3": {
+    "file": "english-6/G6-HAT-V3_hatchet-vocabulary-set-3_deck.html",
+    "title": "G6-HAT-V3 Hatchet Vocabulary Set #3 (Chapters 11–14): Hatchet Escape",
+    "kind": "vocab",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 2: Hatchet",
+    "engine": "quest"
+  },
+  "g6-hat-v4-hatchet-vocabulary-set-4": {
+    "file": "english-6/G6-HAT-V4_hatchet-vocabulary-set-4_deck.html",
+    "title": "G6-HAT-V4 Hatchet Vocabulary Set #4 (Chapters 15–19 and Epilogue): Wilderness Escape",
+    "kind": "vocab",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 2: Hatchet",
+    "engine": "quest"
+  },
+  "g6-emb-v2-ember-vocabulary-set-2": {
+    "file": "english-6/G6-EMB-V2_ember-vocabulary-set-2_deck.html",
+    "title": "G6-EMB-V2 City of Ember Vocabulary Set #2 (Chapters 3–8): Ember Constellation",
+    "kind": "vocab",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 3: The City of Ember",
+    "engine": "quest"
+  },
+  "g6-emb-v3-ember-vocabulary-set-3": {
+    "file": "english-6/G6-EMB-V3_ember-vocabulary-set-3_deck.html",
+    "title": "G6-EMB-V3 City of Ember Vocabulary Set #3 (Chapters 9–14): Pipeworks Constellation",
+    "kind": "vocab",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 3: The City of Ember",
+    "engine": "quest"
+  },
+  "g6-emb-v4-ember-vocabulary-set-4": {
+    "file": "english-6/G6-EMB-V4_ember-vocabulary-set-4_deck.html",
+    "title": "G6-EMB-V4 City of Ember Vocabulary Set #4 (Chapters 15–20): Escape Constellation",
+    "kind": "vocab",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 3: The City of Ember",
+    "engine": "quest"
+  },
+  "g6-u4-l02-modifiers": {
+    "file": "english-6/G6-U4-L02_modifiers_deck.html",
+    "title": "G6-U4-L02 Modifiers: Put Them Where They Belong: Modifier Mechanics",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l03-sentence-variety": {
+    "file": "english-6/G6-U4-L03_sentence-variety_deck.html",
+    "title": "G6-U4-L03 Sentence Variety and Combining: Sentence Builders",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l04-revising-editing": {
+    "file": "english-6/G6-U4-L04_revising-editing_deck.html",
+    "title": "G6-U4-L04 Revising and Editing: Draft Doctor",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l05-text-structures": {
+    "file": "english-6/G6-U4-L05_text-structures_deck.html",
+    "title": "G6-U4-L05 Informational Text Structures: Structure Spotters",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l06-text-features": {
+    "file": "english-6/G6-U4-L06_text-features_deck.html",
+    "title": "G6-U4-L06 Text Features and the Central Idea: Feature Finders",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l07-research-questions": {
+    "file": "english-6/G6-U4-L07_research-questions_deck.html",
+    "title": "G6-U4-L07 Writing Research Questions: Question Quest",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l08-types-of-sources": {
+    "file": "english-6/G6-U4-L08_types-of-sources_deck.html",
+    "title": "G6-U4-L08 Types of Sources: Source Scouts",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l09-credibility": {
+    "file": "english-6/G6-U4-L09_credibility_deck.html",
+    "title": "G6-U4-L09 Judging Credibility: Source Detective",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l10-spotting-bias": {
+    "file": "english-6/G6-U4-L10_spotting-bias_deck.html",
+    "title": "G6-U4-L10 Spotting Bias: Bias Busters",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l11-taking-notes": {
+    "file": "english-6/G6-U4-L11_taking-notes_deck.html",
+    "title": "G6-U4-L11 Taking Notes in Your Own Words: Note Ninjas",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l12-synthesizing-sources": {
+    "file": "english-6/G6-U4-L12_synthesizing-sources_deck.html",
+    "title": "G6-U4-L12 Synthesizing Sources: Synthesis Lab",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l13-citing-sources": {
+    "file": "english-6/G6-U4-L13_citing-sources_deck.html",
+    "title": "G6-U4-L13 Citing Sources: Credit Crew",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u4-l14-informational-product": {
+    "file": "english-6/G6-U4-L14_informational-product_deck.html",
+    "title": "G6-U4-L14 Writing the Informational Product: Article Architects",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 4: Language, Informational Writing and Research",
+    "engine": "quest"
+  },
+  "g6-u5-l01-writing-a-claim": {
+    "file": "english-6/G6-U5-L01_writing-a-claim_deck.html",
+    "title": "G6-U5-L01 What Is an Argument? Writing a Claim: Claim Line",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l02-evidence-reasoning": {
+    "file": "english-6/G6-U5-L02_evidence-reasoning_deck.html",
+    "title": "G6-U5-L02 Evidence and Reasoning: Proof Express",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l03-knowing-your-audience": {
+    "file": "english-6/G6-U5-L03_knowing-your-audience_deck.html",
+    "title": "G6-U5-L03 Knowing Your Audience: Audience Express",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l04-trust-feelings-logic": {
+    "file": "english-6/G6-U5-L04_trust-feelings-logic_deck.html",
+    "title": "G6-U5-L04 Three Ways to Persuade: Trust, Feelings and Logic: Persuasion Express",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l05-common-fallacies": {
+    "file": "english-6/G6-U5-L05_common-fallacies_deck.html",
+    "title": "G6-U5-L05 Common Fallacies: Logic Line",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l06-counterclaims-rebuttals": {
+    "file": "english-6/G6-U5-L06_counterclaims-rebuttals_deck.html",
+    "title": "G6-U5-L06 Counterclaims and Rebuttals: Rebuttal Railway",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l07-short-argument": {
+    "file": "english-6/G6-U5-L07_short-argument_deck.html",
+    "title": "G6-U5-L07 Writing a Short Argument: Argument Express",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l08-media-purpose": {
+    "file": "english-6/G6-U5-L08_media-purpose_deck.html",
+    "title": "G6-U5-L08 Purpose and Perspective in Media: Media Line",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l09-news-vs-opinion": {
+    "file": "english-6/G6-U5-L09_news-vs-opinion_deck.html",
+    "title": "G6-U5-L09 News vs. Opinion: News Line",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l10-ads-infographics-video": {
+    "file": "english-6/G6-U5-L10_ads-infographics-video_deck.html",
+    "title": "G6-U5-L10 Analyzing Ads, Infographics and Video: Message Makers",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l11-peer-feedback": {
+    "file": "english-6/G6-U5-L11_peer-feedback_deck.html",
+    "title": "G6-U5-L11 Giving and Using Peer Feedback: Feedback Line",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l12-revising-your-story": {
+    "file": "english-6/G6-U5-L12_revising-your-story_deck.html",
+    "title": "G6-U5-L12 Revising Your Story: Story Express",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u5-l13-editing-publishing": {
+    "file": "english-6/G6-U5-L13_editing-publishing_deck.html",
+    "title": "G6-U5-L13 Editing and Publishing Your Story: Publish Line",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 5: Argument, Media Literacy and Original Fiction",
+    "engine": "quest"
+  },
+  "g6-u6-l01-parts-of-a-poem": {
+    "file": "english-6/G6-U6-L01_parts-of-a-poem_deck.html",
+    "title": "G6-U6-L01 Parts of a Poem: Lines, Stanzas, Rhyme and Rhythm: Poem Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u6-l02-imagery-figurative-language": {
+    "file": "english-6/G6-U6-L02_imagery-figurative-language_deck.html",
+    "title": "G6-U6-L02 Imagery and Figurative Language in Poems: Image Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u6-l03-reading-a-poem-closely": {
+    "file": "english-6/G6-U6-L03_reading-a-poem-closely_deck.html",
+    "title": "G6-U6-L03 Reading a Poem Closely: Close Reading Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u6-l04-writing-your-own-poem": {
+    "file": "english-6/G6-U6-L04_writing-your-own-poem_deck.html",
+    "title": "G6-U6-L04 Writing Your Own Poem: Poet&#x27;s Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u6-l05-reading-a-play": {
+    "file": "english-6/G6-U6-L05_reading-a-play_deck.html",
+    "title": "G6-U6-L05 Reading a Play: Script Format: Stage Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u6-l06-dramatic-dialogue": {
+    "file": "english-6/G6-U6-L06_dramatic-dialogue_deck.html",
+    "title": "G6-U6-L06 Writing Dramatic Dialogue and Staging: Scene Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u6-l07-comparing-genres": {
+    "file": "english-6/G6-U6-L07_comparing-genres_deck.html",
+    "title": "G6-U6-L07 Comparing a Poem, a Story and a Play: Genre Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u6-l08-performing-your-work": {
+    "file": "english-6/G6-U6-L08_performing-your-work_deck.html",
+    "title": "G6-U6-L08 Performing and Sharing Your Work: Performance Tower",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 6: Poetry, Drama and Creative Voice",
+    "engine": "quest"
+  },
+  "g6-u7-l01-planning-your-inquiry": {
+    "file": "english-6/G6-U7-L01_planning-your-inquiry_deck.html",
+    "title": "G6-U7-L01 Choosing a Topic and Planning Your Inquiry: Inquiry Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 7: Multimedia Inquiry Capstone and Portfolio",
+    "engine": "quest"
+  },
+  "g6-u7-l02-crediting-media": {
+    "file": "english-6/G6-U7-L02_crediting-media_deck.html",
+    "title": "G6-U7-L02 Using and Crediting Media Responsibly: Credit Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 7: Multimedia Inquiry Capstone and Portfolio",
+    "engine": "quest"
+  },
+  "g6-u7-l03-planning-trailer-podcast": {
+    "file": "english-6/G6-U7-L03_planning-trailer-podcast_deck.html",
+    "title": "G6-U7-L03 Planning a Book Trailer or Podcast: Script and Storyboard: Studio Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 7: Multimedia Inquiry Capstone and Portfolio",
+    "engine": "quest"
+  },
+  "g6-u7-l04-producing-trailer-podcast": {
+    "file": "english-6/G6-U7-L04_producing-trailer-podcast_deck.html",
+    "title": "G6-U7-L04 Producing Your Trailer or Podcast: Production Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 7: Multimedia Inquiry Capstone and Portfolio",
+    "engine": "quest"
+  },
+  "g6-u7-l05-presenting-findings": {
+    "file": "english-6/G6-U7-L05_presenting-findings_deck.html",
+    "title": "G6-U7-L05 Presenting Your Findings: Presentation Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 7: Multimedia Inquiry Capstone and Portfolio",
+    "engine": "quest"
+  },
+  "g6-u7-l06-portfolio-reflection": {
+    "file": "english-6/G6-U7-L06_portfolio-reflection_deck.html",
+    "title": "G6-U7-L06 Building Your Portfolio and Reflecting on Growth: Portfolio Escape",
+    "kind": "lesson",
+    "questions": 12,
+    "course": "6th Grade English",
+    "unit": "Unit 7: Multimedia Inquiry Capstone and Portfolio",
     "engine": "quest"
   }
 }
